@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { IconArrowRight } from '@tabler/icons-react';
 import { Award, Users, Rocket, ShieldCheck, Globe, Eye, Target } from 'lucide-react';
+import { EncryptedText } from '@/components/ui/encrypted-text';
 
 const companyStats = [
   {
@@ -11,30 +12,35 @@ const companyStats = [
     value: '6+',
     label: 'Years of Experience',
     metric: 'Years of Experience',
+    isNumeric: true,
   },
   {
     icon: Users,
     value: '25+',
     label: 'Team Members',
     metric: 'Team Members',
+    isNumeric: true,
   },
   {
     icon: Rocket,
     value: '30+',
     label: 'Expert Services',
     metric: 'Expert Services',
+    isNumeric: true,
   },
   {
     icon: ShieldCheck,
     value: '800+',
     label: 'Clients',
     metric: 'Clients',
+    isNumeric: true,
   },
   {
     icon: Globe,
     value: 'Serving Globally',
     label: 'Global Reach',
     metric: 'Global Reach',
+    isNumeric: false,
   },
 ];
 
@@ -140,28 +146,42 @@ export const AboutPage = () => {
         </div>
 
         <div className="relative z-10 max-w-[1240px] mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-4 xl:gap-5">
             {companyStats.map((stat, idx) => (
               <div
                 key={stat.metric}
-                className={`relative group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-4 sm:p-5 lg:p-6 transition-all duration-300 flex flex-col items-center text-center justify-center ${
-                  idx === 4 ? 'col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1' : ''
+                className={`relative group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-4 sm:p-5 lg:p-4.5 xl:p-5 transition-all duration-300 flex items-center justify-between gap-3 sm:gap-4 ${
+                  idx === 4 ? 'sm:col-span-2 md:col-span-1 lg:col-span-1' : ''
                 }`}
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 mb-3 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
+                {/* Left: Metric value & descriptive label */}
+                <div className="flex flex-col text-left min-w-0 flex-1">
+                  <div className="mb-1 leading-tight">
+                    {stat.isNumeric ? (
+                      <span className="text-2xl sm:text-3xl lg:text-2xl xl:text-3xl font-black text-white tracking-tight tabular-nums">
+                        <EncryptedText
+                          text={stat.value}
+                          revealDelayMs={60}
+                          flipDelayMs={40}
+                          className="font-black text-white tracking-tight tabular-nums inline-block"
+                          encryptedClassName="text-orange-400"
+                          revealedClassName="text-white"
+                        />
+                      </span>
+                    ) : (
+                      <span className="text-base sm:text-lg lg:text-base xl:text-lg font-black text-white tracking-tight leading-snug">
+                        {stat.value}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium text-neutral-400 group-hover:text-neutral-300 transition-colors leading-snug">
+                    {stat.label}
+                  </div>
+                </div>
+
+                {/* Right: Lucide Icon in orange-accented container */}
+                <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
                   <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <div
-                  className={`font-black text-white tracking-tight mb-1 leading-tight ${
-                    stat.value.length > 5
-                      ? 'text-lg sm:text-xl lg:text-lg xl:text-xl'
-                      : 'text-3xl sm:text-4xl lg:text-4xl'
-                  }`}
-                >
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm font-medium text-neutral-400 group-hover:text-neutral-300 transition-colors">
-                  {stat.label}
                 </div>
               </div>
             ))}
