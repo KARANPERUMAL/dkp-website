@@ -3,7 +3,7 @@
 Production-ready, observable, and secure Java 21 / Spring Boot 3.4 REST API backend for the **DKP Innovations** platform.
 
 This backend powers two unified form workflows:
-1. **Careers Application Submissions** (`POST /api/careers/applications` & `POST /api/careers/apply`) with private resume document upload, file signature validation, candidate acknowledgement, and recruiter notification.
+1. **Careers Application Submissions** (`POST /api/careers/applications` & `POST /api/careers/apply`) with in-memory resume attachment delivery, file signature validation, candidate acknowledgement, and recruiter notification.
 2. **Contact Us & Services Enquiry Submissions** (`POST /api/contact`) supporting both general inquiries and service-specific project enquiries, with client confirmation and team notification.
 
 ---
@@ -25,16 +25,17 @@ This backend powers two unified form workflows:
 │    (/api/careers/*)              (/api/contact)        │
 └──────────┬─────────────────────────────┬───────────────┘
            │                             │
-    ┌──────▼──────┐               ┌──────▼──────┐    ┌─────────────┐
-    │ S3 Resume   │               │ Neon        │    │ Resend API  │
-    │ Storage     │               │ PostgreSQL  │    │ Email Outbox│
-    │ (Private)   │               │ (Flyway)    │    │ (Async)     │
-    └─────────────┘               └─────────────┘    └─────────────┘
+    ┌──────▼──────┐               ┌──────▼──────┐
+    │ Neon        │               │ Resend API  │
+    │ PostgreSQL  │               │ (Attachment │
+    │ (Flyway)    │               │  & Outbox)  │
+    └─────────────┘               └─────────────┘
 ```
 
-- **Resilient Transactional Outbox**: All email dispatches are saved in the `email_outbox` table in the same database transaction as the submission. Submissions are never lost or delayed by email provider latency or temporary downtime.
+- **In-Memory Resume Email Attachments**: Resumes are validated (magic bytes, MIME type, configurable max size up to 5 MB) and attached directly to recruiter notification emails via Resend API (`POST https://api.resend.com/emails`) in memory. Resumes are **never stored as binaries in PostgreSQL** and **require no cloud object storage (S3/R2)**.
+- **Resilient Transactional Outbox**: Applicant acknowledgements and contact notifications are saved in the `email_outbox` table in the database transaction and processed asynchronously by the outbox scheduler with exponential backoff and jitter.
+- **Atomic Failure Handling**: If database persistence or initial recruiter email delivery fails, the request fails with an error status (503 / 500) and no false success is returned to the applicant.
 - **Data Minimization & Redaction**: Customer and candidate personal data (email, phone, name) is redacted from console and server log streams via Logback pattern converters.
-- **Private S3 Resume Storage**: Uploaded resumes are never stored permanently on ephemeral containers. Files are validated by magic byte headers (rejecting disguised executables) and assigned random UUID object keys in private cloud object storage.
 
 ---
 
@@ -47,7 +48,7 @@ This backend powers two unified form workflows:
 | **Maven** | 3.9+ (or included `./mvnw`) |
 | **Database** | PostgreSQL 15+ / Neon Serverless Postgres |
 | **Email Service** | Resend API (HTTP REST) |
-| **Object Storage** | S3-compatible (AWS S3, Cloudflare R2, MinIO, DigitalOcean) |
+| **Storage Mode** | Direct Email Attachments (Zero Object Storage) |
 | **Docker** | 24+ |
 
 ---
@@ -68,12 +69,7 @@ This backend powers two unified form workflows:
 | `MAIL_FROM` | Verified sender address on Resend | `DKP Innovations <noreply@dkpinnovation.com>` | **Yes** |
 | `CAREERS_TO` | Recipient for candidate applications | `careers@dkpinnovation.com` | **Yes** |
 | `CONTACT_TO` | Recipient for contact & service submissions | `info@dkpinnovation.com` | **Yes** |
-| `STORAGE_PROVIDER` | Resume storage provider (`s3` or `local`) | `s3` | Yes |
-| `OBJECT_STORAGE_REGION` | S3 Region | `us-east-1` | Yes (for S3) |
-| `OBJECT_STORAGE_BUCKET` | Private S3 bucket name | `dkp-resumes-prod` | Yes (for S3) |
-| `OBJECT_STORAGE_ACCESS_KEY` | S3 / R2 Access Key | `AKIAIOSFODNN7EXAMPLE` | Yes (for S3) |
-| `OBJECT_STORAGE_SECRET_KEY` | S3 / R2 Secret Key | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` | Yes (for S3) |
-| `OBJECT_STORAGE_ENDPOINT` | Optional custom endpoint (for R2 / MinIO) | `https://<account-id>.r2.cloudflarestorage.com` | No |
+| `MAX_FILE_SIZE_BYTES` | Maximum allowed upload size in bytes | `5242880` (5 MB) | No (default: 5 MB) |
 | `SWAGGER_ENABLED` | Enable OpenAPI Swagger UI | `false` in prod | No |
 
 ---
@@ -85,7 +81,7 @@ Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
-For local testing without S3 or Neon, you can run with the `local` profile (uses embedded/fallback local resume storage at `./storage/resumes`).
+For local testing, the default profile uses in-memory H2 database or local PostgreSQL with simulated Resend delivery if test keys are used.
 
 ### 2. Build & Test
 ```bash
@@ -112,12 +108,9 @@ The server starts at `http://localhost:8080`.
    jdbc:postgresql://ep-xyz.us-east-2.aws.neon.tech/neondb?sslmode=require
    ```
 3. Set `DATABASE_URL`, `DATABASE_USERNAME`, and `DATABASE_PASSWORD`.
-4. Flyway automatically runs database migrations on startup from:
-   `src/main/resources/db/migration/V1__init_schema.sql`
-   Tables created:
-   - `job_applications`
-   - `contact_submissions`
-   - `email_outbox`
+4. Flyway automatically runs database migrations on startup:
+   - `V1__init_schema.sql` (Creates `job_applications`, `contact_submissions`, `email_outbox`)
+   - `V2__resume_attachment_mode.sql` (Adjusts `job_applications.resume_storage_key` to support attachment-only mode)
 
 ---
 
@@ -131,24 +124,29 @@ The server starts at `http://localhost:8080`.
 
 ---
 
-## 7. Private Resume Storage (S3 / Cloudflare R2)
+## 7. Resume Delivery Architecture (In-Memory Email Attachments)
 
-1. Create a private S3 bucket (e.g. `dkp-resumes-private`).
-2. **Disable Public Access**: Block all public access. The application accesses objects securely using IAM credentials.
-3. Configure IAM user permissions with least privilege:
+Resumes submitted by candidates are delivered directly to the recruitment inbox (`CAREERS_TO`) as attachments via Resend:
+
+1. **Validation**: The backend inspects the uploaded file's magic bytes (PDF `%PDF-`, DOCX ZIP `PK..`, DOC OLE), content-type, extension, and file size (default max 5 MB). Disguised or corrupted files are rejected immediately with HTTP 400.
+2. **In-Memory Streaming**: The file bytes are Base64-encoded in memory and dispatched in the `attachments` array of the Resend API payload:
    ```json
    {
-     "Version": "2012-10-17",
-     "Statement": [
+     "from": "DKP Innovations <noreply@dkpinnovation.com>",
+     "to": ["careers@dkpinnovation.com"],
+     "subject": "New Job Application: Senior Java Engineer - Aarav Patel",
+     "attachments": [
        {
-         "Effect": "Allow",
-         "Action": ["s3:PutObject", "s3:GetObject", "s3:DeleteObject"],
-         "Resource": "arn:aws:s3:::dkp-resumes-private/*"
+         "filename": "Aarav_Patel_Resume.pdf",
+         "content": "JVBERi0xLjQKJ...",
+         "contentType": "application/pdf"
        }
      ]
    }
    ```
-4. Set `OBJECT_STORAGE_BUCKET`, `OBJECT_STORAGE_ACCESS_KEY`, and `OBJECT_STORAGE_SECRET_KEY`.
+3. **Database Metadata**: Only application metadata is saved in PostgreSQL (`reference_id`, applicant fields, `resume_original_filename`, `resume_content_type`, `resume_file_size_bytes`, `status`). No binary data is stored in the database.
+4. **No Cloud Object Storage Required**: Eliminates S3 bucket management, IAM keys, lifecycle rules, presigned URLs, and monthly storage costs.
+5. **Atomic Delivery**: If the recruiter email delivery fails, the transaction rolls back and an error (HTTP 503) is returned to the applicant so they can retry.
 
 ---
 
@@ -230,7 +228,7 @@ The server starts at `http://localhost:8080`.
 1. In the Render Dashboard, click **New +** -> **Blueprint**.
 2. Connect your Git repository (`https://github.com/KARANPERUMAL/dkp-website`).
 3. Select `render.yaml`.
-4. In the Render dashboard, supply the secret environment variables (`DATABASE_URL`, `DATABASE_PASSWORD`, `RESEND_API_KEY`, `OBJECT_STORAGE_ACCESS_KEY`, etc.).
+4. In the Render dashboard, supply the secret environment variables (`DATABASE_URL`, `DATABASE_PASSWORD`, `RESEND_API_KEY`, etc.).
 5. Click **Apply**.
 
 ### Option B: Manual Web Service Setup
@@ -265,8 +263,8 @@ In the `frontend` folder:
 
 - [x] **File Validation**: Strict magic byte signature checking prevents disguised executables from being uploaded.
 - [x] **5 MB File Limit**: Enforced at Spring MVC multipart layer and application service.
-- [x] **Path Traversal Protection**: Storage key is a random UUID; original filename is sanitized before storing metadata.
-- [x] **Private Storage**: Objects stored with private ACLs; direct public URLs are never generated.
+- [x] **Path Traversal Protection**: Original filename is strictly sanitized before storing metadata and attaching to email.
+- [x] **Zero Object Storage / No Disk Blobs**: Resumes stream in memory directly as attachments to Resend API; no cloud buckets or permanent disk files.
 - [x] **Log Redaction**: Email addresses and telephone numbers are masked from logs via `DataMaskingConverter`.
 - [x] **Rate Limiting**: Sliding token bucket enforces IP-based rate limiting on all public submission endpoints (HTTP 429 when exceeded).
 - [x] **Honeypot Protection**: Anti-bot honeypot fields reject automated submissions.

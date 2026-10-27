@@ -38,13 +38,6 @@ class ProductionConfigValidatorTest {
         email.setCareersTo("careers@dkpinnovation.com");
         email.setContactTo("info@dkpinnovation.com");
 
-        var storage = props.getStorage();
-        storage.setProvider("s3");
-        storage.setBucket("dkp-resumes-prod");
-        storage.setRegion("us-east-1");
-        storage.setAccessKey("AKIA_TEST_KEY");
-        storage.setSecretKey("SECRET_TEST_KEY");
-
         MockEnvironment env = new MockEnvironment();
         env.setProperty("spring.datasource.url", "jdbc:postgresql://ep-sample-123.us-east-2.aws.neon.tech/neondb?sslmode=require");
         env.setProperty("spring.datasource.username", "neondb_owner");

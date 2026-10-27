@@ -17,10 +17,10 @@ dkp/
 │   └── package.json
 ├── backend/                 # Java 21 + Spring Boot 3.4 Production Backend
 │   ├── src/main/java/com/dkp/
-│   │   ├── careers/         # Career application submission & resume storage
+│   │   ├── careers/         # Career application submission & email attachment delivery
 │   │   ├── contact/         # Contact Us & Services Enquiry form processing
 │   │   ├── email/           # Resend API & Transactional Outbox pattern
-│   │   ├── storage/         # S3 & local resume storage abstraction
+│   │   ├── storage/         # File validation & sanitization (magic bytes, MIME check)
 │   │   ├── security/        # IP Rate limiting & spam protection
 │   │   └── common/          # Standardized API response, error handler, MDC logging
 │   ├── src/main/resources/  # application.yml & Flyway PostgreSQL migrations

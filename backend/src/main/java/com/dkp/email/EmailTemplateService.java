@@ -18,7 +18,7 @@ public class EmailTemplateService {
     public String buildCareerAdminHtml(String refId, String fullName, String email, String phone,
                                        String position, String department, String expLevel,
                                        String arrangement, String skills, String coverLetter,
-                                       String filename, String storageKey) {
+                                       String filename) {
         return """
         <!DOCTYPE html>
         <html>
@@ -38,7 +38,7 @@ public class EmailTemplateService {
                 <tr><td style="padding: 8px 0; font-weight: 600; color: #64748b; font-size: 13px;">Department:</td><td style="padding: 8px 0; color: #0f172a;">%s</td></tr>
                 <tr><td style="padding: 8px 0; font-weight: 600; color: #64748b; font-size: 13px;">Experience Level:</td><td style="padding: 8px 0; color: #0f172a;">%s</td></tr>
                 <tr><td style="padding: 8px 0; font-weight: 600; color: #64748b; font-size: 13px;">Work Arrangement:</td><td style="padding: 8px 0; color: #0f172a;">%s</td></tr>
-                <tr><td style="padding: 8px 0; font-weight: 600; color: #64748b; font-size: 13px;">Resume Document:</td><td style="padding: 8px 0; font-weight: 600; color: #0f172a;">%s (Key: %s)</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: 600; color: #64748b; font-size: 13px;">Resume Attachment:</td><td style="padding: 8px 0; font-weight: 700; color: #ea580c;">%s (Attached to this email)</td></tr>
               </table>
               <div style="margin-top: 16px; padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #ea580c;">
                 <h4 style="margin: 0 0 6px 0; font-size: 13px; color: #334155; text-transform: uppercase;">Key Skills</h4>
@@ -58,15 +58,22 @@ public class EmailTemplateService {
         """.formatted(
                 escape(refId), escape(fullName), escape(email), escape(email),
                 escape(phone), escape(position), escape(department), escape(expLevel),
-                escape(arrangement), escape(filename), escape(storageKey),
+                escape(arrangement), escape(filename),
                 escape(skills), escape(coverLetter)
         );
+    }
+
+    public String buildCareerAdminHtml(String refId, String fullName, String email, String phone,
+                                       String position, String department, String expLevel,
+                                       String arrangement, String skills, String coverLetter,
+                                       String filename, String storageKey) {
+        return buildCareerAdminHtml(refId, fullName, email, phone, position, department, expLevel, arrangement, skills, coverLetter, filename);
     }
 
     public String buildCareerAdminText(String refId, String fullName, String email, String phone,
                                        String position, String department, String expLevel,
                                        String arrangement, String skills, String coverLetter,
-                                       String filename, String storageKey) {
+                                       String filename) {
         return """
         DKP Innovations — New Career Application
         Reference ID: %s
@@ -78,14 +85,21 @@ public class EmailTemplateService {
         Department: %s
         Experience: %s
         Work Arrangement: %s
-        Resume File: %s (Key: %s)
+        Resume Attachment: %s (Attached to this email)
         
         Key Skills:
         %s
         
         Cover Letter:
         %s
-        """.formatted(refId, fullName, email, phone, position, department, expLevel, arrangement, filename, storageKey, skills, coverLetter);
+        """.formatted(refId, fullName, email, phone, position, department, expLevel, arrangement, filename, skills, coverLetter);
+    }
+
+    public String buildCareerAdminText(String refId, String fullName, String email, String phone,
+                                       String position, String department, String expLevel,
+                                       String arrangement, String skills, String coverLetter,
+                                       String filename, String storageKey) {
+        return buildCareerAdminText(refId, fullName, email, phone, position, department, expLevel, arrangement, skills, coverLetter, filename);
     }
 
     public String buildCareerCandidateHtml(String refId, String fullName, String position) {

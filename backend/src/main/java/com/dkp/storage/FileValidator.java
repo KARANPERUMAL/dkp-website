@@ -1,6 +1,7 @@
 package com.dkp.storage;
 
 import com.dkp.common.InvalidFileException;
+import com.dkp.config.AppProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,26 +9,41 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 
 @Component
 public class FileValidator {
 
-    public static final long MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
-    private static final Set<String> ALLOWED_EXTENSIONS = Set.of(".pdf", ".docx", ".doc");
+    public static final long DEFAULT_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
+    public static final List<String> DEFAULT_ALLOWED_EXTENSIONS = List.of(".pdf", ".docx", ".doc");
 
     // Magic bytes for supported document types
     private static final byte[] PDF_MAGIC = new byte[]{0x25, 0x50, 0x44, 0x46}; // %PDF
     private static final byte[] DOCX_MAGIC = new byte[]{0x50, 0x4B, 0x03, 0x04}; // PK.. (ZIP archive)
     private static final byte[] DOC_MAGIC = new byte[]{(byte) 0xD0, (byte) 0xCF, 0x11, (byte) 0xE0}; // OLE2 container
 
+    private final AppProperties appProperties;
+
+    public FileValidator(AppProperties appProperties) {
+        this.appProperties = appProperties;
+    }
+
+    public FileValidator() {
+        this.appProperties = new AppProperties();
+    }
+
     public void validateResumeFile(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             throw new InvalidFileException("Resume file is required. Please upload your CV or resume.");
         }
 
-        if (file.getSize() > MAX_FILE_SIZE_BYTES) {
-            throw new InvalidFileException("File size exceeds 5 MB limit. Provided: " + (file.getSize() / 1024 / 1024) + " MB.");
+        long maxBytes = (appProperties != null && appProperties.getUpload() != null)
+                ? appProperties.getUpload().getMaxFileSizeBytes()
+                : DEFAULT_MAX_FILE_SIZE_BYTES;
+
+        if (file.getSize() > maxBytes) {
+            long maxMb = maxBytes / (1024 * 1024);
+            throw new InvalidFileException("File size exceeds " + maxMb + " MB limit. Provided: " + (file.getSize() / 1024 / 1024) + " MB.");
         }
 
         String originalFilename = file.getOriginalFilename();
@@ -41,7 +57,11 @@ public class FileValidator {
         }
 
         String lowerName = originalFilename.toLowerCase();
-        boolean validExtension = ALLOWED_EXTENSIONS.stream().anyMatch(lowerName::endsWith);
+        List<String> allowedExtensions = (appProperties != null && appProperties.getUpload() != null)
+                ? appProperties.getUpload().getAllowedExtensions()
+                : DEFAULT_ALLOWED_EXTENSIONS;
+
+        boolean validExtension = allowedExtensions.stream().anyMatch(lowerName::endsWith);
         if (!validExtension) {
             throw new InvalidFileException("Unsupported file type. Please upload a PDF, DOCX, or DOC document.");
         }
@@ -75,5 +95,19 @@ public class FileValidator {
         } catch (IOException e) {
             throw new InvalidFileException("Failed to read and verify uploaded file: " + e.getMessage());
         }
+    }
+
+    public String sanitizeFilename(String originalFilename) {
+        if (!StringUtils.hasText(originalFilename)) {
+            return "resume.pdf";
+        }
+        String clean = originalFilename.trim().replaceAll("[^a-zA-Z0-9._-]", "_");
+        if (clean.length() > 100) {
+            int extIdx = clean.lastIndexOf('.');
+            String ext = extIdx > 0 ? clean.substring(extIdx) : ".pdf";
+            String base = extIdx > 0 ? clean.substring(0, Math.min(80, extIdx)) : clean.substring(0, 80);
+            clean = base + ext;
+        }
+        return clean;
     }
 }

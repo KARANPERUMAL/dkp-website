@@ -81,15 +81,8 @@ app:
     contact-to: ${CONTACT_TO:info@dkpinnovation.com}
     outbox-batch-size: 10
     outbox-poll-interval-ms: 5000
-  storage:
-    provider: ${STORAGE_PROVIDER:s3}
-    endpoint: ${OBJECT_STORAGE_ENDPOINT:}
-    region: ${OBJECT_STORAGE_REGION:us-east-1}
-    bucket: ${OBJECT_STORAGE_BUCKET:dkp-resumes}
-    access-key: ${OBJECT_STORAGE_ACCESS_KEY:}
-    secret-key: ${OBJECT_STORAGE_SECRET_KEY:}
-    local-dir: ${LOCAL_STORAGE_DIR:./storage/resumes}
-    max-file-size-bytes: 5242880 # 5 MB
+  upload:
+    max-file-size-bytes: ${MAX_FILE_SIZE_BYTES:5242880} # 5 MB safe limit for email attachments (Resend max: 40 MB)
   rate-limit:
     enabled: true
     capacity: 20

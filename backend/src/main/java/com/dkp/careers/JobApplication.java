@@ -57,8 +57,8 @@ public class JobApplication {
     @Column(name = "privacy_consent_at", nullable = false)
     private Instant privacyConsentAt;
 
-    @Column(name = "resume_storage_key", nullable = false, length = 255)
-    private String resumeStorageKey;
+    @Column(name = "resume_storage_key", length = 255)
+    private String resumeStorageKey = "EMAIL_ATTACHMENT";
 
     @Column(name = "resume_original_filename", nullable = false, length = 255)
     private String resumeOriginalFilename;

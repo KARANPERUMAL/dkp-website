@@ -12,8 +12,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class ResendEmailClient {
@@ -28,11 +27,33 @@ public class ResendEmailClient {
         this.appProperties = appProperties;
         this.restTemplate = builder
                 .connectTimeout(Duration.ofSeconds(10))
-                .readTimeout(Duration.ofSeconds(15))
+                .readTimeout(Duration.ofSeconds(20))
                 .build();
     }
 
     public String sendEmail(String toEmail, String subject, String bodyHtml, String bodyText) {
+        return sendEmailWithAttachments(toEmail, subject, bodyHtml, bodyText, Collections.emptyList());
+    }
+
+    public String sendEmailWithAttachment(String toEmail, String subject, String bodyHtml, String bodyText,
+                                          String attachmentFilename, byte[] attachmentBytes, String contentType) {
+        if (attachmentBytes == null || attachmentBytes.length == 0) {
+            return sendEmail(toEmail, subject, bodyHtml, bodyText);
+        }
+
+        String base64Content = Base64.getEncoder().encodeToString(attachmentBytes);
+        Map<String, Object> attachmentMap = new HashMap<>();
+        attachmentMap.put("filename", attachmentFilename);
+        attachmentMap.put("content", base64Content);
+        if (StringUtils.hasText(contentType)) {
+            attachmentMap.put("contentType", contentType);
+        }
+
+        return sendEmailWithAttachments(toEmail, subject, bodyHtml, bodyText, List.of(attachmentMap));
+    }
+
+    public String sendEmailWithAttachments(String toEmail, String subject, String bodyHtml, String bodyText,
+                                           List<Map<String, Object>> attachments) {
         String apiKey = appProperties.getEmail().getResendApiKey();
 
         if (!StringUtils.hasText(apiKey)) {
@@ -45,13 +66,15 @@ public class ResendEmailClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey.trim());
 
-        Map<String, Object> payload = Map.of(
-                "from", appProperties.getEmail().getMailFrom(),
-                "to", List.of(toEmail),
-                "subject", subject,
-                "html", bodyHtml,
-                "text", bodyText
-        );
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("from", appProperties.getEmail().getMailFrom());
+        payload.put("to", List.of(toEmail));
+        payload.put("subject", subject);
+        payload.put("html", bodyHtml);
+        payload.put("text", bodyText);
+        if (attachments != null && !attachments.isEmpty()) {
+            payload.put("attachments", attachments);
+        }
 
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(payload, headers);
 

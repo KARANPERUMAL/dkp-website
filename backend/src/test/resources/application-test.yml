@@ -12,13 +12,12 @@ spring:
     enabled: false
 
 app:
-  storage:
-    provider: local
-    local-dir: ./target/test-storage/resumes
+  upload:
+    max-file-size-bytes: 5242880
   email:
     resend-api-key: "re_test_mock_key"
   rate-limit:
-    enabled: true
-    capacity: 5
-    refill-tokens: 5
+    enabled: false
+    capacity: 100
+    refill-tokens: 100
     refill-period-seconds: 60

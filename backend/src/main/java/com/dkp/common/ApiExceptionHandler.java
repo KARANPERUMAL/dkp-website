@@ -91,6 +91,30 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
 
+    @ExceptionHandler(com.dkp.email.ResendEmailClient.TransientEmailException.class)
+    public ResponseEntity<ApiError> handleTransientEmail(com.dkp.email.ResendEmailClient.TransientEmailException ex) {
+        log.error("Transient email gateway failure [correlationId={}]: {}", getCorrelationId(), ex.getMessage());
+        ApiError apiError = new ApiError(
+                HttpStatus.SERVICE_UNAVAILABLE.value(),
+                "Service Unavailable",
+                "Email delivery service temporarily unavailable. Your application could not be dispatched. Please try again in a few moments or email your resume directly to careers@dkpinnovation.com.",
+                getCorrelationId()
+        );
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(apiError);
+    }
+
+    @ExceptionHandler(com.dkp.email.ResendEmailClient.PermanentEmailException.class)
+    public ResponseEntity<ApiError> handlePermanentEmail(com.dkp.email.ResendEmailClient.PermanentEmailException ex) {
+        log.error("Permanent email gateway failure [correlationId={}]: {}", getCorrelationId(), ex.getMessage());
+        ApiError apiError = new ApiError(
+                HttpStatus.BAD_GATEWAY.value(),
+                "Bad Gateway",
+                "Email gateway rejected the application message. Please ensure your contact details are valid or submit your resume directly to careers@dkpinnovation.com.",
+                getCorrelationId()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(apiError);
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiError> handleIllegalArgument(IllegalArgumentException ex) {
         log.warn("Illegal argument: {} [correlationId={}]", ex.getMessage(), getCorrelationId());

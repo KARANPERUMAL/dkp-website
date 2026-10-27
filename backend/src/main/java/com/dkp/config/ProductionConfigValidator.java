@@ -65,25 +65,7 @@ public class ProductionConfigValidator implements ApplicationRunner {
             missingOrInvalid.add("CONTACT_TO must be configured with the business inquiry mailbox.");
         }
 
-        // 3. Private Resume Storage checks
-        var storage = appProperties.getStorage();
-        if (!"s3".equalsIgnoreCase(storage.getProvider())) {
-            missingOrInvalid.add("STORAGE_PROVIDER must be 's3' in production. Local disk storage is prohibited in production.");
-        }
-        if (!StringUtils.hasText(storage.getBucket())) {
-            missingOrInvalid.add("OBJECT_STORAGE_BUCKET must be configured for resume storage.");
-        }
-        if (!StringUtils.hasText(storage.getRegion())) {
-            missingOrInvalid.add("OBJECT_STORAGE_REGION must be configured for S3 object storage.");
-        }
-        if (!StringUtils.hasText(storage.getAccessKey())) {
-            missingOrInvalid.add("OBJECT_STORAGE_ACCESS_KEY must be configured for S3 object storage.");
-        }
-        if (!StringUtils.hasText(storage.getSecretKey())) {
-            missingOrInvalid.add("OBJECT_STORAGE_SECRET_KEY must be configured for S3 object storage.");
-        }
-
-        // 4. Frontend & CORS checks
+        // 3. Frontend & CORS checks
         if (!StringUtils.hasText(appProperties.getFrontendUrl()) || appProperties.getFrontendUrl().contains("localhost")) {
             missingOrInvalid.add("FRONTEND_URL must be configured with the canonical production domain (e.g. https://dkpinnovation.com).");
         }

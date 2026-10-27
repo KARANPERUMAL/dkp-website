@@ -9,7 +9,7 @@ public class AppProperties {
     private String frontendUrl = "http://localhost:5173";
     private List<String> corsAllowedOrigins = List.of("http://localhost:5173", "http://localhost:3000");
     private final EmailProperties email = new EmailProperties();
-    private final StorageProperties storage = new StorageProperties();
+    private final UploadProperties upload = new UploadProperties();
     private final RateLimitProperties rateLimit = new RateLimitProperties();
     private final SecurityProperties security = new SecurityProperties();
 
@@ -33,8 +33,8 @@ public class AppProperties {
         return email;
     }
 
-    public StorageProperties getStorage() {
-        return storage;
+    public UploadProperties getUpload() {
+        return upload;
     }
 
     public RateLimitProperties getRateLimit() {
@@ -102,71 +102,9 @@ public class AppProperties {
         }
     }
 
-    public static class StorageProperties {
-        private String provider = "s3";
-        private String endpoint = "";
-        private String region = "us-east-1";
-        private String bucket = "dkp-resumes";
-        private String accessKey = "";
-        private String secretKey = "";
-        private String localDir = "./storage/resumes";
-        private long maxFileSizeBytes = 5 * 1024 * 1024; // 5 MB
-
-        public String getProvider() {
-            return provider;
-        }
-
-        public void setProvider(String provider) {
-            this.provider = provider;
-        }
-
-        public String getEndpoint() {
-            return endpoint;
-        }
-
-        public void setEndpoint(String endpoint) {
-            this.endpoint = endpoint;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
-        public String getBucket() {
-            return bucket;
-        }
-
-        public void setBucket(String bucket) {
-            this.bucket = bucket;
-        }
-
-        public String getAccessKey() {
-            return accessKey;
-        }
-
-        public void setAccessKey(String accessKey) {
-            this.accessKey = accessKey;
-        }
-
-        public String getSecretKey() {
-            return secretKey;
-        }
-
-        public void setSecretKey(String secretKey) {
-            this.secretKey = secretKey;
-        }
-
-        public String getLocalDir() {
-            return localDir;
-        }
-
-        public void setLocalDir(String localDir) {
-            this.localDir = localDir;
-        }
+    public static class UploadProperties {
+        private long maxFileSizeBytes = 5 * 1024 * 1024; // 5 MB (well within Resend 40 MB total payload limit)
+        private List<String> allowedExtensions = List.of(".pdf", ".docx", ".doc");
 
         public long getMaxFileSizeBytes() {
             return maxFileSizeBytes;
@@ -174,6 +112,14 @@ public class AppProperties {
 
         public void setMaxFileSizeBytes(long maxFileSizeBytes) {
             this.maxFileSizeBytes = maxFileSizeBytes;
+        }
+
+        public List<String> getAllowedExtensions() {
+            return allowedExtensions;
+        }
+
+        public void setAllowedExtensions(List<String> allowedExtensions) {
+            this.allowedExtensions = allowedExtensions;
         }
     }
 
