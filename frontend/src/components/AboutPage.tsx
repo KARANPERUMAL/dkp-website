@@ -3,11 +3,43 @@ import { useNavigation } from '../context/NavigationContext';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { IconArrowRight } from '@tabler/icons-react';
+import { Award, Users, Rocket, ShieldCheck, Globe, Eye, Target } from 'lucide-react';
+
+const companyStats = [
+  {
+    icon: Award,
+    value: '6+',
+    label: 'Years of Experience',
+    metric: 'Years of Experience',
+  },
+  {
+    icon: Users,
+    value: '25+',
+    label: 'Team Members',
+    metric: 'Team Members',
+  },
+  {
+    icon: Rocket,
+    value: '30+',
+    label: 'Expert Services',
+    metric: 'Expert Services',
+  },
+  {
+    icon: ShieldCheck,
+    value: '800+',
+    label: 'Clients',
+    metric: 'Clients',
+  },
+  {
+    icon: Globe,
+    value: 'Serving Globally',
+    label: 'Global Reach',
+    metric: 'Global Reach',
+  },
+];
 
 export const AboutPage = () => {
   const { navigateTo } = useNavigation();
-
-
 
   return (
     <div className="min-h-screen bg-[#050608] text-neutral-900 flex flex-col w-full selection:bg-orange-500 selection:text-white">
@@ -93,7 +125,51 @@ export const AboutPage = () => {
         </section>
       </div>
 
-      {/* Main Content Area: Light & Warm Sections */}
+      {/* SECTION: Key Company Statistics */}
+      <section className="relative w-full bg-[#08090d] border-b border-white/10 py-10 sm:py-14 px-4 sm:px-8 lg:px-12 select-none overflow-hidden">
+        {/* Ambient Lighting */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] rounded-full"
+            style={{
+              background:
+                'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.08) 0%, transparent 70%)',
+              filter: 'blur(50px)',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-[1240px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+            {companyStats.map((stat, idx) => (
+              <div
+                key={stat.metric}
+                className={`relative group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-4 sm:p-5 lg:p-6 transition-all duration-300 flex flex-col items-center text-center justify-center ${
+                  idx === 4 ? 'col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1' : ''
+                }`}
+              >
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 mb-3 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div
+                  className={`font-black text-white tracking-tight mb-1 leading-tight ${
+                    stat.value.length > 5
+                      ? 'text-lg sm:text-xl lg:text-lg xl:text-xl'
+                      : 'text-3xl sm:text-4xl lg:text-4xl'
+                  }`}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm font-medium text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Area */}
       <main className="relative w-full bg-neutral-50 flex-1">
         {/* SECTION B: Founder Profile — Puttaraju KV */}
         <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#090b10] border-b border-neutral-800/80 relative overflow-hidden select-none">
@@ -149,50 +225,57 @@ export const AboutPage = () => {
           </div>
         </section>
 
-        {/* SECTION D: Our Growth Partnership */}
-        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-white">
+        {/* SECTION C: Purpose & Direction — Vision & Mission */}
+        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-neutral-50 select-none">
           <div className="max-w-[1240px] mx-auto">
-            <div className="bg-gradient-to-br from-[#090b10] via-[#0d1017] to-[#161a24] rounded-3xl p-8 sm:p-12 lg:p-16 text-white border border-neutral-800 shadow-2xl relative overflow-hidden">
-              {/* Subtle Ambient Glow */}
-              <div
-                className="absolute right-0 top-0 w-[400px] h-[300px] pointer-events-none rounded-full"
-                style={{
-                  background:
-                    'radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, transparent 70%)',
-                  filter: 'blur(45px)',
-                }}
-              />
+            {/* Section Header */}
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2.5 block">
+                Purpose & Direction
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4">
+                Our Vision & Mission
+              </h2>
+              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal">
+                Guided by strategic clarity and creative ambition, we empower organisations to thrive in an evolving digital landscape.
+              </p>
+            </div>
 
-              <div className="relative z-10 max-w-3xl">
-                <span className="text-xs font-bold text-orange-400 uppercase tracking-wider mb-3 block">
-                  Collaborative Engagement
-                </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-5 leading-tight">
-                  Your Vision. Our Strategy. <br className="hidden sm:inline" />
-                  <span className="text-orange-500">Shared Growth.</span>
-                </h2>
-                <p className="text-base sm:text-lg text-neutral-300 leading-relaxed mb-6 font-normal">
-                  DKP Innovation acts as your dedicated growth partner. We support brands at every stage of their journey—strengthening your digital presence, refining creative communication, and deploying multi-channel marketing campaigns that generate tangible business value.
-                </p>
-                <p className="text-sm sm:text-base text-neutral-400 leading-relaxed mb-8">
-                  Whether establishing a new venture or scaling an established market presence, our teams in Bengaluru provide the strategic foundation and creative horsepower needed to achieve your vision.
-                </p>
+            {/* Vision & Mission Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-stretch">
+              {/* Vision Card */}
+              <div className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 mb-6 group-hover:scale-105 group-hover:bg-orange-100/80 transition-all duration-300">
+                    <Eye className="w-7 h-7" />
+                  </div>
+                  <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">
+                    Strategic Focus
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight mb-4">
+                    Our Vision
+                  </h3>
+                  <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-normal">
+                    To empower every organisation with effective digital solutions that help them establish a strong online presence, build a trusted brand reputation, and unlock sustainable growth opportunities in the digital era.
+                  </p>
+                </div>
+              </div>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                  <button
-                    onClick={() => navigateTo('contact', 'enquiry-form')}
-                    className="inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-[0_4px_20px_rgba(234,88,12,0.4)] transition-all cursor-pointer"
-                  >
-                    <span>Discuss Your Project</span>
-                    <IconArrowRight className="w-4 h-4" />
-                  </button>
-
-                  <button
-                    onClick={() => navigateTo('contact', 'branch-map')}
-                    className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white font-semibold text-sm border border-white/10 transition-colors cursor-pointer"
-                  >
-                    <span>Visit Our Bengaluru Branches</span>
-                  </button>
+              {/* Mission Card */}
+              <div className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 mb-6 group-hover:scale-105 group-hover:bg-orange-100/80 transition-all duration-300">
+                    <Target className="w-7 h-7" />
+                  </div>
+                  <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">
+                    Core Commitment
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight mb-4">
+                    Our Mission
+                  </h3>
+                  <p className="text-base sm:text-lg text-neutral-700 leading-relaxed font-normal">
+                    To help businesses of all sizes grow through practical, innovative, and result-oriented digital strategies that improve visibility, strengthen customer connections, and create long-term business value.
+                  </p>
                 </div>
               </div>
             </div>
