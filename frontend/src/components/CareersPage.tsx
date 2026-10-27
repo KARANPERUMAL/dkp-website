@@ -16,10 +16,6 @@ import {
 } from '@/components/ui/text-animation-blur-fade-in';
 import {
   Briefcase,
-  Users,
-  GraduationCap,
-  Target,
-  Sparkles,
   CheckCircle2,
   AlertCircle,
   FileText,
@@ -396,121 +392,9 @@ export const CareersPage = () => {
         </div>
       </section>
 
-      {/* SECTION 2: WHY WORK WITH US? */}
-      <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#08090d] border-b border-neutral-800/80 relative overflow-hidden select-none">
-        <div className="max-w-[1240px] mx-auto">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-            <TextAnimationBlurFadeIn
-              as="span"
-              delay={0.05}
-              duration={0.4}
-              className="text-xs font-bold text-orange-500 uppercase tracking-widest mb-2.5 block"
-            >
-              Company Culture
-            </TextAnimationBlurFadeIn>
-            <TextAnimationBlurFadeIn
-              as="h2"
-              delay={0.15}
-              duration={0.5}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
-            >
-              Why Join DKP Innovation?
-            </TextAnimationBlurFadeIn>
-            <TextAnimationBlurFadeIn
-              as="p"
-              delay={0.25}
-              duration={0.5}
-              className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal"
-            >
-              Be part of a collaborative environment where strategic thinking and creative execution drive tangible business growth.
-            </TextAnimationBlurFadeIn>
-          </div>
-
-          {/* 4 Benefit Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-            {/* Card 1 */}
-            <BlurFadeIn
-              delay={0.1}
-              duration={0.5}
-              className="group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
-                  <Sparkles className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2.5 tracking-tight">
-                  Technology & Innovation
-                </h3>
-                <p className="text-sm text-neutral-400 leading-relaxed font-normal">
-                  Work with modern technologies and practical digital solutions.
-                </p>
-              </div>
-            </BlurFadeIn>
-
-            {/* Card 2 */}
-            <BlurFadeIn
-              delay={0.18}
-              duration={0.5}
-              className="group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
-                  <Users className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2.5 tracking-tight">
-                  Creative Collaboration
-                </h3>
-                <p className="text-sm text-neutral-400 leading-relaxed font-normal">
-                  Collaborate across development, marketing, design, and creative production.
-                </p>
-              </div>
-            </BlurFadeIn>
-
-            {/* Card 3 */}
-            <BlurFadeIn
-              delay={0.26}
-              duration={0.5}
-              className="group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
-                  <GraduationCap className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2.5 tracking-tight">
-                  Continuous Learning
-                </h3>
-                <p className="text-sm text-neutral-400 leading-relaxed font-normal">
-                  Build your skills through hands-on projects and opportunities to learn.
-                </p>
-              </div>
-            </BlurFadeIn>
-
-            {/* Card 4 */}
-            <BlurFadeIn
-              delay={0.34}
-              duration={0.5}
-              className="group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-6 sm:p-8 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
-                  <Target className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2.5 tracking-tight">
-                  Meaningful Impact
-                </h3>
-                <p className="text-sm text-neutral-400 leading-relaxed font-normal">
-                  Contribute to solutions that help businesses strengthen their digital presence and grow.
-                </p>
-              </div>
-            </BlurFadeIn>
-          </div>
-        </div>
-      </section>
-
       {/* MAIN CONTENT AREA: Open Positions & Job Application Form */}
       <main className="relative w-full bg-neutral-50 flex-1">
-        {/* SECTION 3: OPEN POSITIONS */}
+        {/* SECTION 2: OPEN POSITIONS */}
         <section id="open-positions" className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 border-b border-neutral-200/80">
           <div className="max-w-[1240px] mx-auto">
             {/* Header */}
