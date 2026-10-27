@@ -56,7 +56,7 @@ export const branchLocations: BranchLocation[] = [
   {
     id: 'branch-3-kengeri',
     name: 'Nagadevanahalli Branch — Kengeri Outer Ring Road',
-    subtitle: 'Technology Solutions & Regional Operations Hub',
+    subtitle: 'IT & Digital Solutions & Regional Operations Hub',
     tag: 'Operations Hub',
     address: '#32, 1st Floor, Kengeri Outer Ring Road, Nagadevanahalli, Bengaluru, Karnataka 560056, India',
     lat: 12.935699,

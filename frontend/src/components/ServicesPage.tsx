@@ -85,7 +85,7 @@ export const ServicesPage = () => {
                 href="#technology-solutions"
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-1.5 px-6 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white font-semibold text-sm border border-white/10 transition-colors"
               >
-                <span>Explore 4 Core Capabilities</span>
+                <span>Explore 5 Core Capabilities</span>
               </a>
             </motion.div>
 
@@ -111,7 +111,7 @@ export const ServicesPage = () => {
         </section>
       </div>
 
-      {/* Main Content: 4 Category Sections in Strict Specified Order */}
+      {/* Main Content: 5 Category Sections in Strict Specified Order */}
       <main className="relative w-full bg-neutral-50 flex-1">
         {serviceCategories.map((category, catIdx) => (
           <section
@@ -130,7 +130,7 @@ export const ServicesPage = () => {
                   {/* Banner Content (Spans 7 cols on desktop) */}
                   <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center relative z-10 text-white bg-gradient-to-r from-[#050608] via-[#090b10] to-[#141824]/90">
                     <div className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-orange-400 mb-3">
-                      <span>Category {catIdx + 1} of 4</span>
+                      <span>Category {catIdx + 1} of {serviceCategories.length}</span>
                       <span>•</span>
                       <span>{category.services.length} Specialized Services</span>
                     </div>

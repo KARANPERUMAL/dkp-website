@@ -120,7 +120,7 @@ export const AboutPage = () => {
                 onClick={() => navigateTo('services')}
                 className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-orange-500 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-sm cursor-pointer group"
               >
-                <span>Explore All 16 Specialized Services</span>
+                <span>Explore All 19 Specialized Services</span>
                 <IconArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
@@ -163,36 +163,13 @@ export const AboutPage = () => {
                     Leadership
                   </span>
 
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-5 sm:mb-6">
                     Puttaraju KV
                   </h2>
 
-                  {/* Professional Roles */}
-                  <div className="space-y-3 sm:space-y-3.5">
-                    {/* Primary Role: Founder & CEO */}
-                    <div className="flex items-center space-x-3.5 p-3.5 sm:p-4 rounded-xl bg-orange-500/10 border border-orange-500/25">
-                      <div className="w-2.5 h-2.5 rounded-full bg-orange-500 flex-shrink-0 shadow-[0_0_8px_rgba(234,88,12,0.8)]" />
-                      <span className="text-base sm:text-lg font-bold text-orange-400">
-                        Founder &amp; CEO @ DKP Innovations
-                      </span>
-                    </div>
-
-                    {/* Role 2: Business Coach */}
-                    <div className="flex items-center space-x-3.5 p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                      <div className="w-2.5 h-2.5 rounded-full bg-neutral-400 flex-shrink-0" />
-                      <span className="text-sm sm:text-base font-semibold text-neutral-200">
-                        Business Coach
-                      </span>
-                    </div>
-
-                    {/* Role 3: Expert @ Google Services and Digital Solutions */}
-                    <div className="flex items-center space-x-3.5 p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                      <div className="w-2.5 h-2.5 rounded-full bg-neutral-400 flex-shrink-0" />
-                      <span className="text-sm sm:text-base font-semibold text-neutral-200">
-                        Expert @ Google Services and Digital Solutions
-                      </span>
-                    </div>
-                  </div>
+                  <p className="text-base sm:text-lg text-neutral-200 leading-relaxed font-normal">
+                    Founder & CEO of DKP Innovations, is an experience in Google Services and Digital Solutions and Business Coach.
+                  </p>
                 </div>
 
               </div>

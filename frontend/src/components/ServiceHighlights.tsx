@@ -43,7 +43,7 @@ export const ServiceHighlights = () => {
             onClick={() => navigateTo('services')}
             className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-orange-500 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-sm cursor-pointer group"
           >
-            <span>Explore All 16 Specialized Services</span>
+            <span>Explore All 19 Specialized Services</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </button>
         </div>

@@ -20,21 +20,21 @@ export interface ServiceCategory {
 }
 
 export const serviceCategories: ServiceCategory[] = [
-  // Category 1 — Technology Solutions
+  // Category 1 — IT & Digital Solutions
   {
     id: 'technology-solutions',
     slug: 'technology-solutions',
-    title: 'Technology Solutions',
+    title: 'IT & Digital Solutions',
     subtitle: 'Scalable Engineering, Enterprise Architecture & Search Dominance',
     description:
       'We architect high-performance websites, scalable e-commerce infrastructure, and search dominance systems designed to transform casual visitors into long-term brand advocates.',
     titleCardImage: '/images/services/technology-solutions/title-card.jpg',
-    titleCardAlt: 'Technology Solutions overview and engineering capabilities at DKP Innovation',
+    titleCardAlt: 'IT & Digital Solutions overview and engineering capabilities at DKP Innovation',
     services: [
       {
         id: 'seo-expert-advanced-strategy',
         name: 'SEO Expert — Advanced Strategy',
-        category: 'Technology Solutions',
+        category: 'IT & Digital Solutions',
         image: '/images/services/technology-solutions/seo-expert-advanced-strategy.jpg',
         alt: 'Advanced search engine optimization strategy and analytics dashboard',
         description:
@@ -49,7 +49,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: 'ecommerce-website-solutions',
         name: 'E-Commerce Website Solutions',
-        category: 'Technology Solutions',
+        category: 'IT & Digital Solutions',
         image: '/images/services/technology-solutions/e-commerce-website-solutions.jpg',
         alt: 'High-conversion e-commerce platform and online store architecture',
         description:
@@ -64,7 +64,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: 'website-design-development',
         name: 'Website Design & Development',
-        category: 'Technology Solutions',
+        category: 'IT & Digital Solutions',
         image: '/images/services/technology-solutions/website-design-and-development.jpg',
         alt: 'Modern responsive website design and frontend development layout',
         description:
@@ -79,7 +79,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: 'social-media-optimization-strategy',
         name: 'Social Media Optimization & Strategy',
-        category: 'Technology Solutions',
+        category: 'IT & Digital Solutions',
         image: '/images/services/technology-solutions/social-media-optimization-and-strategy.jpg',
         alt: 'Social media profile optimization and organic engagement growth strategy',
         description:
@@ -94,66 +94,7 @@ export const serviceCategories: ServiceCategory[] = [
     ],
   },
 
-  // Category 2 — Creative Production & Advertising
-  {
-    id: 'creative-production-and-advertising',
-    slug: 'creative-production-and-advertising',
-    title: 'Creative Production & Advertising',
-    subtitle: 'Cinematic Visuals, Commercial Storytelling & Immersive Media',
-    description:
-      'We bring brand narratives to life through high-definition cinematography, commercial photography, and interactive 360-degree virtual experiences that captivate attention.',
-    titleCardImage: '/images/services/creative-production-and-advertising/title-card.jpg',
-    titleCardAlt: 'Creative Production & Advertising showcase at DKP Innovation',
-    services: [
-      {
-        id: 'corporate-photography-videography',
-        name: 'Corporate Photography & Videography',
-        category: 'Creative Production & Advertising',
-        image: '/images/services/creative-production-and-advertising/corporate-photography-and-videography.jpg',
-        alt: 'Professional corporate film crew and executive photography shoot',
-        description:
-          'High-definition executive portraits, workplace culture showcases, corporate documentaries, and branded asset libraries that establish trust and market authority.',
-        highlights: [
-          'Executive headshots & leadership team editorial photography',
-          'High-impact corporate brand films & cultural documentaries',
-          'Multi-camera 4K cinema equipment & precision studio lighting',
-          'Full post-production color grading, sound design & editing',
-        ],
-      },
-      {
-        id: 'advertisement-shoots',
-        name: 'Advertisement Shoots',
-        category: 'Creative Production & Advertising',
-        image: '/images/services/creative-production-and-advertising/advertisement-shoots.jpg',
-        alt: 'High-concept commercial advertising shoot in professional studio',
-        description:
-          'High-impact commercial photography and film production crafted for multi-platform digital advertising, outdoor hoardings, and premium promotional campaigns.',
-        highlights: [
-          'Scriptwriting, storyboarding & creative concept development',
-          'Professional casting, styling & location scouting',
-          'Multi-aspect ratio outputs tailored for TV, YouTube & Meta',
-          'Cinematic visual effects, motion typography & audio master',
-        ],
-      },
-      {
-        id: 'google-virtual-tours',
-        name: 'Google Virtual Tours',
-        category: 'Creative Production & Advertising',
-        image: '/images/services/creative-production-and-advertising/google-virtual-tours.jpg',
-        alt: 'Interactive 360-degree Google Virtual Tour Street View walkthrough',
-        description:
-          'Interactive 360-degree Street View virtual tours that elevate your Google Maps presence, invite online walk-ins, and build immediate credibility with prospective customers.',
-        highlights: [
-          'Official Google Street View certified panoramic 360° capture',
-          'Seamless Google Business Profile integration & map linkage',
-          'Interactive indoor navigation with customizable clickable hotspots',
-          'Measurable boost to local search prominence and user dwell time',
-        ],
-      },
-    ],
-  },
-
-  // Category 3 — Digital Marketing & Lead Generation
+  // Category 2 — Digital Marketing & Lead Generation
   {
     id: 'digital-marketing-and-lead-generation',
     slug: 'digital-marketing-and-lead-generation',
@@ -242,7 +183,7 @@ export const serviceCategories: ServiceCategory[] = [
     ],
   },
 
-  // Category 4 — Branding, PR & Influencer Marketing
+  // Category 3 — Branding, PR & Influencer Marketing
   {
     id: 'branding-pr-and-influencer-marketing',
     slug: 'branding-pr-and-influencer-marketing',
@@ -311,6 +252,124 @@ export const serviceCategories: ServiceCategory[] = [
           'Audiovisual engineering, live streaming & ambient lighting',
           'Media credentialing, press lounge management & photo walls',
           'On-site technical director & minute-by-minute protocol execution',
+        ],
+      },
+    ],
+  },
+
+  // Category 4 — Creative Production & Advertising
+  {
+    id: 'creative-production-and-advertising',
+    slug: 'creative-production-and-advertising',
+    title: 'Creative Production & Advertising',
+    subtitle: 'Cinematic Visuals, Commercial Storytelling & Immersive Media',
+    description:
+      'We bring brand narratives to life through high-definition cinematography, commercial photography, and interactive 360-degree virtual experiences that captivate attention.',
+    titleCardImage: '/images/services/creative-production-and-advertising/title-card.jpg',
+    titleCardAlt: 'Creative Production & Advertising showcase at DKP Innovation',
+    services: [
+      {
+        id: 'corporate-photography-videography',
+        name: 'Corporate Photography & Videography',
+        category: 'Creative Production & Advertising',
+        image: '/images/services/creative-production-and-advertising/corporate-photography-and-videography.jpg',
+        alt: 'Professional corporate film crew and executive photography shoot',
+        description:
+          'High-definition executive portraits, workplace culture showcases, corporate documentaries, and branded asset libraries that establish trust and market authority.',
+        highlights: [
+          'Executive headshots & leadership team editorial photography',
+          'High-impact corporate brand films & cultural documentaries',
+          'Multi-camera 4K cinema equipment & precision studio lighting',
+          'Full post-production color grading, sound design & editing',
+        ],
+      },
+      {
+        id: 'advertisement-shoots',
+        name: 'Advertisement Shoots',
+        category: 'Creative Production & Advertising',
+        image: '/images/services/creative-production-and-advertising/advertisement-shoots.jpg',
+        alt: 'High-concept commercial advertising shoot in professional studio',
+        description:
+          'High-impact commercial photography and film production crafted for multi-platform digital advertising, outdoor hoardings, and premium promotional campaigns.',
+        highlights: [
+          'Scriptwriting, storyboarding & creative concept development',
+          'Professional casting, styling & location scouting',
+          'Multi-aspect ratio outputs tailored for TV, YouTube & Meta',
+          'Cinematic visual effects, motion typography & audio master',
+        ],
+      },
+      {
+        id: 'google-virtual-tours',
+        name: 'Google Virtual Tours',
+        category: 'Creative Production & Advertising',
+        image: '/images/services/creative-production-and-advertising/google-virtual-tours.jpg',
+        alt: 'Interactive 360-degree Google Virtual Tour Street View walkthrough',
+        description:
+          'Interactive 360-degree Street View virtual tours that elevate your Google Maps presence, invite online walk-ins, and build immediate credibility with prospective customers.',
+        highlights: [
+          'Official Google Street View certified panoramic 360° capture',
+          'Seamless Google Business Profile integration & map linkage',
+          'Interactive indoor navigation with customizable clickable hotspots',
+          'Measurable boost to local search prominence and user dwell time',
+        ],
+      },
+    ],
+  },
+
+  // Category 5 — Business Registration & Corporate Compliance
+  {
+    id: 'business-registration-and-corporate-compliance',
+    slug: 'business-registration-and-corporate-compliance',
+    title: 'Business Registration & Corporate Compliance',
+    subtitle: 'Legal Entity Formation, Tax Compliance & Intellectual Property Protection',
+    description:
+      'We provide end-to-end corporate legal structuring, company incorporation, GST compliance, and trademark protection to establish a rock-solid operational and regulatory foundation for your enterprise.',
+    titleCardImage: '/images/services/business-registration-and-corporate-compliance/title-card.jpg',
+    titleCardAlt: 'Business Registration & Corporate Compliance overview and advisory services at DKP Innovation',
+    services: [
+      {
+        id: 'company-incorporation',
+        name: 'Company Incorporation',
+        category: 'Business Registration & Corporate Compliance',
+        image: '/images/services/business-registration-and-corporate-compliance/company-incorporation.jpg',
+        alt: 'Company incorporation and legal business entity registration services',
+        description:
+          'End-to-end legal entity formation, MCA registration, Private Limited, LLP, and OPC incorporations, digital signature certificates (DSC), and statutory filing support.',
+        highlights: [
+          'Private Limited, LLP, OPC & Partnership firm registration',
+          'Director Identification Number (DIN) & Digital Signature (DSC)',
+          'MOA & AOA drafting and Ministry of Corporate Affairs (MCA) filing',
+          'PAN, TAN, bank account opening & post-incorporation advisory',
+        ],
+      },
+      {
+        id: 'gst-registration-and-returns',
+        name: 'GST Registration and Returns',
+        category: 'Business Registration & Corporate Compliance',
+        image: '/images/services/business-registration-and-corporate-compliance/gst-registration-and-return-filing.jpg',
+        alt: 'GST registration, monthly return filing, and corporate tax compliance',
+        description:
+          'Seamless Goods and Services Tax (GST) registration, monthly and quarterly return filings (GSTR-1, GSTR-3B), tax reconciliation, and timely statutory compliance management.',
+        highlights: [
+          'New GST registration & voluntary registration assistance',
+          'Timely GSTR-1, GSTR-3B, and annual return (GSTR-9) filing',
+          'Input Tax Credit (ITC) reconciliation and notice handling',
+          'Ongoing corporate tax advisory & compliance calendar tracking',
+        ],
+      },
+      {
+        id: 'trademark-registration',
+        name: 'Trademark Registration',
+        category: 'Business Registration & Corporate Compliance',
+        image: '/images/services/business-registration-and-corporate-compliance/trademark-registration-and-ip-protection.jpg',
+        alt: 'Trademark registration, IP protection, and brand copyright filing',
+        description:
+          'Comprehensive trademark search, brand name and logo IP registration, copyright filings, objection handling, and long-term brand asset protection.',
+        highlights: [
+          'Comprehensive trademark search across Indian & global classes',
+          'Brand name, logo mark, slogan & copyright application filing',
+          'Examination report response, hearing representation & objection handling',
+          'Trademark renewal and brand asset infringement protection',
         ],
       },
     ],
