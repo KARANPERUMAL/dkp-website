@@ -19,10 +19,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+      whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
       viewport={{ once: true, margin: '-20px' }}
-      transition={{ duration: 0.45, delay: serviceIndex * 0.08 }}
+      transition={{ duration: 0.5, delay: serviceIndex * 0.08, ease: [0.16, 1, 0.3, 1] }}
       className="w-full flex"
     >
       <TiltCard

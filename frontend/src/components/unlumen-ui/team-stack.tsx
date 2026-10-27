@@ -9,6 +9,7 @@ import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { serviceCategories } from "@/data/servicesData";
+import { TextAnimationBlurFadeIn } from "@/components/ui/text-animation-blur-fade-in";
 
 export interface TeamCardItem {
   name: string;
@@ -417,19 +418,34 @@ export function TeamStack({
       {(eyebrow || title || description) && (
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-4">
           {eyebrow && (
-            <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">
+            <TextAnimationBlurFadeIn
+              as="span"
+              delay={0.05}
+              duration={0.4}
+              className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block"
+            >
               {eyebrow}
-            </span>
+            </TextAnimationBlurFadeIn>
           )}
           {title && (
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 tracking-tight mb-4">
+            <TextAnimationBlurFadeIn
+              as="h2"
+              delay={0.12}
+              duration={0.5}
+              className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 tracking-tight mb-4"
+            >
               {title}
-            </h2>
+            </TextAnimationBlurFadeIn>
           )}
           {description && (
-            <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
+            <TextAnimationBlurFadeIn
+              as="p"
+              delay={0.22}
+              duration={0.5}
+              className="text-base sm:text-lg text-neutral-600 leading-relaxed"
+            >
               {description}
-            </p>
+            </TextAnimationBlurFadeIn>
           )}
         </div>
       )}

@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
 import { useNavigation } from '../context/NavigationContext';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { IconArrowRight } from '@tabler/icons-react';
 import { Award, Users, Rocket, ShieldCheck, Globe, Eye, Target } from 'lucide-react';
 import { EncryptedText } from '@/components/ui/encrypted-text';
+import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 
 const companyStats = [
   {
@@ -50,106 +50,94 @@ export const AboutPage = () => {
   return (
     <div className="min-h-screen bg-[#050608] text-neutral-900 flex flex-col w-full selection:bg-orange-500 selection:text-white">
       {/* Floating Header & Navbar */}
-      <div className="relative w-full bg-[#050608]">
-        <Navbar />
+      <Navbar />
 
-        {/* SECTION A: About Hero */}
-        <section className="relative w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
-          {/* Ambient Lighting Gradients */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div
-              className="absolute left-1/2 -top-[10%] -translate-x-1/2 w-[700px] h-[400px] rounded-full"
-              style={{
-                background:
-                  'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.22) 0%, rgba(180, 60, 10, 0.08) 45%, transparent 70%)',
-                filter: 'blur(50px)',
-              }}
-            />
-            <div
-              className="absolute right-[8%] top-[25%] w-[420px] h-[320px] rounded-full"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(30, 41, 59, 0.28) 0%, transparent 70%)',
-                filter: 'blur(45px)',
-              }}
-            />
-          </div>
-
-          <div className="relative z-10 max-w-[1240px] mx-auto text-center">
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-6xl md:text-7xl font-black text-orange-500 tracking-tight uppercase mb-6 max-w-4xl mx-auto leading-[1.05]"
-            >
-              We Turn Ideas Into Powerful Brands.
-            </motion.h1>
-
-            {/* Supporting Copy based on authoritative company description */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-3xl mx-auto text-base sm:text-lg text-neutral-300 leading-relaxed font-normal mb-8"
-            >
-              <span className="text-white font-semibold">DKP Innovation</span> is a full-service digital and creative innovations company dedicated to building powerful brands across every platform. From digital marketing and web development to ad production, events, and talent management, we bring your vision to life.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="max-w-2xl mx-auto text-sm sm:text-base text-neutral-400 leading-relaxed font-normal mb-10"
-            >
-              With a team of passionate strategists, designers, and creators, we deliver results that go beyond expectations. Whatever your goal, DKP Innovation is your one-stop growth partner.
-            </motion.p>
-
-            {/* Primary & Secondary CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <button
-                onClick={() => navigateTo('services')}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-[0_4px_20px_rgba(234,88,12,0.4)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.6)] transition-all duration-200 cursor-pointer"
-              >
-                <span>Explore Our Services</span>
-                <IconArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => navigateTo('contact', 'enquiry-form')}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-1.5 px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white font-semibold text-sm border border-white/10 transition-colors cursor-pointer"
-              >
-                <span>Let's Talk</span>
-              </button>
-            </motion.div>
-          </div>
-        </section>
-      </div>
-
-      {/* SECTION: Key Company Statistics */}
-      <section className="relative w-full bg-[#08090d] border-b border-white/10 py-10 sm:py-14 px-4 sm:px-8 lg:px-12 select-none overflow-hidden">
-        {/* Ambient Lighting */}
+      {/* COMBINED HERO & COMPANY STATISTICS SECTION: One cohesive section with unified background and minimal gap */}
+      <section className="relative w-full bg-[#050608] pt-28 pb-14 sm:pt-36 sm:pb-20 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-neutral-800/80">
+        {/* Ambient Lighting Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] rounded-full"
+            className="absolute left-1/2 -top-[10%] -translate-x-1/2 w-[700px] h-[400px] rounded-full"
+            style={{
+              background:
+                'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.22) 0%, rgba(180, 60, 10, 0.08) 45%, transparent 70%)',
+              filter: 'blur(50px)',
+            }}
+          />
+          <div
+            className="absolute right-[8%] top-[25%] w-[420px] h-[320px] rounded-full"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(30, 41, 59, 0.28) 0%, transparent 70%)',
+              filter: 'blur(45px)',
+            }}
+          />
+          <div
+            className="absolute left-1/2 bottom-[8%] -translate-x-1/2 w-[600px] h-[220px] rounded-full"
             style={{
               background:
                 'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.08) 0%, transparent 70%)',
-              filter: 'blur(50px)',
+              filter: 'blur(55px)',
             }}
           />
         </div>
 
-        <div className="relative z-10 max-w-[1240px] mx-auto">
+        <div className="relative z-10 max-w-[1240px] mx-auto text-center">
+          {/* Main Heading with Blur-and-Fade Reveal */}
+          <TextAnimationBlurFadeIn
+            as="h1"
+            delay={0.1}
+            staggerDuration={0.03}
+            duration={0.6}
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-orange-500 tracking-tight uppercase mb-6 max-w-4xl mx-auto leading-[1.05]"
+          >
+            We Turn Ideas Into Powerful Brands.
+          </TextAnimationBlurFadeIn>
+
+          {/* Supporting Copy based on authoritative company description with Blur-and-Fade */}
+          <TextAnimationBlurFadeIn
+            as="p"
+            delay={0.25}
+            duration={0.5}
+            className="max-w-3xl mx-auto text-base sm:text-lg text-neutral-300 leading-relaxed font-normal mb-6"
+          >
+            DKP Innovation is a full-service digital and creative innovations company dedicated to building powerful brands across every platform. From digital marketing and web development to ad production, events, and talent management, we bring your vision to life.
+          </TextAnimationBlurFadeIn>
+
+          <TextAnimationBlurFadeIn
+            as="p"
+            delay={0.35}
+            duration={0.5}
+            className="max-w-2xl mx-auto text-sm sm:text-base text-neutral-400 leading-relaxed font-normal mb-8"
+          >
+            With a team of passionate strategists, designers, and creators, we deliver results that go beyond expectations. Whatever your goal, DKP Innovation is your one-stop growth partner.
+          </TextAnimationBlurFadeIn>
+
+          {/* Primary & Secondary CTAs with Blur-and-Fade Reveal */}
+          <BlurFadeIn delay={0.42} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16">
+            <button
+              onClick={() => navigateTo('services')}
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-[0_4px_20px_rgba(234,88,12,0.4)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.6)] transition-all duration-200 cursor-pointer"
+            >
+              <span>Explore Our Services</span>
+              <IconArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={() => navigateTo('contact', 'enquiry-form')}
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-1.5 px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white font-semibold text-sm border border-white/10 transition-colors cursor-pointer"
+            >
+              <span>Let's Talk</span>
+            </button>
+          </BlurFadeIn>
+
+          {/* Combined Statistics Row: Directly beneath CTAs with clean spacing */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-4 xl:gap-5">
             {companyStats.map((stat, idx) => (
-              <div
+              <BlurFadeIn
                 key={stat.metric}
+                delay={0.5 + idx * 0.08}
+                duration={0.5}
                 className={`relative group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-4 sm:p-5 lg:p-4.5 xl:p-5 transition-all duration-300 flex items-center justify-between gap-3 sm:gap-4 ${
                   idx === 4 ? 'sm:col-span-2 md:col-span-1 lg:col-span-1' : ''
                 }`}
@@ -161,8 +149,8 @@ export const AboutPage = () => {
                       <span className="text-2xl sm:text-3xl lg:text-2xl xl:text-3xl font-black text-white tracking-tight tabular-nums">
                         <EncryptedText
                           text={stat.value}
-                          revealDelayMs={60}
-                          flipDelayMs={40}
+                          revealDelayMs={280}
+                          flipDelayMs={60}
                           className="font-black text-white tracking-tight tabular-nums inline-block"
                           encryptedClassName="text-orange-400"
                           revealedClassName="text-white"
@@ -183,7 +171,7 @@ export const AboutPage = () => {
                 <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
                   <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-              </div>
+              </BlurFadeIn>
             ))}
           </div>
         </div>
@@ -206,7 +194,11 @@ export const AboutPage = () => {
           </div>
 
           <div className="max-w-[1100px] mx-auto relative z-10">
-            <div className="bg-gradient-to-br from-[#0c0f17] via-[#10141f] to-[#161a25] border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-14 shadow-2xl">
+            <BlurFadeIn
+              delay={0.1}
+              duration={0.6}
+              className="bg-gradient-to-br from-[#0c0f17] via-[#10141f] to-[#161a25] border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-14 shadow-2xl"
+            >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 {/* Founder Photograph */}
@@ -241,30 +233,49 @@ export const AboutPage = () => {
                 </div>
 
               </div>
-            </div>
+            </BlurFadeIn>
           </div>
         </section>
 
         {/* SECTION C: Purpose & Direction — Vision & Mission */}
         <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-neutral-50 select-none">
           <div className="max-w-[1240px] mx-auto">
-            {/* Section Header */}
+            {/* Section Header with Blur-and-Fade Reveal */}
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2.5 block">
+              <TextAnimationBlurFadeIn
+                as="span"
+                delay={0.05}
+                duration={0.4}
+                className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2.5 block"
+              >
                 Purpose & Direction
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="h2"
+                delay={0.15}
+                duration={0.5}
+                className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4"
+              >
                 Our Vision & Mission
-              </h2>
-              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="p"
+                delay={0.25}
+                duration={0.5}
+                className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal"
+              >
                 Guided by strategic clarity and creative ambition, we empower organisations to thrive in an evolving digital landscape.
-              </p>
+              </TextAnimationBlurFadeIn>
             </div>
 
-            {/* Vision & Mission Cards */}
+            {/* Vision & Mission Cards with Staggered Blur-Fade Reveal */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-stretch">
               {/* Vision Card */}
-              <div className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between">
+              <BlurFadeIn
+                delay={0.3}
+                duration={0.5}
+                className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between"
+              >
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 mb-6 group-hover:scale-105 group-hover:bg-orange-100/80 transition-all duration-300">
                     <Eye className="w-7 h-7" />
@@ -279,10 +290,14 @@ export const AboutPage = () => {
                     To empower every organisation with effective digital solutions that help them establish a strong online presence, build a trusted brand reputation, and unlock sustainable growth opportunities in the digital era.
                   </p>
                 </div>
-              </div>
+              </BlurFadeIn>
 
               {/* Mission Card */}
-              <div className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between">
+              <BlurFadeIn
+                delay={0.4}
+                duration={0.5}
+                className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between"
+              >
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 mb-6 group-hover:scale-105 group-hover:bg-orange-100/80 transition-all duration-300">
                     <Target className="w-7 h-7" />
@@ -297,7 +312,7 @@ export const AboutPage = () => {
                     To help businesses of all sizes grow through practical, innovative, and result-oriented digital strategies that improve visibility, strengthen customer connections, and create long-term business value.
                   </p>
                 </div>
-              </div>
+              </BlurFadeIn>
             </div>
           </div>
         </section>

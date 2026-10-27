@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from 'react';
-import { motion } from 'framer-motion';
 import { useNavigation } from '../context/NavigationContext';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { BranchMap } from './BranchMap';
+import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import {
   OFFICIAL_PHONE,
   OFFICIAL_PHONE_TEL,
@@ -143,35 +143,34 @@ export const ContactPage = () => {
 
           <div className="relative z-10 max-w-[1100px] mx-auto text-center">
             {/* Tag Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+            <BlurFadeIn
+              delay={0.05}
+              duration={0.4}
               className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-orange-400 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm"
             >
               <IconSparkles className="w-4 h-4 text-orange-500" />
               <span>Direct Commercial & Strategic Inquiries</span>
-            </motion.div>
+            </BlurFadeIn>
 
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+            {/* Main Heading with Blur-Fade Reveal */}
+            <TextAnimationBlurFadeIn
+              as="h1"
+              delay={0.15}
+              duration={0.5}
               className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-6"
             >
               Let's Build Something Great Together
-            </motion.h1>
+            </TextAnimationBlurFadeIn>
 
-            {/* Supporting Copy */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            {/* Supporting Copy with Blur-Fade Reveal */}
+            <TextAnimationBlurFadeIn
+              as="p"
+              delay={0.25}
+              duration={0.5}
               className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-300 leading-relaxed font-normal"
             >
               Tell us about your business goals and our team will help you explore the right digital, creative and marketing solutions.
-            </motion.p>
+            </TextAnimationBlurFadeIn>
           </div>
         </section>
       </div>

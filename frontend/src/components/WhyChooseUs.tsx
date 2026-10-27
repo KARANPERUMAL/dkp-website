@@ -5,6 +5,7 @@ import {
   StackedFeatureCards,
   defaultWhyChooseUsCards,
 } from '@/components/unlumen-ui/stacked-feature-cards';
+import { TextAnimationBlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 
 export const WhyChooseUs = () => {
   const { navigateTo } = useNavigation();
@@ -168,37 +169,45 @@ export const WhyChooseUs = () => {
             </svg>
           </motion.div>
 
-          {/* Eyebrow, Heading, and Supporting Copy */}
-          <motion.div
-            initial={{ opacity: 0, x: 15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-20px' }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 text-center sm:text-left pt-1"
-          >
-            <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">
+          {/* Eyebrow, Heading, and Supporting Copy with Blur-and-Fade Reveal */}
+          <div className="flex-1 text-center sm:text-left pt-1">
+            <TextAnimationBlurFadeIn
+              as="span"
+              delay={0.05}
+              duration={0.4}
+              className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block"
+            >
               WHY CHOOSE US
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a1e26] tracking-tight leading-snug mb-3">
-              Your Growth Deserves{' '}
-              <span className="text-orange-600">More Than Ordinary</span> Marketing.
-            </h2>
-            <p className="text-sm sm:text-base text-neutral-600 font-normal leading-relaxed max-w-2xl">
+            </TextAnimationBlurFadeIn>
+            <TextAnimationBlurFadeIn
+              as="h2"
+              delay={0.12}
+              duration={0.5}
+              className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a1e26] tracking-tight leading-snug mb-3"
+            >
+              Your Growth Deserves More Than Ordinary Marketing.
+            </TextAnimationBlurFadeIn>
+            <TextAnimationBlurFadeIn
+              as="p"
+              delay={0.22}
+              duration={0.5}
+              className="text-sm sm:text-base text-neutral-600 font-normal leading-relaxed max-w-2xl"
+            >
               We combine tailored strategy, creative expertise and practical execution to help your business build a stronger brand presence and pursue meaningful growth.
-            </p>
-          </motion.div>
+            </TextAnimationBlurFadeIn>
+          </div>
 
         </div>
 
         {/* Stacked Feature Cards Component replacing the five-card grid */}
         <StackedFeatureCards cards={defaultWhyChooseUsCards} className="max-w-4xl mx-auto" />
 
-        {/* Dedicated Discuss Your Project Action Card (Preserved static outside stacking animation) */}
+        {/* Dedicated Discuss Your Project Action Card with Blur-Fade reveal */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, filter: 'blur(10px)', y: 15 }}
+          whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 0.45 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 sm:mt-12 bg-gradient-to-br from-[#0c0e14] to-[#181d28] text-white rounded-2xl p-6 sm:p-8 border border-neutral-800 shadow-xl max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6"
         >
           <div className="flex-1 text-center sm:text-left">

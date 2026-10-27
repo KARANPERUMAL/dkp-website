@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
 import { useNavigation } from '../context/NavigationContext';
 import { serviceCategories } from '../data/servicesData';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { ServiceCard } from './ServiceCard';
+import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import {
   IconArrowRight,
   IconChevronRight,
@@ -46,33 +46,28 @@ export const ServicesPage = () => {
           </div>
 
           <div className="relative z-10 max-w-[1240px] mx-auto text-center">
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+            {/* Main Heading with Blur-Fade Reveal */}
+            <TextAnimationBlurFadeIn
+              as="h1"
+              delay={0.1}
+              duration={0.6}
               className="text-4xl sm:text-6xl md:text-7xl font-black text-orange-500 tracking-tight uppercase mb-6"
             >
               What Do We Do
-            </motion.h1>
+            </TextAnimationBlurFadeIn>
 
-            {/* Supporting Copy */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            {/* Supporting Copy with Blur-Fade Reveal */}
+            <TextAnimationBlurFadeIn
+              as="p"
+              delay={0.25}
+              duration={0.5}
               className="max-w-3xl mx-auto text-base sm:text-xl text-neutral-300 leading-relaxed font-normal mb-8"
             >
               We combine technology, creativity and strategic marketing to help businesses build their digital presence, strengthen their brand and generate measurable growth.
-            </motion.p>
+            </TextAnimationBlurFadeIn>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
+            {/* CTA Buttons with Blur-Fade Reveal */}
+            <BlurFadeIn delay={0.35} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => navigateTo('contact', 'enquiry-form')}
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-[0_4px_20px_rgba(234,88,12,0.4)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.6)] transition-all duration-200 cursor-pointer"
@@ -87,13 +82,12 @@ export const ServicesPage = () => {
               >
                 <span>Explore 5 Core Capabilities</span>
               </a>
-            </motion.div>
+            </BlurFadeIn>
 
-            {/* Quick Category Jump Pills */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+            {/* Quick Category Jump Pills with Blur-Fade Reveal */}
+            <BlurFadeIn
+              delay={0.45}
+              duration={0.5}
               className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
             >
               {serviceCategories.map((cat, idx) => (
@@ -106,7 +100,7 @@ export const ServicesPage = () => {
                   <span>{cat.title}</span>
                 </a>
               ))}
-            </motion.div>
+            </BlurFadeIn>
           </div>
         </section>
       </div>
@@ -123,8 +117,12 @@ export const ServicesPage = () => {
           >
             <div className="max-w-[1240px] mx-auto">
               
-              {/* Category Introduction Banner featuring Title-Card Image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-xl mb-12 sm:mb-16 border border-neutral-200/80 bg-neutral-900">
+              {/* Category Introduction Banner featuring Title-Card Image with Blur-Fade Reveal */}
+              <BlurFadeIn
+                delay={0.1}
+                duration={0.6}
+                className="relative rounded-2xl overflow-hidden shadow-xl mb-12 sm:mb-16 border border-neutral-200/80 bg-neutral-900"
+              >
                 <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[300px]">
                   
                   {/* Banner Content (Spans 7 cols on desktop) */}
@@ -169,7 +167,7 @@ export const ServicesPage = () => {
                   </div>
 
                 </div>
-              </div>
+              </BlurFadeIn>
 
               {/* Service Cards Grid (Using matching individual images and ClippedCircle hover effect) */}
               <div

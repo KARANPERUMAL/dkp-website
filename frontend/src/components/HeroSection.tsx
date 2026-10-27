@@ -1,5 +1,6 @@
 import type { MouseEvent } from 'react';
 import { motion } from 'framer-motion';
+import { BackgroundRippleEffect } from './ui/background-ripple-effect';
 
 interface HeroSectionProps {
   onCtaClick?: () => void;
@@ -23,8 +24,13 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
       id="home"
       className="relative w-full h-screen bg-[#050608] text-white pt-14 sm:pt-16 pb-0 overflow-hidden select-none flex flex-col justify-center"
     >
+      {/* Background Ripple Effect: Interactive subtle ripple layer behind hero content */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
+        <BackgroundRippleEffect rows={14} cols={32} cellSize={54} />
+      </div>
+
       {/* Atmospheric Background Lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
         {/* Warm amber / orange atmospheric glow behind right headline & CTA */}
         <div
           className="absolute right-[10%] top-[18%] w-[480px] h-[380px] sm:w-[600px] sm:h-[460px] rounded-full"
@@ -70,9 +76,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
           >
             {/* Line 1: We Don't Just (slightly narrower, centered at top of ladder) */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.08 }}
+              initial={{ opacity: 0, filter: 'blur(10px)', y: 8 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2.3rem,5.4vw,5.6rem)] leading-[0.90] transition-colors"
               style={{
                 backgroundImage: 'linear-gradient(180deg, #384255 0%, #252b36 100%)',
@@ -85,9 +91,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
             {/* Line 2: Market Your Brand — (wider middle tier of ladder with increased vertical gap) */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.16 }}
+              initial={{ opacity: 0, filter: 'blur(10px)', y: 8 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(3.1rem,7.8vw,8.2rem)] leading-[0.88] tracking-[-0.045em] transition-colors"
               style={{
                 backgroundImage:
@@ -101,9 +107,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
             {/* Line 3: We Build It. (balanced base beneath them, sitting naturally lower) */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.24 }}
+              initial={{ opacity: 0, filter: 'blur(10px)', y: 8 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(3.8rem,9.6vw,10.2rem)] leading-[0.86] tracking-[-0.05em] transition-colors"
               style={{
                 backgroundImage:
