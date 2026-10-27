@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
-export type PageRoute = 'home' | 'about' | 'services' | 'contact';
+export type PageRoute = 'home' | 'about' | 'services' | 'careers' | 'contact';
 
 interface NavigationContextType {
   currentPage: PageRoute;
   navigateTo: (page: PageRoute, targetId?: string) => void;
   selectedServiceForInquiry?: string;
   setSelectedServiceForInquiry: (serviceName: string) => void;
+  selectedPositionForApplication?: string;
+  setSelectedPositionForApplication: (positionName: string) => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
@@ -22,6 +24,9 @@ function getInitialPage(): PageRoute {
   if (path.includes('/services') || hash.includes('#services') || hash.includes('#/services')) {
     return 'services';
   }
+  if (path.includes('/careers') || hash.includes('#careers') || hash.includes('#/careers')) {
+    return 'careers';
+  }
   if (path.includes('/contact') || hash.includes('#contact') || hash.includes('#/contact')) {
     return 'contact';
   }
@@ -31,6 +36,7 @@ function getInitialPage(): PageRoute {
 export const NavigationProvider = ({ children }: { children: ReactNode }) => {
   const [currentPage, setCurrentPage] = useState<PageRoute>(getInitialPage());
   const [selectedServiceForInquiry, setSelectedServiceForInquiry] = useState<string | undefined>();
+  const [selectedPositionForApplication, setSelectedPositionForApplication] = useState<string | undefined>();
 
   useEffect(() => {
     const handleUrlChange = () => {
@@ -74,6 +80,8 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
         navigateTo,
         selectedServiceForInquiry,
         setSelectedServiceForInquiry,
+        selectedPositionForApplication,
+        setSelectedPositionForApplication,
       }}
     >
       {children}
