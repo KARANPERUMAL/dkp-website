@@ -29,3 +29,18 @@ pnpm-debug.log*
 # Agent & temporary files
 .gemini/
 scratch/
+
+# Backend & Java Maven artifacts
+target/
+**/target/
+storage/
+**/storage/
+*.class
+*.jar
+*.war
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+!**/.env.example

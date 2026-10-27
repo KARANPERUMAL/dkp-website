@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: dkp-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    region: ohio
+    plan: starter
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        value: DKP Innovations <noreply@dkpinnovation.com>
+      - key: CAREERS_TO
+        value: careers@dkpinnovation.com
+      - key: SERVICES_TO
+        value: services@dkpinnovation.com
+      - key: CONTACT_TO
+        value: info@dkpinnovation.com
+      - key: STORAGE_PROVIDER
+        value: s3
+      - key: OBJECT_STORAGE_REGION
+        value: us-east-1
+      - key: OBJECT_STORAGE_BUCKET
+        sync: false
+      - key: OBJECT_STORAGE_ACCESS_KEY
+        sync: false
+      - key: OBJECT_STORAGE_SECRET_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: https://dkpinnovation.com
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://dkpinnovation.com,https://www.dkpinnovation.com
+      - key: SWAGGER_ENABLED
+        value: false

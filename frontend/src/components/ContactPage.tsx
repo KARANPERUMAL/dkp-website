@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { BranchMap } from './BranchMap';
 import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
+import { submitContactMessage } from '../services/contactService';
 import {
   OFFICIAL_PHONE,
   OFFICIAL_PHONE_TEL,
@@ -56,6 +57,8 @@ export const ContactPage = () => {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState<{ referenceId: string; message: string } | null>(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(OFFICIAL_EMAIL);
@@ -97,16 +100,38 @@ export const ContactPage = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Frontend-only simulation of message dispatch
-    setTimeout(() => {
+    setSubmissionError(null);
+
+    try {
+      const res = await submitContactMessage({
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.service,
+        message: formData.message,
+      });
+
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 600);
+
+      if (res.success && res.referenceId) {
+        setSubmissionResult({
+          referenceId: res.referenceId,
+          message: res.message || 'Your inquiry has been received successfully.',
+        });
+        setIsSubmitted(true);
+      } else {
+        setSubmissionError(res.error || 'Failed to submit inquiry. Your entered data has been preserved.');
+      }
+    } catch (err: unknown) {
+      setIsSubmitting(false);
+      const msg = err instanceof Error ? err.message : 'Unknown network failure';
+      setSubmissionError(`Submission failed: ${msg}. Your entered information has been preserved.`);
+    }
   };
 
   const handleResetForm = () => {
@@ -119,6 +144,8 @@ export const ContactPage = () => {
     });
     setErrors({});
     setIsSubmitted(false);
+    setSubmissionResult(null);
+    setSubmissionError(null);
   };
 
   return (
@@ -339,8 +366,9 @@ export const ContactPage = () => {
                 <p className="text-sm text-neutral-600 max-w-md mx-auto mb-4 leading-relaxed">
                   Thank you, <strong className="text-neutral-900">{formData.fullName}</strong>. Our team has received your project details for <strong className="text-neutral-900">{formData.service}</strong> and will connect at <strong className="text-neutral-900">{formData.email}</strong> shortly.
                 </p>
-                <div className="inline-block p-3 rounded-lg bg-white border border-orange-200/80 text-xs text-neutral-500 mb-6">
-                  <span className="font-semibold text-orange-700">Notice:</span> Frontend validation demonstration. Inquiries are validated client-side until backend integration is connected.
+                <div className="inline-block p-3 rounded-lg bg-white border border-orange-200/80 text-xs text-neutral-600 mb-6">
+                  <span className="font-semibold text-neutral-500">Inquiry Reference ID:</span>{' '}
+                  <span className="font-mono font-bold text-orange-600">{submissionResult?.referenceId}</span>
                 </div>
                 <div>
                   <button
@@ -354,13 +382,16 @@ export const ContactPage = () => {
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
                 
-                {/* Notice Pill */}
-                <div className="p-3 rounded-lg bg-orange-50/80 border border-orange-200/70 text-xs text-orange-950 flex items-start space-x-2">
-                  <IconAlertCircle className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
-                  <span className="leading-snug">
-                    <strong>Frontend Consultation Form:</strong> Input fields validate in real-time. Submissions are processed on the frontend for immediate preview.
-                  </span>
-                </div>
+                {/* Error Banner */}
+                {submissionError && (
+                  <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm flex items-start space-x-2.5">
+                    <IconAlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                    <div className="flex-1 leading-relaxed">
+                      <strong className="font-semibold block mb-0.5">Submission Notice</strong>
+                      <span>{submissionError}</span>
+                    </div>
+                  </div>
+                )}
 
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

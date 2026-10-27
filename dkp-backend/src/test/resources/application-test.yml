@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:dkp_test_db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+app:
+  storage:
+    provider: local
+    local-dir: ./target/test-storage/resumes
+  email:
+    resend-api-key: "re_test_mock_key"
+  rate-limit:
+    enabled: true
+    capacity: 5
+    refill-tokens: 5
+    refill-period-seconds: 60

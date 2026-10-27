@@ -1,3 +1,5 @@
+import { getApiBaseUrl, parseResponse } from './apiClient';
+
 export interface JobApplicationPayload {
   fullName: string;
   email: string;
@@ -12,6 +14,7 @@ export interface JobApplicationPayload {
   portfolioUrl?: string;
   privacyConsent: boolean;
   resumeFile: File;
+  honeypot?: string;
 }
 
 export interface CareerSubmissionResult {
@@ -19,36 +22,28 @@ export interface CareerSubmissionResult {
   message?: string;
   applicationId?: string;
   error?: string;
+  fieldErrors?: Record<string, string>;
   isNetworkError?: boolean;
 }
 
 /**
  * Career application submission service.
- * Connects to the configured backend API endpoint.
- *
- * Backend Requirements:
- * - Method: POST
- * - Content-Type: multipart/form-data
- * - Expected Endpoint: /api/careers/apply (or VITE_CAREERS_API_URL)
- * - Payload:
- *   - fullName, email, phone, position, department, experienceLevel,
- *     workArrangement, keySkills, coverLetter, linkedInUrl, portfolioUrl,
- *     privacyConsent, and resume (binary file).
- * - Expected Success Response: 200/201 JSON { success: true, applicationId: string, message: string }
+ * Connects to the Spring Boot backend API endpoint (POST /api/careers/applications).
  */
 export async function submitCareerApplication(
   payload: JobApplicationPayload
 ): Promise<CareerSubmissionResult> {
-  const endpoint = import.meta.env.VITE_CAREERS_API_URL || '/api/careers/apply';
+  const baseUrl = getApiBaseUrl();
+  const endpoint = import.meta.env.VITE_CAREERS_API_URL || `${baseUrl}/api/careers/applications`;
 
   const formData = new FormData();
   formData.append('fullName', payload.fullName.trim());
   formData.append('email', payload.email.trim());
   formData.append('phone', payload.phone.trim());
-  formData.append('position', payload.position);
-  formData.append('department', payload.department);
-  formData.append('experienceLevel', payload.experienceLevel);
-  formData.append('workArrangement', payload.workArrangement);
+  formData.append('position', payload.position.trim());
+  formData.append('department', payload.department.trim());
+  formData.append('experienceLevel', payload.experienceLevel.trim());
+  formData.append('workArrangement', payload.workArrangement.trim());
   formData.append('keySkills', payload.keySkills.trim());
   formData.append('coverLetter', payload.coverLetter.trim());
   if (payload.linkedInUrl?.trim()) {
@@ -59,34 +54,35 @@ export async function submitCareerApplication(
   }
   formData.append('privacyConsent', String(payload.privacyConsent));
   formData.append('resume', payload.resumeFile, payload.resumeFile.name);
+  if (payload.honeypot) {
+    formData.append('honeypot', payload.honeypot);
+  }
 
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        // Note: Do NOT set Content-Type header manually for FormData so the browser generates the multipart boundary
+      },
       body: formData,
     });
 
-    if (!response.ok) {
-      let errorMessage = `Server error (${response.status})`;
-      try {
-        const errorData = await response.json();
-        if (errorData.message) errorMessage = errorData.message;
-        else if (errorData.error) errorMessage = errorData.error;
-      } catch {
-        // Response is non-JSON
-      }
+    const parsed = await parseResponse(response);
+
+    if (parsed.success) {
+      return {
+        success: true,
+        applicationId: parsed.data.referenceId,
+        message: parsed.data.message,
+      };
+    } else {
       return {
         success: false,
-        error: errorMessage,
+        error: parsed.error.message,
+        fieldErrors: parsed.error.fieldErrors,
       };
     }
-
-    const data = await response.json().catch(() => ({}));
-    return {
-      success: true,
-      applicationId: data.applicationId || data.id || `APP-${Date.now()}`,
-      message: data.message || 'Your application has been successfully submitted.',
-    };
   } catch (err: unknown) {
     const errorMsg =
       err instanceof Error ? err.message : 'Unknown network failure';

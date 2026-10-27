@@ -1,0 +1,9 @@
+package com.dkp.email;
+
+public enum EmailEventType {
+    CAREER_ADMIN_NOTIFICATION,
+    CAREER_CANDIDATE_ACK,
+    SERVICE_ADMIN_NOTIFICATION,
+    SERVICE_CLIENT_ACK,
+    CONTACT_ADMIN_NOTIFICATION
+}
