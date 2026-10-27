@@ -2,10 +2,9 @@
 
 Production-ready, observable, and secure Java 21 / Spring Boot 3.4 REST API backend for the **DKP Innovations** platform.
 
-This backend powers:
-1. **Careers Application Submissions** (`POST /api/careers/applications` & `POST /api/careers/apply`) with private resume document upload, file signature validation, and candidate notifications.
-2. **Services Enquiry Submissions** (`POST /api/services/enquiries`) with service catalogue verification and client confirmations.
-3. **Contact Us Submissions** (`POST /api/contact`) supporting direct consultation inquiries.
+This backend powers two unified form workflows:
+1. **Careers Application Submissions** (`POST /api/careers/applications` & `POST /api/careers/apply`) with private resume document upload, file signature validation, candidate acknowledgement, and recruiter notification.
+2. **Contact Us & Services Enquiry Submissions** (`POST /api/contact`) supporting both general inquiries and service-specific project enquiries, with client confirmation and team notification.
 
 ---
 
@@ -22,15 +21,15 @@ This backend powers:
 │  [CORS Allowlist]   [IP Rate Limiter]   [Correlation]  │
 │  [File Signature Validator (Magic Bytes)]   [Honeypot] │
 │                                                        │
-│   Careers API       Services API       Contact API     │
-│  (/api/careers/*)   (/api/services/*)   (/api/contact) │
-└──────────┬─────────────────┬──────────────────┬────────┘
-           │                 │                  │
-    ┌──────▼──────┐   ┌──────▼──────┐    ┌──────▼──────┐
-    │ S3 Resume   │   │ Neon        │    │ Resend API  │
-    │ Storage     │   │ PostgreSQL  │    │ Email Outbox│
-    │ (Private)   │   │ (Flyway)    │    │ (Async)     │
-    └─────────────┘   └─────────────┘    └─────────────┘
+│       Careers API            Contact & Services API    │
+│    (/api/careers/*)              (/api/contact)        │
+└──────────┬─────────────────────────────┬───────────────┘
+           │                             │
+    ┌──────▼──────┐               ┌──────▼──────┐    ┌─────────────┐
+    │ S3 Resume   │               │ Neon        │    │ Resend API  │
+    │ Storage     │               │ PostgreSQL  │    │ Email Outbox│
+    │ (Private)   │               │ (Flyway)    │    │ (Async)     │
+    └─────────────┘               └─────────────┘    └─────────────┘
 ```
 
 - **Resilient Transactional Outbox**: All email dispatches are saved in the `email_outbox` table in the same database transaction as the submission. Submissions are never lost or delayed by email provider latency or temporary downtime.
@@ -68,8 +67,7 @@ This backend powers:
 | `RESEND_API_KEY` | Resend API key | `re_123456789...` | **Yes** |
 | `MAIL_FROM` | Verified sender address on Resend | `DKP Innovations <noreply@dkpinnovation.com>` | **Yes** |
 | `CAREERS_TO` | Recipient for candidate applications | `careers@dkpinnovation.com` | **Yes** |
-| `SERVICES_TO` | Recipient for service proposals | `services@dkpinnovation.com` | **Yes** |
-| `CONTACT_TO` | Recipient for general inquiries | `info@dkpinnovation.com` | **Yes** |
+| `CONTACT_TO` | Recipient for contact & service submissions | `info@dkpinnovation.com` | **Yes** |
 | `STORAGE_PROVIDER` | Resume storage provider (`s3` or `local`) | `s3` | Yes |
 | `OBJECT_STORAGE_REGION` | S3 Region | `us-east-1` | Yes (for S3) |
 | `OBJECT_STORAGE_BUCKET` | Private S3 bucket name | `dkp-resumes-prod` | Yes (for S3) |
@@ -118,7 +116,6 @@ The server starts at `http://localhost:8080`.
    `src/main/resources/db/migration/V1__init_schema.sql`
    Tables created:
    - `job_applications`
-   - `service_enquiries`
    - `contact_submissions`
    - `email_outbox`
 
@@ -185,44 +182,29 @@ The server starts at `http://localhost:8080`.
   }
   ```
 
-### Services Enquiry
+### Contact Us / Services Enquiry
 - **Method**: `POST`
-- **Path**: `/api/services/enquiries`
+- **Path**: `/api/contact`
 - **Content-Type**: `application/json`
-- **Body**:
+- **Description**: Unified endpoint handling both general contact messages and service-specific project enquiries.
+- **Body Example (Service Enquiry)**:
   ```json
   {
     "fullName": "Aarav Patel",
     "email": "aarav@enterprise.com",
     "phone": "+91 98765 43210",
-    "companyName": "Enterprise Solutions Ltd",
     "service": "IT & Digital Solutions",
-    "message": "We require a scalable web infrastructure with automated inventory and CRM integration.",
-    "privacyConsent": true
+    "message": "We require a scalable web infrastructure with automated inventory and CRM integration."
   }
   ```
-- **Response** (`201 Created`):
-  ```json
-  {
-    "success": true,
-    "referenceId": "DKP-SRV-20261027-XYZ890",
-    "message": "Thank you! Your project enquiry has been received...",
-    "timestamp": "2026-10-27T13:40:00Z"
-  }
-  ```
-
-### Contact Us Message
-- **Method**: `POST`
-- **Path**: `/api/contact`
-- **Content-Type**: `application/json`
-- **Body**:
+- **Body Example (General Contact)**:
   ```json
   {
     "fullName": "Pooja Reddy",
     "email": "pooja@company.com",
     "phone": "+91 98450 11223",
-    "service": "Website Design & Development",
-    "message": "Interested in redesigning our customer portal and improving organic search visibility."
+    "service": "General Inquiry",
+    "message": "Interested in connecting with your executive team regarding business partnerships."
   }
   ```
 - **Response** (`201 Created`):
@@ -230,7 +212,7 @@ The server starts at `http://localhost:8080`.
   {
     "success": true,
     "referenceId": "DKP-CNT-20261027-KLM456",
-    "message": "Thank you! Your message has been received...",
+    "message": "Thank you! Your message has been received. Our team will get back to you shortly.",
     "timestamp": "2026-10-27T13:40:00Z"
   }
   ```

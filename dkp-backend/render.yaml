@@ -24,8 +24,6 @@ services:
         value: DKP Innovations <noreply@dkpinnovation.com>
       - key: CAREERS_TO
         value: careers@dkpinnovation.com
-      - key: SERVICES_TO
-        value: services@dkpinnovation.com
       - key: CONTACT_TO
         value: info@dkpinnovation.com
       - key: STORAGE_PROVIDER

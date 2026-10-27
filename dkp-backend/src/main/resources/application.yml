@@ -78,7 +78,6 @@ app:
     resend-api-key: ${RESEND_API_KEY:}
     mail-from: ${MAIL_FROM:DKP Innovations <noreply@dkpinnovation.com>}
     careers-to: ${CAREERS_TO:careers@dkpinnovation.com}
-    services-to: ${SERVICES_TO:services@dkpinnovation.com}
     contact-to: ${CONTACT_TO:info@dkpinnovation.com}
     outbox-batch-size: 10
     outbox-poll-interval-ms: 5000

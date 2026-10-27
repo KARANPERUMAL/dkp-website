@@ -35,29 +35,7 @@ CREATE INDEX IF NOT EXISTS idx_job_app_email ON job_applications (email);
 CREATE INDEX IF NOT EXISTS idx_job_app_status ON job_applications (status);
 CREATE INDEX IF NOT EXISTS idx_job_app_created ON job_applications (created_at DESC);
 
--- 2. Service Enquiries Table
-CREATE TABLE IF NOT EXISTS service_enquiries (
-    id BIGSERIAL PRIMARY KEY,
-    reference_id VARCHAR(64) NOT NULL,
-    full_name VARCHAR(150) NOT NULL,
-    email VARCHAR(150) NOT NULL,
-    phone VARCHAR(30),
-    company_name VARCHAR(150),
-    service VARCHAR(150) NOT NULL,
-    message TEXT NOT NULL,
-    privacy_consent BOOLEAN NOT NULL DEFAULT TRUE,
-    privacy_consent_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(30) NOT NULL DEFAULT 'SUBMITTED',
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT uq_service_enquiries_ref UNIQUE (reference_id)
-);
-
-CREATE INDEX IF NOT EXISTS idx_service_enq_email ON service_enquiries (email);
-CREATE INDEX IF NOT EXISTS idx_service_enq_status ON service_enquiries (status);
-CREATE INDEX IF NOT EXISTS idx_service_enq_created ON service_enquiries (created_at DESC);
-
--- 3. Contact Submissions Table
+-- 2. Contact Submissions Table (handles both General Inquiries and Service Enquiries)
 CREATE TABLE IF NOT EXISTS contact_submissions (
     id BIGSERIAL PRIMARY KEY,
     reference_id VARCHAR(64) NOT NULL,
@@ -76,7 +54,7 @@ CREATE INDEX IF NOT EXISTS idx_contact_sub_email ON contact_submissions (email);
 CREATE INDEX IF NOT EXISTS idx_contact_sub_status ON contact_submissions (status);
 CREATE INDEX IF NOT EXISTS idx_contact_sub_created ON contact_submissions (created_at DESC);
 
--- 4. Transactional Email Outbox Table
+-- 3. Transactional Email Outbox Table
 CREATE TABLE IF NOT EXISTS email_outbox (
     id BIGSERIAL PRIMARY KEY,
     event_type VARCHAR(50) NOT NULL,

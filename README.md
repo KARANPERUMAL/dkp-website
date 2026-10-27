@@ -18,8 +18,7 @@ dkp/
 ├── dkp-backend/             # Java 21 + Spring Boot 3.4 Production Backend
 │   ├── src/main/java/com/dkp/
 │   │   ├── careers/         # Career application submission & resume storage
-│   │   ├── services/        # Service enquiry & catalogue validation
-│   │   ├── contact/         # Contact Us form processing
+│   │   ├── contact/         # Contact Us & Services Enquiry form processing
 │   │   ├── email/           # Resend API & Transactional Outbox pattern
 │   │   ├── storage/         # S3 & local resume storage abstraction
 │   │   ├── security/        # IP Rate limiting & spam protection

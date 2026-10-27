@@ -49,7 +49,6 @@ public class AppProperties {
         private String resendApiKey = "";
         private String mailFrom = "DKP Innovations <noreply@dkpinnovation.com>";
         private String careersTo = "careers@dkpinnovation.com";
-        private String servicesTo = "services@dkpinnovation.com";
         private String contactTo = "info@dkpinnovation.com";
         private int outboxBatchSize = 10;
         private long outboxPollIntervalMs = 5000;
@@ -76,14 +75,6 @@ public class AppProperties {
 
         public void setCareersTo(String careersTo) {
             this.careersTo = careersTo;
-        }
-
-        public String getServicesTo() {
-            return servicesTo;
-        }
-
-        public void setServicesTo(String servicesTo) {
-            this.servicesTo = servicesTo;
         }
 
         public String getContactTo() {
