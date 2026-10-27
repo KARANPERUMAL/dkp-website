@@ -238,8 +238,8 @@ The server starts at `http://localhost:8080`.
 2. Select your repository.
 3. Configure:
    - **Environment**: Docker
-   - **Docker Context**: `./dkp-backend`
-   - **Dockerfile Path**: `./dkp-backend/Dockerfile`
+   - **Docker Context**: `./backend`
+   - **Dockerfile Path**: `./backend/Dockerfile`
    - **Health Check Path**: `/actuator/health`
 4. Add the Environment Variables from the table above in Section 3.
 5. Deploy.

@@ -15,7 +15,7 @@ dkp/
 │   │   ├── data/            # Authoritative service and company data
 │   │   └── hooks/           # Interaction & animation hooks
 │   └── package.json
-├── dkp-backend/             # Java 21 + Spring Boot 3.4 Production Backend
+├── backend/                 # Java 21 + Spring Boot 3.4 Production Backend
 │   ├── src/main/java/com/dkp/
 │   │   ├── careers/         # Career application submission & resume storage
 │   │   ├── contact/         # Contact Us & Services Enquiry form processing
@@ -44,9 +44,9 @@ npm run dev
 ### 2. Backend Development
 
 ```bash
-cd dkp-backend
+cd backend
 ./mvnw clean test
 ./mvnw spring-boot:run
 ```
 
-For detailed backend configuration, Neon PostgreSQL setup, Resend credentials, and Render deployment, see [`dkp-backend/README.md`](file:///c:/dkp-projects/dkp/dkp-backend/README.md).
+For detailed backend configuration, Neon PostgreSQL setup, Resend credentials, and Render deployment, see [`backend/README.md`](file:///c:/dkp-projects/dkp/backend/README.md).
