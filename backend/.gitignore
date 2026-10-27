@@ -4,7 +4,7 @@ target/
 !**/src/test/**/target/
 
 # Local Storage
-storage/
+/storage/
 
 # Environment files
 .env
