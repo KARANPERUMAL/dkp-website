@@ -3,7 +3,6 @@ import { useNavigation } from '../context/NavigationContext';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { IconArrowRight } from '@tabler/icons-react';
-import { TeamStack, defaultDkpServices } from '@/components/unlumen-ui/team-stack';
 
 export const AboutPage = () => {
   const { navigateTo } = useNavigation();
@@ -96,38 +95,7 @@ export const AboutPage = () => {
 
       {/* Main Content Area: Light & Warm Sections */}
       <main className="relative w-full bg-neutral-50 flex-1">
-        {/* SECTION B: Integrated Digital Solutions — Creativity Meets Strategy (TeamStack) */}
-        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80 overflow-x-clip">
-          <div className="max-w-[1240px] mx-auto">
-            <TeamStack
-              eyebrow="Integrated Digital Solutions"
-              title="Creativity Meets Strategy"
-              description="At DKP Innovation, we believe lasting market impact requires both analytical rigor and distinctive creative execution. By uniting five foundational capabilities under one roof, we eliminate fragmented communication and ensure cohesive brand growth."
-              items={defaultDkpServices}
-              onCardClick={(card) => {
-                if (card.slug) {
-                  navigateTo('services', card.slug);
-                } else {
-                  navigateTo('services');
-                }
-              }}
-            />
-
-            {/* Global CTA linking to all specialized services */}
-            <div className="mt-8 sm:mt-10 flex justify-center">
-              <button
-                type="button"
-                onClick={() => navigateTo('services')}
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-orange-500 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-sm cursor-pointer group"
-              >
-                <span>Explore All 19 Specialized Services</span>
-                <IconArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION C: Founder Profile — Puttaraju KV */}
+        {/* SECTION B: Founder Profile — Puttaraju KV */}
         <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#090b10] border-b border-neutral-800/80 relative overflow-hidden select-none">
           {/* Subtle Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -163,12 +131,16 @@ export const AboutPage = () => {
                     Leadership
                   </span>
 
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-5 sm:mb-6">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-2 sm:mb-2.5">
                     Puttaraju KV
                   </h2>
 
-                  <p className="text-base sm:text-lg text-neutral-200 leading-relaxed font-normal">
-                    Founder & CEO of DKP Innovations, is an experience in Google Services and Digital Solutions and Business Coach.
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-orange-500 tracking-normal mb-4 sm:mb-5">
+                    Founder & CEO of DKP Innovations
+                  </h3>
+
+                  <p className="text-base sm:text-lg text-neutral-300 leading-relaxed font-normal">
+                    Puttaraju KV is the Founder & CEO of DKP Innovations, a business coach, and a digital solutions expert passionate about empowering businesses through Google Services, innovative technology, and strategic digital solutions that strengthen the online presence and support sustainable business growth.
                   </p>
                 </div>
 

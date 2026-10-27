@@ -1,10 +1,12 @@
 import { Navbar } from './Navbar';
 import { HeroSection } from './HeroSection';
 import { HeroCurveBoundary, computeCurveState } from './HeroCurveBoundary';
+import { TeamStack, defaultDkpServices } from './unlumen-ui/team-stack';
 import { WhyChooseUs } from './WhyChooseUs';
 import { Footer } from './layout/Footer';
 import { useHeroCurveReveal } from '../hooks/useHeroCurveReveal';
 import { useNavigation } from '../context/NavigationContext';
+import { IconArrowRight } from '@tabler/icons-react';
 
 export const HomePage = () => {
   const { progress, isComplete } = useHeroCurveReveal();
@@ -42,6 +44,38 @@ export const HomePage = () => {
           }}
           className="relative w-full bg-white transition-none -mt-[1px]"
         >
+          {/* Integrated Digital Solutions — Creativity Meets Strategy (TeamStack) */}
+          <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80 overflow-x-clip">
+            <div className="max-w-[1240px] mx-auto">
+              <TeamStack
+                eyebrow="Integrated Digital Solutions"
+                title="Creativity Meets Strategy"
+                description="At DKP Innovation, we believe lasting market impact requires both analytical rigor and distinctive creative execution. By uniting five foundational capabilities under one roof, we eliminate fragmented communication and ensure cohesive brand growth."
+                items={defaultDkpServices}
+                defaultActiveIndex={0}
+                onCardClick={(card) => {
+                  if (card.slug) {
+                    navigateTo('services', card.slug);
+                  } else {
+                    navigateTo('services');
+                  }
+                }}
+              />
+
+              {/* Global CTA linking to all specialized services */}
+              <div className="mt-8 sm:mt-10 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => navigateTo('services')}
+                  className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-orange-500 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-sm cursor-pointer group"
+                >
+                  <span>Explore All 19 Specialized Services</span>
+                  <IconArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </button>
+              </div>
+            </div>
+          </section>
+
           {/* New Why Choose Us Section with 5 Key Reasons */}
           <WhyChooseUs />
         </main>

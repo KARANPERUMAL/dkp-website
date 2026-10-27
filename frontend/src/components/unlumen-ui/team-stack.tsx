@@ -8,6 +8,8 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { serviceCategories } from "@/data/servicesData";
+
 export interface TeamCardItem {
   name: string;
   role: string;
@@ -26,68 +28,30 @@ export interface TeamStackProps {
   eyebrow?: string;
   description?: string;
   className?: string;
+  defaultActiveIndex?: number;
   onCardClick?: (card: TeamCardItem, index: number) => void;
 }
 
-// Authoritative DKP Innovation service data representing the five core capabilities
-export const defaultDkpServices: TeamCardItem[] = [
-  {
-    name: "Digital Marketing & Lead Generation",
-    role: "Performance & Growth",
-    description:
-      "Data-aligned digital marketing, omnichannel campaign management, and search engine optimization structured to expand brand visibility.",
-    imageSrc: "/images/services/digital-marketing-and-lead-generation/title-card.jpg",
-    imageAlt: "Digital Marketing & Lead Generation at DKP Innovation",
-    isFeatured: true,
-    ctaLabel: "Explore Growth",
-    ctaHref: "#services-digital-marketing-and-lead-generation",
-    slug: "digital-marketing-and-lead-generation",
-  },
-  {
-    name: "Web & Digital Engineering",
-    role: "Web & Platform Engineering",
-    description:
-      "Modern websites, web applications, and digital platforms engineered with high performance, accessibility, and conversion focus.",
-    imageSrc: "/images/services/technology-solutions/website-design-and-development.jpg",
-    imageAlt: "Web & Digital Engineering at DKP Innovation",
-    ctaLabel: "Explore Web",
-    ctaHref: "#services-technology-solutions",
-    slug: "technology-solutions",
-  },
-  {
-    name: "Creative Production & Advertising",
-    role: "Visual Storytelling & Media",
-    description:
-      "Commercial film production, studio and corporate photography, and multimedia advertising developed to express your brand identity.",
-    imageSrc: "/images/services/creative-production-and-advertising/title-card.jpg",
-    imageAlt: "Creative Production & Advertising at DKP Innovation",
-    ctaLabel: "Explore Production",
-    ctaHref: "#services-creative-production-and-advertising",
-    slug: "creative-production-and-advertising",
-  },
-  {
-    name: "Engineering & Architecture",
-    role: "Scalable Systems & Tech",
-    description:
-      "Scalable e-commerce infrastructure, bespoke web applications, and enterprise search dominance engineered for high conversion.",
-    imageSrc: "/images/services/technology-solutions/title-card.jpg",
-    imageAlt: "Engineering & Architecture at DKP Innovation",
-    ctaLabel: "Explore Tech",
-    ctaHref: "#services-technology-solutions",
-    slug: "technology-solutions",
-  },
-  {
-    name: "Branding & Business Growth",
-    role: "Brand Identity & Stature",
-    description:
-      "Distinctive visual identity design, national publication press features, celebrity endorsements, and corporate event management.",
-    imageSrc: "/images/services/branding-pr-and-influencer-marketing/title-card.jpg",
-    imageAlt: "Branding & Business Growth at DKP Innovation",
-    ctaLabel: "Explore Branding",
-    ctaHref: "#services-branding-pr-and-influencer-marketing",
-    slug: "branding-pr-and-influencer-marketing",
-  },
-];
+const ctaLabels: Record<string, string> = {
+  "technology-solutions": "Explore IT",
+  "digital-marketing-and-lead-generation": "Explore Growth",
+  "branding-pr-and-influencer-marketing": "Explore Branding",
+  "creative-production-and-advertising": "Explore Production",
+  "business-registration-and-corporate-compliance": "Explore Compliance",
+};
+
+// Authoritative DKP Innovation service data representing the five core capabilities in exact order
+export const defaultDkpServices: TeamCardItem[] = serviceCategories.map((cat, idx) => ({
+  name: cat.title,
+  role: cat.subtitle,
+  description: cat.description,
+  imageSrc: cat.titleCardImage,
+  imageAlt: cat.titleCardAlt,
+  isFeatured: idx === 0,
+  ctaLabel: ctaLabels[cat.slug] || `Explore ${cat.title}`,
+  ctaHref: `#services-${cat.slug}`,
+  slug: cat.slug,
+}));
 
 // Deterministic jitter function for natural card-pile aesthetics
 function pseudoRandom(i: number, amplitude: number, seed: number): number {
@@ -129,7 +93,7 @@ function TeamMemberCard({
   const showCta = isHighlighted || isCtaHovered;
   const hasCta = Boolean(card.ctaHref || card.slug || onCardClick);
   const ctaLabel = card.ctaLabel || `View ${card.name}`;
-  const isFeatured = Boolean(card.isFeatured);
+  const isDark = isActive || (Boolean(card.isFeatured) && !isActive);
 
   // Measure CTA label width for spring expand pill
   React.useLayoutEffect(() => {
@@ -285,7 +249,7 @@ function TeamMemberCard({
         mass: 0.55,
       }}
       style={{
-        zIndex: isHighlighted ? total + 20 : total - index,
+        zIndex: isHighlighted ? total + 20 : isDark ? total + 10 : total - index,
       } as MotionStyle}
       className={cn(
         "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
@@ -295,7 +259,7 @@ function TeamMemberCard({
         isHighlighted
           ? "h-[25.5rem] sm:h-[27.5rem] shadow-[0_20px_45px_rgba(0,0,0,0.18)]"
           : "h-[24.5rem] sm:h-[26.5rem] shadow-[0_10px_28px_rgba(0,0,0,0.08)]",
-        isFeatured
+        isDark
           ? "border-orange-500/40 bg-[#090b0e] text-white"
           : "border-neutral-200/90 bg-white text-neutral-900",
         hasCta ? "cursor-pointer" : ""
@@ -321,7 +285,7 @@ function TeamMemberCard({
             transition={{ type: "spring", stiffness: 320, damping: 24 }}
             className={cn(
               "relative inline-flex h-8.5 sm:h-9 items-center justify-end overflow-hidden rounded-full shadow-md transition-colors",
-              isFeatured
+              isDark
                 ? "bg-orange-500 text-white hover:bg-orange-600"
                 : "bg-neutral-900 text-white hover:bg-orange-600"
             )}
@@ -353,7 +317,7 @@ function TeamMemberCard({
       <div
         className={cn(
           "w-full overflow-hidden rounded-2xl border transition-transform duration-300",
-          isFeatured
+          isDark
             ? "border-neutral-800 bg-neutral-900"
             : "border-neutral-200/80 bg-neutral-100",
           isHighlighted ? "scale-[1.01]" : ""
@@ -372,7 +336,7 @@ function TeamMemberCard({
         <span
           className={cn(
             "text-[10px] sm:text-[11px] font-bold uppercase tracking-wider block",
-            isFeatured ? "text-orange-400" : "text-orange-600"
+            isDark ? "text-orange-400" : "text-orange-600"
           )}
         >
           {card.role}
@@ -380,8 +344,8 @@ function TeamMemberCard({
         <h3
           className={cn(
             "text-base sm:text-[1.18rem] font-bold tracking-tight leading-snug transition-colors line-clamp-2",
-            isFeatured ? "text-white" : "text-neutral-900",
-            isHighlighted && !isFeatured ? "text-orange-600" : ""
+            isDark ? "text-white" : "text-neutral-900",
+            isHighlighted && !isDark ? "text-orange-600" : ""
           )}
         >
           {card.name}
@@ -389,7 +353,7 @@ function TeamMemberCard({
         <p
           className={cn(
             "text-[12px] sm:text-[13px] leading-relaxed line-clamp-3 pt-0.5",
-            isFeatured ? "text-neutral-300" : "text-neutral-600"
+            isDark ? "text-neutral-300" : "text-neutral-600"
           )}
         >
           {card.description}
@@ -405,12 +369,13 @@ export function TeamStack({
   eyebrow,
   description,
   className,
+  defaultActiveIndex = 0,
   onCardClick,
 }: TeamStackProps) {
   const [isMobile, setIsMobile] = React.useState(false);
   const [isTablet, setIsTablet] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const [activeCard, setActiveCard] = React.useState<number | null>(null);
+  const [activeCard, setActiveCard] = React.useState<number | null>(defaultActiveIndex);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   // Responsive breakpoints
@@ -435,17 +400,12 @@ export function TeamStack({
         (!containerRef.current || !containerRef.current.contains(target))
       ) {
         setIsExpanded(false);
-        setActiveCard(null);
+        setActiveCard(defaultActiveIndex);
       }
     };
     document.addEventListener("pointerdown", handlePointerDown);
     return () => document.removeEventListener("pointerdown", handlePointerDown);
-  }, [isExpanded, isMobile]);
-
-  // Reset active state when leaving mobile
-  React.useEffect(() => {
-    if (!isMobile) setActiveCard(null);
-  }, [isMobile]);
+  }, [isExpanded, isMobile, defaultActiveIndex]);
 
   return (
     <div
@@ -483,7 +443,7 @@ export function TeamStack({
             ? undefined
             : () => {
                 setIsExpanded(false);
-                setActiveCard(null);
+                setActiveCard(defaultActiveIndex);
               }
         }
         onClick={
