@@ -38,14 +38,16 @@ USER appuser
 # Expose default HTTP port
 EXPOSE 8080
 
-# Environment variables with safe defaults
+# Environment variables with safe defaults (binding to 0.0.0.0 for Render port detection)
 ENV PORT=8080 \
+    SERVER_PORT=8080 \
+    SERVER_ADDRESS=0.0.0.0 \
     SPRING_PROFILES_ACTIVE=prod \
     JAVA_OPTS="-XX:+UseG1GC -XX:MaxRAMPercentage=75.0 -XX:+ExitOnOutOfMemoryError"
 
 # Container healthcheck
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-  CMD curl -f http://localhost:${PORT:-8080}/actuator/health || exit 1
+  CMD curl -f http://127.0.0.1:${PORT:-8080}/actuator/health || exit 1
 
-# Launch application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+# Launch application with explicit 0.0.0.0 host binding and dynamic port configuration
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dserver.port=${PORT:-8080} -Dserver.address=0.0.0.0 -jar app.jar --server.port=${PORT:-8080} --server.address=0.0.0.0"]
