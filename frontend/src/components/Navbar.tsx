@@ -5,6 +5,7 @@ import {
   IconHome,
   IconUsers,
   IconBriefcase,
+  IconPhoto,
   IconUserCheck,
   IconMessage,
 } from '@tabler/icons-react';
@@ -26,6 +27,11 @@ export const navItems: NavItem[] = [
     icon: <IconBriefcase className="h-4 w-4" />,
   },
   {
+    name: 'Gallery',
+    link: '#gallery',
+    icon: <IconPhoto className="h-4 w-4" />,
+  },
+  {
     name: 'Careers',
     link: '#careers',
     icon: <IconUserCheck className="h-4 w-4" />,
@@ -44,6 +50,7 @@ export const Navbar = () => {
   const getTabForPage = (page: string) => {
     if (page === 'about') return '#about';
     if (page === 'services') return '#services';
+    if (page === 'gallery') return '#gallery';
     if (page === 'careers') return '#careers';
     if (page === 'contact') return '#contact';
     return '#home';
@@ -63,6 +70,8 @@ export const Navbar = () => {
       navigateTo('about');
     } else if (link === '#services') {
       navigateTo('services');
+    } else if (link === '#gallery') {
+      navigateTo('gallery');
     } else if (link === '#careers') {
       navigateTo('careers');
     } else if (link === '#contact') {

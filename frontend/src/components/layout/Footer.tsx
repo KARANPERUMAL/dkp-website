@@ -104,6 +104,14 @@ export const Footer = () => {
               </li>
               <li>
                 <button
+                  onClick={() => navigateTo('gallery')}
+                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                >
+                  Gallery
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => navigateTo('careers')}
                   className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
                 >

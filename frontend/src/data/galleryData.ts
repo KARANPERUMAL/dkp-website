@@ -1,0 +1,217 @@
+export interface GalleryItem {
+  id: string;
+  orderNumber: string;
+  filename: string;
+  src: string;
+  title: string;
+  subtitle: string;
+  category: 'workspace' | 'studio' | 'executive' | 'culture';
+  categoryLabel: string;
+  width: number;
+  height: number;
+  aspectRatio: 'landscape' | 'portrait';
+  orientation: 'Landscape' | 'Portrait';
+  alt: string;
+  caption: string;
+  location: string;
+  featured?: boolean;
+}
+
+export const galleryItems: GalleryItem[] = [
+  {
+    id: 'studio-panorama',
+    orderNumber: '01',
+    filename: '3.jpeg',
+    src: '/images/gallery/3.jpeg',
+    title: 'Main Creative & Technology Studio',
+    subtitle: 'Collaborative Agile Workspaces',
+    category: 'workspace',
+    categoryLabel: 'Workspaces & Tech',
+    width: 1392,
+    height: 928,
+    aspectRatio: 'landscape',
+    orientation: 'Landscape',
+    alt: 'Panoramic view of DKP Innovations collaborative tech workspace with custom brand murals, dual workstations, and agile team zones',
+    caption: 'The heart of our technology and creative operations — featuring agile computer hubs, brand growth murals, and integrated team collaboration lounges.',
+    location: 'Bangalore Studio · Main Floor',
+    featured: true,
+  },
+  {
+    id: 'digital-marketing-hub',
+    orderNumber: '02',
+    filename: '1.jpeg',
+    src: '/images/gallery/1.jpeg',
+    title: 'Digital Marketing & Strategy Workstation',
+    subtitle: 'Brand Growth Hub',
+    category: 'workspace',
+    categoryLabel: 'Workspaces & Tech',
+    width: 928,
+    height: 1392,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'DKP Innovations digital marketing development workstation with custom typography wall art, dual monitors, and high-performance PC tower',
+    caption: 'Dedicated digital marketing and SEO workstation flanked by custom-illustrated brand methodology murals and high-performance computing hardware.',
+    location: 'Bangalore Studio · Digital Wing',
+    featured: false,
+  },
+  {
+    id: 'chroma-production-studio',
+    orderNumber: '03',
+    filename: '5.jpeg',
+    src: '/images/gallery/5.jpeg',
+    title: 'Chroma Green Screen Production Suite',
+    subtitle: 'In-House Media & Video Lab',
+    category: 'studio',
+    categoryLabel: 'Production Studio',
+    width: 1392,
+    height: 928,
+    aspectRatio: 'landscape',
+    orientation: 'Landscape',
+    alt: 'DKP Innovations in-house video production studio with full green screen chroma backdrop, Simpex LED lights, and camera tripod equipment',
+    caption: 'Specialized video shooting and photography studio fitted with professional Simpex LED lighting rigs, chroma green cyclorama, and broadcast camera stands.',
+    location: 'Bangalore Studio · Production Lab',
+    featured: true,
+  },
+  {
+    id: 'executive-director-cabin',
+    orderNumber: '04',
+    filename: '9.jpeg',
+    src: '/images/gallery/9.jpeg',
+    title: "Founder & Executive Director's Cabin",
+    subtitle: 'Leadership & Strategy Suite',
+    category: 'executive',
+    categoryLabel: 'Executive Cabins',
+    width: 928,
+    height: 1392,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'Founder executive cabin with natural pine wood wall paneling, leather chair, executive desk, and desk bamboo',
+    caption: 'The executive director office with vertical pine wood paneling, high-back leather executive seating, and a quiet setting for client consultations.',
+    location: 'Bangalore Studio · Executive Suite',
+    featured: false,
+  },
+  {
+    id: 'inspirational-cultural-mural',
+    orderNumber: '05',
+    filename: '4.jpeg',
+    src: '/images/gallery/4.jpeg',
+    title: 'Inspirational Cultural Wall & Mission',
+    subtitle: 'Guiding Heritage & Philosophy',
+    category: 'culture',
+    categoryLabel: 'Culture & Architecture',
+    width: 1392,
+    height: 928,
+    aspectRatio: 'landscape',
+    orientation: 'Landscape',
+    alt: 'DKP Innovations motivational wall art featuring Swami Vivekananda with Kannada calligraphy and inspirational quote',
+    caption: 'Our guiding beacon — featuring Swami Vivekananda alongside Kannada typography ("ಡಿ.ಕೆ.ಪಿ ಇನ್ನೋವೇಶನ್ಸ್") and the enduring motto: "Arise, awake and do not stop until the goal is achieved."',
+    location: 'Bangalore Studio · Central Lounge',
+    featured: true,
+  },
+  {
+    id: 'consultation-lounge',
+    orderNumber: '06',
+    filename: '6.jpeg',
+    src: '/images/gallery/6.jpeg',
+    title: 'Private Consultation Suite & Lounge',
+    subtitle: 'Strategic Client Discussions',
+    category: 'executive',
+    categoryLabel: 'Executive Cabins',
+    width: 928,
+    height: 1392,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'Private meeting room with white executive consultation desk, laptop, and warm gold corner sectional sofa',
+    caption: 'Acoustically insulated consultation suite with executive work desk, corporate literature, and plush corner seating designed for client briefings.',
+    location: 'Bangalore Studio · Meeting Room A',
+    featured: false,
+  },
+  {
+    id: 'corridor-and-suites',
+    orderNumber: '07',
+    filename: '2.jpeg',
+    src: '/images/gallery/2.jpeg',
+    title: 'Central Corridor & Architectural Layout',
+    subtitle: 'Studio Perspective',
+    category: 'culture',
+    categoryLabel: 'Culture & Architecture',
+    width: 928,
+    height: 1392,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'Office hallway with polished wood flooring, glass-paneled partition offices, and warm ceiling illumination',
+    caption: 'Polished wood-floor corridor featuring partitioned glass offices and warm downlighting that connects our executive suites to the main tech studio.',
+    location: 'Bangalore Studio · Main Corridor',
+    featured: false,
+  },
+  {
+    id: 'strategy-meeting-desk',
+    orderNumber: '08',
+    filename: '7.jpeg',
+    src: '/images/gallery/7.jpeg',
+    title: 'Strategy & Client Collaboration Desk',
+    subtitle: 'Discussion & Planning Desk',
+    category: 'executive',
+    categoryLabel: 'Executive Cabins',
+    width: 1392,
+    height: 928,
+    aspectRatio: 'landscape',
+    orientation: 'Landscape',
+    alt: 'Collaboration conference desk with monitor, indoor potted plant, and branded DKP partition glass',
+    caption: 'Clean, focused strategy table with natural indoor greenery, dual display, and branded partition walls used for sprint reviews and client discovery.',
+    location: 'Bangalore Studio · Strategy Zone',
+    featured: false,
+  },
+  {
+    id: 'workspace-vertical-depth',
+    orderNumber: '09',
+    filename: '8.jpeg',
+    src: '/images/gallery/8.jpeg',
+    title: 'Studio Elevation & Workspace Architecture',
+    subtitle: 'Spatial Design & Layout',
+    category: 'workspace',
+    categoryLabel: 'Workspaces & Tech',
+    width: 928,
+    height: 1392,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'Full vertical perspective of DKP Innovations workspace showing wood paneled ceiling, workstation desks, and central lounge coffee table',
+    caption: 'Vertical architectural perspective revealing wood-slatted ceiling architecture, modular workstation benches, and central lounge layout.',
+    location: 'Bangalore Studio · Main Floor',
+    featured: false,
+  },
+  {
+    id: 'hardware-and-marketing-desk',
+    orderNumber: '10',
+    filename: '10.jpeg',
+    src: '/images/gallery/10.jpeg',
+    title: 'Creative Technology & Development Setup',
+    subtitle: 'Hardware & Production Desk',
+    category: 'workspace',
+    categoryLabel: 'Workspaces & Tech',
+    width: 928,
+    height: 1392,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'Close-up of tech workstation setup with mechanical keyboard, desktop tower, and digital marketing illustrative icons',
+    caption: 'High-performance workstation equipped for graphic design, web application development, and campaign analytics execution.',
+    location: 'Bangalore Studio · Tech Lab',
+    featured: false,
+  },
+];
+
+export type GalleryCategory = 'all' | 'workspace' | 'studio' | 'executive' | 'culture';
+
+export interface GalleryFilterOption {
+  key: GalleryCategory;
+  label: string;
+  count: number;
+}
+
+export const galleryCategories: GalleryFilterOption[] = [
+  { key: 'all', label: 'All Frames', count: 10 },
+  { key: 'workspace', label: 'Workspaces & Tech', count: 4 },
+  { key: 'studio', label: 'Production Studio', count: 1 },
+  { key: 'executive', label: 'Executive Cabins', count: 3 },
+  { key: 'culture', label: 'Culture & Architecture', count: 2 },
+];
