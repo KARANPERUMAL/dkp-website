@@ -205,7 +205,7 @@ export const BrandIntroduction = () => {
           >
             {/* Primary Headline matching reference typography */}
             <h2 className="text-[21px] sm:text-[23px] md:text-[25px] font-normal tracking-tight text-[#22262e] leading-snug">
-              <span className="text-[#ea580c] font-bold">We</span>{' '}
+              <span className="text-[#854D0E] font-bold">We</span>{' '}
               <span className="font-normal text-[#272b34]">
                 build brands that stand out.
               </span>

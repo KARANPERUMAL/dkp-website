@@ -166,10 +166,10 @@ export const HeroCurveBoundary = ({
             y2={curveState.headY}
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0%" stopColor="#ff4d00" stopOpacity="0" />
-            <stop offset="35%" stopColor="#ff6a00" stopOpacity="0.45" />
-            <stop offset="70%" stopColor="#ffa020" stopOpacity="0.85" />
-            <stop offset="92%" stopColor="#fff0d0" stopOpacity="0.95" />
+            <stop offset="0%" stopColor="#E6BF00" stopOpacity="0" />
+            <stop offset="35%" stopColor="#FFD60A" stopOpacity="0.45" />
+            <stop offset="70%" stopColor="#FFE047" stopOpacity="0.85" />
+            <stop offset="92%" stopColor="#FFF9D6" stopOpacity="0.95" />
             <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
           </linearGradient>
 
@@ -182,10 +182,10 @@ export const HeroCurveBoundary = ({
             y2={curveState.headY}
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0%" stopColor="#ff3300" stopOpacity="0" />
-            <stop offset="50%" stopColor="#ff5500" stopOpacity="0.35" />
-            <stop offset="85%" stopColor="#ff7700" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#ff9900" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#CA8A04" stopOpacity="0" />
+            <stop offset="50%" stopColor="#EAB308" stopOpacity="0.35" />
+            <stop offset="85%" stopColor="#FFD60A" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#FFE047" stopOpacity="0.8" />
           </linearGradient>
         </defs>
 
@@ -203,7 +203,7 @@ export const HeroCurveBoundary = ({
             {/* Refined Luminous Light Streak hugging the curved boundary */}
             {curveState.streakD && curveState.opacity > 0 && (
               <g opacity={curveState.opacity}>
-                {/* 1. Subtle, tightly controlled orange glow stroke immediately surrounding the streak */}
+                {/* 1. Subtle, tightly controlled yellow glow stroke immediately surrounding the streak */}
                 <path
                   d={curveState.streakD}
                   fill="none"
@@ -213,7 +213,7 @@ export const HeroCurveBoundary = ({
                   filter="url(#tightStreakGlow)"
                 />
 
-                {/* 2. Narrow luminous orange-to-white streak following the curve */}
+                {/* 2. Narrow luminous yellow-to-white streak following the curve */}
                 <path
                   d={curveState.streakD}
                   fill="none"

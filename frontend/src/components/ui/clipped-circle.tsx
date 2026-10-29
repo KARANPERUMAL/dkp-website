@@ -19,7 +19,7 @@ export interface ClippedCircleProps {
 
 export function ClippedCircle({
   className,
-  circleClassName = "bg-black",
+  circleClassName = "bg-[#000122]",
   circleSize = 450,
   children,
 }: ClippedCircleProps) {

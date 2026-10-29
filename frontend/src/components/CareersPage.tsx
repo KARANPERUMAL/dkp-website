@@ -314,19 +314,19 @@ export const CareersPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050608] text-neutral-900 flex flex-col w-full selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
       {/* Floating Centered Navbar */}
       <Navbar />
 
       {/* SECTION 1: CAREERS HERO SECTION */}
-      <section className="relative w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-neutral-800/80">
+      <section className="relative w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/10">
         {/* Ambient Lighting Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
             className="absolute left-1/2 -top-[12%] -translate-x-1/2 w-[720px] h-[400px] rounded-full"
             style={{
               background:
-                'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.24) 0%, rgba(180, 60, 10, 0.08) 45%, transparent 70%)',
+                'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.16) 0%, rgba(255, 214, 10, 0.05) 45%, transparent 70%)',
               filter: 'blur(55px)',
             }}
           />
@@ -346,7 +346,7 @@ export const CareersPage = () => {
             as="span"
             delay={0.05}
             duration={0.4}
-            className="text-xs sm:text-sm font-bold text-orange-500 uppercase tracking-widest mb-4 block"
+            className="text-xs sm:text-sm font-bold text-[#FFD60A] uppercase tracking-widest mb-4 block"
           >
             CAREERS AT DKP INNOVATION
           </TextAnimationBlurFadeIn>
@@ -376,7 +376,7 @@ export const CareersPage = () => {
           <BlurFadeIn delay={0.4} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => scrollTo('open-positions')}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-[0_4px_20px_rgba(234,88,12,0.4)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.6)] transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer"
             >
               <span>Explore Open Positions</span>
               <IconArrowRight className="w-4 h-4" />
@@ -403,7 +403,7 @@ export const CareersPage = () => {
                 as="span"
                 delay={0.05}
                 duration={0.4}
-                className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2.5 block"
+                className="text-xs font-bold text-[#854D0E] uppercase tracking-widest mb-2.5 block"
               >
                 Current Opportunities
               </TextAnimationBlurFadeIn>
@@ -429,7 +429,7 @@ export const CareersPage = () => {
             {openPositions.length === 0 ? (
               /* Clean Initial State when no vacancies are configured */
               <BlurFadeIn delay={0.2} duration={0.5} className="bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-14 text-center max-w-2xl mx-auto shadow-sm">
-                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-5">
+                <div className="w-14 h-14 rounded-2xl bg-[#FFD60A]/15 border border-[#FFD60A]/30 text-[#854D0E] flex items-center justify-center mx-auto mb-5">
                   <Briefcase className="w-7 h-7" />
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight mb-3">
@@ -441,7 +441,7 @@ export const CareersPage = () => {
                 <button
                   type="button"
                   onClick={() => scrollTo('application-form')}
-                  className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-md transition-all cursor-pointer"
+                  className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-md transition-all cursor-pointer"
                 >
                   <span>Submit General Application</span>
                   <ArrowRight className="w-4 h-4" />
@@ -455,11 +455,11 @@ export const CareersPage = () => {
                     key={pos.id}
                     delay={0.1 + idx * 0.08}
                     duration={0.5}
-                    className="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-orange-500/40 transition-all duration-300"
+                    className="bg-white border border-neutral-200/90 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-[#FFD60A]/50 transition-all duration-300"
                   >
                     <div>
                       {/* Department Badge */}
-                      <span className="inline-block text-[11px] font-bold text-orange-600 uppercase tracking-wider bg-orange-50 border border-orange-100 rounded-full px-3 py-1 mb-4">
+                      <span className="inline-block text-[11px] font-bold text-[#854D0E] uppercase tracking-wider bg-[#FFD60A]/15 border border-[#FFD60A]/30 rounded-full px-3 py-1 mb-4">
                         {pos.department}
                       </span>
 
@@ -513,7 +513,7 @@ export const CareersPage = () => {
                     <button
                       type="button"
                       onClick={() => handleSelectRole(pos.title)}
-                      className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm transition-all shadow-sm cursor-pointer mt-4"
+                      className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm transition-all shadow-sm cursor-pointer mt-4"
                     >
                       <span>Apply for this Role</span>
                       <ArrowRight className="w-4 h-4" />
@@ -534,7 +534,7 @@ export const CareersPage = () => {
                 as="span"
                 delay={0.05}
                 duration={0.4}
-                className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2.5 block"
+                className="text-xs font-bold text-[#854D0E] uppercase tracking-widest mb-2.5 block"
               >
                 Join Our Team
               </TextAnimationBlurFadeIn>
@@ -581,7 +581,7 @@ export const CareersPage = () => {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm transition-all cursor-pointer"
+                    className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#000122] hover:bg-[#000235] text-white font-bold text-sm transition-all cursor-pointer"
                   >
                     <span>Submit Another Application</span>
                   </button>
@@ -612,7 +612,7 @@ export const CareersPage = () => {
                         htmlFor="fullName"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Full Name <span className="text-orange-600">*</span>
+                        Full Name <span className="text-[#854D0E]">*</span>
                       </label>
                       <input
                         id="fullName"
@@ -622,7 +622,7 @@ export const CareersPage = () => {
                           setFormData({ ...formData, fullName: e.target.value })
                         }
                         placeholder="e.g. John Doe"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.fullName
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -641,7 +641,7 @@ export const CareersPage = () => {
                         htmlFor="email"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Email Address <span className="text-orange-600">*</span>
+                        Email Address <span className="text-[#854D0E]">*</span>
                       </label>
                       <input
                         id="email"
@@ -651,7 +651,7 @@ export const CareersPage = () => {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         placeholder="e.g. john@example.com"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.email
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -674,7 +674,7 @@ export const CareersPage = () => {
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
                         Phone Number (with Country Code){' '}
-                        <span className="text-orange-600">*</span>
+                        <span className="text-[#854D0E]">*</span>
                       </label>
                       <input
                         id="phone"
@@ -684,7 +684,7 @@ export const CareersPage = () => {
                           setFormData({ ...formData, phone: e.target.value })
                         }
                         placeholder="e.g. +91 98765 43210"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.phone
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -703,7 +703,7 @@ export const CareersPage = () => {
                         htmlFor="position"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Position Applying For <span className="text-orange-600">*</span>
+                        Position Applying For <span className="text-[#854D0E]">*</span>
                       </label>
                       <select
                         id="position"
@@ -711,7 +711,7 @@ export const CareersPage = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, position: e.target.value })
                         }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.position
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -742,7 +742,7 @@ export const CareersPage = () => {
                         htmlFor="department"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Department of Interest <span className="text-orange-600">*</span>
+                        Department of Interest <span className="text-[#854D0E]">*</span>
                       </label>
                       <select
                         id="department"
@@ -750,7 +750,7 @@ export const CareersPage = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, department: e.target.value })
                         }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.department
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -775,7 +775,7 @@ export const CareersPage = () => {
                         htmlFor="experienceLevel"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Experience Level <span className="text-orange-600">*</span>
+                        Experience Level <span className="text-[#854D0E]">*</span>
                       </label>
                       <select
                         id="experienceLevel"
@@ -783,7 +783,7 @@ export const CareersPage = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, experienceLevel: e.target.value })
                         }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.experienceLevel
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -811,7 +811,7 @@ export const CareersPage = () => {
                         htmlFor="workArrangement"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Preferred Work Arrangement <span className="text-orange-600">*</span>
+                        Preferred Work Arrangement <span className="text-[#854D0E]">*</span>
                       </label>
                       <select
                         id="workArrangement"
@@ -819,7 +819,7 @@ export const CareersPage = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, workArrangement: e.target.value })
                         }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.workArrangement
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -844,7 +844,7 @@ export const CareersPage = () => {
                         htmlFor="keySkills"
                         className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                       >
-                        Key Skills & Competencies <span className="text-orange-600">*</span>
+                        Key Skills & Competencies <span className="text-[#854D0E]">*</span>
                       </label>
                       <input
                         id="keySkills"
@@ -854,7 +854,7 @@ export const CareersPage = () => {
                           setFormData({ ...formData, keySkills: e.target.value })
                         }
                         placeholder="e.g. React, Node.js, SEO, Creative Direction"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.keySkills
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -875,14 +875,14 @@ export const CareersPage = () => {
                       className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                     >
                       Resume / CV Upload (PDF, DOC, DOCX up to 5 MB){' '}
-                      <span className="text-orange-600">*</span>
+                      <span className="text-[#854D0E]">*</span>
                     </label>
 
                     {resumeFile ? (
                       /* Display Selected File Preview */
-                      <div className="flex items-center justify-between p-4 rounded-xl border border-orange-200 bg-orange-50/60">
+                      <div className="flex items-center justify-between p-4 rounded-xl border border-[#FFD60A]/40 bg-[#FFD60A]/10">
                         <div className="flex items-center space-x-3 min-w-0">
-                          <div className="w-10 h-10 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 rounded-lg bg-[#FFD60A]/20 text-[#854D0E] flex items-center justify-center shrink-0">
                             <FileText className="w-5 h-5" />
                           </div>
                           <div className="min-w-0">
@@ -908,10 +908,10 @@ export const CareersPage = () => {
                       /* Upload Drag & Click Trigger */
                       <div
                         onClick={() => fileInputRef.current?.click()}
-                        className={`border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition-colors bg-white hover:bg-orange-50/30 ${
+                        className={`border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition-colors bg-white hover:bg-[#FFD60A]/10 ${
                           errors.resumeFile
                             ? 'border-red-400 bg-red-50/20'
-                            : 'border-neutral-300 hover:border-orange-500'
+                            : 'border-neutral-300 hover:border-[#FFD60A]'
                         }`}
                       >
                         <UploadCloud className="w-8 h-8 text-neutral-400 mx-auto mb-2.5" />
@@ -946,7 +946,7 @@ export const CareersPage = () => {
                       htmlFor="coverLetter"
                       className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
                     >
-                      Cover Letter or Introduction <span className="text-orange-600">*</span>
+                      Cover Letter or Introduction <span className="text-[#854D0E]">*</span>
                     </label>
                     <textarea
                       id="coverLetter"
@@ -956,7 +956,7 @@ export const CareersPage = () => {
                         setFormData({ ...formData, coverLetter: e.target.value })
                       }
                       placeholder="Share a brief overview of your background, career aspirations, and how you can contribute to DKP Innovation..."
-                      className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                      className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                         errors.coverLetter
                           ? 'border-red-400 ring-1 ring-red-400'
                           : 'border-neutral-300'
@@ -987,7 +987,7 @@ export const CareersPage = () => {
                           setFormData({ ...formData, linkedInUrl: e.target.value })
                         }
                         placeholder="https://linkedin.com/in/yourprofile"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.linkedInUrl
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -1016,7 +1016,7 @@ export const CareersPage = () => {
                           setFormData({ ...formData, portfolioUrl: e.target.value })
                         }
                         placeholder="https://github.com/yourusername"
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all ${
+                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                           errors.portfolioUrl
                             ? 'border-red-400 ring-1 ring-red-400'
                             : 'border-neutral-300'
@@ -1042,7 +1042,7 @@ export const CareersPage = () => {
                             privacyConsent: e.target.checked,
                           })
                         }
-                        className="mt-1 h-4 w-4 rounded text-orange-600 focus:ring-orange-500 border-neutral-300"
+                        className="mt-1 h-4 w-4 rounded text-[#FFD60A] accent-[#FFD60A] focus:ring-[#FFD60A] focus:border-[#FFD60A] border-neutral-300"
                       />
                       <span className="text-xs sm:text-sm text-neutral-600 leading-relaxed select-none">
                         I consent to DKP Innovation processing the information I provide for recruitment purposes, in accordance with its Privacy Policy.
@@ -1060,11 +1060,11 @@ export const CareersPage = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full inline-flex items-center justify-center space-x-2 py-4 px-8 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:bg-orange-400 text-white font-bold text-sm sm:text-base shadow-lg shadow-orange-600/30 transition-all cursor-pointer disabled:cursor-not-allowed"
+                      className="w-full inline-flex items-center justify-center space-x-2 py-4 px-8 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] disabled:bg-[#FFD60A]/50 text-[#000122] font-bold text-sm sm:text-base shadow-lg shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all cursor-pointer disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-[#000122] border-t-transparent rounded-full animate-spin" />
                           <span>Submitting Application...</span>
                         </>
                       ) : (

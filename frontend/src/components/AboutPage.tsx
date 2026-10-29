@@ -48,19 +48,19 @@ export const AboutPage = () => {
   const { navigateTo } = useNavigation();
 
   return (
-    <div className="min-h-screen bg-[#050608] text-neutral-900 flex flex-col w-full selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
       {/* Floating Header & Navbar */}
       <Navbar />
 
       {/* COMBINED HERO & COMPANY STATISTICS SECTION: One cohesive section with unified background and minimal gap */}
-      <section className="relative w-full bg-[#050608] pt-28 pb-14 sm:pt-36 sm:pb-20 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-neutral-800/80">
+      <section className="relative w-full bg-[#000122] pt-28 pb-14 sm:pt-36 sm:pb-20 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/10">
         {/* Ambient Lighting Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
             className="absolute left-1/2 -top-[10%] -translate-x-1/2 w-[700px] h-[400px] rounded-full"
             style={{
               background:
-                'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.22) 0%, rgba(180, 60, 10, 0.08) 45%, transparent 70%)',
+                'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.16) 0%, rgba(255, 214, 10, 0.05) 45%, transparent 70%)',
               filter: 'blur(50px)',
             }}
           />
@@ -76,7 +76,7 @@ export const AboutPage = () => {
             className="absolute left-1/2 bottom-[8%] -translate-x-1/2 w-[600px] h-[220px] rounded-full"
             style={{
               background:
-                'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.08) 0%, transparent 70%)',
+                'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.05) 0%, transparent 70%)',
               filter: 'blur(55px)',
             }}
           />
@@ -89,7 +89,7 @@ export const AboutPage = () => {
             delay={0.1}
             staggerDuration={0.03}
             duration={0.6}
-            className="text-4xl sm:text-6xl md:text-7xl font-black text-orange-500 tracking-tight uppercase mb-6 max-w-4xl mx-auto leading-[1.05]"
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFD60A] tracking-tight uppercase mb-6 max-w-4xl mx-auto leading-[1.05]"
           >
             We Turn Ideas Into Powerful Brands.
           </TextAnimationBlurFadeIn>
@@ -117,7 +117,7 @@ export const AboutPage = () => {
           <BlurFadeIn delay={0.42} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16">
             <button
               onClick={() => navigateTo('services')}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-[0_4px_20px_rgba(234,88,12,0.4)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.6)] transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer"
             >
               <span>Explore Our Services</span>
               <IconArrowRight className="w-4 h-4" />
@@ -138,7 +138,7 @@ export const AboutPage = () => {
                 key={stat.metric}
                 delay={0.5 + idx * 0.08}
                 duration={0.5}
-                className={`relative group bg-[#0d1017] hover:bg-[#121622] border border-white/10 hover:border-orange-500/40 rounded-2xl p-4 sm:p-5 lg:p-4.5 xl:p-5 transition-all duration-300 flex items-center justify-between gap-3 sm:gap-4 ${
+                className={`relative group bg-[#000122] hover:bg-[#000235] border border-white/10 hover:border-[#FFD60A]/50 rounded-2xl p-4 sm:p-5 lg:p-4.5 xl:p-5 transition-all duration-300 flex items-center justify-between gap-3 sm:gap-4 ${
                   idx === 4 ? 'sm:col-span-2 md:col-span-1 lg:col-span-1' : ''
                 }`}
               >
@@ -152,7 +152,7 @@ export const AboutPage = () => {
                           revealDelayMs={280}
                           flipDelayMs={60}
                           className="font-black text-white tracking-tight tabular-nums inline-block"
-                          encryptedClassName="text-orange-400"
+                          encryptedClassName="text-[#FFD60A]"
                           revealedClassName="text-white"
                         />
                       </span>
@@ -167,8 +167,8 @@ export const AboutPage = () => {
                   </div>
                 </div>
 
-                {/* Right: Lucide Icon in orange-accented container */}
-                <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 group-hover:scale-105 group-hover:bg-orange-500/20 transition-all duration-300">
+                {/* Right: Lucide Icon in yellow-accented container */}
+                <div className="shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/25 flex items-center justify-center text-[#FFD60A] group-hover:scale-105 group-hover:bg-[#FFD60A]/20 transition-all duration-300">
                   <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
               </BlurFadeIn>
@@ -180,14 +180,14 @@ export const AboutPage = () => {
       {/* Main Content Area */}
       <main className="relative w-full bg-neutral-50 flex-1">
         {/* SECTION B: Founder Profile — Puttaraju KV */}
-        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#090b10] border-b border-neutral-800/80 relative overflow-hidden select-none">
+        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#000122] border-b border-white/10 relative overflow-hidden select-none">
           {/* Subtle Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div
               className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[500px] h-[350px] rounded-full"
               style={{
                 background:
-                  'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.12) 0%, transparent 70%)',
+                  'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.08) 0%, transparent 70%)',
                 filter: 'blur(55px)',
               }}
             />
@@ -197,25 +197,25 @@ export const AboutPage = () => {
             <BlurFadeIn
               delay={0.1}
               duration={0.6}
-              className="bg-gradient-to-br from-[#0c0f17] via-[#10141f] to-[#161a25] border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-14 shadow-2xl"
+              className="bg-gradient-to-br from-[#000122] via-[#000235] to-[#000122] border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-14 shadow-2xl"
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 {/* Founder Photograph */}
                 <div className="md:col-span-5 flex justify-center">
-                  <div className="relative group w-full max-w-[320px] sm:max-w-[360px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.7)] bg-neutral-900">
+                  <div className="relative group w-full max-w-[320px] sm:max-w-[360px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.7)] bg-[#000122]">
                     <img
                       src="/images/founder-img/founder.png"
                       alt="Puttaraju KV - Founder & CEO @ DKP Innovations"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#000122]/60 via-transparent to-transparent pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Profile Information & Credentials */}
                 <div className="md:col-span-7 flex flex-col justify-center text-left">
-                  <span className="text-xs font-bold text-orange-500 uppercase tracking-widest mb-3 block">
+                  <span className="text-xs font-bold text-[#FFD60A] uppercase tracking-widest mb-3 block">
                     Leadership
                   </span>
 
@@ -223,7 +223,7 @@ export const AboutPage = () => {
                     Puttaraju KV
                   </h2>
 
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-orange-500 tracking-normal mb-4 sm:mb-5">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#FFD60A] tracking-normal mb-4 sm:mb-5">
                     Founder & CEO of DKP Innovations
                   </h3>
 
@@ -246,7 +246,7 @@ export const AboutPage = () => {
                 as="span"
                 delay={0.05}
                 duration={0.4}
-                className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2.5 block"
+                className="text-xs font-bold text-[#854D0E] uppercase tracking-widest mb-2.5 block"
               >
                 Purpose & Direction
               </TextAnimationBlurFadeIn>
@@ -274,13 +274,13 @@ export const AboutPage = () => {
               <BlurFadeIn
                 delay={0.3}
                 duration={0.5}
-                className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between"
+                className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(255,214,10,0.15)] hover:border-[#FFD60A]/40 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 mb-6 group-hover:scale-105 group-hover:bg-orange-100/80 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-2xl bg-[#FFD60A]/15 border border-[#FFD60A]/30 flex items-center justify-center text-[#854D0E] mb-6 group-hover:scale-105 group-hover:bg-[#FFD60A] group-hover:text-[#000122] transition-all duration-300">
                     <Eye className="w-7 h-7" />
                   </div>
-                  <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">
+                  <span className="text-xs font-bold text-[#854D0E] uppercase tracking-wider mb-2 block">
                     Strategic Focus
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight mb-4">
@@ -296,13 +296,13 @@ export const AboutPage = () => {
               <BlurFadeIn
                 delay={0.4}
                 duration={0.5}
-                className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(234,88,12,0.08)] hover:border-orange-500/30 transition-all duration-300 flex flex-col justify-between"
+                className="group relative bg-white border border-neutral-200/90 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(255,214,10,0.15)] hover:border-[#FFD60A]/40 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 mb-6 group-hover:scale-105 group-hover:bg-orange-100/80 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-2xl bg-[#FFD60A]/15 border border-[#FFD60A]/30 flex items-center justify-center text-[#854D0E] mb-6 group-hover:scale-105 group-hover:bg-[#FFD60A] group-hover:text-[#000122] transition-all duration-300">
                     <Target className="w-7 h-7" />
                   </div>
-                  <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block">
+                  <span className="text-xs font-bold text-[#854D0E] uppercase tracking-wider mb-2 block">
                     Core Commitment
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight mb-4">

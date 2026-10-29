@@ -28,16 +28,16 @@ export const BranchMap = () => {
         '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors | DKP Innovation Locations',
     }).addTo(map);
 
-    // Create custom DKP orange marker icon with animated pulse ring
+    // Create custom DKP yellow marker icon with animated pulse ring
     const createCustomIcon = (isSelected: boolean, index: number) => {
-      const pinColor = isSelected ? '#ea580c' : '#f97316';
+      const pinColor = '#FFD60A';
       const scale = isSelected ? 1.15 : 1.0;
       return L.divIcon({
         className: 'custom-dkp-marker',
         html: `
           <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; transform: scale(${scale}); transition: transform 0.25s ease;">
-            ${isSelected ? '<div style="position: absolute; width: 44px; height: 44px; border-radius: 50%; background: rgba(234, 88, 12, 0.35); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>' : ''}
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${pinColor}; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #ffffff; font-weight: 800; font-size: 13px;">
+            ${isSelected ? '<div style="position: absolute; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 214, 10, 0.45); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>' : ''}
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${pinColor}; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #000122; font-weight: 800; font-size: 13px;">
               ${index + 1}
             </div>
             <div style="position: absolute; bottom: -6px; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid ${pinColor};"></div>
@@ -64,7 +64,7 @@ export const BranchMap = () => {
       // Popup with branch details & direct directions link
       const popupContent = `
         <div style="font-family: inherit; padding: 4px 2px; max-width: 260px;">
-          <div style="display: inline-block; background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 12px; margin-bottom: 6px; text-transform: uppercase;">
+          <div style="display: inline-block; background: #fef9c3; color: #854d0e; border: 1px solid #fde047; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 12px; margin-bottom: 6px; text-transform: uppercase;">
             ${branch.tag}
           </div>
           <h4 style="margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: #1e293b; line-height: 1.3;">
@@ -74,7 +74,7 @@ export const BranchMap = () => {
             ${branch.address}
           </p>
           <div style="display: flex; gap: 8px; margin-top: 8px;">
-            <a href="${branch.directionsUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background: #ea580c; color: #ffffff; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; text-decoration: none;">
+            <a href="${branch.directionsUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background: #FFD60A; color: #000122; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-decoration: none;">
               Get Directions &#8599;
             </a>
             <a href="tel:${branch.phone.replace(/[^0-9+]/g, '')}" style="display: inline-flex; align-items: center; gap: 4px; background: #f1f5f9; color: #334155; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; text-decoration: none;">
@@ -138,12 +138,12 @@ export const BranchMap = () => {
         {/* Left Column: Interactive Branch Location Cards */}
         <div className="w-full lg:w-[420px] flex flex-col space-y-3.5">
           <div className="flex items-center justify-between pb-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-orange-600">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#854D0E]">
               Select Branch to Locate
             </span>
             <button
               onClick={handleResetView}
-              className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-orange-600 transition-colors font-medium cursor-pointer"
+              className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-[#854D0E] transition-colors font-medium cursor-pointer"
               title="Show all 3 branches"
             >
               <IconRefresh className="w-3.5 h-3.5" />
@@ -159,7 +159,7 @@ export const BranchMap = () => {
                 onClick={() => handleSelectBranch(branch)}
                 className={`group relative p-4 sm:p-5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? 'bg-neutral-900 text-white border-orange-500/80 shadow-[0_6px_20px_rgba(234,88,12,0.15)] ring-1 ring-orange-500/40'
+                    ? 'bg-[#000122] text-white border-[#FFD60A]/80 shadow-[0_6px_20px_rgba(255,214,10,0.2)] ring-1 ring-[#FFD60A]/40'
                     : 'bg-white hover:bg-neutral-50 text-neutral-900 border-neutral-200/90 shadow-sm'
                 }`}
               >
@@ -169,8 +169,8 @@ export const BranchMap = () => {
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                         isSelected
-                          ? 'bg-orange-500 text-white'
-                          : 'bg-neutral-100 text-neutral-700 group-hover:bg-orange-100 group-hover:text-orange-600'
+                          ? 'bg-[#FFD60A] text-[#000122]'
+                          : 'bg-neutral-100 text-neutral-700 group-hover:bg-[#FFD60A]/20 group-hover:text-[#854D0E]'
                       }`}
                     >
                       {idx + 1}
@@ -178,8 +178,8 @@ export const BranchMap = () => {
                     <span
                       className={`text-[11px] font-semibold tracking-wide uppercase px-2 py-0.5 rounded-full ${
                         isSelected
-                          ? 'bg-orange-950/80 text-orange-300 border border-orange-500/30'
-                          : 'bg-orange-50 text-orange-700 border border-orange-200/60'
+                          ? 'bg-[#FFD60A]/20 text-[#FFD60A] border border-[#FFD60A]/30'
+                          : 'bg-[#FEF9C3] text-[#854D0E] border border-[#FDE047]'
                       }`}
                     >
                       {branch.tag}
@@ -188,7 +188,7 @@ export const BranchMap = () => {
 
                   <span
                     className={`text-xs font-medium transition-colors ${
-                      isSelected ? 'text-orange-400' : 'text-neutral-400 group-hover:text-orange-600'
+                      isSelected ? 'text-[#FFD60A]' : 'text-neutral-400 group-hover:text-[#854D0E]'
                     }`}
                   >
                     Click to view map &rarr;
@@ -218,7 +218,7 @@ export const BranchMap = () => {
                   }`}
                 >
                   <div className="flex items-center space-x-1.5">
-                    <IconClock className="w-3.5 h-3.5 text-orange-500" />
+                    <IconClock className="w-3.5 h-3.5 text-[#FFD60A]" />
                     <span className="text-[11px]">{branch.hours}</span>
                   </div>
 
@@ -229,8 +229,8 @@ export const BranchMap = () => {
                     onClick={(e) => e.stopPropagation()}
                     className={`inline-flex items-center space-x-1 font-semibold text-[11px] px-2.5 py-1 rounded-md transition-colors ${
                       isSelected
-                        ? 'bg-orange-500 hover:bg-orange-600 text-white'
-                        : 'bg-neutral-100 hover:bg-orange-50 text-neutral-800 hover:text-orange-600'
+                        ? 'bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold'
+                        : 'bg-neutral-100 hover:bg-[#FFD60A]/20 text-neutral-800 hover:text-[#000122]'
                     }`}
                   >
                     <IconDirections className="w-3.5 h-3.5" />
@@ -253,7 +253,7 @@ export const BranchMap = () => {
 
           {/* Floating Map Legend Indicator */}
           <div className="absolute top-3 right-3 z-[1000] bg-white/95 backdrop-blur-sm border border-neutral-200/80 px-3 py-2 rounded-lg shadow-md text-xs text-neutral-700 pointer-events-auto flex items-center space-x-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FFD60A] animate-pulse"></span>
             <span className="font-semibold text-neutral-800">3 Bengaluru Branches</span>
           </div>
         </div>

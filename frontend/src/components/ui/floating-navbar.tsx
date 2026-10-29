@@ -75,7 +75,7 @@ export const FloatingNav = ({
       >
         <nav
           aria-label="Floating Navigation"
-          className="flex items-center justify-center gap-1 rounded-full border border-white/[0.15] bg-[#050608]/85 px-2 sm:px-2.5 py-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.1)] backdrop-blur-xl"
+          className="flex items-center justify-center gap-1 rounded-full border border-white/[0.18] bg-[#000122]/90 px-2 sm:px-2.5 py-1.5 shadow-[0_8px_32px_rgba(0,1,34,0.7),inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-xl"
         >
           {navItems.map((navItem, idx: number) => {
             const isActive = activeTab === navItem.link;
@@ -92,14 +92,14 @@ export const FloatingNav = ({
                 className={cn(
                   "relative flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 select-none",
                   isActive
-                    ? "text-neutral-950 font-bold"
-                    : "text-neutral-300 hover:text-white hover:bg-white/10"
+                    ? "text-[#000122] font-bold"
+                    : "text-[#CBD5E1] hover:text-[#FFD60A] hover:bg-white/10"
                 )}
               >
                 {isActive && (
                   <motion.span
                     layoutId="activeTabIndicator"
-                    className="absolute inset-0 rounded-full bg-white shadow-[0_2px_12px_rgba(255,255,255,0.25)]"
+                    className="absolute inset-0 rounded-full bg-[#FFD60A] shadow-[0_2px_14px_rgba(255,214,10,0.35)]"
                     transition={{
                       type: "spring",
                       stiffness: 380,
@@ -112,7 +112,7 @@ export const FloatingNav = ({
                     <span
                       className={cn(
                         "transition-colors",
-                        isActive ? "text-orange-600" : "text-neutral-400 group-hover:text-neutral-200"
+                        isActive ? "text-[#000122]" : "text-neutral-400 group-hover:text-[#FFD60A]"
                       )}
                     >
                       {navItem.icon}
@@ -121,7 +121,7 @@ export const FloatingNav = ({
                   <span className="hidden sm:inline">{navItem.name}</span>
                   {/* Active Indicator Dot on small mobile screens where text is hidden */}
                   {isActive && (
-                    <span className="sm:hidden w-1.5 h-1.5 rounded-full bg-orange-600 ml-0.5" />
+                    <span className="sm:hidden w-1.5 h-1.5 rounded-full bg-[#000122] ml-0.5" />
                   )}
                 </span>
               </a>

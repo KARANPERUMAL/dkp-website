@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   motion,
   type MotionStyle,
+  useReducedMotion,
 } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -261,7 +262,7 @@ function TeamMemberCard({
           ? "h-[25.5rem] sm:h-[27.5rem] shadow-[0_20px_45px_rgba(0,0,0,0.18)]"
           : "h-[24.5rem] sm:h-[26.5rem] shadow-[0_10px_28px_rgba(0,0,0,0.08)]",
         isDark
-          ? "border-orange-500/40 bg-[#090b0e] text-white"
+          ? "border-[#FFD60A]/50 bg-[#000122] text-white"
           : "border-neutral-200/90 bg-white text-neutral-900",
         hasCta ? "cursor-pointer" : ""
       )}
@@ -287,8 +288,8 @@ function TeamMemberCard({
             className={cn(
               "relative inline-flex h-8.5 sm:h-9 items-center justify-end overflow-hidden rounded-full shadow-md transition-colors",
               isDark
-                ? "bg-orange-500 text-white hover:bg-orange-600"
-                : "bg-neutral-900 text-white hover:bg-orange-600"
+                ? "bg-[#FFD60A] text-[#000122] hover:bg-[#FFE047]"
+                : "bg-[#000122] text-white hover:bg-[#FFD60A] hover:text-[#000122]"
             )}
           >
             <motion.span
@@ -319,7 +320,7 @@ function TeamMemberCard({
         className={cn(
           "w-full overflow-hidden rounded-2xl border transition-transform duration-300",
           isDark
-            ? "border-neutral-800 bg-neutral-900"
+            ? "border-white/10 bg-[#000122]"
             : "border-neutral-200/80 bg-neutral-100",
           isHighlighted ? "scale-[1.01]" : ""
         )}
@@ -337,7 +338,7 @@ function TeamMemberCard({
         <span
           className={cn(
             "text-[10px] sm:text-[11px] font-bold uppercase tracking-wider block",
-            isDark ? "text-orange-400" : "text-orange-600"
+            isDark ? "text-[#FFD60A]" : "text-[#854D0E]"
           )}
         >
           {card.role}
@@ -346,7 +347,7 @@ function TeamMemberCard({
           className={cn(
             "text-base sm:text-[1.18rem] font-bold tracking-tight leading-snug transition-colors line-clamp-2",
             isDark ? "text-white" : "text-neutral-900",
-            isHighlighted && !isDark ? "text-orange-600" : ""
+            isHighlighted && !isDark ? "text-[#854D0E]" : ""
           )}
         >
           {card.name}
@@ -364,6 +365,104 @@ function TeamMemberCard({
   );
 }
 
+interface MobileServiceCardProps {
+  card: TeamCardItem;
+  index: number;
+  onCardClick?: (card: TeamCardItem, index: number) => void;
+  prefersReducedMotion: boolean | null;
+}
+
+function MobileServiceCard({
+  card,
+  index,
+  onCardClick,
+  prefersReducedMotion,
+}: MobileServiceCardProps) {
+  const handleAction = React.useCallback(() => {
+    if (onCardClick) {
+      onCardClick(card, index);
+      return;
+    }
+    if (card.ctaHref && card.ctaHref.startsWith("#")) {
+      const el = document.getElementById(card.ctaHref.slice(1));
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+    if (card.ctaHref) {
+      window.location.href = card.ctaHref;
+    }
+  }, [card, index, onCardClick]);
+
+  const hasCta = Boolean(card.ctaHref || card.slug || onCardClick);
+  const ctaLabel = card.ctaLabel || `Explore ${card.name}`;
+
+  return (
+    <motion.article
+      initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-30px", amount: 0.15 }}
+      transition={{
+        duration: prefersReducedMotion ? 0.05 : 0.6,
+        delay: prefersReducedMotion ? 0 : Math.min(index * 0.08, 0.24),
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      onClick={hasCta ? handleAction : undefined}
+      onKeyDown={
+        hasCta
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleAction();
+              }
+            }
+          : undefined
+      }
+      role={hasCta ? "button" : "article"}
+      tabIndex={hasCta ? 0 : undefined}
+      aria-label={`${card.name} - ${card.role}`}
+      className="group relative flex flex-col w-full bg-white border border-neutral-200/90 hover:border-[#FFD60A] rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(255,214,10,0.18)] transition-all duration-300 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] select-none overflow-hidden"
+    >
+      {/* Service Image Visual */}
+      <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl border border-neutral-200/80 bg-neutral-100 select-none">
+        <img
+          src={card.imageSrc}
+          alt={card.imageAlt || card.name}
+          loading="lazy"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+        />
+      </div>
+
+      {/* Service Details */}
+      <div className="mt-4 flex-1 flex flex-col justify-between">
+        <div>
+          <span className="text-[10.5px] font-bold text-[#854D0E] uppercase tracking-wider block mb-1">
+            {card.role}
+          </span>
+          <h3 className="text-lg font-bold text-neutral-900 tracking-tight leading-snug group-hover:text-[#854D0E] transition-colors mb-2">
+            {card.name}
+          </h3>
+          <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal mb-4">
+            {card.description}
+          </p>
+        </div>
+
+        {/* Explore Button & Counter */}
+        <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#000122] text-white text-xs font-semibold group-hover:bg-[#FFD60A] group-hover:text-[#000122] transition-colors shadow-sm">
+            <span>{ctaLabel}</span>
+            <ArrowUpRight className="size-3.5 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </div>
+          <span className="text-[11px] font-mono font-medium text-neutral-400">
+            0{index + 1}
+          </span>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export function TeamStack({
   items = defaultDkpServices,
   title,
@@ -373,17 +472,16 @@ export function TeamStack({
   defaultActiveIndex = 0,
   onCardClick,
 }: TeamStackProps) {
-  const [isMobile, setIsMobile] = React.useState(false);
   const [isTablet, setIsTablet] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [activeCard, setActiveCard] = React.useState<number | null>(defaultActiveIndex);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  // Responsive breakpoints
+  // Responsive breakpoint for tablet
   React.useEffect(() => {
     const checkViewport = () => {
       const width = window.innerWidth;
-      setIsMobile(width < 768);
       setIsTablet(width >= 768 && width < 1024);
     };
     checkViewport();
@@ -391,27 +489,10 @@ export function TeamStack({
     return () => window.removeEventListener("resize", checkViewport);
   }, []);
 
-  // Collapse and reset active state on mobile tap outside
-  React.useEffect(() => {
-    if (!isMobile || !isExpanded) return;
-    const handlePointerDown = (e: PointerEvent) => {
-      const target = e.target;
-      if (
-        target instanceof Node &&
-        (!containerRef.current || !containerRef.current.contains(target))
-      ) {
-        setIsExpanded(false);
-        setActiveCard(defaultActiveIndex);
-      }
-    };
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => document.removeEventListener("pointerdown", handlePointerDown);
-  }, [isExpanded, isMobile, defaultActiveIndex]);
-
   return (
     <div
       className={cn(
-        "relative w-full overflow-x-clip select-none py-3 sm:py-5",
+        "relative w-full overflow-x-clip select-none pt-2 pb-0 sm:pt-4 sm:pb-0",
         className
       )}
     >
@@ -422,7 +503,7 @@ export function TeamStack({
               as="span"
               delay={0.05}
               duration={0.4}
-              className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2 block"
+              className="text-xs font-bold text-[#854D0E] uppercase tracking-wider mb-2 block"
             >
               {eyebrow}
             </TextAnimationBlurFadeIn>
@@ -450,25 +531,32 @@ export function TeamStack({
         </div>
       )}
 
+      {/* -------------------------------------------------------------
+          MOBILE LAYOUT: Clean vertical list of normal service cards (< 768px)
+          ------------------------------------------------------------- */}
+      <div className="flex flex-col gap-4 sm:gap-5 w-full max-w-lg mx-auto md:hidden px-1">
+        {items.map((card, index) => (
+          <MobileServiceCard
+            key={card.name}
+            card={card}
+            index={index}
+            onCardClick={onCardClick}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        ))}
+      </div>
+
+      {/* -------------------------------------------------------------
+          DESKTOP & TABLET LAYOUT: Stacked / Fanned Deck (>= 768px)
+          ------------------------------------------------------------- */}
       <div
         ref={containerRef}
-        className="relative mx-auto flex h-[31rem] sm:h-[34rem] lg:h-[35rem] w-full max-w-6xl items-center justify-center"
-        onMouseEnter={isMobile ? undefined : () => setIsExpanded(true)}
-        onMouseLeave={
-          isMobile
-            ? undefined
-            : () => {
-                setIsExpanded(false);
-                setActiveCard(defaultActiveIndex);
-              }
-        }
-        onClick={
-          isMobile
-            ? () => {
-                if (!isExpanded) setIsExpanded(true);
-              }
-            : undefined
-        }
+        className="relative mx-auto hidden md:flex h-[28rem] sm:h-[31rem] lg:h-[32rem] w-full max-w-6xl items-center justify-center"
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => {
+          setIsExpanded(false);
+          setActiveCard(defaultActiveIndex);
+        }}
       >
         <div className="relative h-[25rem] w-full max-w-5xl sm:h-[28rem]">
           {items.map((card, index) => (
@@ -478,7 +566,7 @@ export function TeamStack({
               index={index}
               total={items.length}
               isExpanded={isExpanded}
-              isMobile={isMobile}
+              isMobile={false}
               isTablet={isTablet}
               isActive={activeCard === index}
               onActivate={setActiveCard}
@@ -487,15 +575,6 @@ export function TeamStack({
             />
           ))}
         </div>
-      </div>
-
-      {/* Subtext interaction prompt */}
-      <div className="mt-2 text-center">
-        <p className="text-[12px] sm:text-xs text-neutral-600 tracking-wide">
-          {isMobile
-            ? "Tap cards to cycle • Tap active card to view service"
-            : "Hover over the deck to explore services • Click any card to view details"}
-        </p>
       </div>
     </div>
   );

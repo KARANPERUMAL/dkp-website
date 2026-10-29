@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { GalleryItem } from '../../data/galleryData';
 
 interface GalleryLightboxProps {
@@ -37,15 +37,14 @@ export const GalleryLightbox = ({
       document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
 
-    // Auto-focus the close button for accessibility
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       closeButtonRef.current?.focus();
     }, 50);
 
     return () => {
+      clearTimeout(timer);
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
-      // Restore focus to triggering thumbnail
       triggerElement?.focus();
     };
   }, [isOpen, triggerElement]);
@@ -62,7 +61,7 @@ export const GalleryLightbox = ({
     onNavigate(nextIndex);
   }, [currentIndex, items.length, onNavigate]);
 
-  // Keyboard controls: Escape, ArrowLeft, ArrowRight
+  // Keyboard navigation: Escape, ArrowLeft, ArrowRight
   useEffect(() => {
     if (!isOpen) return;
 
@@ -85,9 +84,6 @@ export const GalleryLightbox = ({
 
   if (!isOpen || !currentItem) return null;
 
-  const currentDisplayNumber = String(currentIndex + 1).padStart(2, '0');
-  const totalDisplayNumber = String(items.length).padStart(2, '0');
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -98,64 +94,45 @@ export const GalleryLightbox = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: prefersReducedMotion ? 0.05 : 0.25 }}
+          transition={{ duration: prefersReducedMotion ? 0.05 : 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 z-[9999] flex flex-col justify-between bg-black/95 backdrop-blur-2xl select-none"
+          className="fixed inset-0 z-[9999] flex flex-col justify-between bg-[#000122]/95 backdrop-blur-2xl select-none"
         >
-          {/* Top Control Bar */}
+          {/* Top Bar: Minimal and uncluttered */}
           <header
             onClick={(e) => e.stopPropagation()}
-            className="w-full flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 z-20 border-b border-white/10 bg-black/40 backdrop-blur-md"
+            className="w-full flex items-center justify-between px-6 sm:px-10 py-5 z-20"
           >
-            {/* Left: Counter and Category */}
-            <div className="flex items-center space-x-3 sm:space-x-4">
-              <span className="text-xs sm:text-sm font-mono font-bold text-orange-500 tracking-wider">
-                {currentDisplayNumber} <span className="text-white/40">/</span> {totalDisplayNumber}
-              </span>
-              <span className="hidden sm:inline-block h-3 w-px bg-white/20" />
-              <span className="hidden sm:inline-block text-xs uppercase tracking-widest text-neutral-400 font-semibold">
-                {currentItem.categoryLabel}
-              </span>
+            <div className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-400">
+              {currentItem.title}
             </div>
 
-            {/* Center: Title on medium+ screens */}
-            <div className="hidden md:flex items-center space-x-2 text-center max-w-md truncate">
-              <span className="text-sm font-semibold text-white truncate">
-                {currentItem.title}
-              </span>
-            </div>
-
-            {/* Right: Controls & Close */}
-            <div className="flex items-center space-x-2">
-              <span className="text-[11px] font-mono text-neutral-400 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 hidden sm:inline-block">
-                {currentItem.width} × {currentItem.height}
-              </span>
-
-              <button
-                ref={closeButtonRef}
-                onClick={onClose}
-                aria-label="Close image viewer (Press Escape)"
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-orange-600 text-white transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+            <button
+              ref={closeButtonRef}
+              onClick={onClose}
+              type="button"
+              aria-label="Close image viewer"
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-white/[0.08] hover:bg-white/20 text-white/80 hover:text-white transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </header>
 
-          {/* Center: Main Image Viewport with Previous & Next navigation */}
+          {/* Main Viewport */}
           <div
             onClick={onClose}
-            className="relative flex-1 flex items-center justify-center p-3 sm:p-6 md:p-8 min-h-0 overflow-hidden"
+            className="relative flex-1 flex items-center justify-center p-4 sm:p-8 min-h-0 overflow-hidden"
           >
             {/* Previous Button */}
             {items.length > 1 && (
               <button
+                type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   handlePrev();
                 }}
-                aria-label="Previous image (Left Arrow)"
-                className="absolute left-2 sm:left-4 md:left-6 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-orange-600 text-white border border-white/15 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                aria-label="Previous image"
+                className="absolute left-4 sm:left-8 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#000122]/80 hover:bg-[#000235] text-white/90 hover:text-white border border-white/15 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -164,23 +141,24 @@ export const GalleryLightbox = ({
             {/* Next Button */}
             {items.length > 1 && (
               <button
+                type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleNext();
                 }}
-                aria-label="Next image (Right Arrow)"
-                className="absolute right-2 sm:right-4 md:right-6 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-orange-600 text-white border border-white/15 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                aria-label="Next image"
+                className="absolute right-4 sm:right-8 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#000122]/80 hover:bg-[#000235] text-white/90 hover:text-white border border-white/15 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
             )}
 
-            {/* Active Image Container */}
+            {/* Centered Image */}
             <motion.div
               key={currentItem.id}
               initial={{
                 opacity: 0,
-                scale: prefersReducedMotion ? 1 : 0.96,
+                scale: prefersReducedMotion ? 1 : 0.98,
               }}
               animate={{
                 opacity: 1,
@@ -188,10 +166,10 @@ export const GalleryLightbox = ({
               }}
               exit={{
                 opacity: 0,
-                scale: prefersReducedMotion ? 1 : 0.96,
+                scale: prefersReducedMotion ? 1 : 0.98,
               }}
               transition={{
-                duration: prefersReducedMotion ? 0.05 : 0.28,
+                duration: prefersReducedMotion ? 0.05 : 0.25,
                 ease: [0.16, 1, 0.3, 1],
               }}
               onClick={(e) => e.stopPropagation()}
@@ -200,36 +178,19 @@ export const GalleryLightbox = ({
               <img
                 src={currentItem.src}
                 alt={currentItem.alt}
-                className="max-h-[72vh] sm:max-h-[76vh] md:max-h-[78vh] w-auto max-w-[92vw] sm:max-w-[88vw] object-contain rounded-xl sm:rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] border border-white/15 ring-1 ring-white/10"
+                className="max-h-[78vh] sm:max-h-[82vh] w-auto max-w-[90vw] object-contain rounded-lg sm:rounded-xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/10"
               />
             </motion.div>
           </div>
 
-          {/* Bottom Caption & Details Bar */}
+          {/* Minimal Bottom Bar */}
           <footer
             onClick={(e) => e.stopPropagation()}
-            className="w-full z-20 px-4 sm:px-8 py-4 sm:py-5 border-t border-white/10 bg-black/60 backdrop-blur-md"
+            className="w-full z-20 px-6 sm:px-10 py-5 text-center"
           >
-            <div className="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left">
-              <div className="flex-1 min-w-0 pr-4">
-                <div className="flex items-center space-x-2 mb-1">
-                  <span className="text-sm sm:text-base font-bold text-white tracking-tight">
-                    {currentItem.title}
-                  </span>
-                  <span className="text-xs text-orange-500 font-semibold sm:hidden">
-                    · {currentItem.categoryLabel}
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal max-w-3xl">
-                  {currentItem.caption}
-                </p>
-              </div>
-
-              <div className="flex items-center space-x-2 text-xs text-neutral-400 whitespace-nowrap self-end sm:self-center">
-                <MapPin className="w-3.5 h-3.5 text-orange-500" />
-                <span>{currentItem.location}</span>
-              </div>
-            </div>
+            <p className="text-xs sm:text-sm text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed">
+              {currentItem.caption}
+            </p>
           </footer>
         </motion.div>
       )}

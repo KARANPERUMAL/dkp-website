@@ -7,7 +7,7 @@ export const Footer = () => {
   const { navigateTo } = useNavigation();
 
   return (
-    <footer id="contact" className="w-full bg-[#08090c] text-white border-t border-white/10 pt-14 pb-8 px-4 sm:px-8 lg:px-12 select-none">
+    <footer id="contact" className="w-full bg-[#000122] text-white border-t border-white/10 pt-14 pb-8 px-4 sm:px-8 lg:px-12 select-none">
       <div className="max-w-[1240px] mx-auto">
         
         {/* Main 4-Column Grid */}
@@ -31,7 +31,7 @@ export const Footer = () => {
               />
             </a>
 
-            <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-neutral-300 leading-relaxed max-w-sm">
               We help businesses grow through technology, creative production, digital marketing and strategic brand development.
             </p>
 
@@ -46,7 +46,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="DKP Innovation Facebook"
-                  className="w-8 h-8 rounded-lg bg-[#14171f] hover:bg-orange-600 text-neutral-400 hover:text-white flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
+                  className="w-8 h-8 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
                 >
                   f
                 </a>
@@ -55,7 +55,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="DKP Innovation Twitter / X"
-                  className="w-8 h-8 rounded-lg bg-[#14171f] hover:bg-orange-600 text-neutral-400 hover:text-white flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
+                  className="w-8 h-8 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
                 >
                   t
                 </a>
@@ -64,7 +64,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="DKP Innovation LinkedIn"
-                  className="w-8 h-8 rounded-lg bg-[#14171f] hover:bg-orange-600 text-neutral-400 hover:text-white flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
+                  className="w-8 h-8 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
                 >
                   in
                 </a>
@@ -81,7 +81,7 @@ export const Footer = () => {
               <li>
                 <button
                   onClick={() => navigateTo('home', 'home')}
-                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >
                   Home
                 </button>
@@ -89,7 +89,7 @@ export const Footer = () => {
               <li>
                 <button
                   onClick={() => navigateTo('home', 'about')}
-                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >
                   Who We Are
                 </button>
@@ -97,7 +97,7 @@ export const Footer = () => {
               <li>
                 <button
                   onClick={() => navigateTo('services')}
-                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >
                   What Do We Do
                 </button>
@@ -105,7 +105,7 @@ export const Footer = () => {
               <li>
                 <button
                   onClick={() => navigateTo('gallery')}
-                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >
                   Gallery
                 </button>
@@ -113,7 +113,7 @@ export const Footer = () => {
               <li>
                 <button
                   onClick={() => navigateTo('careers')}
-                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >
                   Careers
                 </button>
@@ -121,7 +121,7 @@ export const Footer = () => {
               <li>
                 <button
                   onClick={() => navigateTo('contact')}
-                  className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left"
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >
                   Contact Us
                 </button>
@@ -139,7 +139,7 @@ export const Footer = () => {
                 <li key={cat.id}>
                   <button
                     onClick={() => navigateTo('services', cat.slug)}
-                    className="text-neutral-400 hover:text-orange-400 transition-colors cursor-pointer text-left leading-snug flex items-center group"
+                    className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left leading-snug flex items-center group"
                   >
                     <span className="group-hover:translate-x-0.5 transition-transform">
                       {cat.title}
@@ -159,9 +159,9 @@ export const Footer = () => {
               <div>
                 <a
                   href={OFFICIAL_PHONE_TEL}
-                  className="inline-flex items-center space-x-2 text-neutral-300 hover:text-orange-400 font-medium transition-colors"
+                  className="inline-flex items-center space-x-2 text-neutral-300 hover:text-[#FFD60A] font-medium transition-colors"
                 >
-                  <IconPhone className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                  <IconPhone className="w-4 h-4 text-[#FFD60A] flex-shrink-0" />
                   <span>{OFFICIAL_PHONE}</span>
                 </a>
               </div>
@@ -169,22 +169,22 @@ export const Footer = () => {
               <div>
                 <a
                   href={OFFICIAL_EMAIL_MAILTO}
-                  className="inline-flex items-center space-x-2 text-neutral-300 hover:text-orange-400 text-xs sm:text-sm font-medium transition-colors break-all"
+                  className="inline-flex items-center space-x-2 text-neutral-300 hover:text-[#FFD60A] text-xs sm:text-sm font-medium transition-colors break-all"
                 >
-                  <IconMail className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                  <IconMail className="w-4 h-4 text-[#FFD60A] flex-shrink-0" />
                   <span>{OFFICIAL_EMAIL}</span>
                 </a>
               </div>
 
               <div className="pt-2 border-t border-white/10">
                 <div className="flex items-center space-x-1.5 text-xs font-semibold text-neutral-300 mb-2">
-                  <IconMapPin className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                  <IconMapPin className="w-4 h-4 text-[#FFD60A] flex-shrink-0" />
                   <span>Bengaluru Branches</span>
                 </div>
                 <ul className="space-y-1.5 text-xs text-neutral-400">
                   {branchLocations.map((branch, i) => (
                     <li key={branch.id} className="leading-snug">
-                      <span className="text-orange-400 font-semibold">{i + 1}.</span>{' '}
+                      <span className="text-[#FFD60A] font-semibold">{i + 1}.</span>{' '}
                       <span className="text-neutral-300">{branch.name.split('—')[0].trim()}</span>{' '}
                       <span className="text-neutral-500">({branch.tag})</span>
                     </li>
@@ -193,7 +193,7 @@ export const Footer = () => {
 
                 <button
                   onClick={() => navigateTo('contact', 'branch-map')}
-                  className="mt-3 inline-flex items-center space-x-1 text-xs text-orange-400 hover:text-orange-300 font-semibold cursor-pointer group"
+                  className="mt-3 inline-flex items-center space-x-1 text-xs text-[#FFD60A] hover:text-[#FFE047] font-semibold cursor-pointer group"
                 >
                   <span>View Interactive Branch Map</span>
                   <IconArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

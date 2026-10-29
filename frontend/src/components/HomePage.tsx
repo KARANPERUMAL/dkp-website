@@ -17,12 +17,12 @@ export const HomePage = () => {
   const headXPercent = (curveState.headX / 1440) * 100;
 
   return (
-    <div className="relative min-h-screen bg-[#050608] text-neutral-900 flex flex-col w-full selection:bg-orange-500 selection:text-white">
+    <div className="relative min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
       {/* Floating Centered Navbar & Header Logo (fixed z-50 at top) */}
       <Navbar />
 
       {/* PINNED DARK HERO VIEWPORT: Remains fixed at top while white section scrolls up over it */}
-      <div className="sticky top-0 h-screen w-full z-0 overflow-hidden bg-[#050608] pointer-events-auto">
+      <div className="sticky top-0 h-screen w-full z-0 overflow-hidden bg-[#000122] pointer-events-auto">
         <HeroSection onCtaClick={() => navigateTo('services')} />
       </div>
 
@@ -63,11 +63,11 @@ export const HomePage = () => {
               />
 
               {/* Global CTA linking to all specialized services */}
-              <div className="mt-8 sm:mt-10 flex justify-center">
+              <div className="mt-6 sm:mt-8 flex justify-center">
                 <button
                   type="button"
                   onClick={() => navigateTo('services')}
-                  className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-orange-500 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-sm cursor-pointer group"
+                  className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-[#FFD60A] hover:text-[#000122] border border-neutral-200/80 hover:border-[#FFD60A] transition-all duration-300 shadow-sm cursor-pointer group"
                 >
                   <span>Explore All 19 Specialized Services</span>
                   <IconArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

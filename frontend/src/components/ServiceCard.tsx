@@ -29,8 +29,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         title={service.name}
         description={service.description}
         circleSize={280}
-        circleClassName="bg-black"
-        className="h-full flex flex-col justify-between select-none bg-white border border-neutral-200/90 hover:border-orange-500/40 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+        circleClassName="bg-[#000122]"
+        className="h-full flex flex-col justify-between select-none bg-white border border-neutral-200/90 hover:border-[#FFD60A] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
       >
         {/* REGION 1: Isolated Service Image Container — outside the hover effect layer, completely untouched */}
         <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100 select-none">
@@ -48,19 +48,19 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {/* CLIPPED OVERLAY: attached directly to text/content container so circle coordinates and clipping are strictly bounded */}
           <ClippedCircle
             circleSize={280}
-            circleClassName="bg-black"
+            circleClassName="bg-[#000122]"
             className="z-20"
           >
             {/* Synchronized duplicate containing ONLY the text/content area */}
-            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between h-full bg-black select-none pointer-events-none">
+            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between h-full bg-[#000122] select-none pointer-events-none">
               <div>
-                {/* Category Label: DKP orange accent */}
-                <div className="text-[11px] font-bold text-orange-500 uppercase tracking-wider mb-1.5">
+                {/* Category Label: DKP yellow accent */}
+                <div className="text-[11px] font-bold text-[#FFD60A] uppercase tracking-wider mb-1.5">
                   {service.category}
                 </div>
 
-                {/* Service Heading: DKP orange brand color */}
-                <h3 className="text-base sm:text-lg font-bold text-orange-500 leading-snug mb-2">
+                {/* Service Heading: DKP yellow brand color */}
+                <h3 className="text-base sm:text-lg font-bold text-[#FFD60A] leading-snug mb-2">
                   {service.name}
                 </h3>
 
@@ -77,7 +77,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                   aria-hidden="true"
                   className="w-full inline-flex items-center justify-center space-x-1.5 py-2.5 px-4 rounded-lg bg-white/10 text-white font-semibold text-xs border border-white/20 select-none pointer-events-none"
                 >
-                  <IconMessageDots className="w-3.5 h-3.5 text-orange-500" />
+                  <IconMessageDots className="w-3.5 h-3.5 text-[#FFD60A]" />
                   <span>Enquire About Service</span>
                   <IconChevronRight className="w-3.5 h-3.5 text-neutral-400" />
                 </div>
@@ -88,8 +88,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {/* BASE CONTENT: original light theme with dark headings and text */}
           <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between relative z-10 bg-white">
             <div>
-              {/* Category Label: DKP orange brand color */}
-              <div className="text-[11px] font-bold text-orange-600 uppercase tracking-wider mb-1.5">
+              {/* Category Label: DKP brand color */}
+              <div className="text-[11px] font-bold text-[#854D0E] uppercase tracking-wider mb-1.5">
                 {service.category}
               </div>
 
@@ -112,11 +112,11 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                   e.stopPropagation();
                   onEnquire(service.name);
                 }}
-                className="w-full relative z-10 inline-flex items-center justify-center space-x-1.5 py-2.5 px-4 rounded-lg bg-neutral-50 hover:bg-orange-50 text-neutral-800 hover:text-orange-600 font-semibold text-xs border border-neutral-200/90 hover:border-orange-500/40 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all cursor-pointer group/btn pointer-events-auto"
+                className="w-full relative z-10 inline-flex items-center justify-center space-x-1.5 py-2.5 px-4 rounded-lg bg-neutral-50 hover:bg-[#FFD60A] text-neutral-800 hover:text-[#000122] font-semibold text-xs border border-neutral-200/90 hover:border-[#FFD60A] focus:outline-none focus:ring-2 focus:ring-[#FFD60A]/50 transition-all cursor-pointer group/btn pointer-events-auto"
               >
-                <IconMessageDots className="w-3.5 h-3.5 text-orange-600" />
+                <IconMessageDots className="w-3.5 h-3.5 text-[#854D0E] group-hover/btn:text-[#000122]" />
                 <span>Enquire About Service</span>
-                <IconChevronRight className="w-3.5 h-3.5 text-neutral-400 group-hover/btn:text-orange-600 group-hover/btn:translate-x-0.5 transition-transform" />
+                <IconChevronRight className="w-3.5 h-3.5 text-neutral-400 group-hover/btn:text-[#000122] group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
             </div>
           </div>

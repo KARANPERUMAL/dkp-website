@@ -149,9 +149,9 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050608] text-neutral-900 flex flex-col w-full selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
       {/* Floating Navbar & Header */}
-      <div className="relative w-full bg-[#050608]">
+      <div className="relative w-full bg-[#000122]">
         <Navbar />
 
         {/* Contact Hero Section */}
@@ -162,7 +162,7 @@ export const ContactPage = () => {
               className="absolute left-1/2 -top-[15%] -translate-x-1/2 w-[650px] h-[360px] rounded-full"
               style={{
                 background:
-                  'radial-gradient(ellipse at center, rgba(234, 88, 12, 0.22) 0%, rgba(180, 60, 10, 0.08) 45%, transparent 70%)',
+                  'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.16) 0%, rgba(255, 214, 10, 0.05) 45%, transparent 70%)',
                 filter: 'blur(50px)',
               }}
             />
@@ -173,9 +173,9 @@ export const ContactPage = () => {
             <BlurFadeIn
               delay={0.05}
               duration={0.4}
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-orange-400 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm"
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FFD60A] text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm"
             >
-              <IconSparkles className="w-4 h-4 text-orange-500" />
+              <IconSparkles className="w-4 h-4 text-[#FFD60A]" />
               <span>Direct Commercial & Strategic Inquiries</span>
             </BlurFadeIn>
 
@@ -211,9 +211,9 @@ export const ContactPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               {/* Phone Card */}
-              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 hover:border-orange-500/40 transition-all flex flex-col justify-between shadow-sm">
+              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 hover:border-[#FFD60A]/50 transition-all flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#FFD60A]/20 text-[#854D0E] flex items-center justify-center mb-4">
                     <IconPhone className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-1">
@@ -221,7 +221,7 @@ export const ContactPage = () => {
                   </span>
                   <a
                     href={OFFICIAL_PHONE_TEL}
-                    className="text-lg sm:text-xl font-bold text-neutral-900 hover:text-orange-600 transition-colors block mb-2"
+                    className="text-lg sm:text-xl font-bold text-neutral-900 hover:text-[#854D0E] transition-colors block mb-2"
                   >
                     {OFFICIAL_PHONE}
                   </a>
@@ -233,7 +233,7 @@ export const ContactPage = () => {
                 <div className="pt-4 mt-4 border-t border-neutral-200/60 flex items-center justify-between">
                   <a
                     href={OFFICIAL_PHONE_TEL}
-                    className="text-xs font-semibold text-orange-600 hover:text-orange-700 inline-flex items-center space-x-1"
+                    className="text-xs font-semibold text-[#854D0E] hover:text-[#713f12] inline-flex items-center space-x-1"
                   >
                     <span>Call Now</span>
                     <span>&rarr;</span>
@@ -259,9 +259,9 @@ export const ContactPage = () => {
               </div>
 
               {/* Email Card */}
-              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 hover:border-orange-500/40 transition-all flex flex-col justify-between shadow-sm">
+              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 hover:border-[#FFD60A]/50 transition-all flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#FFD60A]/20 text-[#854D0E] flex items-center justify-center mb-4">
                     <IconMail className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-1">
@@ -269,7 +269,7 @@ export const ContactPage = () => {
                   </span>
                   <a
                     href={OFFICIAL_EMAIL_MAILTO}
-                    className="text-sm sm:text-base font-bold text-neutral-900 hover:text-orange-600 transition-colors block mb-2 break-all"
+                    className="text-sm sm:text-base font-bold text-neutral-900 hover:text-[#854D0E] transition-colors block mb-2 break-all"
                   >
                     {OFFICIAL_EMAIL}
                   </a>
@@ -281,7 +281,7 @@ export const ContactPage = () => {
                 <div className="pt-4 mt-4 border-t border-neutral-200/60 flex items-center justify-between">
                   <a
                     href={OFFICIAL_EMAIL_MAILTO}
-                    className="text-xs font-semibold text-orange-600 hover:text-orange-700 inline-flex items-center space-x-1"
+                    className="text-xs font-semibold text-[#854D0E] hover:text-[#713f12] inline-flex items-center space-x-1"
                   >
                     <span>Write Email</span>
                     <span>&rarr;</span>
@@ -307,18 +307,18 @@ export const ContactPage = () => {
               </div>
 
               {/* Working Hours & Response Card */}
-              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 hover:border-orange-500/40 transition-all flex flex-col justify-between shadow-sm">
+              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 hover:border-[#FFD60A]/50 transition-all flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#FFD60A]/20 text-[#854D0E] flex items-center justify-center mb-4">
                     <IconClock className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-1">
                     Operating Hours
                   </span>
                   <div className="text-base sm:text-lg font-bold text-neutral-900 mb-1">
-                    Mon – Sat: 9:00 AM – 7:00 PM
+                    Mon – Sat: 9:30 AM – 6:30 PM
                   </div>
-                  <div className="text-xs font-semibold text-orange-600 mb-2">
+                  <div className="text-xs font-semibold text-[#854D0E] mb-2">
                     India Standard Time (IST)
                   </div>
                   <p className="text-xs text-neutral-500 leading-relaxed">
@@ -344,7 +344,7 @@ export const ContactPage = () => {
           <div className="max-w-[860px] mx-auto bg-white rounded-2xl border border-neutral-200/90 shadow-xl p-6 sm:p-10 lg:p-12">
             
             <div className="text-center max-w-xl mx-auto mb-8">
-              <span className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-1.5 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#854D0E] mb-1.5 block">
                 Project Inquiry
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 mb-2">
@@ -356,8 +356,8 @@ export const ContactPage = () => {
             </div>
 
             {isSubmitted ? (
-              <div className="p-8 sm:p-10 rounded-xl bg-orange-50/80 border border-orange-200 text-center animate-fadeIn">
-                <div className="w-14 h-14 rounded-full bg-orange-500 text-white flex items-center justify-center mx-auto mb-4 shadow-md">
+              <div className="p-8 sm:p-10 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/30 text-center animate-fadeIn">
+                <div className="w-14 h-14 rounded-full bg-[#FFD60A] text-[#000122] flex items-center justify-center mx-auto mb-4 shadow-md">
                   <IconCheck className="w-7 h-7 stroke-[2.5]" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">
@@ -366,14 +366,14 @@ export const ContactPage = () => {
                 <p className="text-sm text-neutral-600 max-w-md mx-auto mb-4 leading-relaxed">
                   Thank you, <strong className="text-neutral-900">{formData.fullName}</strong>. Our team has received your project details for <strong className="text-neutral-900">{formData.service}</strong> and will connect at <strong className="text-neutral-900">{formData.email}</strong> shortly.
                 </p>
-                <div className="inline-block p-3 rounded-lg bg-white border border-orange-200/80 text-xs text-neutral-600 mb-6">
+                <div className="inline-block p-3 rounded-lg bg-white border border-[#FFD60A]/30 text-xs text-neutral-600 mb-6">
                   <span className="font-semibold text-neutral-500">Inquiry Reference ID:</span>{' '}
-                  <span className="font-mono font-bold text-orange-600">{submissionResult?.referenceId}</span>
+                  <span className="font-mono font-bold text-[#854D0E]">{submissionResult?.referenceId}</span>
                 </div>
                 <div>
                   <button
                     onClick={handleResetForm}
-                    className="px-6 py-2.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold transition-colors cursor-pointer"
+                    className="px-6 py-2.5 rounded-lg bg-[#000122] hover:bg-[#000235] text-white text-xs font-semibold transition-colors cursor-pointer"
                   >
                     Send Another Inquiry
                   </button>
@@ -397,7 +397,7 @@ export const ContactPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="fullName" className="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
-                      Full Name <span className="text-orange-600">*</span>
+                      Full Name <span className="text-[#854D0E]">*</span>
                     </label>
                     <input
                       id="fullName"
@@ -411,7 +411,7 @@ export const ContactPage = () => {
                       className={`w-full px-4 py-3 rounded-lg border text-sm text-neutral-900 bg-white placeholder-neutral-400 focus:outline-none focus:ring-2 transition-all ${
                         errors.fullName
                           ? 'border-rose-400 focus:ring-rose-200'
-                          : 'border-neutral-200 focus:border-orange-500 focus:ring-orange-100'
+                          : 'border-neutral-200 focus:border-[#FFD60A] focus:ring-[#FFD60A]/30'
                       }`}
                       aria-invalid={Boolean(errors.fullName)}
                       aria-describedby={errors.fullName ? 'fullName-error' : undefined}
@@ -425,7 +425,7 @@ export const ContactPage = () => {
 
                   <div>
                     <label htmlFor="email" className="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
-                      Work Email <span className="text-orange-600">*</span>
+                      Work Email <span className="text-[#854D0E]">*</span>
                     </label>
                     <input
                       id="email"
@@ -439,7 +439,7 @@ export const ContactPage = () => {
                       className={`w-full px-4 py-3 rounded-lg border text-sm text-neutral-900 bg-white placeholder-neutral-400 focus:outline-none focus:ring-2 transition-all ${
                         errors.email
                           ? 'border-rose-400 focus:ring-rose-200'
-                          : 'border-neutral-200 focus:border-orange-500 focus:ring-orange-100'
+                          : 'border-neutral-200 focus:border-[#FFD60A] focus:ring-[#FFD60A]/30'
                       }`}
                       aria-invalid={Boolean(errors.email)}
                       aria-describedby={errors.email ? 'email-error' : undefined}
@@ -470,7 +470,7 @@ export const ContactPage = () => {
                       className={`w-full px-4 py-3 rounded-lg border text-sm text-neutral-900 bg-white placeholder-neutral-400 focus:outline-none focus:ring-2 transition-all ${
                         errors.phone
                           ? 'border-rose-400 focus:ring-rose-200'
-                          : 'border-neutral-200 focus:border-orange-500 focus:ring-orange-100'
+                          : 'border-neutral-200 focus:border-[#FFD60A] focus:ring-[#FFD60A]/30'
                       }`}
                       aria-invalid={Boolean(errors.phone)}
                       aria-describedby={errors.phone ? 'phone-error' : undefined}
@@ -490,7 +490,7 @@ export const ContactPage = () => {
                       id="service"
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-100 text-sm text-neutral-900 bg-white focus:outline-none transition-all cursor-pointer"
+                      className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:border-[#FFD60A] focus:ring-2 focus:ring-[#FFD60A]/30 text-sm text-neutral-900 bg-white focus:outline-none transition-all cursor-pointer"
                     >
                       {allServices.map((srv) => (
                         <option key={srv.id} value={srv.name}>
@@ -504,7 +504,7 @@ export const ContactPage = () => {
                 {/* Message Field */}
                 <div>
                   <label htmlFor="message" className="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
-                    Project Requirements / Scope <span className="text-orange-600">*</span>
+                    Project Requirements / Scope <span className="text-[#854D0E]">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -518,7 +518,7 @@ export const ContactPage = () => {
                     className={`w-full px-4 py-3 rounded-lg border text-sm text-neutral-900 bg-white placeholder-neutral-400 focus:outline-none focus:ring-2 transition-all resize-y ${
                       errors.message
                         ? 'border-rose-400 focus:ring-rose-200'
-                        : 'border-neutral-200 focus:border-orange-500 focus:ring-orange-100'
+                        : 'border-neutral-200 focus:border-[#FFD60A] focus:ring-[#FFD60A]/30'
                     }`}
                     aria-invalid={Boolean(errors.message)}
                     aria-describedby={errors.message ? 'message-error' : undefined}
@@ -535,7 +535,7 @@ export const ContactPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center space-x-2 py-3.5 px-6 rounded-lg bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer disabled:opacity-60"
+                    className="w-full inline-flex items-center justify-center space-x-2 py-3.5 px-6 rounded-lg bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer disabled:opacity-60"
                   >
                     {isSubmitting ? (
                       <span>Validating & Dispatching...</span>
@@ -560,7 +560,7 @@ export const ContactPage = () => {
             
             {/* Section Header */}
             <div className="max-w-2xl mb-10">
-              <span className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-2 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#854D0E] mb-2 block">
                 Physical Presence
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-neutral-900 mb-3 tracking-tight">
@@ -579,7 +579,7 @@ export const ContactPage = () => {
               {branchLocations.map((b, i) => (
                 <div key={b.id} className="p-5 rounded-xl bg-neutral-50/70 border border-neutral-200/80">
                   <div className="flex items-center space-x-2 mb-2">
-                    <span className="w-5 h-5 rounded-full bg-orange-500 text-white text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-[#FFD60A] text-[#000122] text-[10px] font-bold flex items-center justify-center">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold text-neutral-900">{b.name}</span>
@@ -595,7 +595,7 @@ export const ContactPage = () => {
                       href={b.directionsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-orange-600 hover:text-orange-700 font-semibold inline-flex items-center space-x-1"
+                      className="text-[#854D0E] hover:text-[#713f12] font-semibold inline-flex items-center space-x-1"
                     >
                       <IconDirections className="w-3.5 h-3.5" />
                       <span>Directions</span>

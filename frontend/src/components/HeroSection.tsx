@@ -22,7 +22,11 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
   return (
     <section
       id="home"
-      className="relative w-full h-screen bg-[#050608] text-white pt-14 sm:pt-16 pb-0 overflow-hidden select-none flex flex-col justify-center"
+      className="relative w-full h-screen bg-[#000122] text-white pt-14 sm:pt-16 pb-0 overflow-hidden select-none flex flex-col justify-center"
+      style={{
+        background:
+          'radial-gradient(ellipse 90% 70% at 50% 30%, #00023a 0%, #000122 55%, #000018 100%)',
+      }}
     >
       {/* Background Ripple Effect: Interactive subtle ripple layer behind hero content */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
@@ -31,32 +35,32 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
       {/* Atmospheric Background Lighting */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
-        {/* Warm amber / orange atmospheric glow behind right headline & CTA */}
+        {/* Warm yellow / gold atmospheric glow behind right headline & CTA */}
         <div
           className="absolute right-[10%] top-[18%] w-[480px] h-[380px] sm:w-[600px] sm:h-[460px] rounded-full"
           style={{
             background:
-              'radial-gradient(ellipse at center, rgba(235, 95, 15, 0.28) 0%, rgba(180, 60, 10, 0.12) 42%, rgba(140, 40, 5, 0.03) 68%, transparent 75%)',
-            filter: 'blur(40px)',
-          }}
-        />
-
-        {/* Charcoal & dark navy atmospheric fill on left */}
-        <div
-          className="absolute left-[6%] top-[22%] w-[460px] h-[360px] sm:w-[560px] sm:h-[420px] rounded-full"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(32, 45, 68, 0.26) 0%, rgba(18, 24, 36, 0.10) 50%, transparent 70%)',
+              'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.16) 0%, rgba(255, 214, 10, 0.06) 42%, transparent 75%)',
             filter: 'blur(50px)',
           }}
         />
 
-        {/* Ambient warm bronze glow behind center-lower text */}
+        {/* Restrained deep blue atmospheric fill on left */}
+        <div
+          className="absolute left-[6%] top-[22%] w-[460px] h-[360px] sm:w-[560px] sm:h-[420px] rounded-full"
+          style={{
+            background:
+              'radial-gradient(circle, rgba(0, 2, 58, 0.45) 0%, rgba(0, 1, 34, 0.20) 50%, transparent 70%)',
+            filter: 'blur(50px)',
+          }}
+        />
+
+        {/* Ambient warm gold glow behind center-lower text */}
         <div
           className="absolute left-[36%] top-[40%] w-[360px] h-[260px] rounded-full"
           style={{
             background:
-              'radial-gradient(ellipse at center, rgba(210, 90, 20, 0.14) 0%, transparent 68%)',
+              'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.08) 0%, transparent 68%)',
             filter: 'blur(40px)',
           }}
         />
@@ -81,7 +85,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
               transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2.3rem,5.4vw,5.6rem)] leading-[0.90] transition-colors"
               style={{
-                backgroundImage: 'linear-gradient(180deg, #384255 0%, #252b36 100%)',
+                backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
@@ -97,7 +101,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
               className="text-[clamp(3.1rem,7.8vw,8.2rem)] leading-[0.88] tracking-[-0.045em] transition-colors"
               style={{
                 backgroundImage:
-                  'linear-gradient(92deg, #28303e 0%, #353f50 40%, #463730 70%, #56372b 100%)',
+                  'linear-gradient(92deg, #FFFFFF 0%, #E2E8F0 45%, #FEF08A 78%, #FFD60A 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
@@ -113,7 +117,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
               className="text-[clamp(3.8rem,9.6vw,10.2rem)] leading-[0.86] tracking-[-0.05em] transition-colors"
               style={{
                 backgroundImage:
-                  'linear-gradient(92deg, #242a36 0%, #333235 35%, #4c372f 65%, #3c2c2c 100%)',
+                  'linear-gradient(92deg, #F8FAFC 0%, #E2E8F0 40%, #FEF08A 70%, #FFD60A 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
@@ -122,7 +126,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
             </motion.div>
           </motion.div>
 
-          {/* Position the orange circular CTA between lines 2 and 3 on the center-right (z-30 ensures visibility) */}
+          {/* Position the yellow circular CTA between lines 2 and 3 on the center-right (z-30 ensures visibility) */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -134,21 +138,31 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
             }}
             className="absolute z-30 top-[43%] sm:top-[44%] md:top-[45%] lg:top-[46%] right-[6%] sm:right-[10%] md:right-[14%] lg:right-[16%]"
           >
+            {/* Soft ambient yellow glow behind circular button */}
+            <div
+              className="absolute -inset-6 sm:-inset-8 md:-inset-10 rounded-full pointer-events-none -z-10"
+              style={{
+                background:
+                  'radial-gradient(circle, rgba(255, 214, 10, 0.45) 0%, rgba(255, 214, 10, 0.18) 45%, transparent 75%)',
+                filter: 'blur(20px)',
+              }}
+            />
+
             <a
               href="#services"
               onClick={handleScrollToServices}
               aria-label="View Our Services"
-              className="group relative flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[108px] sm:h-[108px] md:w-[116px] md:h-[116px] lg:w-[120px] lg:h-[120px] rounded-full text-white cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-orange-400/50"
+              className="group relative flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[108px] sm:h-[108px] md:w-[116px] md:h-[116px] lg:w-[120px] lg:h-[120px] rounded-full text-[#000122] cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#FFD60A]/50"
               style={{
                 background:
-                  'radial-gradient(circle at 35% 30%, #ff8326 0%, #fa5a00 50%, #d83d00 95%)',
+                  'radial-gradient(circle at 35% 30%, #FFE566 0%, #FFD60A 52%, #E6BF00 95%)',
                 boxShadow:
-                  '0 14px 34px rgba(234, 79, 0, 0.48), 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 3px rgba(255, 255, 255, 0.5)',
+                  '0 14px 34px rgba(255, 214, 10, 0.35), 0 0 28px rgba(255, 214, 10, 0.25), 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.7)',
               }}
             >
               {/* Subtle top specular sheen */}
               <div
-                className="absolute top-1 left-2.5 right-2.5 h-[45%] rounded-t-full pointer-events-none opacity-30"
+                className="absolute top-1 left-2.5 right-2.5 h-[45%] rounded-t-full pointer-events-none opacity-40"
                 style={{
                   background:
                     'linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%)',
@@ -157,10 +171,10 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
               {/* Button text */}
               <div className="relative z-10 flex flex-col items-center text-center px-1">
-                <span className="text-[18px] sm:text-[20px] md:text-[22px] font-black lowercase tracking-tight leading-none group-hover:scale-105 transition-transform duration-200">
+                <span className="text-[18px] sm:text-[20px] md:text-[22px] font-black lowercase tracking-tight leading-none group-hover:scale-105 transition-transform duration-200 text-[#000122]">
                   view
                 </span>
-                <span className="text-[9px] sm:text-[10px] md:text-[10.5px] font-extrabold uppercase tracking-wider mt-0.5 sm:mt-1 text-white/95 leading-tight">
+                <span className="text-[9px] sm:text-[10px] md:text-[10.5px] font-black uppercase tracking-wider mt-0.5 sm:mt-1 text-[#000122]/90 leading-tight">
                   OUR SERVICES
                 </span>
               </div>

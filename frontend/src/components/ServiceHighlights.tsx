@@ -23,7 +23,7 @@ export const ServiceHighlights = () => {
         
         {/* Section Header: Creativity Meets Strategy */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
-          <span className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-2.5 block">
+          <span className="text-xs font-bold text-[#854D0E] uppercase tracking-wider mb-2.5 block">
             Integrated Digital Solutions
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 tracking-tight mb-4">
@@ -38,10 +38,10 @@ export const ServiceHighlights = () => {
         <TeamStack onCardClick={handleCardClick} />
 
         {/* Global CTA to View All Detailed Services */}
-        <div className="mt-8 sm:mt-10 flex justify-center">
+        <div className="mt-6 sm:mt-8 flex justify-center">
           <button
             onClick={() => navigateTo('services')}
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-orange-500 hover:text-white border border-neutral-200/80 transition-all duration-300 shadow-sm cursor-pointer group"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-[#FFD60A] hover:text-[#000122] border border-neutral-200/80 hover:border-[#FFD60A] transition-all duration-300 shadow-sm cursor-pointer group"
           >
             <span>Explore All 19 Specialized Services</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

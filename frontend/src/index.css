@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
+  --color-deep-blue: #000122;
+  --color-deep-blue-dark: #000122;
+  --color-deep-blue-surface: #000235;
+  --color-brand-yellow: #FFD60A;
+  --color-brand-yellow-hover: #FFE047;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #CBD5E1;
+
   --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
 
   @keyframes cell-ripple {
@@ -20,6 +28,13 @@
 
 @layer base {
   :root {
+    --bg-primary: #000122;
+    --bg-secondary: #000122;
+    --bg-surface: #000235;
+    --color-accent-yellow: #FFD60A;
+    --color-accent-yellow-hover: #FFE047;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CBD5E1;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
@@ -35,7 +50,7 @@
   body {
     margin: 0;
     padding: 0;
-    background-color: #060709;
+    background-color: #000122;
     color: #1a1a1a;
     font-family: var(--font-sans);
     overflow-x: hidden;
@@ -43,8 +58,9 @@
 }
 
 /* Custom glow and glass utilities */
+.yellow-glow,
 .orange-glow {
-  filter: drop-shadow(0 0 16px rgba(255, 102, 0, 0.55));
+  filter: drop-shadow(0 0 16px rgba(255, 214, 10, 0.55));
 }
 
 .text-bevel {
@@ -65,4 +81,3 @@
 .leaflet-container {
   font-family: inherit;
 }
-
