@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { useNavigation } from '../context/NavigationContext';
-import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL, OFFICIAL_EMAIL, OFFICIAL_EMAIL_MAILTO, branchLocations } from '../data/branchesData';
 import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import {
   HeartHandshake,
@@ -11,9 +10,6 @@ import {
   Users,
   ArrowDown,
   ArrowRight,
-  Phone,
-  Mail,
-  MapPin,
   AlertCircle,
   RotateCcw,
   CheckCircle2,
@@ -129,8 +125,6 @@ export const FoundationPage = () => {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const corporateHq = branchLocations[0];
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
@@ -475,87 +469,7 @@ export const FoundationPage = () => {
         </section>
 
         {/* =========================================================================
-            SECTION D — DONATION & PARTICIPATION (OFFICIAL NOTICE & DESK)
-            ========================================================================= */}
-        <section
-          id="support"
-          className="relative w-full py-14 sm:py-16 md:py-20 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80"
-        >
-          <div className="max-w-[1240px] mx-auto flex flex-col gap-6 sm:gap-8">
-            {/* Official Compliance & Direct Coordination Notice with Blur-Fade Reveal */}
-            <BlurFadeIn
-              delay={0.15}
-              duration={0.5}
-              className="rounded-2xl bg-amber-50/70 border border-amber-200/90 p-6 sm:p-8 shadow-xs"
-            >
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
-                <div className="p-3.5 rounded-xl bg-amber-100 border border-amber-300 text-amber-800 shrink-0">
-                  <ShieldCheck className="w-7 h-7 text-amber-800" />
-                </div>
-                <div className="flex-grow">
-                  <h3 className="text-base sm:text-lg font-bold text-[#000122] mb-1.5">
-                    Notice on Verified Coordination & Transparency
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed">
-                    To maintain strict governance, donor protection, and regulatory compliance, DKP Foundation <strong className="text-[#000122]">does not collect anonymous funds via automated third-party gateways or UPI QR codes online</strong>. Every formal partnership, institutional contribution, or volunteer coordination is verified directly through official Foundation leadership.
-                  </p>
-                </div>
-              </div>
-            </BlurFadeIn>
-
-            {/* Direct Foundation Communication Desk with Blur-Fade Reveal */}
-            <BlurFadeIn
-              delay={0.25}
-              duration={0.5}
-              className="rounded-2xl bg-neutral-50 border border-neutral-200 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xs"
-            >
-              <div>
-                <h3 className="text-xl font-bold text-[#000122] mb-2">
-                  Official Foundation Desk
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed max-w-xl">
-                  Connect with our team directly for partnership inquiries, relief drive details, or volunteer opportunities.
-                </p>
-                <div className="flex flex-wrap items-center gap-4 mt-4 text-xs sm:text-sm text-neutral-700">
-                  <a
-                    href={OFFICIAL_PHONE_TEL}
-                    className="inline-flex items-center gap-2 text-neutral-800 hover:text-amber-600 font-medium transition-colors"
-                  >
-                    <Phone className="w-4 h-4 text-amber-600" />
-                    <span>{OFFICIAL_PHONE}</span>
-                  </a>
-                  <span className="text-neutral-300 hidden sm:inline">•</span>
-                  <a
-                    href={OFFICIAL_EMAIL_MAILTO}
-                    className="inline-flex items-center gap-2 text-neutral-800 hover:text-amber-600 font-medium transition-colors"
-                  >
-                    <Mail className="w-4 h-4 text-amber-600" />
-                    <span>{OFFICIAL_EMAIL}</span>
-                  </a>
-                  <span className="text-neutral-300 hidden sm:inline">•</span>
-                  <span
-                    title={corporateHq.address}
-                    className="inline-flex items-center gap-2 text-neutral-600"
-                  >
-                    <MapPin className="w-4 h-4 text-amber-600" />
-                    <span>Bengaluru, India</span>
-                  </span>
-                </div>
-              </div>
-
-              <button
-                onClick={() => navigateTo('contact', 'enquiry-form')}
-                className="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-md shadow-amber-300/30 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
-              >
-                <span>Get in Touch to Support</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </BlurFadeIn>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            SECTION E — CLOSING CALL TO ACTION
+            SECTION D — CLOSING CALL TO ACTION
             ========================================================================= */}
         <section
           id="closing-cta"
