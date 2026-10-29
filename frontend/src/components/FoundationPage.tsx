@@ -1,0 +1,660 @@
+import { useState, useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Navbar } from './Navbar';
+import { Footer } from './layout/Footer';
+import { useNavigation } from '../context/NavigationContext';
+import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL, OFFICIAL_EMAIL, OFFICIAL_EMAIL_MAILTO, branchLocations } from '../data/branchesData';
+import {
+  HeartHandshake,
+  BookOpen,
+  ShieldCheck,
+  Users,
+  Building2,
+  Gift,
+  ArrowDown,
+  ArrowRight,
+  Phone,
+  Mail,
+  MapPin,
+  AlertCircle,
+  RotateCcw,
+  Sparkles,
+  CheckCircle2,
+  Video as VideoIcon,
+} from 'lucide-react';
+import { IconHeartHandshake } from '@tabler/icons-react';
+
+interface FoundationVideoCardProps {
+  id: string;
+  src: string;
+  title: string;
+  badge: string;
+  description: string;
+  tags: string[];
+}
+
+const FoundationVideoCard = ({
+  src,
+  title,
+  badge,
+  description,
+  tags,
+}: FoundationVideoCardProps) => {
+  const [hasError, setHasError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleRetry = () => {
+    setHasError(false);
+    if (videoRef.current) {
+      videoRef.current.load();
+    }
+  };
+
+  return (
+    <div className="group flex flex-col bg-[#000122]/90 rounded-2xl border border-white/10 hover:border-[#FFD60A]/40 transition-all duration-300 shadow-[0_12px_40px_rgba(0,1,34,0.7)] overflow-hidden">
+      {/* Video Container */}
+      <div className="relative w-full aspect-video bg-neutral-950 overflow-hidden border-b border-white/10">
+        {hasError ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-neutral-950/90 text-neutral-300">
+            <AlertCircle className="w-10 h-10 text-[#FFD60A] mb-3" />
+            <h4 className="text-base font-bold text-white mb-1">Video Unavailable</h4>
+            <p className="text-xs text-neutral-400 max-w-sm mb-4 leading-relaxed">
+              We couldn&apos;t load this video preview in your browser. Please check your connection or contact our team.
+            </p>
+            <button
+              onClick={handleRetry}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Retry Video</span>
+            </button>
+          </div>
+        ) : (
+          <video
+            ref={videoRef}
+            src={src}
+            controls
+            playsInline
+            preload="metadata"
+            onError={() => setHasError(true)}
+            aria-label={title}
+            className="w-full h-full object-cover"
+          >
+            Your browser does not support the video tag.
+          </video>
+        )}
+
+        {/* Category Pill Tag Overlay */}
+        <div className="absolute top-3 left-3 pointer-events-none z-10">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#000122]/85 border border-white/20 text-[11px] font-semibold text-[#FFD60A] backdrop-blur-md shadow-sm">
+            <VideoIcon className="w-3 h-3 text-[#FFD60A]" />
+            {badge}
+          </span>
+        </div>
+      </div>
+
+      {/* Details Box */}
+      <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
+        <div>
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-2 group-hover:text-[#FFD60A] transition-colors">
+            {title}
+          </h3>
+          <p className="text-sm text-neutral-300 leading-relaxed mb-4">
+            {description}
+          </p>
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+          {tags.map((tag, idx) => (
+            <span
+              key={idx}
+              className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-white/[0.04] text-neutral-300 border border-white/10"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const FoundationPage = () => {
+  const { navigateTo } = useNavigation();
+  const prefersReducedMotion = useReducedMotion();
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const corporateHq = branchLocations[0];
+
+  return (
+    <div className="min-h-screen bg-[#000122] text-white flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+      {/* Floating Centered Navigation */}
+      <Navbar />
+
+      <main className="flex-grow w-full">
+        {/* =========================================================================
+            SECTION A — FOUNDATION HERO
+            ========================================================================= */}
+        <section
+          id="hero"
+          className="relative w-full pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/10"
+        >
+          {/* Ambient Radial Blue Glow */}
+          <div
+            aria-hidden="true"
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(0,114,255,0.18),transparent_70%)] pointer-events-none -z-10"
+          />
+
+          <div className="max-w-[1240px] mx-auto text-center flex flex-col items-center">
+            {/* Pill Eyebrow */}
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFD60A]/10 border border-[#FFD60A]/30 text-[#FFD60A] text-xs font-semibold uppercase tracking-wider mb-5 shadow-[0_2px_12px_rgba(255,214,10,0.15)]"
+            >
+              <IconHeartHandshake className="w-4 h-4 text-[#FFD60A]" />
+              <span>DKP Foundation • Philanthropy & Social Impact</span>
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.h1
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6 max-w-4xl"
+            >
+              Empowering Communities. <br />
+              <span className="text-[#FFD60A]">Cultivating Hope.</span>
+            </motion.h1>
+
+            {/* Intro Copy */}
+            <motion.p
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-lg md:text-xl text-neutral-300 font-normal max-w-2xl sm:max-w-3xl mb-10 leading-relaxed"
+            >
+              At DKP Innovations, technological advancement is deeply intertwined with social responsibility. 
+              The <strong className="text-white font-semibold">DKP Foundation</strong> is our dedicated philanthropic wing, bringing direct aid, community relief, educational enablement, and social empowerment to underserved individuals and families.
+            </motion.p>
+
+            {/* Dual CTAs */}
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-14"
+            >
+              <button
+                onClick={() => scrollTo('initiatives')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-[0_4px_24px_rgba(255,214,10,0.35)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+              >
+                <span>Explore Our Initiatives</span>
+                <ArrowDown className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => scrollTo('foundation-videos')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer backdrop-blur-sm"
+              >
+                <span>Watch Our Activities</span>
+                <VideoIcon className="w-4 h-4 text-[#FFD60A]" />
+              </button>
+            </motion.div>
+
+            {/* 3 Core Trust Pillars */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full max-w-4xl text-left">
+              <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3.5">
+                <div className="p-2.5 rounded-lg bg-[#FFD60A]/10 text-[#FFD60A] shrink-0">
+                  <HeartHandshake className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-sm font-bold text-white mb-1">Grassroots Reach</h2>
+                  <p className="text-xs text-neutral-300 leading-relaxed">
+                    Direct on-ground engagement ensuring relief reaches vulnerable households without unnecessary friction.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3.5">
+                <div className="p-2.5 rounded-lg bg-[#FFD60A]/10 text-[#FFD60A] shrink-0">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-sm font-bold text-white mb-1">100% Accountable</h2>
+                  <p className="text-xs text-neutral-300 leading-relaxed">
+                    Zero third-party automated links. Every contribution and initiative is strictly verified and documented.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3.5">
+                <div className="p-2.5 rounded-lg bg-[#FFD60A]/10 text-[#FFD60A] shrink-0">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-sm font-bold text-white mb-1">Dignified Upliftment</h2>
+                  <p className="text-xs text-neutral-300 leading-relaxed">
+                    Holistic support focused on human dignity, educational encouragement, and sustainable long-term hope.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION B — SOCIAL INITIATIVES
+            ========================================================================= */}
+        <section
+          id="initiatives"
+          className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 border-b border-white/10"
+        >
+          <div className="max-w-[1240px] mx-auto">
+            {/* Section Header */}
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+              <span className="text-xs font-bold text-[#FFD60A] uppercase tracking-widest block mb-2">
+                WHAT WE CHAMPION
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+                Core Social Initiatives
+              </h2>
+              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                We design and execute focused programs to support underprivileged families, provide critical relief, and empower the next generation through education and well-being.
+              </p>
+            </div>
+
+            {/* 4 Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+              {/* Initiative 1 */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#FFD60A]/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/20 flex items-center justify-center text-[#FFD60A] mb-5">
+                    <HeartHandshake className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                    Community Welfare & Essential Relief
+                  </h3>
+                  <p className="text-sm text-neutral-300 leading-relaxed mb-6">
+                    Delivering vital food dry rations, clothing, warm blankets, and everyday necessities directly to families and elder citizens navigating acute economic distress.
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/10">
+                  <h4 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
+                    Key Focus Areas
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-neutral-300">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Direct essential nutrition and dry ration packages</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Seasonal relief kits for vulnerable households</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Dignified, compassionate door-to-door distribution</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Initiative 2 */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#FFD60A]/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/20 flex items-center justify-center text-[#FFD60A] mb-5">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                    Educational & Youth Enablement
+                  </h3>
+                  <p className="text-sm text-neutral-300 leading-relaxed mb-6">
+                    Equipping children and aspiring students with stationery, learning materials, backpacks, and foundational digital learning sessions to unlock academic potential.
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/10">
+                  <h4 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
+                    Key Focus Areas
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-neutral-300">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Notebooks, study kits, and school bag distribution</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Basic digital literacy and educational guidance</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Youth encouragement drives and study support</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Initiative 3 */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#FFD60A]/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/20 flex items-center justify-center text-[#FFD60A] mb-5">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                    Health, Wellness & Sanitation
+                  </h3>
+                  <p className="text-sm text-neutral-300 leading-relaxed mb-6">
+                    Promoting preventive community health awareness, distributing personal care kits, and aiding families with critical medical coordination during emergencies.
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/10">
+                  <h4 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
+                    Key Focus Areas
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-neutral-300">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Hygiene, sanitization, and basic wellness kits</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Preventive community health & cleanliness guidance</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Emergency medical coordination for distressed families</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Initiative 4 */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#FFD60A]/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/20 flex items-center justify-center text-[#FFD60A] mb-5">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                    Civic Action & Social Responsibility
+                  </h3>
+                  <p className="text-sm text-neutral-300 leading-relaxed mb-6">
+                    Mobilizing youth volunteers and civic champions for neighborhood care, local cleanliness drives, and collaborative social welfare action.
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/10">
+                  <h4 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
+                    Key Focus Areas
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-neutral-300">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Youth volunteer mobilization and leadership</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Civic and neighborhood environmental awareness</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FFD60A] shrink-0" />
+                      <span>Collaborative grassroots community building</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION C — VIDEO GALLERY
+            ========================================================================= */}
+        <section
+          id="foundation-videos"
+          className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 border-b border-white/10 bg-black/20"
+        >
+          <div className="max-w-[1240px] mx-auto">
+            {/* Section Header */}
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+              <span className="text-xs font-bold text-[#FFD60A] uppercase tracking-widest block mb-2">
+                FIELD ACTIVITIES & DOCUMENTATION
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+                Moments of Impact — Foundation in Action
+              </h2>
+              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                Transparent glimpses into our on-ground community outreach, essential welfare distributions, and social engagement programs.
+              </p>
+            </div>
+
+            {/* Video Cards Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+              <FoundationVideoCard
+                id="video-relief-drive"
+                src="/videos/video11.mp4"
+                badge="Community Welfare Drive"
+                title="On-Ground Essential Support & Relief"
+                description="Footage from our grassroots distribution effort, delivering direct provisions and critical everyday supplies to families facing economic vulnerability."
+                tags={['Grassroots Outreach', 'Essential Relief', 'Direct Support']}
+              />
+
+              <FoundationVideoCard
+                id="video-social-engagement"
+                src="/videos/video22.mp4"
+                badge="Community Engagement"
+                title="Social Empowerment & Youth Interaction"
+                description="Moments reflecting community togetherness, engaging local families and young participants in supportive welfare and encouragement initiatives."
+                tags={['Social Welfare', 'Youth Empowerment', 'Community Action']}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION D — DONATION, SUPPORT & PARTICIPATION
+            ========================================================================= */}
+        <section
+          id="support"
+          className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 border-b border-white/10"
+        >
+          <div className="max-w-[1240px] mx-auto">
+            {/* Section Header */}
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+              <span className="text-xs font-bold text-[#FFD60A] uppercase tracking-widest block mb-2">
+                COLLABORATION & SUPPORT
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+                Partner With Us to Expand Our Reach
+              </h2>
+              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                Social transformation is a shared responsibility. We warmly welcome corporate allies, volunteer leaders, and concerned citizens to join hands with us.
+              </p>
+            </div>
+
+            {/* 3 Participation Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-[#FFD60A]/10 flex items-center justify-center text-[#FFD60A] mb-4">
+                    <Building2 className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    Institutional & CSR Partnerships
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-4">
+                    Align your corporate social responsibility mandates with verified, accountable on-ground initiatives executed with complete transparency and compliance.
+                  </p>
+                </div>
+                <div className="text-xs font-semibold text-[#FFD60A] flex items-center gap-1.5">
+                  <span>Structured CSR Alignment</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-[#FFD60A]/10 flex items-center justify-center text-[#FFD60A] mb-4">
+                    <HeartHandshake className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    Volunteer & Ground Mobilization
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-4">
+                    Lend your time, professional mentorship, or on-field energy to our community drives, learning workshops, and distribution campaigns.
+                  </p>
+                </div>
+                <div className="text-xs font-semibold text-[#FFD60A] flex items-center gap-1.5">
+                  <span>Active Community Participation</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-[#FFD60A]/10 flex items-center justify-center text-[#FFD60A] mb-4">
+                    <Gift className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">
+                    Material & Relief Sponsorship
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-4">
+                    Directly sponsor verified drive requirements such as dry grain rations, student learning kits, stationery supplies, or seasonal winter gear.
+                  </p>
+                </div>
+                <div className="text-xs font-semibold text-[#FFD60A] flex items-center gap-1.5">
+                  <span>Direct In-Kind Sponsorship</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            </div>
+
+            {/* Official Compliance & Direct Coordination Notice */}
+            <div className="rounded-2xl bg-gradient-to-r from-blue-950/40 via-blue-900/20 to-blue-950/40 border border-blue-500/30 p-6 sm:p-8 mb-12 shadow-[0_4px_24px_rgba(0,1,34,0.5)]">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
+                <div className="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/25 text-[#FFD60A] shrink-0">
+                  <ShieldCheck className="w-7 h-7 text-[#FFD60A]" />
+                </div>
+                <div className="flex-grow">
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-1.5">
+                    Notice on Verified Coordination & Transparency
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                    To maintain strict governance, donor protection, and regulatory compliance, DKP Foundation <strong className="text-white">does not collect anonymous funds via automated third-party gateways or UPI QR codes online</strong>. Every formal partnership, institutional contribution, or volunteer coordination is verified directly through official Foundation leadership.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Direct Foundation Communication Desk */}
+            <div className="rounded-2xl bg-white/[0.02] border border-white/10 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">
+                  Official Foundation Desk
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
+                  Connect with our team directly for partnership inquiries, relief drive details, or volunteer opportunities.
+                </p>
+                <div className="flex flex-wrap items-center gap-4 mt-4 text-xs sm:text-sm text-neutral-300">
+                  <a
+                    href={OFFICIAL_PHONE_TEL}
+                    className="inline-flex items-center gap-2 hover:text-[#FFD60A] transition-colors"
+                  >
+                    <Phone className="w-4 h-4 text-[#FFD60A]" />
+                    <span>{OFFICIAL_PHONE}</span>
+                  </a>
+                  <span className="text-white/20 hidden sm:inline">•</span>
+                  <a
+                    href={OFFICIAL_EMAIL_MAILTO}
+                    className="inline-flex items-center gap-2 hover:text-[#FFD60A] transition-colors"
+                  >
+                    <Mail className="w-4 h-4 text-[#FFD60A]" />
+                    <span>{OFFICIAL_EMAIL}</span>
+                  </a>
+                  <span className="text-white/20 hidden sm:inline">•</span>
+                  <span
+                    title={corporateHq.address}
+                    className="inline-flex items-center gap-2 text-neutral-400"
+                  >
+                    <MapPin className="w-4 h-4 text-[#FFD60A]" />
+                    <span>Bengaluru, India</span>
+                  </span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigateTo('contact', 'enquiry-form')}
+                className="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(255,214,10,0.3)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+              >
+                <span>Get in Touch to Support</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            SECTION E — CLOSING CALL TO ACTION
+            ========================================================================= */}
+        <section
+          id="closing-cta"
+          className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 select-none"
+        >
+          <div className="max-w-[1240px] mx-auto">
+            <div className="relative rounded-3xl p-8 sm:p-12 md:p-16 border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent overflow-hidden text-center shadow-[0_16px_48px_rgba(0,1,34,0.6)]">
+              {/* Subtle ambient light */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,114,255,0.12),transparent_70%)] pointer-events-none"
+              />
+
+              <div className="relative z-10 max-w-2xl mx-auto">
+                <span className="text-xs font-bold text-[#FFD60A] uppercase tracking-widest block mb-3">
+                  BE THE CATALYST
+                </span>
+
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                  Together, We Can Shape a More Compassionate World
+                </h2>
+
+                <p className="text-sm sm:text-base text-neutral-300 leading-relaxed mb-8">
+                  Whether you wish to sponsor a relief initiative, volunteer on the field, or explore an institutional partnership, your voice and actions make a tangible difference.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button
+                    onClick={() => navigateTo('contact', 'enquiry-form')}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <span>Connect With DKP Foundation</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    onClick={() => navigateTo('services')}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer backdrop-blur-sm"
+                  >
+                    <span>Explore Our Services</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Global Footer */}
+      <Footer />
+    </div>
+  );
+};

@@ -112,6 +112,14 @@ export const Footer = () => {
               </li>
               <li>
                 <button
+                  onClick={() => navigateTo('foundation')}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                >
+                  DKP Foundation
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => navigateTo('careers')}
                   className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
                 >

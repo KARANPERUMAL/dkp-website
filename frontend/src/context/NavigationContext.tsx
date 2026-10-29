@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
-export type PageRoute = 'home' | 'about' | 'services' | 'gallery' | 'careers' | 'contact';
+export type PageRoute = 'home' | 'about' | 'services' | 'gallery' | 'foundation' | 'careers' | 'contact';
 
 interface NavigationContextType {
   currentPage: PageRoute;
@@ -26,6 +26,9 @@ function getInitialPage(): PageRoute {
   }
   if (path.includes('/gallery') || hash.includes('#gallery') || hash.includes('#/gallery')) {
     return 'gallery';
+  }
+  if (path.includes('/foundation') || hash.includes('#foundation') || hash.includes('#/foundation')) {
+    return 'foundation';
   }
   if (path.includes('/careers') || hash.includes('#careers') || hash.includes('#/careers')) {
     return 'careers';

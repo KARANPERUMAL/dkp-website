@@ -5,6 +5,7 @@ import { ServicesPage } from './components/ServicesPage';
 import { ContactPage } from './components/ContactPage';
 import { CareersPage } from './components/CareersPage';
 import { GalleryPage } from './components/GalleryPage';
+import { FoundationPage } from './components/FoundationPage';
 
 function PageContent() {
   const { currentPage } = useNavigation();
@@ -16,6 +17,8 @@ function PageContent() {
       return <ServicesPage />;
     case 'gallery':
       return <GalleryPage />;
+    case 'foundation':
+      return <FoundationPage />;
     case 'careers':
       return <CareersPage />;
     case 'contact':
