@@ -26,7 +26,7 @@ export const reviewsData: Record<'google' | 'justdial', ReviewPlatformData> = {
   },
   justdial: {
     id: 'justdial',
-    platformName: 'Justdial',
+    platformName: 'Justdial Reviews',
     // Official verified Justdial listing for DKP Innovations Bangalore
     url: 'https://www.justdial.com/Bangalore/DKP-Innovations-Bhima-Jyothi-Lic-Colony-Basaveshwar-Nagar-Basaveshwara-Nagar/080PXX80-XX80-250225114407-V2V9_BZDET',
     ariaLabel: 'Read verified 5.0 rating and 11 reviews for DKP Innovations on Justdial',

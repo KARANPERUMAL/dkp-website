@@ -2,6 +2,7 @@ import { useNavigation } from '../../context/NavigationContext';
 import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL, OFFICIAL_EMAIL, OFFICIAL_EMAIL_MAILTO, branchLocations } from '../../data/branchesData';
 import { serviceCategories } from '../../data/servicesData';
 import { socialLinksList, OFFICIAL_SOCIAL_LINKS } from '../../data/socialLinks';
+import { ReviewBadges } from '../reviews/ReviewBadges';
 import { IconPhone, IconMail, IconMapPin, IconArrowUpRight } from '@tabler/icons-react';
 
 export const Footer = () => {
@@ -15,7 +16,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-white/10">
           
           {/* Column 1 — Brand (Spans 4 columns on desktop) */}
-          <div className="lg:col-span-4 flex flex-col space-y-4">
+          <div className="lg:col-span-4 flex flex-col space-y-4 min-w-0">
             <a
               href="/"
               onClick={(e) => {
@@ -36,8 +37,8 @@ export const Footer = () => {
               We help businesses grow through technology, creative production, digital marketing and strategic brand development.
             </p>
 
-            {/* Social Media Links */}
-            <div className="pt-2">
+            {/* Social Media Links & Reviews */}
+            <div className="pt-2 min-w-0">
               <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
                 Connect With Us
               </span>
@@ -57,6 +58,11 @@ export const Footer = () => {
                     </a>
                   );
                 })}
+              </div>
+
+              {/* Review Badges side by side in a second row directly beneath social icons */}
+              <div className="mt-3 w-full min-w-0">
+                <ReviewBadges />
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { IconArrowUpRight } from '@tabler/icons-react';
 import { reviewsData, type ReviewPlatformData } from '../../data/reviewsData';
 
 const GoogleLogo = () => (
-  <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+  <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
     <path
       fill="#4285F4"
       d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
@@ -26,7 +26,7 @@ const GoogleLogo = () => (
 
 const JustdialLogo = () => (
   <div
-    className="w-5 h-5 rounded-md bg-[#FF5A00] flex items-center justify-center font-black text-white text-[11px] leading-none tracking-tight select-none shadow-sm"
+    className="w-4 h-4 rounded-md bg-[#FF5A00] flex items-center justify-center font-black text-white text-[9px] leading-none tracking-tight select-none shadow-sm shrink-0"
     aria-hidden="true"
   >
     Jd
@@ -34,11 +34,11 @@ const JustdialLogo = () => (
 );
 
 const FiveYellowStars = () => (
-  <div className="flex items-center space-x-0.5" aria-hidden="true">
+  <div className="flex items-center space-x-0.5 shrink-0" aria-hidden="true">
     {[...Array(5)].map((_, i) => (
       <svg
         key={i}
-        className="w-3.5 h-3.5 fill-[#FFD60A] text-[#FFD60A]"
+        className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#FFD60A] text-[#FFD60A]"
         viewBox="0 0 20 20"
       >
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -47,69 +47,72 @@ const FiveYellowStars = () => (
   </div>
 );
 
-interface ReviewBadgeCardProps {
+export interface ReviewBadgeCardProps {
   data: ReviewPlatformData;
   logo: React.ReactNode;
+  className?: string;
 }
 
-const ReviewBadgeCard = ({ data, logo }: ReviewBadgeCardProps) => {
+export const ReviewBadgeCard = ({ data, logo, className }: ReviewBadgeCardProps) => {
   return (
     <a
       href={data.url}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={data.ariaLabel}
-      className="group relative flex items-center justify-between gap-4 sm:gap-6 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl bg-[#000122] border border-blue-500/25 hover:border-[#FFD60A]/50 transition-all duration-300 shadow-[0_4px_20px_rgba(0,1,34,0.35)] hover:shadow-[0_8px_30px_rgba(255,214,10,0.15)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] cursor-pointer w-full sm:w-auto min-w-[270px] sm:min-w-[290px]"
+      className={`group relative flex items-center justify-between gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-[#000122] hover:bg-[#000235] border border-blue-500/25 hover:border-[#FFD60A]/50 transition-all duration-300 shadow-sm hover:shadow-[0_4px_16px_rgba(255,214,10,0.12)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] cursor-pointer min-w-0 w-full ${className || ''}`}
     >
       {/* Platform Logo */}
-      <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/[0.1] transition-colors">
-          {logo}
+      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/[0.1] transition-colors">
+        {logo}
+      </div>
+
+      {/* Platform Info & Star Rating */}
+      <div className="flex flex-col text-left min-w-0 flex-1 overflow-hidden">
+        <div className="flex items-center gap-1 min-w-0">
+          <span className="text-[11px] sm:text-xs font-bold text-white tracking-tight leading-tight truncate group-hover:text-[#FFD60A] transition-colors">
+            {data.platformName}
+          </span>
+          {data.rating && (
+            <span className="text-[9px] font-black text-[#FFD60A] bg-[#FFD60A]/10 px-1 py-0.5 rounded border border-[#FFD60A]/20 leading-none shrink-0">
+              {data.rating}
+            </span>
+          )}
         </div>
 
-        {/* Platform Info & Star Rating */}
-        <div className="flex flex-col text-left">
-          <div className="flex items-center gap-2">
-            <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
-              {data.platformName}
-            </span>
-            {data.rating && (
-              <span className="text-[11px] font-black text-[#FFD60A] bg-[#FFD60A]/10 px-1.5 py-0.5 rounded border border-[#FFD60A]/20 leading-none">
-                {data.rating}
-              </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2 mt-1">
-            <FiveYellowStars />
-            <span className="text-[11px] text-neutral-400 font-medium">
-              {data.reviewCount ? data.reviewCount : data.actionText}
-            </span>
-          </div>
+        <div className="flex items-center gap-1 mt-0.5 min-w-0">
+          <FiveYellowStars />
+          <span className="text-[10px] text-neutral-400 font-medium truncate leading-none">
+            {data.reviewCount ? data.reviewCount : data.actionText}
+          </span>
         </div>
       </div>
 
       {/* External Link Indicator */}
       <div className="shrink-0 text-neutral-500 group-hover:text-[#FFD60A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200">
-        <IconArrowUpRight className="w-4 h-4" />
+        <IconArrowUpRight className="w-3 h-3" />
       </div>
     </a>
   );
 };
 
-export const ReviewBadges = () => {
+export interface ReviewBadgesProps {
+  className?: string;
+}
+
+export const ReviewBadges = ({ className }: ReviewBadgesProps = {}) => {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-20px' }}
       transition={{
-        duration: prefersReducedMotion ? 0.05 : 0.5,
+        duration: prefersReducedMotion ? 0.05 : 0.35,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-5 w-full max-w-2xl mx-auto"
+      className={`grid grid-cols-1 min-[340px]:grid-cols-2 gap-2 sm:gap-2.5 w-full max-w-[360px] min-w-0 ${className || ''}`}
     >
       <ReviewBadgeCard data={reviewsData.google} logo={<GoogleLogo />} />
       <ReviewBadgeCard data={reviewsData.justdial} logo={<JustdialLogo />} />

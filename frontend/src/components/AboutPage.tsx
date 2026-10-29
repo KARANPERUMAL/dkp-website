@@ -5,7 +5,6 @@ import { IconArrowRight } from '@tabler/icons-react';
 import { Award, Users, Rocket, ShieldCheck, Globe, Eye, Target } from 'lucide-react';
 import { EncryptedText } from '@/components/ui/encrypted-text';
 import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
-import { ReviewBadges } from './reviews/ReviewBadges';
 
 const companyStats = [
   {
@@ -314,14 +313,6 @@ export const AboutPage = () => {
                   </p>
                 </div>
               </BlurFadeIn>
-            </div>
-
-            {/* Verified Client Reviews Badges (Google Reviews & Justdial) */}
-            <div className="mt-10 sm:mt-14 pt-8 sm:pt-10 border-t border-neutral-200/70 flex flex-col items-center">
-              <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest mb-3.5 text-center">
-                Verified Client Ratings & Reviews
-              </span>
-              <ReviewBadges />
             </div>
           </div>
         </section>
