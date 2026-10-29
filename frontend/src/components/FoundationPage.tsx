@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { useNavigation } from '../context/NavigationContext';
 import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL, OFFICIAL_EMAIL, OFFICIAL_EMAIL_MAILTO, branchLocations } from '../data/branchesData';
+import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import {
   HeartHandshake,
   BookOpen,
@@ -21,7 +21,6 @@ import {
   CheckCircle2,
   Video as VideoIcon,
 } from 'lucide-react';
-import { IconHeartHandshake } from '@tabler/icons-react';
 
 interface FoundationVideoCardProps {
   id: string;
@@ -121,7 +120,6 @@ const FoundationVideoCard = ({
 
 export const FoundationPage = () => {
   const { navigateTo } = useNavigation();
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     document.title = 'DKP Foundation | DKP Innovation';
@@ -147,67 +145,69 @@ export const FoundationPage = () => {
             ========================================================================= */}
         <section
           id="hero"
-          className="relative w-full pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none bg-white border-b border-neutral-200/80"
+          className="relative w-full bg-[#000122] text-white pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/10"
         >
-          {/* Subtle Warm Ambient Glow */}
-          <div
-            aria-hidden="true"
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[360px] bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,214,10,0.12),transparent_70%)] pointer-events-none -z-10"
-          />
+          {/* Ambient Lighting Gradients */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div
+              className="absolute left-1/2 -top-[12%] -translate-x-1/2 w-[720px] h-[400px] rounded-full"
+              style={{
+                background:
+                  'radial-gradient(ellipse at center, rgba(255, 214, 10, 0.16) 0%, rgba(255, 214, 10, 0.05) 45%, transparent 70%)',
+                filter: 'blur(55px)',
+              }}
+            />
+            <div
+              className="absolute right-[8%] top-[25%] w-[420px] h-[320px] rounded-full"
+              style={{
+                background:
+                  'radial-gradient(circle, rgba(30, 41, 59, 0.28) 0%, transparent 70%)',
+                filter: 'blur(50px)',
+              }}
+            />
+          </div>
 
-          <div className="max-w-[1240px] mx-auto text-center flex flex-col items-center">
-            {/* Pill Eyebrow */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-900 text-xs font-semibold uppercase tracking-wider mb-5 shadow-xs"
-            >
-              <IconHeartHandshake className="w-4 h-4 text-amber-600" />
-              <span>DKP Foundation • Philanthropy & Social Impact</span>
-            </motion.div>
-
+          <div className="relative z-10 max-w-[1240px] mx-auto text-center flex flex-col items-center">
             {/* Main Page Title / Visible Heading */}
-            <motion.h1
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#000122] leading-[1.1] mb-4 sm:mb-6 max-w-4xl"
+            <TextAnimationBlurFadeIn
+              as="h1"
+              delay={0.1}
+              staggerDuration={0.03}
+              duration={0.6}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#FFD60A] leading-[1.1] mb-4 sm:mb-6 max-w-4xl mx-auto"
             >
               DKP Foundation
-            </motion.h1>
+            </TextAnimationBlurFadeIn>
 
             {/* Tagline Subtitle */}
-            <motion.p
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-lg sm:text-xl md:text-2xl font-semibold text-neutral-800 mb-6 max-w-2xl"
+            <TextAnimationBlurFadeIn
+              as="p"
+              delay={0.22}
+              duration={0.5}
+              className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-6 max-w-2xl mx-auto"
             >
               Empowering Communities. Cultivating Hope.
-            </motion.p>
+            </TextAnimationBlurFadeIn>
 
             {/* Intro Copy */}
-            <motion.p
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-neutral-600 font-normal max-w-2xl sm:max-w-3xl mb-10 leading-relaxed"
+            <TextAnimationBlurFadeIn
+              as="p"
+              delay={0.34}
+              duration={0.5}
+              className="text-base sm:text-lg text-neutral-300 font-normal max-w-2xl sm:max-w-3xl mx-auto mb-10 leading-relaxed"
             >
-              At DKP Innovations, technological advancement is deeply intertwined with social responsibility. 
-              The <strong className="text-[#000122] font-semibold">DKP Foundation</strong> is our dedicated philanthropic wing, bringing direct aid, community relief, educational enablement, and social empowerment to underserved individuals and families.
-            </motion.p>
+              At DKP Innovations, technological advancement is deeply intertwined with social responsibility. The DKP Foundation is our dedicated philanthropic wing, bringing direct aid, community relief, educational enablement, and social empowerment to underserved individuals and families.
+            </TextAnimationBlurFadeIn>
 
-            {/* Dual CTAs */}
-            <motion.div
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
+            {/* Dual CTAs with Blur-and-Fade Reveal */}
+            <BlurFadeIn
+              delay={0.46}
+              duration={0.5}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
             >
               <button
                 onClick={() => scrollTo('initiatives')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-md shadow-amber-300/30 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-[0_4px_24px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_28px_rgba(255,214,10,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <span>Explore Our Initiatives</span>
                 <ArrowDown className="w-4 h-4 text-[#000122]" />
@@ -215,12 +215,12 @@ export const FoundationPage = () => {
 
               <button
                 onClick={() => scrollTo('foundation-videos')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-[#000122] border border-neutral-300 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer shadow-xs"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer backdrop-blur-sm shadow-xs"
               >
                 <span>Watch Our Activities</span>
-                <VideoIcon className="w-4 h-4 text-amber-600" />
+                <VideoIcon className="w-4 h-4 text-[#FFD60A]" />
               </button>
-            </motion.div>
+            </BlurFadeIn>
           </div>
         </section>
 
