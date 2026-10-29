@@ -2,14 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { useNavigation } from '../context/NavigationContext';
+import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL } from '../data/branchesData';
 import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import {
   HeartHandshake,
   BookOpen,
   ShieldCheck,
   Users,
-  ArrowDown,
-  ArrowRight,
+  Phone,
   AlertCircle,
   RotateCcw,
   CheckCircle2,
@@ -119,13 +119,6 @@ export const FoundationPage = () => {
     document.title = 'DKP Foundation | DKP Innovation';
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
       {/* Floating Centered Navigation */}
@@ -197,20 +190,20 @@ export const FoundationPage = () => {
               duration={0.5}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
             >
-              <button
-                onClick={() => scrollTo('initiatives')}
+              <a
+                href={OFFICIAL_PHONE_TEL}
+                aria-label={`Call DKP Foundation at ${OFFICIAL_PHONE}`}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-[0_4px_24px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_28px_rgba(255,214,10,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <span>Explore Our Initiatives</span>
-                <ArrowDown className="w-4 h-4 text-[#000122]" />
-              </button>
+                <Phone className="w-4 h-4 text-[#000122]" />
+                <span>{OFFICIAL_PHONE}</span>
+              </a>
 
               <button
-                onClick={() => scrollTo('foundation-videos')}
+                onClick={() => navigateTo('services')}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer backdrop-blur-sm shadow-xs"
               >
-                <span>Watch Our Activities</span>
-                <VideoIcon className="w-4 h-4 text-[#FFD60A]" />
+                <span>Explore Our Services</span>
               </button>
             </BlurFadeIn>
           </div>
@@ -520,13 +513,14 @@ export const FoundationPage = () => {
                   duration={0.5}
                   className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                  <button
-                    onClick={() => navigateTo('contact', 'enquiry-form')}
+                  <a
+                    href={OFFICIAL_PHONE_TEL}
+                    aria-label={`Call DKP Foundation at ${OFFICIAL_PHONE}`}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-md shadow-amber-300/30 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
                   >
-                    <span>Connect With DKP Foundation</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                    <Phone className="w-4 h-4 text-[#000122]" />
+                    <span>{OFFICIAL_PHONE}</span>
+                  </a>
 
                   <button
                     onClick={() => navigateTo('services')}
