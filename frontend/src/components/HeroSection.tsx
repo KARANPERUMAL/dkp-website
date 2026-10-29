@@ -22,10 +22,10 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
   return (
     <section
       id="home"
-      className="relative w-full h-screen bg-[#000122] text-white pt-14 sm:pt-16 pb-0 overflow-hidden select-none flex flex-col justify-center"
+      className="relative w-full h-screen bg-[#004D86] text-white pt-14 sm:pt-16 pb-0 overflow-hidden select-none flex flex-col justify-center"
       style={{
         background:
-          'radial-gradient(ellipse 90% 70% at 50% 30%, #00023a 0%, #000122 55%, #000018 100%)',
+          'radial-gradient(ellipse 90% 70% at 50% 30%, #005E9E 0%, #004D86 55%, #003E6D 100%)',
       }}
     >
       {/* Background Ripple Effect: Interactive subtle ripple layer behind hero content */}
@@ -45,12 +45,12 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
           }}
         />
 
-        {/* Restrained deep blue atmospheric fill on left */}
+        {/* Luminous blue atmospheric fill on left */}
         <div
           className="absolute left-[6%] top-[22%] w-[460px] h-[360px] sm:w-[560px] sm:h-[420px] rounded-full"
           style={{
             background:
-              'radial-gradient(circle, rgba(0, 2, 58, 0.45) 0%, rgba(0, 1, 34, 0.20) 50%, transparent 70%)',
+              'radial-gradient(circle, rgba(0, 94, 158, 0.45) 0%, rgba(0, 77, 134, 0.20) 50%, transparent 70%)',
             filter: 'blur(50px)',
           }}
         />
@@ -152,7 +152,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
               href="#services"
               onClick={handleScrollToServices}
               aria-label="View Our Services"
-              className="group relative flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[108px] sm:h-[108px] md:w-[116px] md:h-[116px] lg:w-[120px] lg:h-[120px] rounded-full text-[#000122] cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#FFD60A]/50 pointer-events-auto"
+              className="group relative flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[108px] sm:h-[108px] md:w-[116px] md:h-[116px] lg:w-[120px] lg:h-[120px] rounded-full text-[#002244] cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#FFD60A]/50 pointer-events-auto"
               style={{
                 background:
                   'radial-gradient(circle at 35% 30%, #FFE566 0%, #FFD60A 52%, #E6BF00 95%)',
@@ -171,10 +171,10 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
               {/* Button text */}
               <div className="relative z-10 flex flex-col items-center text-center px-1">
-                <span className="text-[18px] sm:text-[20px] md:text-[22px] font-black lowercase tracking-tight leading-none group-hover:scale-105 transition-transform duration-200 text-[#000122]">
+                <span className="text-[18px] sm:text-[20px] md:text-[22px] font-black lowercase tracking-tight leading-none group-hover:scale-105 transition-transform duration-200 text-[#002244]">
                   view
                 </span>
-                <span className="text-[9px] sm:text-[10px] md:text-[10.5px] font-black uppercase tracking-wider mt-0.5 sm:mt-1 text-[#000122]/90 leading-tight">
+                <span className="text-[9px] sm:text-[10px] md:text-[10.5px] font-black uppercase tracking-wider mt-0.5 sm:mt-1 text-[#002244]/90 leading-tight">
                   OUR SERVICES
                 </span>
               </div>

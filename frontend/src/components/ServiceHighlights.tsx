@@ -41,7 +41,7 @@ export const ServiceHighlights = () => {
         <div className="mt-6 sm:mt-8 flex justify-center">
           <button
             onClick={() => navigateTo('services')}
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-[#FFD60A] hover:text-[#000122] border border-neutral-200/80 hover:border-[#FFD60A] transition-all duration-300 shadow-sm cursor-pointer group"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-[#FFD60A] hover:text-[#002244] border border-neutral-200/80 hover:border-[#FFD60A] transition-all duration-300 shadow-sm cursor-pointer group"
           >
             <span>Explore All 19 Specialized Services</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

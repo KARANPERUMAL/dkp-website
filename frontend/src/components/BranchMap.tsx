@@ -37,7 +37,7 @@ export const BranchMap = () => {
         html: `
           <div style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; transform: scale(${scale}); transition: transform 0.25s ease;">
             ${isSelected ? '<div style="position: absolute; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 214, 10, 0.45); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>' : ''}
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${pinColor}; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #000122; font-weight: 800; font-size: 13px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${pinColor}; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; color: #002244; font-weight: 800; font-size: 13px;">
               ${index + 1}
             </div>
             <div style="position: absolute; bottom: -6px; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid ${pinColor};"></div>
@@ -74,7 +74,7 @@ export const BranchMap = () => {
             ${branch.address}
           </p>
           <div style="display: flex; gap: 8px; margin-top: 8px;">
-            <a href="${branch.directionsUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background: #FFD60A; color: #000122; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-decoration: none;">
+            <a href="${branch.directionsUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; background: #FFD60A; color: #002244; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-decoration: none;">
               Get Directions &#8599;
             </a>
             <a href="tel:${branch.phone.replace(/[^0-9+]/g, '')}" style="display: inline-flex; align-items: center; gap: 4px; background: #f1f5f9; color: #334155; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; text-decoration: none;">
@@ -159,7 +159,7 @@ export const BranchMap = () => {
                 onClick={() => handleSelectBranch(branch)}
                 className={`group relative p-4 sm:p-5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? 'bg-[#000122] text-white border-[#FFD60A]/80 shadow-[0_6px_20px_rgba(255,214,10,0.2)] ring-1 ring-[#FFD60A]/40'
+                    ? 'bg-[#004D86] text-white border-[#FFD60A]/80 shadow-[0_6px_20px_rgba(255,214,10,0.2)] ring-1 ring-[#FFD60A]/40'
                     : 'bg-white hover:bg-neutral-50 text-neutral-900 border-neutral-200/90 shadow-sm'
                 }`}
               >
@@ -169,7 +169,7 @@ export const BranchMap = () => {
                     <span
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                         isSelected
-                          ? 'bg-[#FFD60A] text-[#000122]'
+                          ? 'bg-[#FFD60A] text-[#002244]'
                           : 'bg-neutral-100 text-neutral-700 group-hover:bg-[#FFD60A]/20 group-hover:text-[#854D0E]'
                       }`}
                     >
@@ -229,8 +229,8 @@ export const BranchMap = () => {
                     onClick={(e) => e.stopPropagation()}
                     className={`inline-flex items-center space-x-1 font-semibold text-[11px] px-2.5 py-1 rounded-md transition-colors ${
                       isSelected
-                        ? 'bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold'
-                        : 'bg-neutral-100 hover:bg-[#FFD60A]/20 text-neutral-800 hover:text-[#000122]'
+                        ? 'bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold'
+                        : 'bg-neutral-100 hover:bg-[#FFD60A]/20 text-neutral-800 hover:text-[#002244]'
                     }`}
                   >
                     <IconDirections className="w-3.5 h-3.5" />

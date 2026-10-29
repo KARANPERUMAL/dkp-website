@@ -49,13 +49,13 @@ const FoundationVideoCard = ({
         {hasError ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-neutral-100 text-neutral-800">
             <AlertCircle className="w-10 h-10 text-amber-500 mb-3" />
-            <h4 className="text-base font-bold text-[#000122] mb-1">Video Unavailable</h4>
+            <h4 className="text-base font-bold text-neutral-900 mb-1">Video Unavailable</h4>
             <p className="text-xs text-neutral-600 max-w-sm mb-4 leading-relaxed">
               We couldn&apos;t load this video preview in your browser. Please check your connection or contact our team.
             </p>
             <button
               onClick={handleRetry}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#000122] hover:bg-[#000122]/90 text-xs font-semibold text-white transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#004D86] hover:bg-[#003E6D] text-xs font-semibold text-white transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Retry Video</span>
@@ -78,7 +78,7 @@ const FoundationVideoCard = ({
 
         {/* Category Pill Tag Overlay */}
         <div className="absolute top-3 left-3 pointer-events-none z-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#000122]/90 border border-white/20 text-[11px] font-semibold text-[#FFD60A] backdrop-blur-md shadow-sm">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#004D86]/90 border border-white/20 text-[11px] font-semibold text-[#FFD60A] backdrop-blur-md shadow-sm">
             <VideoIcon className="w-3 h-3 text-[#FFD60A]" />
             {badge}
           </span>
@@ -88,7 +88,7 @@ const FoundationVideoCard = ({
       {/* Details Box */}
       <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between bg-white">
         <div>
-          <h3 className="text-lg sm:text-xl font-bold text-[#000122] mb-2 group-hover:text-amber-600 transition-colors">
+          <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 group-hover:text-amber-600 transition-colors">
             {title}
           </h3>
           <p className="text-sm text-neutral-600 leading-relaxed mb-4">
@@ -120,7 +120,7 @@ export const FoundationPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+    <div className="min-h-screen bg-white text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Floating Centered Navigation */}
       <Navbar />
 
@@ -130,7 +130,7 @@ export const FoundationPage = () => {
             ========================================================================= */}
         <section
           id="hero"
-          className="relative w-full bg-[#000122] text-white pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/10"
+          className="relative w-full bg-[#004D86] text-white pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/20"
         >
           {/* Ambient Lighting Gradients */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -193,9 +193,9 @@ export const FoundationPage = () => {
               <a
                 href={OFFICIAL_PHONE_TEL}
                 aria-label={`Call DKP Foundation at ${OFFICIAL_PHONE}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-[0_4px_24px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_28px_rgba(255,214,10,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#002244] font-bold text-sm tracking-wide shadow-[0_4px_24px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_28px_rgba(255,214,10,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <Phone className="w-4 h-4 text-[#000122]" />
+                <Phone className="w-4 h-4 text-[#002244]" />
                 <span>{OFFICIAL_PHONE}</span>
               </a>
 
@@ -231,7 +231,7 @@ export const FoundationPage = () => {
                 as="h2"
                 delay={0.15}
                 duration={0.5}
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 tracking-tight mb-4"
               >
                 Core Social Initiatives
               </TextAnimationBlurFadeIn>
@@ -251,10 +251,10 @@ export const FoundationPage = () => {
               <BlurFadeIn delay={0.15} duration={0.5} className="h-full">
                 <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                      <HeartHandshake className="w-6 h-6 text-[#000122]" />
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#004D86] mb-5">
+                      <HeartHandshake className="w-6 h-6 text-[#004D86]" />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
                       Community Welfare & Essential Relief
                     </h3>
                     <p className="text-sm text-neutral-600 leading-relaxed mb-6">
@@ -288,10 +288,10 @@ export const FoundationPage = () => {
               <BlurFadeIn delay={0.25} duration={0.5} className="h-full">
                 <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                      <BookOpen className="w-6 h-6 text-[#000122]" />
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#004D86] mb-5">
+                      <BookOpen className="w-6 h-6 text-[#004D86]" />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
                       Educational & Youth Enablement
                     </h3>
                     <p className="text-sm text-neutral-600 leading-relaxed mb-6">
@@ -325,10 +325,10 @@ export const FoundationPage = () => {
               <BlurFadeIn delay={0.35} duration={0.5} className="h-full">
                 <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                      <ShieldCheck className="w-6 h-6 text-[#000122]" />
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#004D86] mb-5">
+                      <ShieldCheck className="w-6 h-6 text-[#004D86]" />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
                       Health, Wellness & Sanitation
                     </h3>
                     <p className="text-sm text-neutral-600 leading-relaxed mb-6">
@@ -362,10 +362,10 @@ export const FoundationPage = () => {
               <BlurFadeIn delay={0.45} duration={0.5} className="h-full">
                 <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                      <Users className="w-6 h-6 text-[#000122]" />
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#004D86] mb-5">
+                      <Users className="w-6 h-6 text-[#004D86]" />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
                       Civic Action & Social Responsibility
                     </h3>
                     <p className="text-sm text-neutral-600 leading-relaxed mb-6">
@@ -420,7 +420,7 @@ export const FoundationPage = () => {
                 as="h2"
                 delay={0.15}
                 duration={0.5}
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 tracking-tight mb-4"
               >
                 Moments of Impact — Foundation in Action
               </TextAnimationBlurFadeIn>
@@ -472,7 +472,7 @@ export const FoundationPage = () => {
             <BlurFadeIn
               delay={0.1}
               duration={0.6}
-              className="relative rounded-3xl p-8 sm:p-12 md:p-16 border border-neutral-200 bg-gradient-to-b from-neutral-50 via-white to-amber-50/30 overflow-hidden text-center shadow-lg text-[#000122]"
+              className="relative rounded-3xl p-8 sm:p-12 md:p-16 border border-neutral-200 bg-gradient-to-b from-neutral-50 via-white to-amber-50/30 overflow-hidden text-center shadow-lg text-neutral-900"
             >
               {/* Subtle ambient light */}
               <div
@@ -494,7 +494,7 @@ export const FoundationPage = () => {
                   as="h2"
                   delay={0.25}
                   duration={0.5}
-                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight leading-tight mb-4"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight mb-4"
                 >
                   Together, We Can Shape a More Compassionate World
                 </TextAnimationBlurFadeIn>
@@ -516,15 +516,15 @@ export const FoundationPage = () => {
                   <a
                     href={OFFICIAL_PHONE_TEL}
                     aria-label={`Call DKP Foundation at ${OFFICIAL_PHONE}`}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-md shadow-amber-300/30 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#002244] font-bold text-sm tracking-wide shadow-md shadow-amber-300/30 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
                   >
-                    <Phone className="w-4 h-4 text-[#000122]" />
+                    <Phone className="w-4 h-4 text-[#002244]" />
                     <span>{OFFICIAL_PHONE}</span>
                   </a>
 
                   <button
                     onClick={() => navigateTo('services')}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-100 text-[#000122] border border-neutral-300 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer shadow-xs"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-100 text-neutral-900 border border-neutral-300 font-semibold text-sm tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer shadow-xs"
                   >
                     <span>Explore Our Services</span>
                   </button>

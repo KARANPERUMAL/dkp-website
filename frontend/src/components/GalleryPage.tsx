@@ -81,7 +81,7 @@ const GalleryCard = ({
           }
         }}
         aria-label={`View image: ${item.title}`}
-        className="group relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#000122] border border-white/[0.08] hover:border-white/25 transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000122]"
+        className="group relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#003E6D] border border-white/[0.2] hover:border-white/50 transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#004D86]"
       >
         <div className={`relative w-full h-full overflow-hidden ${aspectClass}`}>
           <img
@@ -134,7 +134,7 @@ export const GalleryPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000122] text-white flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+    <div className="min-h-screen bg-[#004D86] text-white flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Floating Centered Navigation */}
       <Navbar />
 
@@ -376,7 +376,7 @@ export const GalleryPage = () => {
           CONNECT / CALL TO ACTION SECTION
           Refined closing section matching site branding
           ========================================================================= */}
-      <section className="relative w-full py-14 sm:py-18 md:py-20 px-4 sm:px-8 lg:px-12 bg-[#000122] border-t border-white/[0.08] overflow-hidden select-none">
+      <section className="relative w-full py-14 sm:py-18 md:py-20 px-4 sm:px-8 lg:px-12 bg-[#004D86] border-t border-white/[0.2] overflow-hidden select-none">
         <div className="max-w-[1240px] mx-auto text-center relative z-10">
           <BlurFadeIn delay={0.1} duration={0.5}>
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#FFD60A] font-medium block mb-3">
@@ -385,14 +385,14 @@ export const GalleryPage = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
               Experience DKP Innovations
             </h2>
-            <p className="max-w-lg mx-auto text-sm sm:text-base text-neutral-400 font-light mb-6 leading-relaxed">
+            <p className="max-w-lg mx-auto text-sm sm:text-base text-neutral-100 font-light mb-6 leading-relaxed">
               Whether you are planning a technology deployment, brand growth initiative, or exploring career opportunities, our studio doors are always open.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <button
                 type="button"
                 onClick={() => navigateTo('contact')}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-7 py-3 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-xs tracking-wider uppercase shadow-[0_4px_20px_rgba(255,214,10,0.3)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-7 py-3 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-xs tracking-wider uppercase shadow-[0_4px_20px_rgba(255,214,10,0.3)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
               >
                 <span>Start Consultation</span>
                 <ArrowRight className="w-3.5 h-3.5" />

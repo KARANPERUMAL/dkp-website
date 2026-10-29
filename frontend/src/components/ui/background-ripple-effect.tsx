@@ -86,7 +86,7 @@ export const BackgroundRippleEffect = ({
       ref={containerRef}
       className={cn(
         "absolute inset-0 h-full w-full flex items-center justify-center overflow-hidden",
-        "[--cell-border-color:rgba(59,130,246,0.22)] [--cell-fill-color:rgba(30,58,138,0.06)] [--cell-shadow-color:rgba(56,189,248,0.30)]",
+        "[--cell-border-color:rgba(255,255,255,0.18)] [--cell-fill-color:rgba(255,255,255,0.04)] [--cell-shadow-color:rgba(255,255,255,0.30)]",
         className,
       )}
       style={{
@@ -169,21 +169,21 @@ const DivGrid = ({
 
         // Calculate deterministic depth tier for subtle variations across rectangles
         const depthSeed = (rowIdx * 13 + colIdx * 7 + (rowIdx % 3) * 5) % 17;
-        let cellBg = "rgba(30, 58, 138, 0.055)"; // Default translucent navy fill
-        let cellBorder = "rgba(59, 130, 246, 0.20)"; // Default crisp blue border
+        let cellBg = "rgba(255, 255, 255, 0.04)"; // Default translucent fill on bright blue
+        let cellBorder = "rgba(255, 255, 255, 0.16)"; // Default crisp border
 
         if (depthSeed === 0 || depthSeed === 7) {
           // Tier 1: Slightly highlighted accent tiles (approx ~12% of tiles)
-          cellBg = "rgba(56, 189, 248, 0.11)";
-          cellBorder = "rgba(96, 165, 250, 0.34)";
+          cellBg = "rgba(255, 255, 255, 0.10)";
+          cellBorder = "rgba(255, 255, 255, 0.28)";
         } else if (depthSeed === 3 || depthSeed === 11) {
           // Tier 2: Medium subtle blue depth tiles (approx ~12% of tiles)
-          cellBg = "rgba(37, 99, 235, 0.09)";
-          cellBorder = "rgba(56, 189, 248, 0.26)";
+          cellBg = "rgba(255, 255, 255, 0.07)";
+          cellBorder = "rgba(255, 255, 255, 0.22)";
         } else if (depthSeed === 5 || depthSeed === 14) {
           // Tier 3: Soft ambient blue tiles
-          cellBg = "rgba(30, 58, 138, 0.08)";
-          cellBorder = "rgba(59, 130, 246, 0.23)";
+          cellBg = "rgba(255, 255, 255, 0.05)";
+          cellBorder = "rgba(255, 255, 255, 0.19)";
         }
 
         const animStyle: CellStyle = clickedCell
@@ -203,7 +203,7 @@ const DivGrid = ({
             key={idx}
             className={cn(
               "cell relative border-[0.75px] transition-all duration-200 will-change-transform cursor-pointer",
-              "hover:bg-[rgba(56,189,248,0.20)] hover:border-[rgba(147,197,253,0.55)] hover:shadow-[0_0_14px_rgba(56,189,248,0.30)]",
+              "hover:bg-[rgba(255,255,255,0.22)] hover:border-[rgba(255,255,255,0.65)] hover:shadow-[0_0_14px_rgba(255,255,255,0.35)]",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
               !interactive && "pointer-events-none",
             )}

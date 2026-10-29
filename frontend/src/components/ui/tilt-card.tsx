@@ -45,7 +45,7 @@ export function TiltCard({
   children,
   tiltProps,
   circleSize = 380,
-  circleClassName = "bg-[#000122]",
+  circleClassName = "bg-[#004D86]",
   overlayContent,
   className,
   ...props
@@ -99,7 +99,7 @@ export function TiltCard({
           {/* Isolated content area with localized hover effect */}
           <div className="relative flex-1 overflow-hidden">
             <ClippedCircle circleClassName={circleClassName} circleSize={circleSize} className="z-20">
-              <div className="flex flex-row transition-all duration-200 justify-between px-4 sm:px-6 py-4 sm:py-5 bg-[#000122] h-full">
+              <div className="flex flex-row transition-all duration-200 justify-between px-4 sm:px-6 py-4 sm:py-5 bg-[#004D86] h-full">
                 <div className="flex flex-col gap-1 flex-1 mr-2">
                   <h2 className="text-lg tracking-tight leading-tight font-bold text-[#FFD60A]">
                     {title}

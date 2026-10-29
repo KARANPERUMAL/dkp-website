@@ -29,7 +29,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         title={service.name}
         description={service.description}
         circleSize={280}
-        circleClassName="bg-[#000122]"
+        circleClassName="bg-[#004D86]"
         className="h-full flex flex-col justify-between select-none bg-white border border-neutral-200/90 hover:border-[#FFD60A] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
       >
         {/* REGION 1: Isolated Service Image Container — outside the hover effect layer, completely untouched */}
@@ -48,11 +48,11 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {/* CLIPPED OVERLAY: attached directly to text/content container so circle coordinates and clipping are strictly bounded */}
           <ClippedCircle
             circleSize={280}
-            circleClassName="bg-[#000122]"
+            circleClassName="bg-[#004D86]"
             className="z-20"
           >
             {/* Synchronized duplicate containing ONLY the text/content area */}
-            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between h-full bg-[#000122] select-none pointer-events-none">
+            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between h-full bg-[#004D86] select-none pointer-events-none">
               <div>
                 {/* Category Label: DKP yellow accent */}
                 <div className="text-[11px] font-bold text-[#FFD60A] uppercase tracking-wider mb-1.5">
@@ -112,11 +112,11 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                   e.stopPropagation();
                   onEnquire(service.name);
                 }}
-                className="w-full relative z-10 inline-flex items-center justify-center space-x-1.5 py-2.5 px-4 rounded-lg bg-neutral-50 hover:bg-[#FFD60A] text-neutral-800 hover:text-[#000122] font-semibold text-xs border border-neutral-200/90 hover:border-[#FFD60A] focus:outline-none focus:ring-2 focus:ring-[#FFD60A]/50 transition-all cursor-pointer group/btn pointer-events-auto"
+                className="w-full relative z-10 inline-flex items-center justify-center space-x-1.5 py-2.5 px-4 rounded-lg bg-neutral-50 hover:bg-[#FFD60A] text-neutral-800 hover:text-[#002244] font-semibold text-xs border border-neutral-200/90 hover:border-[#FFD60A] focus:outline-none focus:ring-2 focus:ring-[#FFD60A]/50 transition-all cursor-pointer group/btn pointer-events-auto"
               >
-                <IconMessageDots className="w-3.5 h-3.5 text-[#854D0E] group-hover/btn:text-[#000122]" />
+                <IconMessageDots className="w-3.5 h-3.5 text-[#854D0E] group-hover/btn:text-[#002244]" />
                 <span>Enquire About Service</span>
-                <IconChevronRight className="w-3.5 h-3.5 text-neutral-400 group-hover/btn:text-[#000122] group-hover/btn:translate-x-0.5 transition-transform" />
+                <IconChevronRight className="w-3.5 h-3.5 text-neutral-400 group-hover/btn:text-[#002244] group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
             </div>
           </div>

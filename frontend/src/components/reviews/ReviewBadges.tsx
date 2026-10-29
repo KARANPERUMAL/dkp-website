@@ -60,10 +60,10 @@ export const ReviewBadgeCard = ({ data, logo, className }: ReviewBadgeCardProps)
       target="_blank"
       rel="noopener noreferrer"
       aria-label={data.ariaLabel}
-      className={`group relative flex items-center justify-between gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-[#000122] hover:bg-[#000235] border border-blue-500/25 hover:border-[#FFD60A]/50 transition-all duration-300 shadow-sm hover:shadow-[0_4px_16px_rgba(255,214,10,0.12)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] cursor-pointer min-w-0 w-full ${className || ''}`}
+      className={`group relative flex items-center justify-between gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-[#003E6D] hover:bg-[#00345C] border border-white/20 hover:border-[#FFD60A]/70 transition-all duration-300 shadow-sm hover:shadow-[0_4px_16px_rgba(255,214,10,0.2)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] cursor-pointer min-w-0 w-full ${className || ''}`}
     >
       {/* Platform Logo */}
-      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/[0.06] border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/[0.1] transition-colors">
+      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/[0.1] border border-white/20 flex items-center justify-center shrink-0 group-hover:bg-white/[0.18] transition-colors">
         {logo}
       </div>
 
@@ -82,14 +82,14 @@ export const ReviewBadgeCard = ({ data, logo, className }: ReviewBadgeCardProps)
 
         <div className="flex items-center gap-1 mt-0.5 min-w-0">
           <FiveYellowStars />
-          <span className="text-[10px] text-neutral-400 font-medium truncate leading-none">
+          <span className="text-[10px] text-blue-100 font-medium truncate leading-none">
             {data.reviewCount ? data.reviewCount : data.actionText}
           </span>
         </div>
       </div>
 
       {/* External Link Indicator */}
-      <div className="shrink-0 text-neutral-500 group-hover:text-[#FFD60A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200">
+      <div className="shrink-0 text-white/70 group-hover:text-[#FFD60A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200">
         <IconArrowUpRight className="w-3 h-3" />
       </div>
     </a>

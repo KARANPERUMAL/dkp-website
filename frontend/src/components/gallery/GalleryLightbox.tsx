@@ -96,14 +96,14 @@ export const GalleryLightbox = ({
           exit={{ opacity: 0 }}
           transition={{ duration: prefersReducedMotion ? 0.05 : 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 z-[9999] flex flex-col justify-between bg-[#000122]/95 backdrop-blur-2xl select-none"
+          className="fixed inset-0 z-[9999] flex flex-col justify-between bg-[#003E6D]/95 backdrop-blur-2xl select-none"
         >
           {/* Top Bar: Minimal and uncluttered */}
           <header
             onClick={(e) => e.stopPropagation()}
             className="w-full flex items-center justify-between px-6 sm:px-10 py-5 z-20"
           >
-            <div className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-400">
+            <div className="text-xs font-mono uppercase tracking-[0.2em] text-white/90">
               {currentItem.title}
             </div>
 
@@ -112,7 +112,7 @@ export const GalleryLightbox = ({
               onClick={onClose}
               type="button"
               aria-label="Close image viewer"
-              className="w-10 h-10 rounded-full flex items-center justify-center bg-white/[0.08] hover:bg-white/20 text-white/80 hover:text-white transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-white/[0.12] hover:bg-white/25 text-white/90 hover:text-white transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
             >
               <X className="w-5 h-5" />
             </button>
@@ -132,7 +132,7 @@ export const GalleryLightbox = ({
                   handlePrev();
                 }}
                 aria-label="Previous image"
-                className="absolute left-4 sm:left-8 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#000122]/80 hover:bg-[#000235] text-white/90 hover:text-white border border-white/15 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+                className="absolute left-4 sm:left-8 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#004D86]/80 hover:bg-[#00345C] text-white/90 hover:text-white border border-white/25 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -147,7 +147,7 @@ export const GalleryLightbox = ({
                   handleNext();
                 }}
                 aria-label="Next image"
-                className="absolute right-4 sm:right-8 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#000122]/80 hover:bg-[#000235] text-white/90 hover:text-white border border-white/15 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+                className="absolute right-4 sm:right-8 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#004D86]/80 hover:bg-[#00345C] text-white/90 hover:text-white border border-white/25 flex items-center justify-center transition-all duration-200 backdrop-blur-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>

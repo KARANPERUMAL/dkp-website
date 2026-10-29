@@ -314,12 +314,12 @@ export const CareersPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+    <div className="min-h-screen bg-[#004D86] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Floating Centered Navbar */}
       <Navbar />
 
       {/* SECTION 1: CAREERS HERO SECTION */}
-      <section className="relative w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/10">
+      <section className="relative w-full bg-[#004D86] pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/20">
         {/* Ambient Lighting Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
@@ -357,7 +357,7 @@ export const CareersPage = () => {
             as="p"
             delay={0.28}
             duration={0.5}
-            className="max-w-3xl mx-auto text-base sm:text-lg text-neutral-300 leading-relaxed font-normal mb-10"
+            className="max-w-3xl mx-auto text-base sm:text-lg text-neutral-100 leading-relaxed font-normal mb-10"
           >
             Join a team that brings together technology, creativity, and digital strategy to help businesses grow. Explore opportunities to develop your skills, work on meaningful projects, and build your future with DKP Innovation.
           </TextAnimationBlurFadeIn>
@@ -366,7 +366,7 @@ export const CareersPage = () => {
           <BlurFadeIn delay={0.4} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => scrollTo('open-positions')}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer"
             >
               <span>Explore Open Positions</span>
               <IconArrowRight className="w-4 h-4" />
@@ -431,7 +431,7 @@ export const CareersPage = () => {
                 <button
                   type="button"
                   onClick={() => scrollTo('application-form')}
-                  className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-md transition-all cursor-pointer"
+                  className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-sm shadow-md transition-all cursor-pointer"
                 >
                   <span>Submit General Application</span>
                   <ArrowRight className="w-4 h-4" />
@@ -503,7 +503,7 @@ export const CareersPage = () => {
                     <button
                       type="button"
                       onClick={() => handleSelectRole(pos.title)}
-                      className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm transition-all shadow-sm cursor-pointer mt-4"
+                      className="w-full inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-sm transition-all shadow-sm cursor-pointer mt-4"
                     >
                       <span>Apply for this Role</span>
                       <ArrowRight className="w-4 h-4" />
@@ -571,7 +571,7 @@ export const CareersPage = () => {
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#000122] hover:bg-[#000235] text-white font-bold text-sm transition-all cursor-pointer"
+                    className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#004D86] hover:bg-[#003E6D] text-white font-bold text-sm transition-all cursor-pointer"
                   >
                     <span>Submit Another Application</span>
                   </button>
@@ -1050,11 +1050,11 @@ export const CareersPage = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full inline-flex items-center justify-center space-x-2 py-4 px-8 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] disabled:bg-[#FFD60A]/50 text-[#000122] font-bold text-sm sm:text-base shadow-lg shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all cursor-pointer disabled:cursor-not-allowed"
+                      className="w-full inline-flex items-center justify-center space-x-2 py-4 px-8 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] disabled:bg-[#FFD60A]/50 text-[#002244] font-bold text-sm sm:text-base shadow-lg shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all cursor-pointer disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
-                          <div className="w-4 h-4 border-2 border-[#000122] border-t-transparent rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-[#002244] border-t-transparent rounded-full animate-spin" />
                           <span>Submitting Application...</span>
                         </>
                       ) : (

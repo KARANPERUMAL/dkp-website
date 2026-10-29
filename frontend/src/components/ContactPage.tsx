@@ -149,9 +149,9 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+    <div className="min-h-screen bg-[#004D86] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Floating Navbar & Header */}
-      <div className="relative w-full bg-[#000122]">
+      <div className="relative w-full bg-[#004D86]">
         <Navbar />
 
         {/* Contact Hero Section */}
@@ -360,7 +360,7 @@ export const ContactPage = () => {
 
             {isSubmitted ? (
               <div className="p-8 sm:p-10 rounded-xl bg-[#FFD60A]/10 border border-[#FFD60A]/30 text-center animate-fadeIn">
-                <div className="w-14 h-14 rounded-full bg-[#FFD60A] text-[#000122] flex items-center justify-center mx-auto mb-4 shadow-md">
+                <div className="w-14 h-14 rounded-full bg-[#FFD60A] text-[#002244] flex items-center justify-center mx-auto mb-4 shadow-md">
                   <IconCheck className="w-7 h-7 stroke-[2.5]" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">
@@ -376,7 +376,7 @@ export const ContactPage = () => {
                 <div>
                   <button
                     onClick={handleResetForm}
-                    className="px-6 py-2.5 rounded-lg bg-[#000122] hover:bg-[#000235] text-white text-xs font-semibold transition-colors cursor-pointer"
+                    className="px-6 py-2.5 rounded-lg bg-[#004D86] hover:bg-[#003E6D] text-white text-xs font-semibold transition-colors cursor-pointer"
                   >
                     Send Another Inquiry
                   </button>
@@ -538,7 +538,7 @@ export const ContactPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center space-x-2 py-3.5 px-6 rounded-lg bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer disabled:opacity-60"
+                    className="w-full inline-flex items-center justify-center space-x-2 py-3.5 px-6 rounded-lg bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer disabled:opacity-60"
                   >
                     {isSubmitting ? (
                       <span>Validating & Dispatching...</span>
@@ -582,7 +582,7 @@ export const ContactPage = () => {
               {branchLocations.map((b, i) => (
                 <div key={b.id} className="p-5 rounded-xl bg-neutral-50/70 border border-neutral-200/80">
                   <div className="flex items-center space-x-2 mb-2">
-                    <span className="w-5 h-5 rounded-full bg-[#FFD60A] text-[#000122] text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-[#FFD60A] text-[#002244] text-[10px] font-bold flex items-center justify-center">
                       {i + 1}
                     </span>
                     <span className="text-xs font-bold text-neutral-900">{b.name}</span>

@@ -262,7 +262,7 @@ function TeamMemberCard({
           ? "h-[25.5rem] sm:h-[27.5rem] shadow-[0_20px_45px_rgba(0,0,0,0.18)]"
           : "h-[24.5rem] sm:h-[26.5rem] shadow-[0_10px_28px_rgba(0,0,0,0.08)]",
         isDark
-          ? "border-[#FFD60A]/50 bg-[#000122] text-white"
+          ? "border-[#FFD60A]/50 bg-[#004D86] text-white"
           : "border-neutral-200/90 bg-white text-neutral-900",
         hasCta ? "cursor-pointer" : ""
       )}
@@ -288,8 +288,8 @@ function TeamMemberCard({
             className={cn(
               "relative inline-flex h-8.5 sm:h-9 items-center justify-end overflow-hidden rounded-full shadow-md transition-colors",
               isDark
-                ? "bg-[#FFD60A] text-[#000122] hover:bg-[#FFE047]"
-                : "bg-[#000122] text-white hover:bg-[#FFD60A] hover:text-[#000122]"
+                ? "bg-[#FFD60A] text-[#002244] hover:bg-[#FFE047]"
+                : "bg-[#004D86] text-white hover:bg-[#FFD60A] hover:text-[#002244]"
             )}
           >
             <motion.span
@@ -320,7 +320,7 @@ function TeamMemberCard({
         className={cn(
           "w-full overflow-hidden rounded-2xl border transition-transform duration-300",
           isDark
-            ? "border-white/10 bg-[#000122]"
+            ? "border-white/20 bg-[#003E6D]"
             : "border-neutral-200/80 bg-neutral-100",
           isHighlighted ? "scale-[1.01]" : ""
         )}
@@ -450,7 +450,7 @@ function MobileServiceCard({
 
         {/* Explore Button & Counter */}
         <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#000122] text-white text-xs font-semibold group-hover:bg-[#FFD60A] group-hover:text-[#000122] transition-colors shadow-sm">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#004D86] text-white text-xs font-semibold group-hover:bg-[#FFD60A] group-hover:text-[#002244] transition-colors shadow-sm">
             <span>{ctaLabel}</span>
             <ArrowUpRight className="size-3.5 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </div>

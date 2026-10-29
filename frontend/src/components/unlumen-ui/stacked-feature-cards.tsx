@@ -37,7 +37,7 @@ export const defaultWhyChooseUsCards: FeatureCardItem[] = [
       "Every business has different goals and audiences. We tailor our digital, creative and marketing strategies to your specific needs rather than relying on a one-size-fits-all approach.",
     icon: Target,
     cardClassName: "bg-white border border-neutral-200/90 text-neutral-900 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:border-[#FFD60A]",
-    iconClassName: "bg-[#FFD60A] text-[#000122] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
+    iconClassName: "bg-[#FFD60A] text-[#002244] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
     rotateClassName: "rotate-[-0.6deg] sm:rotate-[-1.2deg]",
   },
   {
@@ -47,7 +47,7 @@ export const defaultWhyChooseUsCards: FeatureCardItem[] = [
       "We align our work with clear business objectives and use relevant performance indicators to evaluate progress and guide improvements.",
     icon: ChartNoAxesColumnIncreasing,
     cardClassName: "bg-[#fafafb] border border-neutral-200/90 text-neutral-900 shadow-[0_12px_32px_rgba(0,0,0,0.07)] hover:border-[#FFD60A]",
-    iconClassName: "bg-[#FFD60A] text-[#000122] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
+    iconClassName: "bg-[#FFD60A] text-[#002244] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
     rotateClassName: "rotate-[0.8deg] sm:rotate-[1.4deg]",
   },
   {
@@ -57,7 +57,7 @@ export const defaultWhyChooseUsCards: FeatureCardItem[] = [
       "Our approach brings strategy, design and creative execution together to develop consistent brand communication across digital and offline channels.",
     icon: Paintbrush,
     cardClassName: "bg-white border border-neutral-200/90 text-neutral-900 shadow-[0_14px_34px_rgba(0,0,0,0.08)] hover:border-[#FFD60A]",
-    iconClassName: "bg-[#FFD60A] text-[#000122] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
+    iconClassName: "bg-[#FFD60A] text-[#002244] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
     rotateClassName: "rotate-[-0.5deg] sm:rotate-[-0.9deg]",
   },
   {
@@ -67,7 +67,7 @@ export const defaultWhyChooseUsCards: FeatureCardItem[] = [
       "We prioritize clear project scope, practical timelines and coordinated execution to keep deliverables organized and projects moving forward.",
     icon: Clock,
     cardClassName: "bg-[#fafafb] border border-neutral-200/90 text-neutral-900 shadow-[0_16px_36px_rgba(0,0,0,0.09)] hover:border-[#FFD60A]",
-    iconClassName: "bg-[#FFD60A] text-[#000122] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
+    iconClassName: "bg-[#FFD60A] text-[#002244] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
     rotateClassName: "rotate-[0.6deg] sm:rotate-[1.1deg]",
   },
   {
@@ -77,7 +77,7 @@ export const defaultWhyChooseUsCards: FeatureCardItem[] = [
       "We aim to provide solutions that match the client's requirements and budget without compromising on strategic clarity or quality.",
     icon: PiggyBank,
     cardClassName: "bg-white border border-neutral-200/90 text-neutral-900 shadow-[0_18px_38px_rgba(0,0,0,0.1)] hover:border-[#FFD60A]",
-    iconClassName: "bg-[#FFD60A] text-[#000122] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
+    iconClassName: "bg-[#FFD60A] text-[#002244] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]",
     rotateClassName: "rotate-[-0.4deg] sm:rotate-[-0.6deg]",
   },
 ];
@@ -140,7 +140,7 @@ export function StackedFeatureCards({
                   <span
                     className={cn(
                       "inline-flex size-11 sm:size-12 items-center justify-center rounded-2xl transition-transform duration-200 hover:scale-105 shadow-sm",
-                      card.iconClassName || "bg-[#FFD60A] text-[#000122] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]"
+                      card.iconClassName || "bg-[#FFD60A] text-[#002244] border border-[#FFD60A] shadow-[0_2px_10px_rgba(255,214,10,0.35)]"
                     )}
                   >
                     <Icon className="size-5 sm:size-6" />

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-deep-blue: #000122;
-  --color-deep-blue-dark: #000122;
-  --color-deep-blue-surface: #000235;
+  --color-deep-blue: #004D86;
+  --color-deep-blue-dark: #003E6D;
+  --color-deep-blue-surface: #00345C;
   --color-brand-yellow: #FFD60A;
   --color-brand-yellow-hover: #FFE047;
   --color-text-primary: #FFFFFF;
@@ -13,20 +13,20 @@
 
   @keyframes cell-ripple {
     0% {
-      background-color: rgba(56, 189, 248, 0.45);
-      border-color: rgba(147, 197, 253, 0.85);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.45), inset 0 0 10px rgba(56, 189, 248, 0.25);
+      background-color: rgba(255, 255, 255, 0.55);
+      border-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.55), inset 0 0 10px rgba(255, 255, 255, 0.35);
     }
 
     40% {
-      background-color: rgba(37, 99, 235, 0.25);
-      border-color: rgba(96, 165, 250, 0.50);
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+      background-color: rgba(255, 255, 255, 0.28);
+      border-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
     }
 
     100% {
-      background-color: var(--cell-fill-color, rgba(30, 58, 138, 0.055));
-      border-color: var(--cell-border-color, rgba(59, 130, 246, 0.20));
+      background-color: var(--cell-fill-color, rgba(255, 255, 255, 0.04));
+      border-color: var(--cell-border-color, rgba(255, 255, 255, 0.16));
       box-shadow: none;
     }
   }
@@ -34,9 +34,9 @@
 
 @layer base {
   :root {
-    --bg-primary: #000122;
-    --bg-secondary: #000122;
-    --bg-surface: #000235;
+    --bg-primary: #004D86;
+    --bg-secondary: #003E6D;
+    --bg-surface: #00345C;
     --color-accent-yellow: #FFD60A;
     --color-accent-yellow-hover: #FFE047;
     --text-primary: #FFFFFF;
@@ -56,7 +56,7 @@
   body {
     margin: 0;
     padding: 0;
-    background-color: #000122;
+    background-color: #004D86;
     color: #1a1a1a;
     font-family: var(--font-sans);
     overflow-x: hidden;

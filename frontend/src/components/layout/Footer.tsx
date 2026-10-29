@@ -9,11 +9,11 @@ export const Footer = () => {
   const { navigateTo } = useNavigation();
 
   return (
-    <footer id="contact" className="w-full bg-[#000122] text-white border-t border-white/10 pt-14 pb-8 px-4 sm:px-8 lg:px-12 select-none">
+    <footer id="contact" className="w-full bg-[#004D86] text-white border-t border-white/20 pt-14 pb-8 px-4 sm:px-8 lg:px-12 select-none">
       <div className="max-w-[1240px] mx-auto">
         
         {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-white/20">
           
           {/* Column 1 — Brand (Spans 4 columns on desktop) */}
           <div className="lg:col-span-4 flex flex-col space-y-4 min-w-0">
@@ -33,13 +33,13 @@ export const Footer = () => {
               />
             </a>
 
-            <p className="text-sm text-neutral-300 leading-relaxed max-w-sm">
+            <p className="text-sm text-white/90 leading-relaxed max-w-sm">
               We help businesses grow through technology, creative production, digital marketing and strategic brand development.
             </p>
 
             {/* Social Media Links & Reviews */}
             <div className="pt-2 min-w-0">
-              <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
+              <span className="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-2.5">
                 Connect With Us
               </span>
               <div className="flex items-center space-x-2.5">
@@ -52,7 +52,7 @@ export const Footer = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.ariaLabel}
-                      className="w-9 h-9 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center border border-white/10 hover:border-[#FFD60A] transition-all duration-200 cursor-pointer shadow-sm hover:shadow-[0_2px_12px_rgba(255,214,10,0.3)] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+                      className="w-9 h-9 rounded-lg bg-[#003E6D] hover:bg-[#FFD60A] text-white hover:text-[#002244] flex items-center justify-center border border-white/20 hover:border-[#FFD60A] transition-all duration-200 cursor-pointer shadow-sm hover:shadow-[0_2px_12px_rgba(255,214,10,0.3)] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
                     >
                       <Icon className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
                     </a>
@@ -221,9 +221,9 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Row */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-3">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/70 gap-3">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1">
-            <span className="font-bold text-neutral-300 tracking-tight">DKP INNOVATION</span>
+            <span className="font-bold text-white tracking-tight">DKP INNOVATION</span>
             <span>•</span>
             <span>Digital Agency, Creative Production & Brand Architecture</span>
             <span>•</span>

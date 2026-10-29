@@ -18,9 +18,9 @@ export const ServicesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+    <div className="min-h-screen bg-[#004D86] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Integrated Floating Navbar & Header */}
-      <div className="relative w-full bg-[#000122]">
+      <div className="relative w-full bg-[#004D86]">
         <Navbar />
 
         {/* Cinematic Services Hero Section */}
@@ -70,7 +70,7 @@ export const ServicesPage = () => {
             <BlurFadeIn delay={0.35} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => navigateTo('contact', 'enquiry-form')}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] hover:shadow-[0_6px_25px_rgba(255,214,10,0.5)] transition-all duration-200 cursor-pointer"
               >
                 <span>Discuss Your Project</span>
                 <IconArrowRight className="w-4 h-4" />
@@ -88,13 +88,13 @@ export const ServicesPage = () => {
             <BlurFadeIn
               delay={0.45}
               duration={0.5}
-              className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+              className="mt-12 pt-8 border-t border-white/20 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
             >
               {serviceCategories.map((cat, idx) => (
                 <a
                   key={cat.id}
                   href={`#${cat.slug}`}
-                  className="px-3.5 py-1.5 rounded-lg bg-[#000122] hover:bg-[#FFD60A]/10 text-xs text-[#CBD5E1] hover:text-[#FFD60A] border border-white/10 hover:border-[#FFD60A]/50 transition-all font-medium flex items-center space-x-1.5"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#003E6D] hover:bg-white/20 text-xs text-white hover:text-[#FFD60A] border border-white/20 hover:border-[#FFD60A]/50 transition-all font-medium flex items-center space-x-1.5"
                 >
                   <span className="text-[#FFD60A] font-bold">{idx + 1}.</span>
                   <span>{cat.title}</span>
@@ -121,12 +121,12 @@ export const ServicesPage = () => {
               <BlurFadeIn
                 delay={0.1}
                 duration={0.6}
-                className="relative rounded-2xl overflow-hidden shadow-xl mb-12 sm:mb-16 border border-white/10 bg-[#000122]"
+                className="relative rounded-2xl overflow-hidden shadow-xl mb-12 sm:mb-16 border border-white/20 bg-[#003E6D]"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[300px]">
                   
                   {/* Banner Content (Spans 7 cols on desktop) */}
-                  <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center relative z-10 text-white bg-gradient-to-r from-[#000122] via-[#000235] to-[#000122]/95">
+                  <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center relative z-10 text-white bg-gradient-to-r from-[#003E6D] via-[#00345C] to-[#003E6D]/95">
                     <div className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#FFD60A] mb-3">
                       <span>{category.services.length} Specialized Services</span>
                     </div>
@@ -139,14 +139,14 @@ export const ServicesPage = () => {
                       {category.subtitle}
                     </p>
 
-                    <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-xl mb-6">
+                    <p className="text-sm sm:text-base text-neutral-100 leading-relaxed max-w-xl mb-6">
                       {category.description}
                     </p>
 
                     <div>
                       <button
                         onClick={() => handleEnquire(category.title)}
-                        className="inline-flex items-center space-x-2 text-xs sm:text-sm font-bold text-[#000122] bg-[#FFD60A] hover:bg-[#FFE047] px-5 py-2.5 rounded-lg shadow-md transition-all cursor-pointer"
+                        className="inline-flex items-center space-x-2 text-xs sm:text-sm font-bold text-[#002244] bg-[#FFD60A] hover:bg-[#FFE047] px-5 py-2.5 rounded-lg shadow-md transition-all cursor-pointer"
                       >
                         <span>Inquire About {category.title}</span>
                         <IconChevronRight className="w-4 h-4" />
@@ -155,13 +155,13 @@ export const ServicesPage = () => {
                   </div>
 
                   {/* Banner Image Visual (Spans 5 cols on desktop) */}
-                  <div className="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-[#000122]">
+                  <div className="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-[#003E6D]">
                     <img
                       src={category.titleCardImage}
                       alt={category.titleCardAlt}
                       className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 filter brightness-90"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-transparent via-[#000122]/30 to-[#000122] pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-transparent via-[#003E6D]/30 to-[#003E6D] pointer-events-none" />
                   </div>
 
                 </div>
@@ -193,7 +193,7 @@ export const ServicesPage = () => {
         ))}
 
         {/* Closing Contact CTA Section */}
-        <section className="w-full bg-[#000122] text-white py-16 sm:py-20 px-4 sm:px-8 lg:px-12 border-t border-white/10 select-none">
+        <section className="w-full bg-[#004D86] text-white py-16 sm:py-20 px-4 sm:px-8 lg:px-12 border-t border-white/20 select-none">
           <div className="max-w-[1000px] mx-auto text-center">
             <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#FFD60A] mb-3">
               Start Your Project
@@ -201,13 +201,13 @@ export const ServicesPage = () => {
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase mb-4">
               Ready to Accelerate Your Brand?
             </h2>
-            <p className="text-sm sm:text-base text-neutral-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base text-neutral-100 max-w-2xl mx-auto mb-8 leading-relaxed">
               Whether you need enterprise web engineering, high-concept commercial film production, or scalable lead generation campaigns, our Bengaluru teams are ready to deliver.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => navigateTo('contact', 'enquiry-form')}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#000122] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-full bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-sm shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all cursor-pointer"
               >
                 <span>Discuss Your Project</span>
                 <IconArrowRight className="w-4 h-4" />

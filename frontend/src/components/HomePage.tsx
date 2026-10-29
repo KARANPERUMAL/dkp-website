@@ -17,12 +17,12 @@ export const HomePage = () => {
   const headXPercent = (curveState.headX / 1440) * 100;
 
   return (
-    <div className="relative min-h-screen bg-[#000122] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
+    <div className="relative min-h-screen bg-[#004D86] text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Floating Centered Navbar & Header Logo (fixed z-50 at top) */}
       <Navbar />
 
-      {/* PINNED DARK HERO VIEWPORT: Remains fixed at top while white section scrolls up over it */}
-      <div className="sticky top-0 h-screen w-full z-0 overflow-hidden bg-[#000122] pointer-events-auto">
+      {/* PINNED HERO VIEWPORT: Remains fixed at top while white section scrolls up over it */}
+      <div className="sticky top-0 h-screen w-full z-0 overflow-hidden bg-[#004D86] pointer-events-auto">
         <HeroSection onCtaClick={() => navigateTo('services')} />
       </div>
 
@@ -67,7 +67,7 @@ export const HomePage = () => {
                 <button
                   type="button"
                   onClick={() => navigateTo('services')}
-                  className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-[#FFD60A] hover:text-[#000122] border border-neutral-200/80 hover:border-[#FFD60A] transition-all duration-300 shadow-sm cursor-pointer group"
+                  className="inline-flex items-center space-x-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 bg-neutral-100 hover:bg-[#FFD60A] hover:text-[#002244] border border-neutral-200/80 hover:border-[#FFD60A] transition-all duration-300 shadow-sm cursor-pointer group"
                 >
                   <span>Explore All 19 Specialized Services</span>
                   <IconArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
