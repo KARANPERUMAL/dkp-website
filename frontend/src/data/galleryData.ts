@@ -198,6 +198,42 @@ export const galleryItems: GalleryItem[] = [
     location: 'Bangalore Studio · Tech Lab',
     featured: false,
   },
+  {
+    id: 'nagadevanahalli-corporate-facade',
+    orderNumber: '11',
+    filename: '11.png',
+    src: '/images/gallery/11.png',
+    title: 'DKP Innovations Corporate Facade & Branch',
+    subtitle: 'Exterior Architecture & Commercial Presence',
+    category: 'culture',
+    categoryLabel: 'Culture & Architecture',
+    width: 1536,
+    height: 1024,
+    aspectRatio: 'landscape',
+    orientation: 'Landscape',
+    alt: 'DKP Innovations corporate building exterior facade in Nagadevanahalli, Bengaluru featuring modern blue glass architecture and branded commercial signage',
+    caption: 'Exterior facade of DKP Innovations Nagadevanahalli corporate building on Outer Ring Road, featuring modern blue glass architecture and prominent branch signage.',
+    location: 'Nagadevanahalli Branch · Exterior',
+    featured: true,
+  },
+  {
+    id: 'corporate-tower-elevation',
+    orderNumber: '12',
+    filename: '12.png',
+    src: '/images/gallery/12.png',
+    title: 'Corporate Tower Architectural Elevation',
+    subtitle: 'Glass Facade & Multi-Story Facility',
+    category: 'culture',
+    categoryLabel: 'Culture & Architecture',
+    width: 1024,
+    height: 1536,
+    aspectRatio: 'portrait',
+    orientation: 'Portrait',
+    alt: 'Full vertical architectural perspective of the modern multi-story glass facade corporate tower housing DKP Innovations',
+    caption: 'Full vertical elevation of the multi-story corporate facility, showcasing contemporary structural glass engineering and architectural depth.',
+    location: 'Nagadevanahalli Branch · Building Elevation',
+    featured: true,
+  },
 ];
 
 export type GalleryCategory = 'all' | 'workspace' | 'studio' | 'executive' | 'culture';
@@ -209,9 +245,9 @@ export interface GalleryFilterOption {
 }
 
 export const galleryCategories: GalleryFilterOption[] = [
-  { key: 'all', label: 'All Frames', count: 10 },
+  { key: 'all', label: 'All Frames', count: 12 },
   { key: 'workspace', label: 'Workspaces & Tech', count: 4 },
   { key: 'studio', label: 'Production Studio', count: 1 },
   { key: 'executive', label: 'Executive Cabins', count: 3 },
-  { key: 'culture', label: 'Culture & Architecture', count: 2 },
+  { key: 'culture', label: 'Culture & Architecture', count: 4 },
 ];

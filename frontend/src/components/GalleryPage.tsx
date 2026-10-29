@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { useNavigation } from '../context/NavigationContext';
@@ -11,39 +11,101 @@ import {
   BlurFadeIn,
 } from '@/components/ui/text-animation-blur-fade-in';
 
-// Ordered gallery archive to precisely fulfill the hand-drawn sketch composition
-const CURATED_ORDER_IDS = [
-  'studio-panorama', // 0: Full-width Hero landscape (3.jpeg)
-  // Left Column
-  'digital-marketing-hub', // 1: Medium portrait (1.jpeg)
-  'chroma-production-studio', // 2: Smaller landscape 1 (5.jpeg)
-  'inspirational-cultural-mural', // 3: Smaller landscape 2 (4.jpeg)
-  // Right Column
-  'strategy-meeting-desk', // 4: Small landscape near top (7.jpeg)
-  'executive-director-cabin', // 5: Larger portrait in middle (9.jpeg)
-  'consultation-lounge', // 6: Large landscape near bottom (6.jpeg)
-  // Extended Archive (revealed on Load More)
-  'corridor-and-suites', // 7: Studio corridor portrait (2.jpeg)
-  'workspace-vertical-depth', // 8: Workspace vertical architecture (8.jpeg)
-  'hardware-and-marketing-desk', // 9: Tech setup detail (10.jpeg)
+// Ordered gallery archive to precisely fulfill the editorial collage composition:
+// Top row (2): 3.jpeg (large wide left) + 4.jpeg (tall landscape right)
+// Middle row (3): 5.jpeg (small square left) + 7.jpeg (larger rectangle center) + 1.jpeg (narrow vertical right)
+// Bottom row (3): 6.jpeg (portrait) + 9.jpeg (portrait) + 2.jpeg (portrait)
+// Additional row (4): 11.png (wide facade left) + 12.png (tower) + 8.jpeg (elevation) + 10.jpeg (hardware)
+const CURATED_COLLAGE_IDS = [
+  // Top Row (2 images)
+  'studio-panorama', // Slot 0: 3.jpeg (Landscape, large wide left)
+  'inspirational-cultural-mural', // Slot 1: 4.jpeg (Landscape, tall landscape right)
+
+  // Middle Row (3 images)
+  'chroma-production-studio', // Slot 2: 5.jpeg (Landscape cropped to square 1:1, left)
+  'strategy-meeting-desk', // Slot 3: 7.jpeg (Landscape, larger rectangular center)
+  'digital-marketing-hub', // Slot 4: 1.jpeg (Portrait, narrow vertical right)
+
+  // Bottom Row (3 images)
+  'consultation-lounge', // Slot 5: 6.jpeg (Portrait, left)
+  'executive-director-cabin', // Slot 6: 9.jpeg (Portrait, center)
+  'corridor-and-suites', // Slot 7: 2.jpeg (Portrait, right)
+
+  // Additional Balanced Row (4 images)
+  'nagadevanahalli-corporate-facade', // Slot 8: 11.png (Landscape, wide corporate facade left)
+  'corporate-tower-elevation', // Slot 9: 12.png (Portrait, tower elevation right 1)
+  'workspace-vertical-depth', // Slot 10: 8.jpeg (Portrait, studio elevation right 2)
+  'hardware-and-marketing-desk', // Slot 11: 10.jpeg (Portrait, tech workstation right 3)
 ];
 
-interface ColumnSlotConfig {
+interface GalleryCardProps {
   item: GalleryItem;
-  globalIndex: number;
-  aspectClass: string;
+  index: number;
+  aspectClass?: string;
+  eager?: boolean;
+  objectPosition?: string;
+  onOpen: (index: number, e?: React.MouseEvent | React.KeyboardEvent) => void;
+  className?: string;
 }
+
+const GalleryCard = ({
+  item,
+  index,
+  aspectClass = 'aspect-[16/10]',
+  eager = false,
+  objectPosition = 'object-center',
+  onOpen,
+  className = '',
+}: GalleryCardProps) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{
+        duration: prefersReducedMotion ? 0.05 : 0.5,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={`w-full ${className}`}
+    >
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={(e) => onOpen(index, e)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onOpen(index, e);
+          }
+        }}
+        aria-label={`View image: ${item.title}`}
+        className="group relative w-full h-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#000122] border border-white/[0.08] hover:border-white/25 transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000122]"
+      >
+        <div className={`relative w-full h-full overflow-hidden ${aspectClass}`}>
+          <img
+            src={item.src}
+            alt={item.alt}
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+            className={`w-full h-full object-cover ${objectPosition} transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03] will-change-transform`}
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export const GalleryPage = () => {
   const { navigateTo } = useNavigation();
-  const prefersReducedMotion = useReducedMotion();
 
-  // Curate existing items in intentional order
+  // Curate all 12 items in intentional editorial order
   const curatedGalleryItems: GalleryItem[] = useMemo(() => {
     const itemMap = new Map(galleryItems.map((item) => [item.id, item]));
     const ordered: GalleryItem[] = [];
 
-    for (const id of CURATED_ORDER_IDS) {
+    for (const id of CURATED_COLLAGE_IDS) {
       const found = itemMap.get(id);
       if (found) {
         ordered.push(found);
@@ -58,13 +120,6 @@ export const GalleryPage = () => {
     return ordered;
   }, []);
 
-  // First full-width hero image
-  const heroItem = curatedGalleryItems[0];
-
-  // Progressive discovery state
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-
   // Lightbox state
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [activeLightboxIndex, setActiveLightboxIndex] = useState(0);
@@ -78,56 +133,6 @@ export const GalleryPage = () => {
     setIsLightboxOpen(true);
   };
 
-  const handleLoadMore = () => {
-    setIsLoadingMore(true);
-    setTimeout(() => {
-      setIsExpanded(true);
-      setIsLoadingMore(false);
-    }, 120);
-  };
-
-  // Two-column layout mappings directly matching the reference sketch:
-  // Left Column:
-  // 1. Medium portrait
-  // 2. Smaller landscape (stacked)
-  // 3. Smaller landscape (stacked)
-  // (Extended on Load More: corridor portrait + tech detail)
-  const leftColumnItems: ColumnSlotConfig[] = useMemo(() => {
-    const base: ColumnSlotConfig[] = [
-      { item: curatedGalleryItems[1], globalIndex: 1, aspectClass: 'aspect-[4/5]' },
-      { item: curatedGalleryItems[2], globalIndex: 2, aspectClass: 'aspect-[16/10]' },
-      { item: curatedGalleryItems[3], globalIndex: 3, aspectClass: 'aspect-[16/10]' },
-    ];
-    if (isExpanded) {
-      if (curatedGalleryItems[7]) {
-        base.push({ item: curatedGalleryItems[7], globalIndex: 7, aspectClass: 'aspect-[4/5]' });
-      }
-      if (curatedGalleryItems[9]) {
-        base.push({ item: curatedGalleryItems[9], globalIndex: 9, aspectClass: 'aspect-[16/10]' });
-      }
-    }
-    return base;
-  }, [curatedGalleryItems, isExpanded]);
-
-  // Right Column:
-  // 1. Small landscape near top
-  // 2. Larger portrait in middle
-  // 3. Large landscape near bottom
-  // (Extended on Load More: studio architecture portrait)
-  const rightColumnItems: ColumnSlotConfig[] = useMemo(() => {
-    const base: ColumnSlotConfig[] = [
-      { item: curatedGalleryItems[4], globalIndex: 4, aspectClass: 'aspect-[16/9]' },
-      { item: curatedGalleryItems[5], globalIndex: 5, aspectClass: 'aspect-[3/4]' },
-      { item: curatedGalleryItems[6], globalIndex: 6, aspectClass: 'aspect-[16/10]' },
-    ];
-    if (isExpanded) {
-      if (curatedGalleryItems[8]) {
-        base.push({ item: curatedGalleryItems[8], globalIndex: 8, aspectClass: 'aspect-[3/4]' });
-      }
-    }
-    return base;
-  }, [curatedGalleryItems, isExpanded]);
-
   return (
     <div className="min-h-screen bg-[#000122] text-white flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#000122]">
       {/* Floating Centered Navigation */}
@@ -137,7 +142,7 @@ export const GalleryPage = () => {
           EDITORIAL HEADER SECTION
           Minimal, quiet luxury presentation with natural description placement
           ========================================================================= */}
-      <header className="relative w-full pt-28 sm:pt-32 md:pt-28 pb-4 sm:pb-6 md:pb-8 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
+      <header className="relative w-full pt-28 sm:pt-32 md:pt-28 pb-6 sm:pb-8 md:pb-10 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
         {/* Subtle Ambient Light */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
           <div
@@ -164,149 +169,206 @@ export const GalleryPage = () => {
       </header>
 
       {/* =========================================================================
-          MAIN GALLERY LAYOUT (MATCHING REFERENCE SKETCH)
-          1. First Row: Large full-width horizontal lead image
-          2. Below: Two-column asymmetrical staggered composition
+          MAIN GALLERY LAYOUT (MATCHING REFERENCE EDITORIAL COLLAGE)
+          Tier 1: Top row (2 images: large wide left, tall landscape right)
+          Tier 2: Middle row (3 images: small square left, larger rectangular center, narrow vertical right)
+          Tier 3: Bottom row (3 images: three portrait-oriented images arranged side by side)
+          Tier 4: Additional balanced row (4 images: wide corporate facade left + vertical triptych right)
+          All 12 images visible directly on the page without omission or duplication
           ========================================================================= */}
       <main className="relative w-full pb-14 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 flex-1">
-        <div className="max-w-[1240px] mx-auto">
-          {/* 1. FIRST ROW: FULL-WIDTH LARGE HORIZONTAL IMAGE */}
-          {heroItem && (
-            <motion.div
-              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: prefersReducedMotion ? 0.05 : 0.6,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="w-full mb-4 sm:mb-5 md:mb-6"
-            >
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={(e) => openLightboxAt(0, e)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openLightboxAt(0, e);
-                  }
-                }}
-                aria-label={`View image: ${heroItem.title}`}
-                className="group relative w-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#000122] border border-white/[0.08] hover:border-white/25 transition-colors duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000122]"
-              >
-                <div className="relative w-full overflow-hidden aspect-[16/10] sm:aspect-[2/1] lg:aspect-[21/9]">
-                  <img
-                    src={heroItem.src}
-                    alt={heroItem.alt}
-                    loading="eager"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.02] will-change-transform"
-                  />
-                </div>
+        <div className="max-w-[1240px] mx-auto flex flex-col gap-4 sm:gap-5 md:gap-6">
+          {/* ---------------------------------------------------------------------
+              TIER 1 — TOP ROW (2 IMAGES)
+              Large wide image on the left, tall landscape-oriented image on the right
+              --------------------------------------------------------------------- */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
+            {/* Left: Large wide image (Slot 0, 3.jpeg) */}
+            {curatedGalleryItems[0] && (
+              <div className="col-span-12 md:col-span-7 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[0]}
+                  index={0}
+                  aspectClass="aspect-[16/10]"
+                  eager
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
               </div>
-            </motion.div>
-          )}
+            )}
 
-          {/* 2. TWO-COLUMN ASYMMETRICAL GALLERY LAYOUT */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 items-start">
-            {/* LEFT COLUMN: Medium portrait, followed by two stacked smaller landscapes */}
-            <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 w-full">
-              {leftColumnItems.map((slot) => (
-                <motion.div
-                  key={slot.item.id}
-                  initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: prefersReducedMotion ? 0.05 : 0.45,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="w-full"
-                >
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onClick={(e) => openLightboxAt(slot.globalIndex, e)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openLightboxAt(slot.globalIndex, e);
-                      }
-                    }}
-                    aria-label={`View image: ${slot.item.title}`}
-                    className="group relative w-full overflow-hidden rounded-lg sm:rounded-xl bg-[#000122] border border-white/[0.07] hover:border-white/25 transition-colors duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000122]"
-                  >
-                    <div className={`relative w-full overflow-hidden ${slot.aspectClass}`}>
-                      <img
-                        src={slot.item.src}
-                        alt={slot.item.alt}
-                        loading={slot.globalIndex < 4 ? 'eager' : 'lazy'}
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03] will-change-transform"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* RIGHT COLUMN: Small landscape near top, larger portrait in middle, large landscape near bottom */}
-            <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 w-full">
-              {rightColumnItems.map((slot) => (
-                <motion.div
-                  key={slot.item.id}
-                  initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: prefersReducedMotion ? 0.05 : 0.45,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="w-full"
-                >
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onClick={(e) => openLightboxAt(slot.globalIndex, e)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openLightboxAt(slot.globalIndex, e);
-                      }
-                    }}
-                    aria-label={`View image: ${slot.item.title}`}
-                    className="group relative w-full overflow-hidden rounded-lg sm:rounded-xl bg-[#000122] border border-white/[0.07] hover:border-white/25 transition-colors duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000122]"
-                  >
-                    <div className={`relative w-full overflow-hidden ${slot.aspectClass}`}>
-                      <img
-                        src={slot.item.src}
-                        alt={slot.item.alt}
-                        loading={slot.globalIndex < 4 ? 'eager' : 'lazy'}
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03] will-change-transform"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Right: Tall landscape-oriented image (Slot 1, 4.jpeg) */}
+            {curatedGalleryItems[1] && (
+              <div className="col-span-12 md:col-span-5 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[1]}
+                  index={1}
+                  aspectClass="aspect-[4/3] md:aspect-auto"
+                  eager
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
           </div>
 
-          {/* =========================================================================
-              PROGRESSIVE DISCOVERY: MINIMAL LOAD MORE CONTROL
-              ========================================================================= */}
-          {!isExpanded && (
-            <div className="flex justify-center mt-10 sm:mt-12 md:mt-14">
-              <button
-                type="button"
-                onClick={handleLoadMore}
-                disabled={isLoadingMore}
-                aria-label="Load more gallery images"
-                className="group inline-flex items-center space-x-3 px-7 py-3 rounded-full border border-white/15 hover:border-white/40 bg-white/[0.02] hover:bg-white/[0.06] text-xs font-mono uppercase tracking-[0.2em] text-neutral-300 hover:text-white transition-all duration-300 cursor-pointer disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
-              >
-                <span>{isLoadingMore ? 'Loading' : 'Load More'}</span>
-                <ArrowDown className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white group-hover:translate-y-0.5 transition-all duration-300" />
-              </button>
+          {/* ---------------------------------------------------------------------
+              TIER 2 — MIDDLE ROW (3 IMAGES)
+              Small square image on the left, larger rectangular image in center,
+              and narrow vertical image on the right
+              --------------------------------------------------------------------- */}
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
+            {/* Left: Small square image (Slot 2, 5.jpeg) */}
+            {curatedGalleryItems[2] && (
+              <div className="col-span-12 sm:col-span-3 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[2]}
+                  index={2}
+                  aspectClass="aspect-square"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+
+            {/* Center: Larger rectangular image (Slot 3, 7.jpeg) */}
+            {curatedGalleryItems[3] && (
+              <div className="col-span-12 sm:col-span-6 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[3]}
+                  index={3}
+                  aspectClass="aspect-[16/10]"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+
+            {/* Right: Narrow vertical image (Slot 4, 1.jpeg) */}
+            {curatedGalleryItems[4] && (
+              <div className="col-span-12 sm:col-span-3 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[4]}
+                  index={4}
+                  aspectClass="aspect-[3/4]"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* ---------------------------------------------------------------------
+              TIER 3 — BOTTOM ROW (3 IMAGES)
+              Wide gallery composition containing three portrait-oriented images
+              arranged side by side
+              --------------------------------------------------------------------- */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
+            {/* Left: Portrait 1 (Slot 5, 6.jpeg) */}
+            {curatedGalleryItems[5] && (
+              <div className="col-span-1 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[5]}
+                  index={5}
+                  aspectClass="aspect-[3/4]"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+
+            {/* Center: Portrait 2 (Slot 6, 9.jpeg) */}
+            {curatedGalleryItems[6] && (
+              <div className="col-span-1 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[6]}
+                  index={6}
+                  aspectClass="aspect-[3/4]"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+
+            {/* Right: Portrait 3 (Slot 7, 2.jpeg) */}
+            {curatedGalleryItems[7] && (
+              <div className="col-span-1 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[7]}
+                  index={7}
+                  aspectClass="aspect-[3/4]"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* ---------------------------------------------------------------------
+              TIER 4 — ADDITIONAL BALANCED ROW (4 IMAGES)
+              Natural extension presenting all 12 images directly on the page:
+              Large wide corporate facade on the left, paired with a vertical triptych on the right
+              --------------------------------------------------------------------- */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
+            {/* Left: Large wide architectural facade (Slot 8, 11.png) */}
+            {curatedGalleryItems[8] && (
+              <div className="col-span-12 md:col-span-6 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[8]}
+                  index={8}
+                  aspectClass="aspect-[16/10]"
+                  objectPosition="object-center"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1 min-h-[260px] sm:min-h-[320px] md:min-h-[360px]"
+                />
+              </div>
+            )}
+
+            {/* Right: Three vertical architectural portraits side by side (Slots 9, 10, 11) */}
+            <div className="col-span-12 md:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
+              {/* 12.png: Corporate Tower Architectural Elevation */}
+              {curatedGalleryItems[9] && (
+                <div className="flex flex-col">
+                  <GalleryCard
+                    item={curatedGalleryItems[9]}
+                    index={9}
+                    aspectClass="aspect-[3/4] md:aspect-auto"
+                    objectPosition="object-center"
+                    onOpen={openLightboxAt}
+                    className="h-full flex-1 min-h-[260px] sm:min-h-[320px] md:min-h-[360px]"
+                  />
+                </div>
+              )}
+
+              {/* 8.jpeg: Studio Elevation & Workspace Architecture */}
+              {curatedGalleryItems[10] && (
+                <div className="flex flex-col">
+                  <GalleryCard
+                    item={curatedGalleryItems[10]}
+                    index={10}
+                    aspectClass="aspect-[3/4] md:aspect-auto"
+                    objectPosition="object-center"
+                    onOpen={openLightboxAt}
+                    className="h-full flex-1 min-h-[260px] sm:min-h-[320px] md:min-h-[360px]"
+                  />
+                </div>
+              )}
+
+              {/* 10.jpeg: Creative Technology & Development Setup */}
+              {curatedGalleryItems[11] && (
+                <div className="flex flex-col">
+                  <GalleryCard
+                    item={curatedGalleryItems[11]}
+                    index={11}
+                    aspectClass="aspect-[3/4] md:aspect-auto"
+                    objectPosition="object-center"
+                    onOpen={openLightboxAt}
+                    className="h-full flex-1 min-h-[260px] sm:min-h-[320px] md:min-h-[360px]"
+                  />
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </main>
 
