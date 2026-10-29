@@ -33,7 +33,7 @@ export const navItems: NavItem[] = [
     icon: <IconPhoto className="h-4 w-4" />,
   },
   {
-    name: 'Foundation',
+    name: 'DKP Foundation',
     link: '#foundation',
     icon: <IconHeartHandshake className="h-4 w-4" />,
   },
