@@ -9,8 +9,6 @@ import {
   BookOpen,
   ShieldCheck,
   Users,
-  Building2,
-  Gift,
   ArrowDown,
   ArrowRight,
   Phone,
@@ -232,160 +230,183 @@ export const FoundationPage = () => {
           className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80"
         >
           <div className="max-w-[1240px] mx-auto">
-            {/* Section Header */}
+            {/* Section Header with Blur-and-Fade Reveal */}
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2">
+              <TextAnimationBlurFadeIn
+                as="span"
+                delay={0.05}
+                duration={0.4}
+                className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2"
+              >
                 WHAT WE CHAMPION
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="h2"
+                delay={0.15}
+                duration={0.5}
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4"
+              >
                 Core Social Initiatives
-              </h2>
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="p"
+                delay={0.25}
+                duration={0.5}
+                className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal"
+              >
                 We design and execute focused programs to support underprivileged families, provide critical relief, and empower the next generation through education and well-being.
-              </p>
+              </TextAnimationBlurFadeIn>
             </div>
 
-            {/* 4 Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {/* 4 Cards Grid with Staggered Blur-and-Fade Reveal */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
               {/* Initiative 1 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                    <HeartHandshake className="w-6 h-6 text-[#000122]" />
+              <BlurFadeIn delay={0.15} duration={0.5} className="h-full">
+                <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
+                      <HeartHandshake className="w-6 h-6 text-[#000122]" />
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                      Community Welfare & Essential Relief
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+                      Delivering vital food dry rations, clothing, warm blankets, and everyday necessities directly to families and elder citizens navigating acute economic distress.
+                    </p>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
-                    Community Welfare & Essential Relief
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-6">
-                    Delivering vital food dry rations, clothing, warm blankets, and everyday necessities directly to families and elder citizens navigating acute economic distress.
-                  </p>
-                </div>
 
-                <div className="pt-4 border-t border-neutral-100">
-                  <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
-                    Key Focus Areas
-                  </h4>
-                  <ul className="space-y-1.5 text-xs text-neutral-700">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Direct essential nutrition and dry ration packages</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Seasonal relief kits for vulnerable households</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Dignified, compassionate door-to-door distribution</span>
-                    </li>
-                  </ul>
+                  <div className="pt-4 border-t border-neutral-100">
+                    <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
+                      Key Focus Areas
+                    </h4>
+                    <ul className="space-y-1.5 text-xs text-neutral-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Direct essential nutrition and dry ration packages</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Seasonal relief kits for vulnerable households</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Dignified, compassionate door-to-door distribution</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </BlurFadeIn>
 
               {/* Initiative 2 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                    <BookOpen className="w-6 h-6 text-[#000122]" />
+              <BlurFadeIn delay={0.25} duration={0.5} className="h-full">
+                <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
+                      <BookOpen className="w-6 h-6 text-[#000122]" />
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                      Educational & Youth Enablement
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+                      Equipping children and aspiring students with stationery, learning materials, backpacks, and foundational digital learning sessions to unlock academic potential.
+                    </p>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
-                    Educational & Youth Enablement
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-6">
-                    Equipping children and aspiring students with stationery, learning materials, backpacks, and foundational digital learning sessions to unlock academic potential.
-                  </p>
-                </div>
 
-                <div className="pt-4 border-t border-neutral-100">
-                  <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
-                    Key Focus Areas
-                  </h4>
-                  <ul className="space-y-1.5 text-xs text-neutral-700">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Notebooks, study kits, and school bag distribution</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Basic digital literacy and educational guidance</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Youth encouragement drives and study support</span>
-                    </li>
-                  </ul>
+                  <div className="pt-4 border-t border-neutral-100">
+                    <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
+                      Key Focus Areas
+                    </h4>
+                    <ul className="space-y-1.5 text-xs text-neutral-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Notebooks, study kits, and school bag distribution</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Basic digital literacy and educational guidance</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Youth encouragement drives and study support</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </BlurFadeIn>
 
               {/* Initiative 3 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                    <ShieldCheck className="w-6 h-6 text-[#000122]" />
+              <BlurFadeIn delay={0.35} duration={0.5} className="h-full">
+                <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
+                      <ShieldCheck className="w-6 h-6 text-[#000122]" />
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                      Health, Wellness & Sanitation
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+                      Promoting preventive community health awareness, distributing personal care kits, and assisting families with critical medical coordination during emergencies.
+                    </p>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
-                    Health, Wellness & Sanitation
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-6">
-                    Promoting preventive community health awareness, distributing personal care kits, and assisting families with critical medical coordination during emergencies.
-                  </p>
-                </div>
 
-                <div className="pt-4 border-t border-neutral-100">
-                  <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
-                    Key Focus Areas
-                  </h4>
-                  <ul className="space-y-1.5 text-xs text-neutral-700">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Hygiene, sanitization, and basic wellness kits</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Preventive community health & cleanliness guidance</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Emergency medical coordination for distressed families</span>
-                    </li>
-                  </ul>
+                  <div className="pt-4 border-t border-neutral-100">
+                    <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
+                      Key Focus Areas
+                    </h4>
+                    <ul className="space-y-1.5 text-xs text-neutral-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Hygiene, sanitization, and basic wellness kits</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Preventive community health & cleanliness guidance</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Emergency medical coordination for distressed families</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </BlurFadeIn>
 
               {/* Initiative 4 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
-                    <Users className="w-6 h-6 text-[#000122]" />
+              <BlurFadeIn delay={0.45} duration={0.5} className="h-full">
+                <div className="h-full p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-5">
+                      <Users className="w-6 h-6 text-[#000122]" />
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
+                      Civic Action & Social Responsibility
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+                      Mobilizing youth volunteers and civic champions for neighborhood care, local cleanliness drives, and collaborative social welfare action.
+                    </p>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#000122] mb-3">
-                    Civic Action & Social Responsibility
-                  </h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-6">
-                    Mobilizing youth volunteers and civic champions for neighborhood care, local cleanliness drives, and collaborative social welfare action.
-                  </p>
-                </div>
 
-                <div className="pt-4 border-t border-neutral-100">
-                  <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
-                    Key Focus Areas
-                  </h4>
-                  <ul className="space-y-1.5 text-xs text-neutral-700">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Youth volunteer mobilization and leadership</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Civic and neighborhood environmental awareness</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>Collaborative grassroots community building</span>
-                    </li>
-                  </ul>
+                  <div className="pt-4 border-t border-neutral-100">
+                    <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2.5">
+                      Key Focus Areas
+                    </h4>
+                    <ul className="space-y-1.5 text-xs text-neutral-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Youth volunteer mobilization and leadership</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Civic and neighborhood environmental awareness</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>Collaborative grassroots community building</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </BlurFadeIn>
             </div>
           </div>
         </section>
@@ -398,122 +419,75 @@ export const FoundationPage = () => {
           className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80"
         >
           <div className="max-w-[1240px] mx-auto">
-            {/* Section Header */}
+            {/* Section Header with Blur-and-Fade Reveal */}
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2">
+              <TextAnimationBlurFadeIn
+                as="span"
+                delay={0.05}
+                duration={0.4}
+                className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2"
+              >
                 FIELD ACTIVITIES & DOCUMENTATION
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="h2"
+                delay={0.15}
+                duration={0.5}
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4"
+              >
                 Moments of Impact — Foundation in Action
-              </h2>
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="p"
+                delay={0.25}
+                duration={0.5}
+                className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal"
+              >
                 Transparent glimpses into our on-ground community outreach, essential welfare distributions, and social engagement programs.
-              </p>
+              </TextAnimationBlurFadeIn>
             </div>
 
-            {/* Video Cards Grid */}
+            {/* Video Cards Grid with Staggered Blur-and-Fade Reveal */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
-              <FoundationVideoCard
-                id="video-relief-drive"
-                src="/videos/video11.mp4"
-                badge="Community Welfare Drive"
-                title="On-Ground Essential Support & Relief"
-                description="Footage from our grassroots distribution effort, delivering direct provisions and critical everyday supplies to families facing economic vulnerability."
-                tags={['Grassroots Outreach', 'Essential Relief', 'Direct Support']}
-              />
+              <BlurFadeIn delay={0.2} duration={0.5}>
+                <FoundationVideoCard
+                  id="video-relief-drive"
+                  src="/videos/video11.mp4"
+                  badge="Community Welfare Drive"
+                  title="On-Ground Essential Support & Relief"
+                  description="Footage from our grassroots distribution effort, delivering direct provisions and critical everyday supplies to families facing economic vulnerability."
+                  tags={['Grassroots Outreach', 'Essential Relief', 'Direct Support']}
+                />
+              </BlurFadeIn>
 
-              <FoundationVideoCard
-                id="video-social-engagement"
-                src="/videos/video22.mp4"
-                badge="Community Engagement"
-                title="Social Empowerment & Youth Interaction"
-                description="Moments reflecting community togetherness, engaging local families and young participants in supportive welfare and encouragement initiatives."
-                tags={['Social Welfare', 'Youth Empowerment', 'Community Action']}
-              />
+              <BlurFadeIn delay={0.32} duration={0.5}>
+                <FoundationVideoCard
+                  id="video-social-engagement"
+                  src="/videos/video22.mp4"
+                  badge="Community Engagement"
+                  title="Social Empowerment & Youth Interaction"
+                  description="Moments reflecting community togetherness, engaging local families and young participants in supportive welfare and encouragement initiatives."
+                  tags={['Social Welfare', 'Youth Empowerment', 'Community Action']}
+                />
+              </BlurFadeIn>
             </div>
           </div>
         </section>
 
         {/* =========================================================================
-            SECTION D — DONATION, SUPPORT & PARTICIPATION
+            SECTION D — DONATION & PARTICIPATION (OFFICIAL NOTICE & DESK)
             ========================================================================= */}
         <section
           id="support"
-          className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80"
+          className="relative w-full py-14 sm:py-16 md:py-20 px-4 sm:px-8 lg:px-12 bg-white border-b border-neutral-200/80"
         >
-          <div className="max-w-[1240px] mx-auto">
-            {/* Section Header */}
-            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2">
-                COLLABORATION & SUPPORT
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight mb-4">
-                Partner With Us to Expand Our Reach
-              </h2>
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-                Social transformation is a shared responsibility. We warmly welcome corporate allies, volunteer leaders, and concerned citizens to join hands with us.
-              </p>
-            </div>
-
-            {/* 3 Participation Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
-              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-4">
-                    <Building2 className="w-5 h-5 text-[#000122]" />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#000122] mb-2">
-                    Institutional & CSR Partnerships
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
-                    Align your corporate social responsibility mandates with verified, accountable on-ground initiatives executed with complete transparency and compliance.
-                  </p>
-                </div>
-                <div className="text-xs font-bold text-amber-600 flex items-center gap-1.5">
-                  <span>Structured CSR Alignment</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
-
-              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-4">
-                    <HeartHandshake className="w-5 h-5 text-[#000122]" />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#000122] mb-2">
-                    Volunteer & Ground Mobilization
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
-                    Lend your time, professional mentorship, or on-field energy to our community drives, learning workshops, and distribution campaigns.
-                  </p>
-                </div>
-                <div className="text-xs font-bold text-amber-600 flex items-center gap-1.5">
-                  <span>Active Community Participation</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
-
-              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200 hover:border-amber-400 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
-                <div>
-                  <div className="w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#000122] mb-4">
-                    <Gift className="w-5 h-5 text-[#000122]" />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#000122] mb-2">
-                    Material & Relief Sponsorship
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4">
-                    Directly sponsor verified drive requirements such as dry grain rations, student learning kits, stationery supplies, or seasonal winter gear.
-                  </p>
-                </div>
-                <div className="text-xs font-bold text-amber-600 flex items-center gap-1.5">
-                  <span>Direct In-Kind Sponsorship</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </div>
-
-            {/* Official Compliance & Direct Coordination Notice */}
-            <div className="rounded-2xl bg-amber-50/70 border border-amber-200/90 p-6 sm:p-8 mb-12 shadow-xs">
+          <div className="max-w-[1240px] mx-auto flex flex-col gap-6 sm:gap-8">
+            {/* Official Compliance & Direct Coordination Notice with Blur-Fade Reveal */}
+            <BlurFadeIn
+              delay={0.15}
+              duration={0.5}
+              className="rounded-2xl bg-amber-50/70 border border-amber-200/90 p-6 sm:p-8 shadow-xs"
+            >
               <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
                 <div className="p-3.5 rounded-xl bg-amber-100 border border-amber-300 text-amber-800 shrink-0">
                   <ShieldCheck className="w-7 h-7 text-amber-800" />
@@ -527,10 +501,14 @@ export const FoundationPage = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </BlurFadeIn>
 
-            {/* Direct Foundation Communication Desk */}
-            <div className="rounded-2xl bg-neutral-50 border border-neutral-200 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xs">
+            {/* Direct Foundation Communication Desk with Blur-Fade Reveal */}
+            <BlurFadeIn
+              delay={0.25}
+              duration={0.5}
+              className="rounded-2xl bg-neutral-50 border border-neutral-200 p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xs"
+            >
               <div>
                 <h3 className="text-xl font-bold text-[#000122] mb-2">
                   Official Foundation Desk
@@ -572,7 +550,7 @@ export const FoundationPage = () => {
                 <span>Get in Touch to Support</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
-            </div>
+            </BlurFadeIn>
           </div>
         </section>
 
@@ -584,7 +562,11 @@ export const FoundationPage = () => {
           className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 select-none bg-white"
         >
           <div className="max-w-[1240px] mx-auto">
-            <div className="relative rounded-3xl p-8 sm:p-12 md:p-16 border border-neutral-200 bg-gradient-to-b from-neutral-50 via-white to-amber-50/30 overflow-hidden text-center shadow-lg text-[#000122]">
+            <BlurFadeIn
+              delay={0.1}
+              duration={0.6}
+              className="relative rounded-3xl p-8 sm:p-12 md:p-16 border border-neutral-200 bg-gradient-to-b from-neutral-50 via-white to-amber-50/30 overflow-hidden text-center shadow-lg text-[#000122]"
+            >
               {/* Subtle ambient light */}
               <div
                 aria-hidden="true"
@@ -592,19 +574,38 @@ export const FoundationPage = () => {
               />
 
               <div className="relative z-10 max-w-2xl mx-auto">
-                <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-3">
+                <TextAnimationBlurFadeIn
+                  as="span"
+                  delay={0.15}
+                  duration={0.4}
+                  className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-3"
+                >
                   BE THE CATALYST
-                </span>
+                </TextAnimationBlurFadeIn>
 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight leading-tight mb-4">
+                <TextAnimationBlurFadeIn
+                  as="h2"
+                  delay={0.25}
+                  duration={0.5}
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#000122] tracking-tight leading-tight mb-4"
+                >
                   Together, We Can Shape a More Compassionate World
-                </h2>
+                </TextAnimationBlurFadeIn>
 
-                <p className="text-sm sm:text-base text-neutral-600 leading-relaxed mb-8">
+                <TextAnimationBlurFadeIn
+                  as="p"
+                  delay={0.35}
+                  duration={0.5}
+                  className="text-sm sm:text-base text-neutral-600 leading-relaxed mb-8 max-w-2xl mx-auto font-normal"
+                >
                   Whether you wish to sponsor a relief initiative, volunteer on the field, or explore an institutional partnership, your voice and actions make a tangible difference.
-                </p>
+                </TextAnimationBlurFadeIn>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <BlurFadeIn
+                  delay={0.45}
+                  duration={0.5}
+                  className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
                   <button
                     onClick={() => navigateTo('contact', 'enquiry-form')}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE043] text-[#000122] font-bold text-sm tracking-wide shadow-md shadow-amber-300/30 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
@@ -619,9 +620,9 @@ export const FoundationPage = () => {
                   >
                     <span>Explore Our Services</span>
                   </button>
-                </div>
+                </BlurFadeIn>
               </div>
-            </div>
+            </BlurFadeIn>
           </div>
         </section>
       </main>
