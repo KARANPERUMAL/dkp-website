@@ -127,9 +127,7 @@ export const ServicesPage = () => {
                   
                   {/* Banner Content (Spans 7 cols on desktop) */}
                   <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center relative z-10 text-white bg-gradient-to-r from-[#000122] via-[#000235] to-[#000122]/95">
-                    <div className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-[#FFD60A] mb-3">
-                      <span>Category {catIdx + 1} of {serviceCategories.length}</span>
-                      <span>•</span>
+                    <div className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#FFD60A] mb-3">
                       <span>{category.services.length} Specialized Services</span>
                     </div>
 

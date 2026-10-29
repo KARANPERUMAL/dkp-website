@@ -1,11 +1,11 @@
 "use client";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const BackgroundRippleEffect = ({
-  rows = 8,
-  cols = 27,
-  cellSize = 56,
+  rows = 14,
+  cols = 32,
+  cellSize = 54,
   className,
 }: {
   rows?: number;
@@ -18,36 +18,73 @@ export const BackgroundRippleEffect = ({
     col: number;
   } | null>(null);
   const [rippleKey, setRippleKey] = useState(0);
-  const ref = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  // Responsive grid dimension calculation to seamlessly tile edge-to-edge across all viewports
+  const [gridConfig, setGridConfig] = useState({
+    rows,
+    cols,
+    cellSize,
+  });
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const updateGrid = () => {
+      if (!containerRef.current) return;
+      const { clientWidth, clientHeight } = containerRef.current;
+      if (clientWidth === 0 || clientHeight === 0) return;
+
+      // Adjust cellSize responsively: 42px on mobile, 48px on tablet, 52px on desktop
+      const effectiveCellSize = clientWidth < 640 ? 42 : clientWidth < 1024 ? 48 : 52;
+      const calculatedCols = Math.ceil(clientWidth / effectiveCellSize) + 2;
+      const calculatedRows = Math.ceil(clientHeight / effectiveCellSize) + 2;
+
+      setGridConfig({
+        rows: Math.max(10, calculatedRows),
+        cols: Math.max(12, calculatedCols),
+        cellSize: effectiveCellSize,
+      });
+    };
+
+    updateGrid();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateGrid();
+    });
+
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, [rows, cols, cellSize]);
 
   return (
     <div
-      ref={ref}
+      ref={containerRef}
       className={cn(
-        "absolute inset-0 h-full w-full",
-        "[--cell-border-color:rgba(255,255,255,0.06)] [--cell-fill-color:rgba(255,255,255,0.015)] [--cell-shadow-color:rgba(255,214,10,0.15)]",
-        "dark:[--cell-border-color:rgba(255,255,255,0.06)] dark:[--cell-fill-color:rgba(255,255,255,0.015)] dark:[--cell-shadow-color:rgba(255,214,10,0.15)]",
+        "absolute inset-0 h-full w-full flex items-center justify-center overflow-hidden",
+        "[--cell-border-color:rgba(59,130,246,0.22)] [--cell-fill-color:rgba(30,58,138,0.06)] [--cell-shadow-color:rgba(56,189,248,0.30)]",
         className,
       )}
+      style={{
+        maskImage:
+          "radial-gradient(ellipse 94% 88% at 50% 45%, black 45%, rgba(0,0,0,0.85) 75%, transparent 100%)",
+        WebkitMaskImage:
+          "radial-gradient(ellipse 94% 88% at 50% 45%, black 45%, rgba(0,0,0,0.85) 75%, transparent 100%)",
+      }}
     >
-      <div className="relative h-auto w-auto overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
-        <DivGrid
-          key={`base-${rippleKey}`}
-          className="mask-radial-from-20% mask-radial-at-top opacity-600"
-          rows={rows}
-          cols={cols}
-          cellSize={cellSize}
-          borderColor="var(--cell-border-color)"
-          fillColor="var(--cell-fill-color)"
-          clickedCell={clickedCell}
-          onCellClick={(row, col) => {
-            setClickedCell({ row, col });
-            setRippleKey((k) => k + 1);
-          }}
-          interactive
-        />
-      </div>
+      <DivGrid
+        key={`base-${rippleKey}`}
+        className="w-full h-full"
+        rows={gridConfig.rows}
+        cols={gridConfig.cols}
+        cellSize={gridConfig.cellSize}
+        clickedCell={clickedCell}
+        onCellClick={(row, col) => {
+          setClickedCell({ row, col });
+          setRippleKey((k) => k + 1);
+        }}
+        interactive
+      />
     </div>
   );
 };
@@ -57,8 +94,6 @@ type DivGridProps = {
   rows: number;
   cols: number;
   cellSize: number; // in pixels
-  borderColor: string;
-  fillColor: string;
   clickedCell: { row: number; col: number } | null;
   onCellClick?: (row: number, col: number) => void;
   interactive?: boolean;
@@ -67,15 +102,15 @@ type DivGridProps = {
 type CellStyle = React.CSSProperties & {
   ["--delay"]?: string;
   ["--duration"]?: string;
+  ["--cell-fill-color"]?: string;
+  ["--cell-border-color"]?: string;
 };
 
 const DivGrid = ({
   className,
-  rows = 7,
-  cols = 30,
-  cellSize = 56,
-  borderColor = "#3f3f46",
-  fillColor = "rgba(14,165,233,0.3)",
+  rows,
+  cols,
+  cellSize,
   clickedCell = null,
   onCellClick = () => {},
   interactive = true,
@@ -92,38 +127,64 @@ const DivGrid = ({
     width: cols * cellSize,
     height: rows * cellSize,
     marginInline: "auto",
+    touchAction: "pan-y",
   };
 
   return (
-    <div className={cn("relative z-[3]", className)} style={gridStyle}>
+    <div className={cn("relative z-[3] select-none", className)} style={gridStyle}>
       {cells.map((idx) => {
         const rowIdx = Math.floor(idx / cols);
         const colIdx = idx % cols;
         const distance = clickedCell
           ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
           : 0;
-        const delay = clickedCell ? Math.max(0, distance * 55) : 0; // ms
-        const duration = 200 + distance * 80; // ms
+        const delay = clickedCell ? Math.max(0, distance * 50) : 0; // ms
+        const duration = 220 + distance * 70; // ms
 
-        const style: CellStyle = clickedCell
+        // Calculate deterministic depth tier for subtle variations across rectangles
+        const depthSeed = (rowIdx * 13 + colIdx * 7 + (rowIdx % 3) * 5) % 17;
+        let cellBg = "rgba(30, 58, 138, 0.055)"; // Default translucent navy fill
+        let cellBorder = "rgba(59, 130, 246, 0.20)"; // Default crisp blue border
+
+        if (depthSeed === 0 || depthSeed === 7) {
+          // Tier 1: Slightly highlighted accent tiles (approx ~12% of tiles)
+          cellBg = "rgba(56, 189, 248, 0.11)";
+          cellBorder = "rgba(96, 165, 250, 0.34)";
+        } else if (depthSeed === 3 || depthSeed === 11) {
+          // Tier 2: Medium subtle blue depth tiles (approx ~12% of tiles)
+          cellBg = "rgba(37, 99, 235, 0.09)";
+          cellBorder = "rgba(56, 189, 248, 0.26)";
+        } else if (depthSeed === 5 || depthSeed === 14) {
+          // Tier 3: Soft ambient blue tiles
+          cellBg = "rgba(30, 58, 138, 0.08)";
+          cellBorder = "rgba(59, 130, 246, 0.23)";
+        }
+
+        const animStyle: CellStyle = clickedCell
           ? {
               "--delay": `${delay}ms`,
               "--duration": `${duration}ms`,
+              "--cell-fill-color": cellBg,
+              "--cell-border-color": cellBorder,
             }
-          : {};
+          : {
+              "--cell-fill-color": cellBg,
+              "--cell-border-color": cellBorder,
+            };
 
         return (
           <div
             key={idx}
             className={cn(
-              "cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]",
+              "cell relative border-[0.75px] transition-all duration-200 will-change-transform cursor-pointer",
+              "hover:bg-[rgba(56,189,248,0.20)] hover:border-[rgba(147,197,253,0.55)] hover:shadow-[0_0_14px_rgba(56,189,248,0.30)]",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
               !interactive && "pointer-events-none",
             )}
             style={{
-              backgroundColor: fillColor,
-              borderColor: borderColor,
-              ...style,
+              backgroundColor: cellBg,
+              borderColor: cellBorder,
+              ...animStyle,
             }}
             onClick={
               interactive ? () => onCellClick?.(rowIdx, colIdx) : undefined

@@ -55,6 +55,16 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
           }}
         />
 
+        {/* Subtle futuristic blue illumination accentuating the rectangular grid behind the headline */}
+        <div
+          className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 w-[720px] sm:w-[980px] h-[460px] sm:h-[580px] rounded-full pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 65% 50% at center, rgba(37, 99, 235, 0.15) 0%, rgba(30, 58, 138, 0.08) 45%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
+
         {/* Ambient warm gold glow behind center-lower text */}
         <div
           className="absolute left-[36%] top-[40%] w-[360px] h-[260px] rounded-full"
@@ -66,8 +76,8 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
         />
       </div>
 
-      {/* Main Content Container with Centered Composition */}
-      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-8 lg:px-12 pt-0 pb-16 sm:pb-20">
+      {/* Main Content Container with Centered Composition (pointer-events-none lets grid interactions pass through seamlessly) */}
+      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-8 lg:px-12 pt-0 pb-16 sm:pb-20 pointer-events-none">
         
         {/* Centered Hero Headline in a Ladder-Style Layout with Increased Vertical Spacing */}
         <div className="relative pt-1 pb-4 sm:pb-6 md:pb-8 w-full max-w-[1180px] mx-auto">
@@ -136,7 +146,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
               damping: 22,
               delay: 0.32,
             }}
-            className="absolute z-30 top-[43%] sm:top-[44%] md:top-[45%] lg:top-[46%] right-[6%] sm:right-[10%] md:right-[14%] lg:right-[16%]"
+            className="absolute z-30 top-[43%] sm:top-[44%] md:top-[45%] lg:top-[46%] right-[6%] sm:right-[10%] md:right-[14%] lg:right-[16%] pointer-events-auto"
           >
             {/* Soft ambient yellow glow behind circular button */}
             <div
@@ -152,7 +162,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
               href="#services"
               onClick={handleScrollToServices}
               aria-label="View Our Services"
-              className="group relative flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[108px] sm:h-[108px] md:w-[116px] md:h-[116px] lg:w-[120px] lg:h-[120px] rounded-full text-[#000122] cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#FFD60A]/50"
+              className="group relative flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[108px] sm:h-[108px] md:w-[116px] md:h-[116px] lg:w-[120px] lg:h-[120px] rounded-full text-[#000122] cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#FFD60A]/50 pointer-events-auto"
               style={{
                 background:
                   'radial-gradient(circle at 35% 30%, #FFE566 0%, #FFD60A 52%, #E6BF00 95%)',
