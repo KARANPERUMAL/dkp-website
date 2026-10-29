@@ -3,7 +3,7 @@ import { useNavigation } from '../context/NavigationContext';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { BranchMap } from './BranchMap';
-import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
+import { TextAnimationBlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import { submitContactMessage } from '../services/contactService';
 import {
   OFFICIAL_PHONE,
@@ -20,7 +20,6 @@ import {
   IconCheck,
   IconSend,
   IconClock,
-  IconSparkles,
   IconAlertCircle,
   IconDirections,
 } from '@tabler/icons-react';
@@ -169,22 +168,12 @@ export const ContactPage = () => {
           </div>
 
           <div className="relative z-10 max-w-[1100px] mx-auto text-center">
-            {/* Tag Badge */}
-            <BlurFadeIn
-              delay={0.05}
-              duration={0.4}
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FFD60A] text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm"
-            >
-              <IconSparkles className="w-4 h-4 text-[#FFD60A]" />
-              <span>Direct Commercial & Strategic Inquiries</span>
-            </BlurFadeIn>
-
             {/* Main Heading with Blur-Fade Reveal */}
             <TextAnimationBlurFadeIn
               as="h1"
               delay={0.15}
               duration={0.5}
-              className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-6"
+              className="text-3xl sm:text-5xl md:text-6xl font-black text-[#FFD60A] tracking-tight mb-6"
             >
               Let's Build Something Great Together
             </TextAnimationBlurFadeIn>

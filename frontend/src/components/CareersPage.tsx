@@ -341,23 +341,13 @@ export const CareersPage = () => {
         </div>
 
         <div className="relative z-10 max-w-[1240px] mx-auto text-center">
-          {/* Eyebrow Label */}
-          <TextAnimationBlurFadeIn
-            as="span"
-            delay={0.05}
-            duration={0.4}
-            className="text-xs sm:text-sm font-bold text-[#FFD60A] uppercase tracking-widest mb-4 block"
-          >
-            CAREERS AT DKP INNOVATION
-          </TextAnimationBlurFadeIn>
-
           {/* Main Heading */}
           <TextAnimationBlurFadeIn
             as="h1"
             delay={0.15}
             staggerDuration={0.03}
             duration={0.6}
-            className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight mb-6 max-w-4xl mx-auto leading-[1.05]"
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFD60A] tracking-tight mb-6 max-w-4xl mx-auto leading-[1.05]"
           >
             Build Your Career. Create Meaningful Impact.
           </TextAnimationBlurFadeIn>
