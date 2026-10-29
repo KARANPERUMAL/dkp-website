@@ -55,16 +55,6 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
           }}
         />
 
-        {/* Subtle futuristic blue illumination accentuating the rectangular grid behind the headline */}
-        <div
-          className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 w-[720px] sm:w-[980px] h-[460px] sm:h-[580px] rounded-full pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 65% 50% at center, rgba(37, 99, 235, 0.15) 0%, rgba(30, 58, 138, 0.08) 45%, transparent 70%)',
-            filter: 'blur(60px)',
-          }}
-        />
-
         {/* Ambient warm gold glow behind center-lower text */}
         <div
           className="absolute left-[36%] top-[40%] w-[360px] h-[260px] rounded-full"
