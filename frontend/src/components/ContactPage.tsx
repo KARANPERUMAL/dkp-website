@@ -12,6 +12,7 @@ import {
   OFFICIAL_EMAIL_MAILTO,
   branchLocations,
 } from '../data/branchesData';
+import { OFFICIAL_SOCIAL_LINKS } from '../data/socialLinks';
 import { getAllServices } from '../data/servicesData';
 import {
   IconPhone,
@@ -220,13 +221,26 @@ export const ContactPage = () => {
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-neutral-200/60 flex items-center justify-between">
-                  <a
-                    href={OFFICIAL_PHONE_TEL}
-                    className="text-xs font-semibold text-[#854D0E] hover:text-[#713f12] inline-flex items-center space-x-1"
-                  >
-                    <span>Call Now</span>
-                    <span>&rarr;</span>
-                  </a>
+                  <div className="flex items-center space-x-2.5">
+                    <a
+                      href={OFFICIAL_PHONE_TEL}
+                      className="text-xs font-semibold text-[#854D0E] hover:text-[#713f12] inline-flex items-center space-x-1"
+                    >
+                      <span>Call Now</span>
+                      <span>&rarr;</span>
+                    </a>
+                    <span className="text-neutral-300">•</span>
+                    <a
+                      href={OFFICIAL_SOCIAL_LINKS.whatsapp.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat with DKP Innovations on WhatsApp"
+                      className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 inline-flex items-center space-x-1"
+                    >
+                      <span>WhatsApp</span>
+                      <span>&rarr;</span>
+                    </a>
+                  </div>
                   <button
                     onClick={handleCopyPhone}
                     className="text-xs text-neutral-500 hover:text-neutral-800 inline-flex items-center space-x-1 cursor-pointer font-medium"

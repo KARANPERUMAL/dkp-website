@@ -1,6 +1,7 @@
 import { useNavigation } from '../../context/NavigationContext';
 import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL, OFFICIAL_EMAIL, OFFICIAL_EMAIL_MAILTO, branchLocations } from '../../data/branchesData';
 import { serviceCategories } from '../../data/servicesData';
+import { socialLinksList, OFFICIAL_SOCIAL_LINKS } from '../../data/socialLinks';
 import { IconPhone, IconMail, IconMapPin, IconArrowUpRight } from '@tabler/icons-react';
 
 export const Footer = () => {
@@ -40,34 +41,22 @@ export const Footer = () => {
               <span className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2.5">
                 Connect With Us
               </span>
-              <div className="flex items-center space-x-2">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="DKP Innovation Facebook"
-                  className="w-8 h-8 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
-                >
-                  f
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="DKP Innovation Twitter / X"
-                  className="w-8 h-8 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
-                >
-                  t
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="DKP Innovation LinkedIn"
-                  className="w-8 h-8 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center text-xs font-bold border border-white/10 transition-all duration-200"
-                >
-                  in
-                </a>
+              <div className="flex items-center space-x-2.5">
+                {socialLinksList.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.id}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.ariaLabel}
+                      className="w-9 h-9 rounded-lg bg-[#000122] hover:bg-[#FFD60A] text-neutral-300 hover:text-[#000122] flex items-center justify-center border border-white/10 hover:border-[#FFD60A] transition-all duration-200 cursor-pointer shadow-sm hover:shadow-[0_2px_12px_rgba(255,214,10,0.3)] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A]"
+                    >
+                      <Icon className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -181,6 +170,19 @@ export const Footer = () => {
                 >
                   <IconMail className="w-4 h-4 text-[#FFD60A] flex-shrink-0" />
                   <span>{OFFICIAL_EMAIL}</span>
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href={OFFICIAL_SOCIAL_LINKS.whatsapp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={OFFICIAL_SOCIAL_LINKS.whatsapp.ariaLabel}
+                  className="inline-flex items-center space-x-2 text-neutral-300 hover:text-[#FFD60A] text-xs sm:text-sm font-medium transition-colors"
+                >
+                  <OFFICIAL_SOCIAL_LINKS.whatsapp.icon className="w-4 h-4 text-[#FFD60A] flex-shrink-0" />
+                  <span>WhatsApp: {OFFICIAL_SOCIAL_LINKS.whatsapp.shortLabel}</span>
                 </a>
               </div>
 
