@@ -2,6 +2,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+export type GridOrigin = { row: number; col: number };
+
 export const BackgroundRippleEffect = ({
   rows = 14,
   cols = 32,
@@ -13,12 +15,10 @@ export const BackgroundRippleEffect = ({
   cellSize?: number;
   className?: string;
 }) => {
-  const [clickedCell, setClickedCell] = useState<{
-    row: number;
-    col: number;
-  } | null>(null);
+  const [activeOrigins, setActiveOrigins] = useState<GridOrigin[] | null>(null);
   const [rippleKey, setRippleKey] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const hasAutoTriggeredRef = useRef(false);
 
   // Responsive grid dimension calculation to seamlessly tile edge-to-edge across all viewports
   const [gridConfig, setGridConfig] = useState({
@@ -57,6 +57,43 @@ export const BackgroundRippleEffect = ({
     return () => resizeObserver.disconnect();
   }, [rows, cols, cellSize]);
 
+  // Automatically activate the existing blue light effect when the homepage first loads
+  useEffect(() => {
+    // Respect prefers-reduced-motion
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    if (hasAutoTriggeredRef.current) return;
+
+    // Trigger illumination shortly after mounting and layout settling
+    const timer = setTimeout(() => {
+      if (hasAutoTriggeredRef.current) return;
+      hasAutoTriggeredRef.current = true;
+
+      const centerRow = Math.floor(gridConfig.rows * 0.42);
+      const centerCol = Math.floor(gridConfig.cols / 2);
+
+      // Distribute origins across the central headline area for a balanced glow spread
+      const initialOrigins: GridOrigin[] =
+        gridConfig.cols > 16
+          ? [
+              { row: centerRow, col: Math.max(0, centerCol - 5) },
+              { row: centerRow, col: centerCol },
+              { row: centerRow, col: Math.min(gridConfig.cols - 1, centerCol + 5) },
+            ]
+          : [{ row: centerRow, col: centerCol }];
+
+      setActiveOrigins(initialOrigins);
+      setRippleKey((k) => k + 1);
+    }, 380);
+
+    return () => clearTimeout(timer);
+  }, [gridConfig.rows, gridConfig.cols]);
+
   return (
     <div
       ref={containerRef}
@@ -78,9 +115,9 @@ export const BackgroundRippleEffect = ({
         rows={gridConfig.rows}
         cols={gridConfig.cols}
         cellSize={gridConfig.cellSize}
-        clickedCell={clickedCell}
+        activeOrigins={activeOrigins}
         onCellClick={(row, col) => {
-          setClickedCell({ row, col });
+          setActiveOrigins([{ row, col }]);
           setRippleKey((k) => k + 1);
         }}
         interactive
@@ -94,7 +131,7 @@ type DivGridProps = {
   rows: number;
   cols: number;
   cellSize: number; // in pixels
-  clickedCell: { row: number; col: number } | null;
+  activeOrigins: GridOrigin[] | null;
   onCellClick?: (row: number, col: number) => void;
   interactive?: boolean;
 };
@@ -111,7 +148,7 @@ const DivGrid = ({
   rows,
   cols,
   cellSize,
-  clickedCell = null,
+  activeOrigins = null,
   onCellClick = () => {},
   interactive = true,
 }: DivGridProps) => {
@@ -135,11 +172,19 @@ const DivGrid = ({
       {cells.map((idx) => {
         const rowIdx = Math.floor(idx / cols);
         const colIdx = idx % cols;
-        const distance = clickedCell
-          ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
-          : 0;
-        const delay = clickedCell ? Math.max(0, distance * 50) : 0; // ms
-        const duration = 220 + distance * 70; // ms
+
+        // Compute shortest distance from this cell to any active origin
+        let distance = 0;
+        if (activeOrigins && activeOrigins.length > 0) {
+          distance = Math.min(
+            ...activeOrigins.map((origin) =>
+              Math.hypot(origin.row - rowIdx, origin.col - colIdx)
+            )
+          );
+        }
+
+        const delay = activeOrigins && activeOrigins.length > 0 ? Math.max(0, distance * 50) : 0; // ms
+        const duration = 240 + distance * 70; // ms
 
         // Calculate deterministic depth tier for subtle variations across rectangles
         const depthSeed = (rowIdx * 13 + colIdx * 7 + (rowIdx % 3) * 5) % 17;
@@ -160,17 +205,18 @@ const DivGrid = ({
           cellBorder = "rgba(59, 130, 246, 0.23)";
         }
 
-        const animStyle: CellStyle = clickedCell
-          ? {
-              "--delay": `${delay}ms`,
-              "--duration": `${duration}ms`,
-              "--cell-fill-color": cellBg,
-              "--cell-border-color": cellBorder,
-            }
-          : {
-              "--cell-fill-color": cellBg,
-              "--cell-border-color": cellBorder,
-            };
+        const animStyle: CellStyle =
+          activeOrigins && activeOrigins.length > 0
+            ? {
+                "--delay": `${delay}ms`,
+                "--duration": `${duration}ms`,
+                "--cell-fill-color": cellBg,
+                "--cell-border-color": cellBorder,
+              }
+            : {
+                "--cell-fill-color": cellBg,
+                "--cell-border-color": cellBorder,
+              };
 
         return (
           <div
@@ -178,12 +224,13 @@ const DivGrid = ({
             className={cn(
               "cell relative border-[0.75px] transition-all duration-200 will-change-transform cursor-pointer",
               "hover:bg-[rgba(56,189,248,0.20)] hover:border-[rgba(147,197,253,0.55)] hover:shadow-[0_0_14px_rgba(56,189,248,0.30)]",
-              clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
+              activeOrigins && activeOrigins.length > 0 && "animate-cell-ripple [animation-fill-mode:none]",
               !interactive && "pointer-events-none",
             )}
             style={{
               backgroundColor: cellBg,
               borderColor: cellBorder,
+              touchAction: "pan-y",
               ...animStyle,
             }}
             onClick={

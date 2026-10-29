@@ -137,7 +137,7 @@ export const GalleryPage = () => {
           EDITORIAL HEADER SECTION
           Minimal, quiet luxury presentation with natural description placement
           ========================================================================= */}
-      <header className="relative w-full pt-20 sm:pt-24 md:pt-28 pb-4 sm:pb-6 md:pb-8 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
+      <header className="relative w-full pt-28 sm:pt-32 md:pt-28 pb-4 sm:pb-6 md:pb-8 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
         {/* Subtle Ambient Light */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
           <div

@@ -69,13 +69,13 @@ export const FloatingNav = ({
           ease: "easeInOut",
         }}
         className={cn(
-          "fixed top-3.5 sm:top-5 inset-x-0 mx-auto z-[5000] flex max-w-fit items-center justify-center pointer-events-auto",
+          "relative md:fixed md:top-5 md:inset-x-0 md:mx-auto z-[5000] flex max-w-fit items-center justify-center pointer-events-auto",
           className
         )}
       >
         <nav
           aria-label="Floating Navigation"
-          className="flex items-center justify-center gap-1 rounded-full border border-white/[0.18] bg-[#000122]/90 px-2 sm:px-2.5 py-1.5 shadow-[0_8px_32px_rgba(0,1,34,0.7),inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-xl"
+          className="flex items-center justify-center gap-0.5 sm:gap-1 rounded-full border border-white/[0.18] bg-[#000122]/90 px-1.5 sm:px-2.5 py-1.5 shadow-[0_8px_32px_rgba(0,1,34,0.7),inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-xl max-w-[calc(100vw-1.5rem)] overflow-x-auto no-scrollbar"
         >
           {navItems.map((navItem, idx: number) => {
             const isActive = activeTab === navItem.link;
@@ -83,6 +83,8 @@ export const FloatingNav = ({
               <a
                 key={`link-${idx}`}
                 href={navItem.link}
+                title={navItem.name}
+                aria-label={navItem.name}
                 onClick={(e) => {
                   e.preventDefault();
                   if (onItemClick) {
@@ -90,7 +92,7 @@ export const FloatingNav = ({
                   }
                 }}
                 className={cn(
-                  "relative flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 select-none",
+                  "relative flex items-center gap-1.5 px-2.5 sm:px-3 md:px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 select-none shrink-0",
                   isActive
                     ? "text-[#000122] font-bold"
                     : "text-[#CBD5E1] hover:text-[#FFD60A] hover:bg-white/10"
@@ -118,10 +120,10 @@ export const FloatingNav = ({
                       {navItem.icon}
                     </span>
                   )}
-                  <span className="hidden sm:inline">{navItem.name}</span>
-                  {/* Active Indicator Dot on small mobile screens where text is hidden */}
+                  <span className="hidden md:inline">{navItem.name}</span>
+                  {/* Active Indicator Dot on mobile screens below 768px where text is hidden */}
                   {isActive && (
-                    <span className="sm:hidden w-1.5 h-1.5 rounded-full bg-[#000122] ml-0.5" />
+                    <span className="md:hidden w-1.5 h-1.5 rounded-full bg-[#000122] ml-0.5" />
                   )}
                 </span>
               </a>

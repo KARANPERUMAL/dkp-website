@@ -42,9 +42,17 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
   const [selectedPositionForApplication, setSelectedPositionForApplication] = useState<string | undefined>();
 
   useEffect(() => {
+    // Disable browser automatic scroll restoration so page transitions start cleanly at top
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     const handleUrlChange = () => {
       const page = getInitialPage();
       setCurrentPage(page);
+      if (page === 'home' && (!window.location.hash || window.location.hash === '#home')) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
     };
 
     window.addEventListener('popstate', handleUrlChange);
@@ -56,11 +64,21 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const navigateTo = (page: PageRoute, targetId?: string) => {
+    const isAlreadyOnPage = currentPage === page;
     setCurrentPage(page);
 
     const basePath = page === 'home' ? '/' : `/${page}`;
-    const url = targetId ? `${basePath}#${targetId}` : basePath;
+    const url = targetId && targetId !== 'home' ? `${basePath}#${targetId}` : basePath;
     window.history.pushState(null, '', url);
+
+    if (page === 'home' && (!targetId || targetId === 'home')) {
+      // Immediately reset scroll to absolute top (y=0) to restore hero in starting state
+      window.scrollTo({ top: 0, left: 0, behavior: isAlreadyOnPage ? 'smooth' : 'instant' });
+      if (window.location.hash) {
+        window.history.replaceState(null, '', '/');
+      }
+      return;
+    }
 
     if (targetId) {
       setTimeout(() => {
@@ -68,11 +86,11 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
         } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         }
       }, 80);
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: isAlreadyOnPage ? 'smooth' : 'instant' });
     }
   };
 
