@@ -117,7 +117,6 @@ export const Navbar = () => {
               navItems={navItems}
               activeTab={activeTab}
               onItemClick={handleNavClick}
-              alwaysVisible={true}
             />
           </div>
         </div>

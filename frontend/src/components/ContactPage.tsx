@@ -3,6 +3,7 @@ import { useNavigation } from '../context/NavigationContext';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { BranchMap } from './BranchMap';
+import { CustomSelect } from './ui/custom-select';
 import { TextAnimationBlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import { submitContactMessage } from '../services/contactService';
 import {
@@ -174,7 +175,7 @@ export const ContactPage = () => {
               as="h1"
               delay={0.15}
               duration={0.5}
-              className="text-3xl sm:text-5xl md:text-6xl font-black text-[#FFD60A] tracking-tight mb-6"
+              className="text-3xl sm:text-5xl md:text-6xl font-black text-[#FFFFFF] tracking-tight mb-6"
             >
               Let's Build Something Great Together
             </TextAnimationBlurFadeIn>
@@ -489,18 +490,19 @@ export const ContactPage = () => {
                     <label htmlFor="service" className="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
                       Service of Interest
                     </label>
-                    <select
+                    <CustomSelect
                       id="service"
+                      name="service"
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:border-[#FFD60A] focus:ring-2 focus:ring-[#FFD60A]/30 text-sm text-neutral-900 bg-white focus:outline-none transition-all cursor-pointer"
-                    >
-                      {allServices.map((srv) => (
-                        <option key={srv.id} value={srv.name}>
-                          {srv.category}: {srv.name}
-                        </option>
-                      ))}
-                    </select>
+                      options={allServices.map((srv) => ({
+                        value: srv.name,
+                        label: `${srv.category}: ${srv.name}`,
+                        category: srv.category,
+                      }))}
+                      buttonClassName="rounded-lg border-neutral-200"
+                      placeholder="Select a service..."
+                    />
                   </div>
                 </div>
 

@@ -52,7 +52,7 @@ export const AboutPage = () => {
       {/* Floating Header & Navbar */}
       <Navbar />
 
-      {/* COMBINED HERO & COMPANY STATISTICS SECTION: One cohesive section with unified background and minimal gap */}
+      {/* COMBINED HERO & COMPANY STATISTICS SECTION: One cohesive section with unified blue background and minimal gap */}
       <section className="relative w-full bg-[#004D86] pt-28 pb-14 sm:pt-36 sm:pb-20 px-4 sm:px-8 lg:px-12 overflow-hidden select-none border-b border-white/20">
         {/* Ambient Lighting Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -89,7 +89,7 @@ export const AboutPage = () => {
             delay={0.1}
             staggerDuration={0.03}
             duration={0.6}
-            className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFD60A] tracking-tight uppercase mb-6 max-w-4xl mx-auto leading-[1.05]"
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFFFFF] tracking-tight uppercase mb-6 max-w-4xl mx-auto leading-[1.05]"
           >
             We Turn Ideas Into Powerful Brands.
           </TextAnimationBlurFadeIn>
@@ -178,9 +178,9 @@ export const AboutPage = () => {
       </section>
 
       {/* Main Content Area */}
-      <main className="relative w-full bg-neutral-50 flex-1">
+      <main className="relative w-full bg-[#FFFFFF] flex-1">
         {/* SECTION B: Founder Profile — Puttaraju KV */}
-        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#004D86] border-b border-white/20 relative overflow-hidden select-none">
+        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#FFFFFF] border-b border-neutral-200/80 relative overflow-hidden select-none">
           {/* Subtle Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div
@@ -238,7 +238,7 @@ export const AboutPage = () => {
         </section>
 
         {/* SECTION C: Purpose & Direction — Vision & Mission */}
-        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-neutral-50 select-none">
+        <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-[#FFFFFF] select-none">
           <div className="max-w-[1240px] mx-auto">
             {/* Section Header with Blur-and-Fade Reveal */}
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">

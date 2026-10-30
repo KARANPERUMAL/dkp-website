@@ -1,11 +1,10 @@
-"use client";
 import { useState, type ReactNode } from "react";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface NavItem {
@@ -19,7 +18,7 @@ export const FloatingNav = ({
   className,
   activeTab = "#home",
   onItemClick,
-  alwaysVisible = true,
+  alwaysVisible = false,
 }: {
   navItems: NavItem[];
   className?: string;
@@ -27,28 +26,27 @@ export const FloatingNav = ({
   onItemClick?: (link: string) => void;
   alwaysVisible?: boolean;
 }) => {
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
 
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
+  useMotionValueEvent(scrollY, "change", (current) => {
     if (alwaysVisible) {
       if (!visible) setVisible(true);
       return;
     }
     if (typeof current === "number") {
-      const prev = scrollYProgress.getPrevious();
-      const direction = prev !== undefined ? current - prev : 0;
+      const prev = scrollY.getPrevious() ?? 0;
+      const direction = current - prev;
 
       // Keep visible near the top of the viewport
-      if (scrollYProgress.get() < 0.05) {
+      if (current < 20) {
         setVisible(true);
-      } else {
-        // Scrolling up -> reveal; scrolling down -> hide
-        if (direction < 0) {
-          setVisible(true);
-        } else {
-          setVisible(false);
-        }
+      } else if (direction > 5) {
+        // Scrolling down -> smoothly hide
+        setVisible(false);
+      } else if (direction < -5) {
+        // Scrolling up -> smoothly reveal
+        setVisible(true);
       }
     }
   });
@@ -69,13 +67,14 @@ export const FloatingNav = ({
           ease: "easeInOut",
         }}
         className={cn(
-          "relative md:fixed md:top-5 md:inset-x-0 md:mx-auto z-[5000] flex max-w-fit items-center justify-center pointer-events-auto",
+          "relative md:fixed md:top-5 md:inset-x-0 md:mx-auto z-[5000] flex max-w-fit items-center justify-center",
+          visible ? "pointer-events-auto" : "pointer-events-none",
           className
         )}
       >
         <nav
           aria-label="Floating Navigation"
-          className="flex items-center justify-center gap-0.5 sm:gap-1 rounded-full border border-white/[0.25] bg-[#003E6D]/90 px-1.5 sm:px-2.5 py-1.5 shadow-[0_8px_32px_rgba(0,62,109,0.35),inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-xl max-w-[calc(100vw-1.5rem)] overflow-x-auto no-scrollbar"
+          className="flex items-center justify-center gap-0.5 sm:gap-1 rounded-full border border-white/[0.25] bg-[#003E6D]/95 px-1.5 sm:px-2.5 py-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-xl max-w-[calc(100vw-1.5rem)] overflow-x-auto no-scrollbar"
         >
           {navItems.map((navItem, idx: number) => {
             const isActive = activeTab === navItem.link;

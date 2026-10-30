@@ -24,7 +24,7 @@ export const ServicesPage = () => {
         <Navbar />
 
         {/* Cinematic Services Hero Section */}
-        <section className="relative w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
+        <section className="relative w-full pt-28 pb-12 sm:pt-36 sm:pb-16 px-4 sm:px-8 lg:px-12 overflow-hidden select-none">
           {/* Ambient Lighting Gradients */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div
@@ -51,7 +51,7 @@ export const ServicesPage = () => {
               as="h1"
               delay={0.1}
               duration={0.6}
-              className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFD60A] tracking-tight uppercase mb-6"
+              className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFFFFF] tracking-tight uppercase mb-6"
             >
               What Do We Do
             </TextAnimationBlurFadeIn>
@@ -82,24 +82,6 @@ export const ServicesPage = () => {
               >
                 <span>Explore 5 Core Capabilities</span>
               </a>
-            </BlurFadeIn>
-
-            {/* Quick Category Jump Pills with Blur-Fade Reveal */}
-            <BlurFadeIn
-              delay={0.45}
-              duration={0.5}
-              className="mt-12 pt-8 border-t border-white/20 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
-            >
-              {serviceCategories.map((cat, idx) => (
-                <a
-                  key={cat.id}
-                  href={`#${cat.slug}`}
-                  className="px-3.5 py-1.5 rounded-lg bg-[#003E6D] hover:bg-white/20 text-xs text-white hover:text-[#FFD60A] border border-white/20 hover:border-[#FFD60A]/50 transition-all font-medium flex items-center space-x-1.5"
-                >
-                  <span className="text-[#FFD60A] font-bold">{idx + 1}.</span>
-                  <span>{cat.title}</span>
-                </a>
-              ))}
             </BlurFadeIn>
           </div>
         </section>

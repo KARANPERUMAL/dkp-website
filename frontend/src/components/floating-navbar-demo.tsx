@@ -1,4 +1,3 @@
-"use client";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import {
   IconHome,

@@ -14,6 +14,7 @@ import {
   TextAnimationBlurFadeIn,
   BlurFadeIn,
 } from '@/components/ui/text-animation-blur-fade-in';
+import { CustomSelect } from './ui/custom-select';
 import {
   Briefcase,
   CheckCircle2,
@@ -347,7 +348,7 @@ export const CareersPage = () => {
             delay={0.15}
             staggerDuration={0.03}
             duration={0.6}
-            className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFD60A] tracking-tight mb-6 max-w-4xl mx-auto leading-[1.05]"
+            className="text-4xl sm:text-6xl md:text-7xl font-black text-[#FFFFFF] tracking-tight mb-6 max-w-4xl mx-auto leading-[1.05]"
           >
             Build Your Career. Create Meaningful Impact.
           </TextAnimationBlurFadeIn>
@@ -695,27 +696,25 @@ export const CareersPage = () => {
                       >
                         Position Applying For <span className="text-[#854D0E]">*</span>
                       </label>
-                      <select
+                      <CustomSelect
                         id="position"
+                        name="position"
                         value={formData.position}
-                        onChange={(e) =>
-                          setFormData({ ...formData, position: e.target.value })
-                        }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
-                          errors.position
-                            ? 'border-red-400 ring-1 ring-red-400'
-                            : 'border-neutral-300'
-                        }`}
-                      >
-                        <option value="General Application">
-                          General Application (All Disciplines)
-                        </option>
-                        {openPositions.map((pos) => (
-                          <option key={pos.id} value={pos.title}>
-                            {pos.title} ({pos.department})
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(e) => {
+                          setFormData({ ...formData, position: e.target.value });
+                          if (errors.position) setErrors((prev) => ({ ...prev, position: undefined }));
+                        }}
+                        options={[
+                          { value: 'General Application', label: 'General Application (All Disciplines)' },
+                          ...openPositions.map((pos) => ({
+                            value: pos.title,
+                            label: `${pos.title} (${pos.department})`,
+                            category: pos.department,
+                          })),
+                        ]}
+                        error={Boolean(errors.position)}
+                        placeholder="Select a position..."
+                      />
                       {errors.position && (
                         <p className="text-xs text-red-600 mt-1.5 font-medium">
                           {errors.position}
@@ -734,24 +733,18 @@ export const CareersPage = () => {
                       >
                         Department of Interest <span className="text-[#854D0E]">*</span>
                       </label>
-                      <select
+                      <CustomSelect
                         id="department"
+                        name="department"
                         value={formData.department}
-                        onChange={(e) =>
-                          setFormData({ ...formData, department: e.target.value })
-                        }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
-                          errors.department
-                            ? 'border-red-400 ring-1 ring-red-400'
-                            : 'border-neutral-300'
-                        }`}
-                      >
-                        {departmentOptions.map((dep) => (
-                          <option key={dep} value={dep}>
-                            {dep}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(e) => {
+                          setFormData({ ...formData, department: e.target.value });
+                          if (errors.department) setErrors((prev) => ({ ...prev, department: undefined }));
+                        }}
+                        options={departmentOptions}
+                        error={Boolean(errors.department)}
+                        placeholder="Select a department..."
+                      />
                       {errors.department && (
                         <p className="text-xs text-red-600 mt-1.5 font-medium">
                           {errors.department}
@@ -767,24 +760,18 @@ export const CareersPage = () => {
                       >
                         Experience Level <span className="text-[#854D0E]">*</span>
                       </label>
-                      <select
+                      <CustomSelect
                         id="experienceLevel"
+                        name="experienceLevel"
                         value={formData.experienceLevel}
-                        onChange={(e) =>
-                          setFormData({ ...formData, experienceLevel: e.target.value })
-                        }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
-                          errors.experienceLevel
-                            ? 'border-red-400 ring-1 ring-red-400'
-                            : 'border-neutral-300'
-                        }`}
-                      >
-                        {experienceLevelOptions.map((exp) => (
-                          <option key={exp} value={exp}>
-                            {exp}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(e) => {
+                          setFormData({ ...formData, experienceLevel: e.target.value });
+                          if (errors.experienceLevel) setErrors((prev) => ({ ...prev, experienceLevel: undefined }));
+                        }}
+                        options={experienceLevelOptions}
+                        error={Boolean(errors.experienceLevel)}
+                        placeholder="Select experience level..."
+                      />
                       {errors.experienceLevel && (
                         <p className="text-xs text-red-600 mt-1.5 font-medium">
                           {errors.experienceLevel}
@@ -803,24 +790,18 @@ export const CareersPage = () => {
                       >
                         Preferred Work Arrangement <span className="text-[#854D0E]">*</span>
                       </label>
-                      <select
+                      <CustomSelect
                         id="workArrangement"
+                        name="workArrangement"
                         value={formData.workArrangement}
-                        onChange={(e) =>
-                          setFormData({ ...formData, workArrangement: e.target.value })
-                        }
-                        className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
-                          errors.workArrangement
-                            ? 'border-red-400 ring-1 ring-red-400'
-                            : 'border-neutral-300'
-                        }`}
-                      >
-                        {workArrangementOptions.map((arr) => (
-                          <option key={arr} value={arr}>
-                            {arr}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(e) => {
+                          setFormData({ ...formData, workArrangement: e.target.value });
+                          if (errors.workArrangement) setErrors((prev) => ({ ...prev, workArrangement: undefined }));
+                        }}
+                        options={workArrangementOptions}
+                        error={Boolean(errors.workArrangement)}
+                        placeholder="Select work arrangement..."
+                      />
                       {errors.workArrangement && (
                         <p className="text-xs text-red-600 mt-1.5 font-medium">
                           {errors.workArrangement}

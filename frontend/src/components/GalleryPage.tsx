@@ -13,29 +13,35 @@ import {
 
 // Ordered gallery archive to precisely fulfill the editorial collage composition:
 // Top row (2): 3.jpeg (large wide left) + 4.jpeg (tall landscape right)
-// Middle row (3): 5.jpeg (small square left) + 7.jpeg (larger rectangle center) + 1.jpeg (narrow vertical right)
-// Bottom row (3): 6.jpeg (portrait) + 9.jpeg (portrait) + 2.jpeg (portrait)
-// Additional row (4): 11.png (wide facade left) + 12.png (tower) + 8.jpeg (elevation) + 10.jpeg (hardware)
+// Middle row (3): 5.jpeg (square crop left) + 14.jpeg (landscape center) + 9.jpeg (portrait right)
+// Third row (3): 13.jpeg (portrait left) + 6.jpeg (portrait center) + 12.png (portrait right)
+// Fourth row (4): 7.jpeg (landscape left) + 1.jpeg (portrait) + 2.jpeg (portrait) + 15.jpeg (portrait)
+// Fifth row (3): 8.jpeg (portrait left) + 11.png (landscape center) + 10.jpeg (portrait right)
 const CURATED_COLLAGE_IDS = [
-  // Top Row (2 images)
+  // Top Row (2 images) — Preserved exact original positions
   'studio-panorama', // Slot 0: 3.jpeg (Landscape, large wide left)
   'inspirational-cultural-mural', // Slot 1: 4.jpeg (Landscape, tall landscape right)
 
-  // Middle Row (3 images)
-  'chroma-production-studio', // Slot 2: 5.jpeg (Landscape cropped to square 1:1, left)
-  'strategy-meeting-desk', // Slot 3: 7.jpeg (Landscape, larger rectangular center)
-  'digital-marketing-hub', // Slot 4: 1.jpeg (Portrait, narrow vertical right)
+  // Middle Row (3 images) — Balanced production, collaborative workbench, leadership suite
+  'chroma-production-studio', // Slot 2: 5.jpeg (Chroma green studio cropped to square 1:1, left)
+  'advertising-and-creative-bench', // Slot 3: 14.jpeg (Landscape, advertising & web bench center)
+  'executive-director-cabin', // Slot 4: 9.jpeg (Portrait, pine wood executive cabin right)
 
-  // Bottom Row (3 images)
-  'consultation-lounge', // Slot 5: 6.jpeg (Portrait, left)
-  'executive-director-cabin', // Slot 6: 9.jpeg (Portrait, center)
-  'corridor-and-suites', // Slot 7: 2.jpeg (Portrait, right)
+  // Third Row (3 images) — Tech workspace, golden lounge, glass tower elevation
+  'digital-marketing-growth-lab', // Slot 5: 13.jpeg (Portrait, digital marketing team desk left)
+  'consultation-lounge', // Slot 6: 6.jpeg (Portrait, gold sofa consultation lounge center)
+  'corporate-tower-elevation', // Slot 7: 12.png (Portrait, blue glass tower elevation right)
 
-  // Additional Balanced Row (4 images)
-  'nagadevanahalli-corporate-facade', // Slot 8: 11.png (Landscape, wide corporate facade left)
-  'corporate-tower-elevation', // Slot 9: 12.png (Portrait, tower elevation right 1)
-  'workspace-vertical-depth', // Slot 10: 8.jpeg (Portrait, studio elevation right 2)
-  'hardware-and-marketing-desk', // Slot 11: 10.jpeg (Portrait, tech workstation right 3)
+  // Fourth Row (4 images) — Meeting desk & greenery, dual-screen marketing, corridor, IT coding
+  'strategy-meeting-desk', // Slot 8: 7.jpeg (Landscape, strategy desk & plant left)
+  'digital-marketing-hub', // Slot 9: 1.jpeg (Portrait, dual-screen marketing workstation)
+  'corridor-and-suites', // Slot 10: 2.jpeg (Portrait, polished wood floor corridor)
+  'it-solutions-engineering-desk', // Slot 11: 15.jpeg (Portrait, IT solutions coding desk)
+
+  // Fifth Row — Architectural ceiling, corporate building facade, tech hardware (3 images)
+  'workspace-vertical-depth', // Slot 12: 8.jpeg (Portrait, studio elevation & wood ceiling left)
+  'nagadevanahalli-corporate-facade', // Slot 13: 11.png (Landscape, corporate facade center)
+  'hardware-and-marketing-desk', // Slot 14: 10.jpeg (Portrait, keyboard & tech hardware right)
 ];
 
 interface GalleryCardProps {
@@ -100,7 +106,7 @@ const GalleryCard = ({
 export const GalleryPage = () => {
   const { navigateTo } = useNavigation();
 
-  // Curate all 12 items in intentional editorial order
+  // Curate all 15 items in intentional editorial order
   const curatedGalleryItems: GalleryItem[] = useMemo(() => {
     const itemMap = new Map(galleryItems.map((item) => [item.id, item]));
     const ordered: GalleryItem[] = [];
@@ -172,9 +178,10 @@ export const GalleryPage = () => {
           MAIN GALLERY LAYOUT (MATCHING REFERENCE EDITORIAL COLLAGE)
           Tier 1: Top row (2 images: large wide left, tall landscape right)
           Tier 2: Middle row (3 images: small square left, larger rectangular center, narrow vertical right)
-          Tier 3: Bottom row (3 images: three portrait-oriented images arranged side by side)
-          Tier 4: Additional balanced row (4 images: wide corporate facade left + vertical triptych right)
-          All 12 images visible directly on the page without omission or duplication
+          Tier 3: Third row (3 images: three portrait-oriented images arranged side by side)
+          Tier 4: Fourth row (4 images: wide corporate facade left + vertical triptych right)
+          Tier 5: Fifth row (3 images: digital marketing portrait left, advertising landscape center, IT solutions portrait right)
+          All 15 images visible directly on the page without omission or duplication
           ========================================================================= */}
       <main className="relative w-full pb-14 sm:pb-20 md:pb-24 px-4 sm:px-8 lg:px-12 flex-1">
         <div className="max-w-[1240px] mx-auto flex flex-col gap-4 sm:gap-5 md:gap-6">
@@ -231,7 +238,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Center: Larger rectangular image (Slot 3, 7.jpeg) */}
+            {/* Center: Larger rectangular image (Slot 3, 14.jpeg) */}
             {curatedGalleryItems[3] && (
               <div className="col-span-12 sm:col-span-6 flex flex-col">
                 <GalleryCard
@@ -244,7 +251,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Narrow vertical image (Slot 4, 1.jpeg) */}
+            {/* Right: Narrow vertical image (Slot 4, 9.jpeg) */}
             {curatedGalleryItems[4] && (
               <div className="col-span-12 sm:col-span-3 flex flex-col">
                 <GalleryCard
@@ -264,7 +271,7 @@ export const GalleryPage = () => {
               arranged side by side
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Portrait 1 (Slot 5, 6.jpeg) */}
+            {/* Left: Portrait 1 (Slot 5, 13.jpeg) */}
             {curatedGalleryItems[5] && (
               <div className="col-span-1 flex flex-col">
                 <GalleryCard
@@ -277,7 +284,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Center: Portrait 2 (Slot 6, 9.jpeg) */}
+            {/* Center: Portrait 2 (Slot 6, 6.jpeg) */}
             {curatedGalleryItems[6] && (
               <div className="col-span-1 flex flex-col">
                 <GalleryCard
@@ -290,7 +297,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Portrait 3 (Slot 7, 2.jpeg) */}
+            {/* Right: Portrait 3 (Slot 7, 12.png) */}
             {curatedGalleryItems[7] && (
               <div className="col-span-1 flex flex-col">
                 <GalleryCard
@@ -306,11 +313,10 @@ export const GalleryPage = () => {
 
           {/* ---------------------------------------------------------------------
               TIER 4 — ADDITIONAL BALANCED ROW (4 IMAGES)
-              Natural extension presenting all 12 images directly on the page:
-              Large wide corporate facade on the left, paired with a vertical triptych on the right
+              Strategy desk on the left, paired with a vertical triptych on the right
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Large wide architectural facade (Slot 8, 11.png) */}
+            {/* Left: Large wide strategy & meeting collaboration desk (Slot 8, 7.jpeg) */}
             {curatedGalleryItems[8] && (
               <div className="col-span-12 md:col-span-6 flex flex-col">
                 <GalleryCard
@@ -324,9 +330,9 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Three vertical architectural portraits side by side (Slots 9, 10, 11) */}
+            {/* Right: Three vertical studio portraits side by side (Slots 9, 10, 11) */}
             <div className="col-span-12 md:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
-              {/* 12.png: Corporate Tower Architectural Elevation */}
+              {/* 1.jpeg: Digital Marketing & Strategy Workstation */}
               {curatedGalleryItems[9] && (
                 <div className="flex flex-col">
                   <GalleryCard
@@ -340,7 +346,7 @@ export const GalleryPage = () => {
                 </div>
               )}
 
-              {/* 8.jpeg: Studio Elevation & Workspace Architecture */}
+              {/* 2.jpeg: Central Corridor & Architectural Layout */}
               {curatedGalleryItems[10] && (
                 <div className="flex flex-col">
                   <GalleryCard
@@ -354,7 +360,7 @@ export const GalleryPage = () => {
                 </div>
               )}
 
-              {/* 10.jpeg: Creative Technology & Development Setup */}
+              {/* 15.jpeg: IT & Digital Solutions Engineering Station */}
               {curatedGalleryItems[11] && (
                 <div className="flex flex-col">
                   <GalleryCard
@@ -368,6 +374,57 @@ export const GalleryPage = () => {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* ---------------------------------------------------------------------
+              TIER 5 — ARCHITECTURAL CEILING, CORPORATE FACADE & TECH DESK (3 IMAGES)
+              Editorial triptych presenting images 8, 11, and 10:
+              Left: Studio Elevation & Workspace Architecture (Slot 12, 8.jpeg, portrait)
+              Center: DKP Innovations Corporate Facade & Branch (Slot 13, 11.png, landscape)
+              Right: Creative Technology & Development Setup (Slot 14, 10.jpeg, portrait)
+              --------------------------------------------------------------------- */}
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
+            {/* Left: Studio Elevation & Workspace Architecture (Slot 12, 8.jpeg) */}
+            {curatedGalleryItems[12] && (
+              <div className="col-span-12 sm:col-span-3 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[12]}
+                  index={12}
+                  aspectClass="aspect-[3/4]"
+                  objectPosition="object-center"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+
+            {/* Center: DKP Innovations Corporate Facade & Branch (Slot 13, 11.png) */}
+            {curatedGalleryItems[13] && (
+              <div className="col-span-12 sm:col-span-6 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[13]}
+                  index={13}
+                  aspectClass="aspect-[16/10]"
+                  objectPosition="object-center"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
+
+            {/* Right: Creative Technology & Development Setup (Slot 14, 10.jpeg) */}
+            {curatedGalleryItems[14] && (
+              <div className="col-span-12 sm:col-span-3 flex flex-col">
+                <GalleryCard
+                  item={curatedGalleryItems[14]}
+                  index={14}
+                  aspectClass="aspect-[3/4]"
+                  objectPosition="object-center"
+                  onOpen={openLightboxAt}
+                  className="h-full flex-1"
+                />
+              </div>
+            )}
           </div>
         </div>
       </main>
