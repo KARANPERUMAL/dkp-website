@@ -59,7 +59,7 @@ public class ContactService {
         sub.setMessage(request.getMessage().trim());
         sub.setStatus("SUBMITTED");
 
-        repository.save(sub);
+        repository.saveAndFlush(sub);
 
         // Queue Admin Notification Outbox
         String adminTo = appProperties.getEmail().getContactTo();

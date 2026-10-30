@@ -1,6 +1,7 @@
 package com.dkp.email;
 
 import com.dkp.config.AppProperties;
+import com.dkp.report.ExcelReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -18,14 +19,17 @@ public class EmailOutboxScheduler {
     private static final Logger log = LoggerFactory.getLogger(EmailOutboxScheduler.class);
     private final EmailOutboxRepository outboxRepository;
     private final ResendEmailClient resendClient;
+    private final ExcelReportService excelReportService;
     private final AppProperties appProperties;
     private final SecureRandom random = new SecureRandom();
 
     public EmailOutboxScheduler(EmailOutboxRepository outboxRepository,
                                 ResendEmailClient resendClient,
+                                ExcelReportService excelReportService,
                                 AppProperties appProperties) {
         this.outboxRepository = outboxRepository;
         this.resendClient = resendClient;
+        this.excelReportService = excelReportService;
         this.appProperties = appProperties;
     }
 
@@ -58,12 +62,46 @@ public class EmailOutboxScheduler {
         event.setAttemptCount(event.getAttemptCount() + 1);
 
         try {
-            String providerId = resendClient.sendEmail(
-                    event.getRecipientEmail(),
-                    event.getSubject(),
-                    event.getBodyHtml(),
-                    event.getBodyText()
-            );
+            String providerId;
+            // Only attach complete database records workbook to administrator notifications
+            if (event.getEventType() == EmailEventType.CONTACT_ADMIN_NOTIFICATION ||
+                    event.getEventType() == EmailEventType.CAREER_ADMIN_NOTIFICATION) {
+
+                byte[] excelBytes = null;
+                try {
+                    excelBytes = excelReportService.generateRecordsWorkbook();
+                } catch (Exception ex) {
+                    log.error("Failed to generate Excel records attachment for admin notification [ref={}]: {}",
+                            event.getReferenceId(), ex.getMessage(), ex);
+                }
+
+                if (excelBytes != null && excelBytes.length > 0) {
+                    providerId = resendClient.sendEmailWithAttachment(
+                            event.getRecipientEmail(),
+                            event.getSubject(),
+                            event.getBodyHtml(),
+                            event.getBodyText(),
+                            ExcelReportService.EXCEL_FILENAME,
+                            excelBytes,
+                            ExcelReportService.EXCEL_CONTENT_TYPE
+                    );
+                } else {
+                    providerId = resendClient.sendEmail(
+                            event.getRecipientEmail(),
+                            event.getSubject(),
+                            event.getBodyHtml(),
+                            event.getBodyText()
+                    );
+                }
+            } else {
+                // Client / candidate acknowledgement emails NEVER receive attachments
+                providerId = resendClient.sendEmail(
+                        event.getRecipientEmail(),
+                        event.getSubject(),
+                        event.getBodyHtml(),
+                        event.getBodyText()
+                );
+            }
 
             event.setStatus(EmailOutboxStatus.SENT);
             event.setProviderMessageId(providerId);

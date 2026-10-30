@@ -35,6 +35,34 @@ public class ResendEmailClient {
         return sendEmailWithAttachments(toEmail, subject, bodyHtml, bodyText, Collections.emptyList());
     }
 
+    public record EmailAttachment(String filename, byte[] content, String contentType) {}
+
+    public String sendEmailWithMultipleAttachments(String toEmail, String subject, String bodyHtml, String bodyText,
+                                                   List<EmailAttachment> attachments) {
+        if (attachments == null || attachments.isEmpty()) {
+            return sendEmail(toEmail, subject, bodyHtml, bodyText);
+        }
+
+        List<Map<String, Object>> attachmentMaps = new ArrayList<>();
+        for (EmailAttachment att : attachments) {
+            if (att != null && att.content() != null && att.content().length > 0) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("filename", att.filename());
+                map.put("content", Base64.getEncoder().encodeToString(att.content()));
+                if (StringUtils.hasText(att.contentType())) {
+                    map.put("contentType", att.contentType());
+                }
+                attachmentMaps.add(map);
+            }
+        }
+
+        if (attachmentMaps.isEmpty()) {
+            return sendEmail(toEmail, subject, bodyHtml, bodyText);
+        }
+
+        return sendEmailWithAttachments(toEmail, subject, bodyHtml, bodyText, attachmentMaps);
+    }
+
     public String sendEmailWithAttachment(String toEmail, String subject, String bodyHtml, String bodyText,
                                           String attachmentFilename, byte[] attachmentBytes, String contentType) {
         if (attachmentBytes == null || attachmentBytes.length == 0) {

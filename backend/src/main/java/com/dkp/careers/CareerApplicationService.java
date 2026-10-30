@@ -10,6 +10,7 @@ import com.dkp.email.EmailOutbox;
 import com.dkp.email.EmailOutboxRepository;
 import com.dkp.email.EmailTemplateService;
 import com.dkp.email.ResendEmailClient;
+import com.dkp.report.ExcelReportService;
 import com.dkp.security.SpamProtectionService;
 import com.dkp.storage.FileValidator;
 import org.slf4j.Logger;
@@ -20,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CareerApplicationService {
@@ -29,6 +32,7 @@ public class CareerApplicationService {
     private final JobApplicationRepository repository;
     private final EmailOutboxRepository outboxRepository;
     private final ResendEmailClient resendClient;
+    private final ExcelReportService excelReportService;
     private final FileValidator fileValidator;
     private final EmailTemplateService emailTemplateService;
     private final ReferenceGenerator referenceGenerator;
@@ -38,6 +42,7 @@ public class CareerApplicationService {
     public CareerApplicationService(JobApplicationRepository repository,
                                    EmailOutboxRepository outboxRepository,
                                    ResendEmailClient resendClient,
+                                   ExcelReportService excelReportService,
                                    FileValidator fileValidator,
                                    EmailTemplateService emailTemplateService,
                                    ReferenceGenerator referenceGenerator,
@@ -46,6 +51,7 @@ public class CareerApplicationService {
         this.repository = repository;
         this.outboxRepository = outboxRepository;
         this.resendClient = resendClient;
+        this.excelReportService = excelReportService;
         this.fileValidator = fileValidator;
         this.emailTemplateService = emailTemplateService;
         this.referenceGenerator = referenceGenerator;
@@ -118,17 +124,31 @@ public class CareerApplicationService {
                 sanitizedFilename
         );
 
-        // 5. Deliver resume attachment to the recruitment team via Resend API
-        // If this call fails (network timeout, provider error), an exception is thrown and the transaction rolls back.
-        // No success is returned if the email workflow fails.
-        String providerMessageId = resendClient.sendEmailWithAttachment(
+        // 5. Deliver attachments (resume and database records Excel workbook) to recruitment team via Resend API
+        byte[] excelBytes = null;
+        try {
+            excelBytes = excelReportService.generateRecordsWorkbook();
+        } catch (Exception ex) {
+            log.error("Failed to generate Excel records attachment for career application admin notification [ref={}]: {}",
+                    referenceId, ex.getMessage(), ex);
+        }
+
+        List<ResendEmailClient.EmailAttachment> attachments = new ArrayList<>();
+        attachments.add(new ResendEmailClient.EmailAttachment(sanitizedFilename, resumeBytes, contentType));
+        if (excelBytes != null && excelBytes.length > 0) {
+            attachments.add(new ResendEmailClient.EmailAttachment(
+                    ExcelReportService.EXCEL_FILENAME,
+                    excelBytes,
+                    ExcelReportService.EXCEL_CONTENT_TYPE
+            ));
+        }
+
+        String providerMessageId = resendClient.sendEmailWithMultipleAttachments(
                 adminTo,
                 adminSubject,
                 adminHtml,
                 adminText,
-                sanitizedFilename,
-                resumeBytes,
-                contentType
+                attachments
         );
 
         // 6. Queue Candidate Acknowledgement in email_outbox for guaranteed asynchronous delivery

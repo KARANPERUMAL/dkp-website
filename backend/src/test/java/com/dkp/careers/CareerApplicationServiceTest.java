@@ -35,6 +35,9 @@ class CareerApplicationServiceTest {
     @Mock
     private ResendEmailClient resendClient;
 
+    @Mock
+    private com.dkp.report.ExcelReportService excelReportService;
+
     @Spy
     private FileValidator fileValidator = new FileValidator();
 
@@ -83,7 +86,7 @@ class CareerApplicationServiceTest {
         assertThatThrownBy(() -> service.processApplication(validRequest, validFile))
                 .isInstanceOf(DataIntegrityViolationException.class);
 
-        verify(resendClient, never()).sendEmailWithAttachment(anyString(), anyString(), anyString(), anyString(), anyString(), any(), anyString());
+        verify(resendClient, never()).sendEmailWithMultipleAttachments(anyString(), anyString(), anyString(), anyString(), anyList());
         verify(outboxRepository, never()).save(any());
     }
 
@@ -91,7 +94,7 @@ class CareerApplicationServiceTest {
     @DisplayName("When Resend email delivery fails, exception is thrown and success is not returned")
     void testEmailDeliveryFailureThrows() {
         when(repository.saveAndFlush(any(JobApplication.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        when(resendClient.sendEmailWithAttachment(anyString(), anyString(), anyString(), anyString(), anyString(), any(byte[].class), anyString()))
+        when(resendClient.sendEmailWithMultipleAttachments(anyString(), anyString(), anyString(), anyString(), anyList()))
                 .thenThrow(new ResendEmailClient.TransientEmailException("Network timeout contacting Resend"));
 
         assertThatThrownBy(() -> service.processApplication(validRequest, validFile))

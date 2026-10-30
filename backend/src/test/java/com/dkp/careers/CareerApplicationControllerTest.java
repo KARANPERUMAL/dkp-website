@@ -47,6 +47,8 @@ class CareerApplicationControllerTest {
 
     @BeforeEach
     void setupMock() {
+        when(resendEmailClient.sendEmailWithMultipleAttachments(anyString(), anyString(), anyString(), anyString(), anyList()))
+                .thenReturn("msg_mock_resend_attachment_123");
         when(resendEmailClient.sendEmailWithAttachment(anyString(), anyString(), anyString(), anyString(), anyString(), any(byte[].class), anyString()))
                 .thenReturn("msg_mock_resend_attachment_123");
         when(resendEmailClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
@@ -76,15 +78,23 @@ class CareerApplicationControllerTest {
                 .andExpect(jsonPath("$.referenceId", containsString("DKP-APP-")))
                 .andExpect(jsonPath("$.message", notNullValue()));
 
-        // Verify that resend client was invoked with resume attachment
-        verify(resendEmailClient, times(1)).sendEmailWithAttachment(
+        // Verify that resend client was invoked with both resume attachment and dynamic Excel records attachment
+        verify(resendEmailClient, times(1)).sendEmailWithMultipleAttachments(
                 eq("careers@dkpinnovation.com"),
                 contains("Senior React Developer"),
                 contains("Jane Doe"),
                 anyString(),
-                eq("cv.pdf"),
-                eq(validPdfBytes),
-                eq("application/pdf")
+                argThat(attachments -> {
+                    if (attachments == null || attachments.size() != 2) return false;
+                    boolean hasResume = attachments.stream().anyMatch(a ->
+                            "cv.pdf".equals(a.filename()) &&
+                            "application/pdf".equals(a.contentType()));
+                    boolean hasExcel = attachments.stream().anyMatch(a ->
+                            "DKP_Existing_Records.xlsx".equals(a.filename()) &&
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(a.contentType()) &&
+                            a.content() != null && a.content().length > 0);
+                    return hasResume && hasExcel;
+                })
         );
 
         // Verify entity persisted in database
@@ -123,8 +133,10 @@ class CareerApplicationControllerTest {
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.referenceId", containsString("DKP-APP-")));
 
-        verify(resendEmailClient, atLeastOnce()).sendEmailWithAttachment(
-                anyString(), anyString(), anyString(), anyString(), eq("john_cv.pdf"), any(), anyString()
+        verify(resendEmailClient, atLeastOnce()).sendEmailWithMultipleAttachments(
+                anyString(), anyString(), anyString(), anyString(), argThat(attachments ->
+                        attachments != null && attachments.stream().anyMatch(a -> "john_cv.pdf".equals(a.filename()))
+                )
         );
     }
 
@@ -229,7 +241,7 @@ class CareerApplicationControllerTest {
     @Test
     @DisplayName("POST /api/careers/applications when email delivery fails should return 503 and not return success")
     void testEmailDeliveryFailureReturnsError() throws Exception {
-        when(resendEmailClient.sendEmailWithAttachment(anyString(), anyString(), anyString(), anyString(), anyString(), any(byte[].class), anyString()))
+        when(resendEmailClient.sendEmailWithMultipleAttachments(anyString(), anyString(), anyString(), anyString(), anyList()))
                 .thenThrow(new ResendEmailClient.TransientEmailException("Connection to Resend timed out"));
 
         MockMultipartFile resumeFile = new MockMultipartFile("resume", "cv.pdf", "application/pdf", validPdfBytes);

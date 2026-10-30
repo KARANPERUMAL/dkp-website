@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -29,9 +29,11 @@ class EmailOutboxTest {
     private ResendEmailClient resendClient;
 
     @Test
-    @DisplayName("Should persist and process email outbox events")
+    @DisplayName("Should persist and process email outbox events with Excel attachment for admin")
     void testOutboxProcessing() {
         when(resendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
+                .thenReturn("re_mock_provider_123");
+        when(resendClient.sendEmailWithAttachment(anyString(), anyString(), anyString(), anyString(), anyString(), any(), anyString()))
                 .thenReturn("re_mock_provider_123");
 
         EmailOutbox event = new EmailOutbox(
@@ -55,6 +57,58 @@ class EmailOutboxTest {
         assertEquals(EmailOutboxStatus.SENT, updated.getStatus());
         assertEquals("re_mock_provider_123", updated.getProviderMessageId());
         assertEquals(1, updated.getAttemptCount());
+
+        // Verify attachment was included for admin notification
+        verify(resendClient, atLeastOnce()).sendEmailWithAttachment(
+                eq("admin@dkpinnovation.com"),
+                eq("Test Subject"),
+                anyString(),
+                anyString(),
+                eq("DKP_Existing_Records.xlsx"),
+                any(byte[].class),
+                eq("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        );
+    }
+
+    @Test
+    @DisplayName("Client and candidate acknowledgement events must NEVER include attachments")
+    void testClientAckDoesNotIncludeAttachment() {
+        when(resendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
+                .thenReturn("re_mock_provider_client_789");
+
+        EmailOutbox clientEvent = new EmailOutbox(
+                EmailEventType.CONTACT_CLIENT_ACK,
+                "DKP-CNT-CLIENT-002",
+                "customer@example.com",
+                "Acknowledgement Subject",
+                "<p>Thank you for reaching out</p>",
+                "Thank you for reaching out"
+        );
+        clientEvent.setNextAttemptAt(Instant.now().minusSeconds(10));
+        outboxRepository.save(clientEvent);
+
+        scheduler.processOutbox();
+
+        EmailOutbox updated = outboxRepository.findById(clientEvent.getId()).orElseThrow();
+        assertEquals(EmailOutboxStatus.SENT, updated.getStatus());
+        assertEquals("re_mock_provider_client_789", updated.getProviderMessageId());
+
+        // Verify client email was sent WITHOUT attachments
+        verify(resendClient, atLeastOnce()).sendEmail(
+                eq("customer@example.com"),
+                eq("Acknowledgement Subject"),
+                anyString(),
+                anyString()
+        );
+        verify(resendClient, never()).sendEmailWithAttachment(
+                eq("customer@example.com"),
+                anyString(),
+                anyString(),
+                anyString(),
+                anyString(),
+                any(),
+                anyString()
+        );
     }
 }
 
