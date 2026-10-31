@@ -22,8 +22,8 @@ export const getOrganizationSchema = (siteUrl: string = getSiteUrl()) => ({
   name: 'DKP Innovations',
   alternateName: ['DKP Innovation'],
   url: `${siteUrl}/`,
-  logo: `${siteUrl}/images/logo/logo.png`,
-  image: `${siteUrl}/images/logo/logo.png`,
+  logo: `${siteUrl}/images/logo/logo.webp`,
+  image: `${siteUrl}/images/logo/logo.webp`,
   description:
     'DKP Innovations is a premier digital strategy, creative production, IT solutions, and brand architecture company based in Bengaluru, Karnataka, India.',
   telephone: '+91 63637 25910',
@@ -42,7 +42,7 @@ export const getOrganizationSchema = (siteUrl: string = getSiteUrl()) => ({
     worksFor: {
       '@id': `${siteUrl}/#organization`,
     },
-    image: `${siteUrl}/images/founder-img/founder.png`,
+    image: `${siteUrl}/images/founder-img/founder.webp`,
     description:
       'Founder & CEO of DKP Innovations, business coach, and digital solutions expert passionate about empowering businesses through Google services and strategic digital solutions.',
   },
@@ -111,7 +111,7 @@ export const getLocalBusinessSchemas = (siteUrl: string = getSiteUrl()) => {
       '@id': `${siteUrl}/#${branch.id}`,
       name: `DKP Innovations — ${branch.name}`,
       url: `${siteUrl}/contact#${branch.id}`,
-      image: `${siteUrl}/images/logo/logo.png`,
+      image: `${siteUrl}/images/logo/logo.webp`,
       telephone: branch.phone,
       email: branch.email,
       priceRange: '$$',
@@ -208,7 +208,7 @@ export const getFoundationVideoSchemas = (siteUrl: string = getSiteUrl()) => [
     name: 'On-Ground Essential Support & Relief',
     description:
       'Footage from our grassroots distribution effort, delivering direct provisions and critical everyday supplies to families facing economic vulnerability.',
-    thumbnailUrl: `${siteUrl}/images/logo/logo.png`,
+    thumbnailUrl: `${siteUrl}/images/foundation/video11-poster.webp`,
     contentUrl: `${siteUrl}/videos/video11.mp4`,
     uploadDate: '2026-10-29T12:41:00+05:30',
     publisher: {
@@ -221,7 +221,7 @@ export const getFoundationVideoSchemas = (siteUrl: string = getSiteUrl()) => [
     name: 'Social Empowerment & Youth Interaction',
     description:
       'Moments reflecting community togetherness, engaging local families and young participants in supportive welfare and encouragement initiatives.',
-    thumbnailUrl: `${siteUrl}/images/logo/logo.png`,
+    thumbnailUrl: `${siteUrl}/images/foundation/video22-poster.webp`,
     contentUrl: `${siteUrl}/videos/video22.mp4`,
     uploadDate: '2026-10-29T12:41:00+05:30',
     publisher: {
@@ -371,6 +371,17 @@ export const getStructuredDataForRoute = (
           getBreadcrumbSchema(siteUrl, [
             { name: 'Contact Us', path: '/contact' },
           ]),
+        ],
+      };
+
+    case 'not-found':
+    case '404':
+      return {
+        '@context': 'https://schema.org',
+        '@graph': [
+          orgSchema,
+          websiteSchema,
+          getBreadcrumbSchema(siteUrl, [{ name: 'Page Not Found', path: '/404' }]),
         ],
       };
 

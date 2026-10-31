@@ -7,7 +7,8 @@ export type PageRoute =
   | 'gallery'
   | 'foundation'
   | 'careers'
-  | 'contact';
+  | 'contact'
+  | 'not-found';
 
 export interface NavigationContextType {
   currentPage: PageRoute;

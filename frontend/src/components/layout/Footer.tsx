@@ -29,8 +29,12 @@ export const Footer = () => {
               aria-label="DKP Innovation Home"
             >
               <img
-                src="/images/logo/logo.png"
+                src="/images/logo/logo.webp"
                 alt="DKP Innovation"
+                width={160}
+                height={48}
+                loading="lazy"
+                decoding="async"
                 className="h-10 sm:h-12 w-auto object-contain"
               />
             </a>

@@ -141,6 +141,10 @@ export const ServicesPage = () => {
                     <img
                       src={category.titleCardImage}
                       alt={category.titleCardAlt}
+                      width={735}
+                      height={490}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 filter brightness-90"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-transparent via-[#003E6D]/30 to-[#003E6D] pointer-events-none" />

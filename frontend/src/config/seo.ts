@@ -22,7 +22,8 @@ export type SupportedPage =
   | 'gallery'
   | 'foundation'
   | 'careers'
-  | 'contact';
+  | 'contact'
+  | 'not-found';
 
 /**
  * Centralized, authoritative SEO and social metadata for all seven DKP Innovations routes.
@@ -30,9 +31,9 @@ export type SupportedPage =
  */
 export const getSeoForRoute = (route: SupportedPage | string): RouteSeoMetadata => {
   const siteUrl = getSiteUrl();
-  const defaultImage = `${siteUrl}/images/logo/logo.png`;
-  const founderImage = `${siteUrl}/images/founder-img/founder.png`;
-  const studioImage = `${siteUrl}/images/gallery/3.jpeg`;
+  const defaultImage = `${siteUrl}/images/logo/logo.webp`;
+  const founderImage = `${siteUrl}/images/founder-img/founder.webp`;
+  const studioImage = `${siteUrl}/images/gallery/3.webp`;
 
   const normalized = route.replace(/^\//, '').toLowerCase() || 'home';
 
@@ -148,6 +149,26 @@ export const getSeoForRoute = (route: SupportedPage | string): RouteSeoMetadata 
         twitterTitle: 'Contact DKP Innovations | Bengaluru Offices',
         twitterDescription:
           'Contact DKP Innovations for project consultations and digital strategy. Visit our 3 Bengaluru locations at World Trade Center Rajajinagar, Basaveshwar Nagar, and Kengeri.',
+        twitterImage: defaultImage,
+      };
+
+    case 'not-found':
+    case '404':
+      return {
+        path: '/404',
+        title: 'Page Not Found | DKP Innovations',
+        description:
+          'The requested page could not be found. Return to DKP Innovations to explore digital strategy, brand architecture, IT engineering, and creative production in Bengaluru.',
+        canonical: getCanonicalUrl('/404'),
+        ogType: 'website',
+        ogTitle: 'Page Not Found | DKP Innovations',
+        ogDescription:
+          'The requested page could not be found. Return to the DKP Innovations homepage.',
+        ogImage: defaultImage,
+        twitterCard: 'summary',
+        twitterTitle: 'Page Not Found | DKP Innovations',
+        twitterDescription:
+          'The requested page could not be found. Return to the DKP Innovations homepage.',
         twitterImage: defaultImage,
       };
 

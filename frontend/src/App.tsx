@@ -25,6 +25,9 @@ const GalleryPage = lazy(() =>
 const FoundationPage = lazy(() =>
   import('./components/FoundationPage').then((m) => ({ default: m.FoundationPage }))
 );
+const NotFoundPage = lazy(() =>
+  import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage }))
+);
 
 /**
  * Lightweight, non-shifting loading fallback that preserves the deep blue background
@@ -62,6 +65,8 @@ function PageContent() {
             return <CareersPage />;
           case 'contact':
             return <ContactPage />;
+          case 'not-found':
+            return <NotFoundPage />;
           case 'home':
           default:
             return <HomePage />;

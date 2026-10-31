@@ -178,6 +178,9 @@ export const GalleryLightbox = ({
               <img
                 src={currentItem.src}
                 alt={currentItem.alt}
+                width={currentItem.width}
+                height={currentItem.height}
+                decoding="async"
                 className="max-h-[78vh] sm:max-h-[82vh] w-auto max-w-[90vw] object-contain rounded-lg sm:rounded-xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/10"
               />
             </motion.div>

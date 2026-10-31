@@ -97,8 +97,12 @@ export const Navbar = () => {
             className="group flex items-center select-none z-10 transition-transform duration-200 hover:scale-105 cursor-pointer"
           >
             <img
-              src="/images/logo/logo.png"
+              src="/images/logo/logo.webp"
               alt="DKP Innovation"
+              width={180}
+              height={48}
+              fetchPriority="high"
+              decoding="async"
               className="h-8 sm:h-9 md:h-12 w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
             />
           </a>

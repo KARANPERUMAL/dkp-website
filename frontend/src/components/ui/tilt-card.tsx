@@ -83,6 +83,8 @@ export function TiltCard({
               <img
                 src={imageSrc}
                 alt={imageAlt}
+                width={640}
+                height={400}
                 loading="lazy"
                 decoding="async"
                 className={cn(

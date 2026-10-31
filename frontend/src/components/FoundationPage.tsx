@@ -19,6 +19,7 @@ import {
 interface FoundationVideoCardProps {
   id: string;
   src: string;
+  poster?: string;
   title: string;
   badge: string;
   description: string;
@@ -433,6 +434,7 @@ export const FoundationPage = () => {
                 <FoundationVideoCard
                   id="video-relief-drive"
                   src="/videos/video11.mp4"
+                  poster="/images/foundation/video11-poster.webp"
                   badge="Community Welfare Drive"
                   title="On-Ground Essential Support & Relief"
                   description="Footage from our grassroots distribution effort, delivering direct provisions and critical everyday supplies to families facing economic vulnerability."
@@ -444,6 +446,7 @@ export const FoundationPage = () => {
                 <FoundationVideoCard
                   id="video-social-engagement"
                   src="/videos/video22.mp4"
+                  poster="/images/foundation/video22-poster.webp"
                   badge="Community Engagement"
                   title="Social Empowerment & Youth Interaction"
                   description="Moments reflecting community togetherness, engaging local families and young participants in supportive welfare and encouragement initiatives."

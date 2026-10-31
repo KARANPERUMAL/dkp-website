@@ -307,7 +307,10 @@ function TeamMemberCard({
         <img
           src={card.imageSrc}
           alt={card.imageAlt || card.name}
+          width={400}
+          height={160}
           loading="lazy"
+          decoding="async"
           className="h-34 sm:h-40 w-full object-cover object-center"
         />
       </div>
@@ -408,7 +411,10 @@ function MobileServiceCard({
         <img
           src={card.imageSrc}
           alt={card.imageAlt || card.name}
+          width={640}
+          height={400}
           loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
       </div>

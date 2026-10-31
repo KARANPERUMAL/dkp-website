@@ -93,7 +93,10 @@ const GalleryCard = ({
           <img
             src={item.src}
             alt={item.alt}
+            width={item.width}
+            height={item.height}
             loading={eager ? 'eager' : 'lazy'}
+            fetchPriority={eager ? 'high' : 'auto'}
             decoding="async"
             className={`w-full h-full object-cover ${objectPosition} transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03] will-change-transform`}
           />

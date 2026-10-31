@@ -205,8 +205,12 @@ export const AboutPage = () => {
                 <div className="md:col-span-5 flex justify-center">
                   <div className="relative group w-full max-w-[320px] sm:max-w-[360px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-[0_12px_40px_rgba(0,62,109,0.4)] bg-[#003E6D]">
                     <img
-                      src="/images/founder-img/founder.png"
+                      src="/images/founder-img/founder.webp"
                       alt="Puttaraju KV - Founder & CEO @ DKP Innovations"
+                      width={837}
+                      height={819}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#003E6D]/70 via-transparent to-transparent pointer-events-none" />

@@ -3,28 +3,31 @@ import { NavigationContext, type PageRoute } from './navigationState';
 
 function getInitialPage(): PageRoute {
   if (typeof window === 'undefined') return 'home';
-  const path = window.location.pathname.toLowerCase();
+  const rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, '') || '/';
   const hash = window.location.hash.toLowerCase();
 
-  if (path.includes('/about') || hash.includes('#about') || hash.includes('#/about')) {
+  if (rawPath === '/about' || hash.includes('#about') || hash.includes('#/about')) {
     return 'about';
   }
-  if (path.includes('/services') || hash.includes('#services') || hash.includes('#/services')) {
+  if (rawPath === '/services' || hash.includes('#services') || hash.includes('#/services')) {
     return 'services';
   }
-  if (path.includes('/gallery') || hash.includes('#gallery') || hash.includes('#/gallery')) {
+  if (rawPath === '/gallery' || hash.includes('#gallery') || hash.includes('#/gallery')) {
     return 'gallery';
   }
-  if (path.includes('/foundation') || hash.includes('#foundation') || hash.includes('#/foundation')) {
+  if (rawPath === '/foundation' || hash.includes('#foundation') || hash.includes('#/foundation')) {
     return 'foundation';
   }
-  if (path.includes('/careers') || hash.includes('#careers') || hash.includes('#/careers')) {
+  if (rawPath === '/careers' || hash.includes('#careers') || hash.includes('#/careers')) {
     return 'careers';
   }
-  if (path.includes('/contact') || hash.includes('#contact') || hash.includes('#/contact')) {
+  if (rawPath === '/contact' || hash.includes('#contact') || hash.includes('#/contact')) {
     return 'contact';
   }
-  return 'home';
+  if (rawPath === '/' || rawPath === '/index.html' || hash.includes('#home') || (!rawPath && !hash)) {
+    return 'home';
+  }
+  return 'not-found';
 }
 
 export const NavigationProvider = ({ children }: { children: ReactNode }) => {
@@ -58,7 +61,7 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
     const isAlreadyOnPage = currentPage === page;
     setCurrentPage(page);
 
-    const basePath = page === 'home' ? '/' : `/${page}`;
+    const basePath = page === 'home' ? '/' : page === 'not-found' ? '/404' : `/${page}`;
     const url = targetId && targetId !== 'home' ? `${basePath}#${targetId}` : basePath;
     window.history.pushState(null, '', url);
 

@@ -28,14 +28,14 @@ export const serviceCategories: ServiceCategory[] = [
     subtitle: 'Scalable Engineering, Enterprise Architecture & Search Dominance',
     description:
       'We architect high-performance websites, scalable e-commerce infrastructure, and search dominance systems designed to transform casual visitors into long-term brand advocates.',
-    titleCardImage: '/images/services/technology-solutions/title-card.jpg',
+    titleCardImage: '/images/services/technology-solutions/title-card.webp',
     titleCardAlt: 'IT & Digital Solutions overview and engineering capabilities at DKP Innovation',
     services: [
       {
         id: 'seo-expert-advanced-strategy',
         name: 'SEO Expert — Advanced Strategy',
         category: 'IT & Digital Solutions',
-        image: '/images/services/technology-solutions/seo-expert-advanced-strategy.jpg',
+        image: '/images/services/technology-solutions/seo-expert-advanced-strategy.webp',
         alt: 'Advanced search engine optimization strategy and analytics dashboard',
         description:
           'Data-backed organic positioning, deep technical SEO audits, semantic keyword mapping, and search authority architecture that keeps your business at the top of competitive search results.',
@@ -50,7 +50,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'ecommerce-website-solutions',
         name: 'E-Commerce Website Solutions',
         category: 'IT & Digital Solutions',
-        image: '/images/services/technology-solutions/e-commerce-website-solutions.jpg',
+        image: '/images/services/technology-solutions/e-commerce-website-solutions.webp',
         alt: 'High-conversion e-commerce platform and online store architecture',
         description:
           'High-conversion online storefronts engineered with secure checkout pipelines, real-time inventory synchronization, frictionless payment integrations, and speed-optimized product pages.',
@@ -65,7 +65,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'website-design-development',
         name: 'Website Design & Development',
         category: 'IT & Digital Solutions',
-        image: '/images/services/technology-solutions/website-design-and-development.jpg',
+        image: '/images/services/technology-solutions/website-design-and-development.webp',
         alt: 'Modern responsive website design and frontend development layout',
         description:
           'Bespoke, high-performance web experiences engineered with modern frameworks, pixel-perfect responsive layouts, micro-interactions, and conversion-focused design systems.',
@@ -80,7 +80,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'social-media-optimization-strategy',
         name: 'Social Media Optimization & Strategy',
         category: 'IT & Digital Solutions',
-        image: '/images/services/technology-solutions/social-media-optimization-and-strategy.jpg',
+        image: '/images/services/technology-solutions/social-media-optimization-and-strategy.webp',
         alt: 'Social media profile optimization and organic engagement growth strategy',
         description:
           'Holistic channel architecture, profile SEO optimization, strategic content scheduling, and audience retention workflows that turn brand channels into compounding growth engines.',
@@ -102,14 +102,14 @@ export const serviceCategories: ServiceCategory[] = [
     subtitle: 'High-Intent Acquisition, Paid Performance & Search Dominance',
     description:
       'We engineer systematic marketing engines that capture existing demand, generate qualified sales opportunities, and scale client revenue across every digital touchpoint.',
-    titleCardImage: '/images/services/digital-marketing-and-lead-generation/title-card.jpg',
+    titleCardImage: '/images/services/digital-marketing-and-lead-generation/title-card.webp',
     titleCardAlt: 'Digital Marketing & Lead Generation strategy banner',
     services: [
       {
         id: 'influencer-marketing',
         name: 'Influencer Marketing',
         category: 'Digital Marketing & Lead Generation',
-        image: '/images/services/digital-marketing-and-lead-generation/influencer-marketing.jpg',
+        image: '/images/services/digital-marketing-and-lead-generation/influencer-marketing.webp',
         alt: 'Influencer marketing campaign collaboration and creator reach',
         description:
           'Strategic creator partnerships, contract negotiations, verified demographic targeting, and creative briefs that deliver authentic brand endorsements with measurable conversion lift.',
@@ -124,7 +124,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'google-promotions-google-presence',
         name: 'Google Promotions & Google Presence',
         category: 'Digital Marketing & Lead Generation',
-        image: '/images/services/digital-marketing-and-lead-generation/google-promotions-and-google-presence.jpg',
+        image: '/images/services/digital-marketing-and-lead-generation/google-promotions-and-google-presence.webp',
         alt: 'Google Ads PPC campaign and Google Business Profile management',
         description:
           'Targeted Google Search, Performance Max, and Local Services ad campaigns combined with continuous Google Business Profile optimization to capture high-intent commercial buyers.',
@@ -139,7 +139,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'lead-generation-business',
         name: 'Lead Generation for Business',
         category: 'Digital Marketing & Lead Generation',
-        image: '/images/services/digital-marketing-and-lead-generation/lead-generation-for-business.jpg',
+        image: '/images/services/digital-marketing-and-lead-generation/lead-generation-for-business.webp',
         alt: 'B2B and B2C lead generation funnel and qualification workflow',
         description:
           'Full-funnel customer acquisition pipelines combining intent-driven landing pages, automated lead qualification, and CRM routing to supply sales teams with hot prospects.',
@@ -154,7 +154,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'meta-ads-expert-strategy',
         name: 'Meta Ads Expert Strategy',
         category: 'Digital Marketing & Lead Generation',
-        image: '/images/services/digital-marketing-and-lead-generation/meta-ads-expert-strategy.jpg',
+        image: '/images/services/digital-marketing-and-lead-generation/meta-ads-expert-strategy.webp',
         alt: 'Targeted Meta Facebook and Instagram advertising strategy',
         description:
           'Precision-targeted Facebook and Instagram ad campaigns powered by audience modeling, creative hook testing, dynamic retargeting, and scalable ROAS optimization.',
@@ -169,7 +169,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'political-profile-handling-media-strategy',
         name: 'Political Profile Handling & Media Strategy',
         category: 'Digital Marketing & Lead Generation',
-        image: '/images/services/digital-marketing-and-lead-generation/political-profile-handling-and-media-strategy.jpg',
+        image: '/images/services/digital-marketing-and-lead-generation/political-profile-handling-and-media-strategy.webp',
         alt: 'Strategic public affairs communication and political profile management',
         description:
           'Strategic narrative architecture, constituency outreach campaigns, 24/7 digital sentiment monitoring, and crisis mitigation that build public trust and leadership authority.',
@@ -191,14 +191,14 @@ export const serviceCategories: ServiceCategory[] = [
     subtitle: 'Signature Brand Identities, Prestige PR & Public Stature',
     description:
       'We craft iconic visual identities, orchestrate national public relations features, and manage prestige talent branding that positions our partners as undisputed market leaders.',
-    titleCardImage: '/images/services/branding-pr-and-influencer-marketing/title-card.jpg',
+    titleCardImage: '/images/services/branding-pr-and-influencer-marketing/title-card.webp',
     titleCardAlt: 'Branding, PR & Influencer Marketing showcase at DKP Innovation',
     services: [
       {
         id: 'celebrity-artist-branding-pr-strategy',
         name: 'Celebrity & Artist Branding with PR Strategy',
         category: 'Branding, PR & Influencer Marketing',
-        image: '/images/services/branding-pr-and-influencer-marketing/celebrity-and-artist-branding-with-pr-strategy.jpg',
+        image: '/images/services/branding-pr-and-influencer-marketing/celebrity-and-artist-branding-with-pr-strategy.webp',
         alt: 'Celebrity talent branding, red carpet PR, and public relations strategy',
         description:
           'Strategic personal brand architecture, premier publication press features, red carpet media relations, and digital portfolio management tailored for artists and public icons.',
@@ -213,7 +213,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'influencer-celebrity-marketing-reach-strategy',
         name: 'Influencer & Celebrity Marketing with Reach Strategy',
         category: 'Branding, PR & Influencer Marketing',
-        image: '/images/services/branding-pr-and-influencer-marketing/influencer-and-celebrity-marketing.jpg',
+        image: '/images/services/branding-pr-and-influencer-marketing/influencer-and-celebrity-marketing.webp',
         alt: 'Nationwide celebrity endorsement and mega reach marketing strategy',
         description:
           'High-impact celebrity endorsements, nationwide reach campaigns, talent activation, and synergistic brand partnerships that capture market share rapidly.',
@@ -228,7 +228,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'brand-identity-logo-design-startup-growth',
         name: 'Brand Identity, Logo Design & Startup Growth Support',
         category: 'Branding, PR & Influencer Marketing',
-        image: '/images/services/branding-pr-and-influencer-marketing/brand-identity-and-logo-design.jpg',
+        image: '/images/services/branding-pr-and-influencer-marketing/brand-identity-and-logo-design.webp',
         alt: 'Complete visual brand identity, typography palette, and logo design system',
         description:
           'End-to-end brand architecture, memorable logo marks, typographic hierarchies, color palettes, and foundational brand guidelines that set startups up for institutional investment.',
@@ -243,7 +243,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'event-management',
         name: 'Event Management',
         category: 'Branding, PR & Influencer Marketing',
-        image: '/images/services/branding-pr-and-influencer-marketing/event-management.jpg',
+        image: '/images/services/branding-pr-and-influencer-marketing/event-management.webp',
         alt: 'Corporate event production, staging, lighting, and press conference setup',
         description:
           'Flawless end-to-end execution of corporate conferences, product reveals, gala ceremonies, and press events with bespoke stage design, audio-visual mastery, and VIP coordination.',
@@ -265,14 +265,14 @@ export const serviceCategories: ServiceCategory[] = [
     subtitle: 'Cinematic Visuals, Commercial Storytelling & Immersive Media',
     description:
       'We bring brand narratives to life through high-definition cinematography, commercial photography, and interactive 360-degree virtual experiences that captivate attention.',
-    titleCardImage: '/images/services/creative-production-and-advertising/title-card.jpg',
+    titleCardImage: '/images/services/creative-production-and-advertising/title-card.webp',
     titleCardAlt: 'Creative Production & Advertising showcase at DKP Innovation',
     services: [
       {
         id: 'corporate-photography-videography',
         name: 'Corporate Photography & Videography',
         category: 'Creative Production & Advertising',
-        image: '/images/services/creative-production-and-advertising/corporate-photography-and-videography.jpg',
+        image: '/images/services/creative-production-and-advertising/corporate-photography-and-videography.webp',
         alt: 'Professional corporate film crew and executive photography shoot',
         description:
           'High-definition executive portraits, workplace culture showcases, corporate documentaries, and branded asset libraries that establish trust and market authority.',
@@ -287,7 +287,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'advertisement-shoots',
         name: 'Advertisement Shoots',
         category: 'Creative Production & Advertising',
-        image: '/images/services/creative-production-and-advertising/advertisement-shoots.jpg',
+        image: '/images/services/creative-production-and-advertising/advertisement-shoots.webp',
         alt: 'High-concept commercial advertising shoot in professional studio',
         description:
           'High-impact commercial photography and film production crafted for multi-platform digital advertising, outdoor hoardings, and premium promotional campaigns.',
@@ -302,7 +302,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'google-virtual-tours',
         name: 'Google Virtual Tours',
         category: 'Creative Production & Advertising',
-        image: '/images/services/creative-production-and-advertising/google-virtual-tours.jpg',
+        image: '/images/services/creative-production-and-advertising/google-virtual-tours.webp',
         alt: 'Interactive 360-degree Google Virtual Tour Street View walkthrough',
         description:
           'Interactive 360-degree Street View virtual tours that elevate your Google Maps presence, invite online walk-ins, and build immediate credibility with prospective customers.',
@@ -324,14 +324,14 @@ export const serviceCategories: ServiceCategory[] = [
     subtitle: 'Legal Entity Formation, Tax Compliance & Intellectual Property Protection',
     description:
       'We provide end-to-end corporate legal structuring, company incorporation, GST compliance, and trademark protection to establish a rock-solid operational and regulatory foundation for your enterprise.',
-    titleCardImage: '/images/services/business-registration-and-corporate-compliance/title-card.jpg',
+    titleCardImage: '/images/services/business-registration-and-corporate-compliance/title-card.webp',
     titleCardAlt: 'Business Registration & Corporate Compliance overview and advisory services at DKP Innovation',
     services: [
       {
         id: 'company-incorporation',
         name: 'Company Incorporation',
         category: 'Business Registration & Corporate Compliance',
-        image: '/images/services/business-registration-and-corporate-compliance/company-incorporation.jpg',
+        image: '/images/services/business-registration-and-corporate-compliance/company-incorporation.webp',
         alt: 'Company incorporation and legal business entity registration services',
         description:
           'End-to-end legal entity formation, MCA registration, Private Limited, LLP, and OPC incorporations, digital signature certificates (DSC), and statutory filing support.',
@@ -346,7 +346,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'gst-registration-and-returns',
         name: 'GST Registration and Returns',
         category: 'Business Registration & Corporate Compliance',
-        image: '/images/services/business-registration-and-corporate-compliance/gst-registration-and-return-filing.jpg',
+        image: '/images/services/business-registration-and-corporate-compliance/gst-registration-and-return-filing.webp',
         alt: 'GST registration, monthly return filing, and corporate tax compliance',
         description:
           'Seamless Goods and Services Tax (GST) registration, monthly and quarterly return filings (GSTR-1, GSTR-3B), tax reconciliation, and timely statutory compliance management.',
@@ -361,7 +361,7 @@ export const serviceCategories: ServiceCategory[] = [
         id: 'trademark-registration',
         name: 'Trademark Registration',
         category: 'Business Registration & Corporate Compliance',
-        image: '/images/services/business-registration-and-corporate-compliance/trademark-registration-and-ip-protection.jpg',
+        image: '/images/services/business-registration-and-corporate-compliance/trademark-registration-and-ip-protection.webp',
         alt: 'Trademark registration, IP protection, and brand copyright filing',
         description:
           'Comprehensive trademark search, brand name and logo IP registration, copyright filings, objection handling, and long-term brand asset protection.',
