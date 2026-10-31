@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
 import { FloatingNav, type NavItem } from '@/components/ui/floating-navbar';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import {
   IconHome,
   IconUsers,
@@ -11,7 +10,7 @@ import {
   IconMessage,
 } from '@tabler/icons-react';
 
-export const navItems: NavItem[] = [
+const navItems: NavItem[] = [
   {
     name: 'Home',
     link: '/',
@@ -63,14 +62,9 @@ export const Navbar = () => {
     return '/';
   };
 
-  const [activeTab, setActiveTab] = useState<string>(getTabForPage(currentPage));
-
-  useEffect(() => {
-    setActiveTab(getTabForPage(currentPage));
-  }, [currentPage]);
+  const activeTab = getTabForPage(currentPage);
 
   const handleNavClick = (link: string) => {
-    setActiveTab(link);
     if (link === '/' || link === '#home') {
       navigateTo('home');
     } else if (link === '/about' || link === '#about') {

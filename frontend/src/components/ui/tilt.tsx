@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import {
   motion,
@@ -9,7 +7,7 @@ import {
   useTransform,
   type MotionStyle,
   type SpringOptions,
-} from "motion/react";
+} from "framer-motion";
 
 export type TiltProps = {
   children: React.ReactNode;
@@ -37,15 +35,19 @@ export function Tilt({
   springOptions,
 }: TiltProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [reducedMotion, setReducedMotion] = React.useState(false);
+  const [reducedMotion, setReducedMotion] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+    return false;
+  });
 
   React.useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setReducedMotion(true);
-    }
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   const x = useMotionValue(0);

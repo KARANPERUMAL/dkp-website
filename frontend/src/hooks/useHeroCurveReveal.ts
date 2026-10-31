@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 
+function isReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export function useHeroCurveReveal() {
-  const [progress, setProgress] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const [progress, setProgress] = useState(() => (isReducedMotion() ? 1 : 0));
+  const [isComplete, setIsComplete] = useState(() => isReducedMotion());
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
-    if (
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) {
-      setProgress(1);
-      setIsComplete(true);
-      return;
-    }
+    // Respect prefers-reduced-motion without cascading renders
+    if (isReducedMotion()) return;
 
     let rafId: number | null = null;
 
@@ -35,8 +33,8 @@ export function useHeroCurveReveal() {
       rafId = requestAnimationFrame(updateScrollProgress);
     };
 
-    // Initial check on mount
-    updateScrollProgress();
+    // Initial check on mount scheduled via rAF to avoid synchronous setState during effect mount
+    rafId = requestAnimationFrame(updateScrollProgress);
 
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize, { passive: true });

@@ -1,7 +1,7 @@
 import { useState, useRef, type FormEvent, type ChangeEvent } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import {
   openPositions,
   departmentOptions,

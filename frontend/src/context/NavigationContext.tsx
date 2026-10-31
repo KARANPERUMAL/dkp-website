@@ -1,17 +1,5 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-
-export type PageRoute = 'home' | 'about' | 'services' | 'gallery' | 'foundation' | 'careers' | 'contact';
-
-interface NavigationContextType {
-  currentPage: PageRoute;
-  navigateTo: (page: PageRoute, targetId?: string) => void;
-  selectedServiceForInquiry?: string;
-  setSelectedServiceForInquiry: (serviceName: string) => void;
-  selectedPositionForApplication?: string;
-  setSelectedPositionForApplication: (positionName: string) => void;
-}
-
-const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
+import { useState, useEffect, type ReactNode } from 'react';
+import { NavigationContext, type PageRoute } from './navigationState';
 
 function getInitialPage(): PageRoute {
   if (typeof window === 'undefined') return 'home';
@@ -113,10 +101,4 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useNavigation = () => {
-  const context = useContext(NavigationContext);
-  if (!context) {
-    throw new Error('useNavigation must be used within a NavigationProvider');
-  }
-  return context;
-};
+

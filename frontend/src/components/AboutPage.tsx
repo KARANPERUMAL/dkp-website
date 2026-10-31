@@ -1,4 +1,4 @@
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { IconArrowRight } from '@tabler/icons-react';

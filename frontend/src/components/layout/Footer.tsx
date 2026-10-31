@@ -1,9 +1,11 @@
-import { useNavigation } from '../../context/NavigationContext';
+import { useNavigation } from '../../hooks/useNavigation';
 import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL, OFFICIAL_EMAIL, OFFICIAL_EMAIL_MAILTO, branchLocations } from '../../data/branchesData';
 import { serviceCategories } from '../../data/servicesData';
 import { socialLinksList, OFFICIAL_SOCIAL_LINKS } from '../../data/socialLinks';
 import { ReviewBadges } from '../reviews/ReviewBadges';
 import { IconPhone, IconMail, IconMapPin, IconArrowUpRight } from '@tabler/icons-react';
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 export const Footer = () => {
   const { navigateTo } = useNavigation();
@@ -267,7 +269,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <span>© {new Date().getFullYear()} DKP Innovation. All rights reserved.</span>
+            <span>© {CURRENT_YEAR} DKP Innovation. All rights reserved.</span>
           </div>
         </div>
 

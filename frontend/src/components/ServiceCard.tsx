@@ -51,18 +51,18 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             circleClassName="bg-[#004D86]"
             className="z-20"
           >
-            {/* Synchronized duplicate containing ONLY the text/content area */}
-            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between h-full bg-[#004D86] select-none pointer-events-none">
+            {/* Synchronized duplicate containing ONLY the text/content area (marked aria-hidden to eliminate heading duplication) */}
+            <div aria-hidden="true" className="p-4 sm:p-5 flex-1 flex flex-col justify-between h-full bg-[#004D86] select-none pointer-events-none">
               <div>
                 {/* Category Label: DKP yellow accent */}
                 <div className="text-[11px] font-bold text-[#FFD60A] uppercase tracking-wider mb-1.5">
                   {service.category}
                 </div>
 
-                {/* Service Heading: DKP yellow brand color */}
-                <h3 className="text-base sm:text-lg font-bold text-[#FFD60A] leading-snug mb-2">
+                {/* Service Visual Heading: Decorative counterpart for clipped circular hover reveal */}
+                <div className="text-base sm:text-lg font-bold text-[#FFD60A] leading-snug mb-2">
                   {service.name}
-                </h3>
+                </div>
 
                 {/* Description: High-contrast white/light-gray */}
                 <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed">

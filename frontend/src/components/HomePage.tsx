@@ -1,11 +1,13 @@
 import { Navbar } from './Navbar';
 import { HeroSection } from './HeroSection';
-import { HeroCurveBoundary, computeCurveState } from './HeroCurveBoundary';
-import { TeamStack, defaultDkpServices } from './unlumen-ui/team-stack';
+import { HeroCurveBoundary } from './HeroCurveBoundary';
+import { computeCurveState } from '../lib/curveMath';
+import { TeamStack } from './ui-animation/team-stack';
+import { defaultDkpServices } from '../data/teamStackData';
 import { WhyChooseUs } from './WhyChooseUs';
 import { Footer } from './layout/Footer';
 import { useHeroCurveReveal } from '../hooks/useHeroCurveReveal';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import { IconArrowRight } from '@tabler/icons-react';
 
 export const HomePage = () => {

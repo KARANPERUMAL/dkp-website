@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import {
   motion,
@@ -7,7 +5,7 @@ import {
   useMotionTemplate,
   animate,
   useTransform,
-} from "motion/react";
+} from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface ClippedCircleProps {

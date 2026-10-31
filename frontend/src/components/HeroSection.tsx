@@ -72,7 +72,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
         {/* Centered Hero Headline in a Ladder-Style Layout with Increased Vertical Spacing */}
         <div className="relative pt-1 pb-4 sm:pb-6 md:pb-8 w-full max-w-[1180px] mx-auto">
           
-          <motion.div
+          <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -124,7 +124,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
             >
               We Build It.
             </motion.div>
-          </motion.div>
+          </motion.h1>
 
           {/* Position the yellow circular CTA between lines 2 and 3 on the center-right (z-30 ensures visibility) */}
           <motion.div

@@ -1,15 +1,13 @@
-"use client";
-
+import { defaultDkpServices } from '@/data/teamStackData';
 import * as React from "react";
 import {
   motion,
   type MotionStyle,
   useReducedMotion,
-} from "motion/react";
+} from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { serviceCategories } from "@/data/servicesData";
 import { TextAnimationBlurFadeIn } from "@/components/ui/text-animation-blur-fade-in";
 
 export interface TeamCardItem {
@@ -34,26 +32,7 @@ export interface TeamStackProps {
   onCardClick?: (card: TeamCardItem, index: number) => void;
 }
 
-const ctaLabels: Record<string, string> = {
-  "technology-solutions": "Explore IT",
-  "digital-marketing-and-lead-generation": "Explore Growth",
-  "branding-pr-and-influencer-marketing": "Explore Branding",
-  "creative-production-and-advertising": "Explore Production",
-  "business-registration-and-corporate-compliance": "Explore Compliance",
-};
 
-// Authoritative DKP Innovation service data representing the five core capabilities in exact order
-export const defaultDkpServices: TeamCardItem[] = serviceCategories.map((cat, idx) => ({
-  name: cat.title,
-  role: cat.subtitle,
-  description: cat.description,
-  imageSrc: cat.titleCardImage,
-  imageAlt: cat.titleCardAlt,
-  isFeatured: idx === 0,
-  ctaLabel: ctaLabels[cat.slug] || `Explore ${cat.title}`,
-  ctaHref: `#services-${cat.slug}`,
-  slug: cat.slug,
-}));
 
 // Deterministic jitter function for natural card-pile aesthetics
 function pseudoRandom(i: number, amplitude: number, seed: number): number {

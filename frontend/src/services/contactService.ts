@@ -64,7 +64,7 @@ export async function submitContactMessage(
     return {
       success: false,
       isNetworkError: true,
-      error: `Unable to connect to the server at ${endpoint}. The backend service is currently unreachable. Please check your internet connection or email us directly at info@dkpinnovation.com. (${errorMsg})`,
+      error: `Unable to connect to the server at ${endpoint}. The backend service is currently unreachable. Please check your internet connection or email us directly at dkpinnovations20251@gmail.com. (${errorMsg})`,
     };
   }
 }

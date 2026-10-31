@@ -10,26 +10,7 @@ export const BranchMap = () => {
   const markersRef = useRef<{ [id: string]: L.Marker }>({});
   const [selectedBranchId, setSelectedBranchId] = useState<string>(branchLocations[0].id);
 
-  useEffect(() => {
-    if (!mapContainerRef.current) return;
-    if (mapInstanceRef.current) return; // Prevent double initialization
-
-    // Initialize Leaflet map
-    const map = L.map(mapContainerRef.current, {
-      zoomControl: true,
-      scrollWheelZoom: false, // Prevent accidental scrolling when browsing page
-    });
-    mapInstanceRef.current = map;
-
-    // Add OpenStreetMap Tile Layer with required attribution
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors | DKP Innovation Locations',
-    }).addTo(map);
-
-    // Create custom DKP yellow marker icon with animated pulse ring
-    const createCustomIcon = (isSelected: boolean, index: number) => {
+  const createCustomIcon = (isSelected: boolean, index: number) => {
       const pinColor = '#FFD60A';
       const scale = isSelected ? 1.15 : 1.0;
       return L.divIcon({
@@ -49,15 +30,37 @@ export const BranchMap = () => {
       });
     };
 
+  useEffect(() => {
+    if (!mapContainerRef.current) return;
+    if (mapInstanceRef.current) return; // Prevent double initialization
+
+    // Initialize Leaflet map
+    const map = L.map(mapContainerRef.current, {
+      zoomControl: true,
+      scrollWheelZoom: false, // Prevent accidental scrolling when browsing page
+    });
+    mapInstanceRef.current = map;
+
+    // Add OpenStreetMap Tile Layer with required attribution
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors | DKP Innovation Locations',
+    }).addTo(map);
+
+    // Create custom DKP yellow marker icon with animated pulse ring
+    
     // Add markers for all three branches
     const bounds = L.latLngBounds([]);
+
+    const initialSelectedId = branchLocations[0]?.id;
 
     branchLocations.forEach((branch, idx) => {
       const latLng = L.latLng(branch.lat, branch.lon);
       bounds.extend(latLng);
 
       const marker = L.marker(latLng, {
-        icon: createCustomIcon(branch.id === selectedBranchId, idx),
+        icon: createCustomIcon(branch.id === initialSelectedId, idx),
         title: branch.name,
       }).addTo(map);
 
@@ -105,6 +108,16 @@ export const BranchMap = () => {
       mapInstanceRef.current = null;
     };
   }, []);
+
+  // Update marker icons dynamically when selected branch changes
+  useEffect(() => {
+    branchLocations.forEach((branch, idx) => {
+      const marker = markersRef.current[branch.id];
+      if (marker) {
+        marker.setIcon(createCustomIcon(branch.id === selectedBranchId, idx));
+      }
+    });
+  }, [selectedBranchId]);
 
   // Update marker icons and pan when selected branch changes
   const handleSelectBranch = (branch: BranchLocation) => {

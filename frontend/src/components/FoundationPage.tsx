@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import { OFFICIAL_PHONE, OFFICIAL_PHONE_TEL } from '../data/branchesData';
 import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 import {
@@ -115,10 +115,6 @@ const FoundationVideoCard = ({
 export const FoundationPage = () => {
   const { navigateTo } = useNavigation();
 
-  useEffect(() => {
-    document.title = 'DKP Foundation | DKP Innovation';
-  }, []);
-
   return (
     <div className="min-h-screen bg-white text-neutral-900 flex flex-col w-full selection:bg-[#FFD60A] selection:text-[#002244]">
       {/* Floating Centered Navigation */}
@@ -153,13 +149,18 @@ export const FoundationPage = () => {
           </div>
 
           <div className="relative z-10 max-w-[1240px] mx-auto text-center flex flex-col items-center">
+            {/* Category / Organizational Positioning Eyebrow */}
+            <span className="text-xs font-bold text-[#FFD60A] uppercase tracking-widest mb-3 block">
+              Community Welfare Initiative by DKP Innovations
+            </span>
+
             {/* Main Page Title / Visible Heading */}
             <TextAnimationBlurFadeIn
               as="h1"
               delay={0.1}
               staggerDuration={0.03}
               duration={0.6}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#FFD60A] leading-[1.1] mb-4 sm:mb-6 max-w-4xl mx-auto"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#FFFFFF] leading-[1.1] mb-4 sm:mb-6 max-w-4xl mx-auto"
             >
               DKP Foundation
             </TextAnimationBlurFadeIn>
@@ -181,7 +182,7 @@ export const FoundationPage = () => {
               duration={0.5}
               className="text-base sm:text-lg text-neutral-300 font-normal max-w-2xl sm:max-w-3xl mx-auto mb-10 leading-relaxed"
             >
-              At DKP Innovations, technological advancement is deeply intertwined with social responsibility. The DKP Foundation is our dedicated philanthropic wing, bringing direct aid, community relief, educational enablement, and social empowerment to underserved individuals and families.
+              DKP Foundation is a community welfare initiative operated under DKP Innovations, focused on supporting people and creating meaningful social impact through grassroots assistance, community engagement, and youth empowerment.
             </TextAnimationBlurFadeIn>
 
             {/* Dual CTAs with Blur-and-Fade Reveal */}
@@ -220,14 +221,6 @@ export const FoundationPage = () => {
             {/* Section Header with Blur-and-Fade Reveal */}
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
               <TextAnimationBlurFadeIn
-                as="span"
-                delay={0.05}
-                duration={0.4}
-                className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2"
-              >
-                WHAT WE CHAMPION
-              </TextAnimationBlurFadeIn>
-              <TextAnimationBlurFadeIn
                 as="h2"
                 delay={0.15}
                 duration={0.5}
@@ -241,7 +234,7 @@ export const FoundationPage = () => {
                 duration={0.5}
                 className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal"
               >
-                We design and execute focused programs to support underprivileged families, provide critical relief, and empower the next generation through education and well-being.
+                Through DKP Innovations' dedicated community outreach, we plan and carry out direct assistance programs to support families facing economic hardship, provide essential everyday supplies, and encourage youth through educational enablement.
               </TextAnimationBlurFadeIn>
             </div>
 
@@ -430,7 +423,7 @@ export const FoundationPage = () => {
                 duration={0.5}
                 className="text-sm sm:text-base text-neutral-600 leading-relaxed font-normal"
               >
-                Transparent glimpses into our on-ground community outreach, essential welfare distributions, and social engagement programs.
+                Documented moments from our on-ground community outreach, essential welfare distributions, and social engagement programs conducted by DKP Innovations.
               </TextAnimationBlurFadeIn>
             </div>
 
@@ -505,7 +498,7 @@ export const FoundationPage = () => {
                   duration={0.5}
                   className="text-sm sm:text-base text-neutral-600 leading-relaxed mb-8 max-w-2xl mx-auto font-normal"
                 >
-                  Whether you wish to sponsor a relief initiative, volunteer on the field, or explore an institutional partnership, your voice and actions make a tangible difference.
+                  Whether you wish to connect with our outreach team, participate in field volunteer drives, or learn more about our ongoing community welfare work under DKP Innovations, we welcome constructive engagement.
                 </TextAnimationBlurFadeIn>
 
                 <BlurFadeIn

@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import { IconArrowRight } from '@tabler/icons-react';
-import {
-  StackedFeatureCards,
-  defaultWhyChooseUsCards,
-} from '@/components/unlumen-ui/stacked-feature-cards';
+import { StackedFeatureCards } from '@/components/ui-animation/stacked-feature-cards';
+import { defaultWhyChooseUsCards } from '@/data/whyChooseUsData';
 import { TextAnimationBlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
 
 export const WhyChooseUs = () => {

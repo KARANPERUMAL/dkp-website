@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import { galleryItems, type GalleryItem } from '../data/galleryData';
 import { GalleryLightbox } from './gallery/GalleryLightbox';
 import {
@@ -162,10 +162,20 @@ export const GalleryPage = () => {
         </div>
 
         <div className="relative z-10 max-w-[1240px] mx-auto text-center">
+          {/* Main H1 Heading */}
+          <TextAnimationBlurFadeIn
+            as="h1"
+            delay={0.05}
+            duration={0.6}
+            className="text-3xl sm:text-5xl md:text-6xl font-black text-[#FFFFFF] tracking-tight uppercase mb-4"
+          >
+            Studio & Creative Production Gallery
+          </TextAnimationBlurFadeIn>
+
           {/* Subtitle / Description */}
           <TextAnimationBlurFadeIn
             as="p"
-            delay={0.1}
+            delay={0.15}
             duration={0.5}
             className="max-w-2xl mx-auto text-sm sm:text-base text-[#CBD5E1] font-light leading-relaxed"
           >

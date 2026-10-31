@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { useNavigation } from '../context/NavigationContext';
+import { useNavigation } from '../hooks/useNavigation';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { BranchMap } from './BranchMap';
