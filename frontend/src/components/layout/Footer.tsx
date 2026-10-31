@@ -31,7 +31,7 @@ export const Footer = () => {
               <img
                 src="/images/logo/logo.webp"
                 alt="DKP Innovation"
-                width={160}
+                width={96}
                 height={48}
                 loading="lazy"
                 decoding="async"

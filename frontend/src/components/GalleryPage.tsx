@@ -49,6 +49,7 @@ interface GalleryCardProps {
   index: number;
   aspectClass?: string;
   eager?: boolean;
+  highPriority?: boolean;
   objectPosition?: string;
   onOpen: (index: number, e?: React.MouseEvent | React.KeyboardEvent) => void;
   className?: string;
@@ -59,6 +60,7 @@ const GalleryCard = ({
   index,
   aspectClass = 'aspect-[16/10]',
   eager = false,
+  highPriority = false,
   objectPosition = 'object-center',
   onOpen,
   className = '',
@@ -67,9 +69,9 @@ const GalleryCard = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
+      initial={eager ? { opacity: 1, y: 0 } : { opacity: 0, y: prefersReducedMotion ? 0 : 18 }}
+      whileInView={eager ? undefined : { opacity: 1, y: 0 }}
+      viewport={eager ? undefined : { once: true, margin: '-40px' }}
       transition={{
         duration: prefersReducedMotion ? 0.05 : 0.5,
         ease: [0.16, 1, 0.3, 1],
@@ -96,7 +98,7 @@ const GalleryCard = ({
             width={item.width}
             height={item.height}
             loading={eager ? 'eager' : 'lazy'}
-            fetchPriority={eager ? 'high' : 'auto'}
+            fetchPriority={highPriority ? 'high' : 'auto'}
             decoding="async"
             className={`w-full h-full object-cover ${objectPosition} transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03] will-change-transform`}
           />
@@ -211,6 +213,7 @@ export const GalleryPage = () => {
                   index={0}
                   aspectClass="aspect-[16/10]"
                   eager
+                  highPriority
                   onOpen={openLightboxAt}
                   className="h-full flex-1"
                 />

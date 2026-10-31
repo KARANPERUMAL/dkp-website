@@ -125,6 +125,19 @@ async function prerender() {
       `<meta name="twitter:image" content="${seo.twitterImage}" />`
     );
 
+    // 5.1 Route-specific LCP Image Preload
+    let lcpPreloadTag = '';
+    if (key === 'gallery') {
+      lcpPreloadTag = '  <link rel="preload" as="image" href="/images/gallery/3.webp" type="image/webp" fetchpriority="high" />\n';
+    } else if (key === 'about') {
+      lcpPreloadTag = '  <link rel="preload" as="image" href="/images/founder-img/founder.webp" type="image/webp" fetchpriority="high" />\n';
+    } else if (key === 'foundation') {
+      lcpPreloadTag = '  <link rel="preload" as="image" href="/images/foundation/video11-poster.webp" type="image/webp" fetchpriority="high" />\n';
+    }
+    if (lcpPreloadTag) {
+      html = html.replace('</head>', `${lcpPreloadTag}</head>`);
+    }
+
     // 6. Robots Directive
     if (is404) {
       html = replaceTag(

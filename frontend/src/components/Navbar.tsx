@@ -99,7 +99,7 @@ export const Navbar = () => {
             <img
               src="/images/logo/logo.webp"
               alt="DKP Innovation"
-              width={180}
+              width={96}
               height={48}
               fetchPriority="high"
               decoding="async"

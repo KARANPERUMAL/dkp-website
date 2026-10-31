@@ -14,6 +14,7 @@ import {
   RotateCcw,
   CheckCircle2,
   Video as VideoIcon,
+  Play,
 } from 'lucide-react';
 
 interface FoundationVideoCardProps {
@@ -28,18 +29,27 @@ interface FoundationVideoCardProps {
 
 const FoundationVideoCard = ({
   src,
+  poster,
   title,
   badge,
   description,
   tags,
 }: FoundationVideoCardProps) => {
+  const [isPlaying, setIsPlaying] = useState(false);
   const [hasError, setHasError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const handlePlay = () => {
+    setIsPlaying(true);
+    setHasError(false);
+  };
+
   const handleRetry = () => {
     setHasError(false);
+    setIsPlaying(true);
     if (videoRef.current) {
       videoRef.current.load();
+      videoRef.current.play().catch(() => {});
     }
   };
 
@@ -62,19 +72,46 @@ const FoundationVideoCard = ({
               <span>Retry Video</span>
             </button>
           </div>
-        ) : (
+        ) : isPlaying ? (
           <video
             ref={videoRef}
             src={src}
+            poster={poster}
             controls
+            autoPlay
             playsInline
-            preload="metadata"
             onError={() => setHasError(true)}
             aria-label={title}
             className="w-full h-full object-cover"
           >
             Your browser does not support the video tag.
           </video>
+        ) : (
+          <button
+            type="button"
+            onClick={handlePlay}
+            aria-label={`Play video: ${title}`}
+            className="relative w-full h-full group/btn block text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD60A] focus-visible:ring-offset-2"
+          >
+            {poster ? (
+              <img
+                src={poster}
+                alt={title}
+                width={716}
+                height={403}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/btn:scale-105"
+              />
+            ) : (
+              <div className="w-full h-full bg-neutral-900" />
+            )}
+            <div className="absolute inset-0 bg-black/30 group-hover/btn:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#004D86]/90 border border-white/40 shadow-2xl flex items-center justify-center backdrop-blur-sm group-hover/btn:scale-110 group-hover/btn:bg-[#004D86] transition-transform duration-300">
+                <Play className="w-7 h-7 sm:w-8 sm:h-8 text-[#FFD60A] fill-[#FFD60A] ml-1" />
+              </div>
+            </div>
+          </button>
         )}
 
         {/* Category Pill Tag Overlay */}

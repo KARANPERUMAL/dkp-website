@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { BackgroundRippleEffect } from './ui/background-ripple-effect';
 
 interface HeroSectionProps {
@@ -7,6 +7,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
+  const prefersReducedMotion = useReducedMotion();
   const handleScrollToServices = (e: MouseEvent) => {
     e.preventDefault();
     if (onCtaClick) {
@@ -80,7 +81,7 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
           >
             {/* Line 1: We Don't Just (slightly narrower, centered at top of ladder) */}
             <motion.div
-              initial={{ opacity: 0, filter: 'blur(10px)', y: 8 }}
+              initial={{ opacity: 0, filter: prefersReducedMotion ? 'none' : 'blur(10px)', y: 8 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2.3rem,5.4vw,5.6rem)] leading-[0.90] transition-colors"
@@ -95,9 +96,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
             {/* Line 2: Market Your Brand — (wider middle tier of ladder with increased vertical gap) */}
             <motion.div
-              initial={{ opacity: 0, filter: 'blur(10px)', y: 8 }}
+              initial={{ opacity: 0, filter: prefersReducedMotion ? 'none' : 'blur(10px)', y: 8 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(3.1rem,7.8vw,8.2rem)] leading-[0.88] tracking-[-0.045em] transition-colors"
               style={{
                 backgroundImage:
@@ -111,9 +112,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
             {/* Line 3: We Build It. (balanced base beneath them, sitting naturally lower) */}
             <motion.div
-              initial={{ opacity: 0, filter: 'blur(10px)', y: 8 }}
+              initial={{ opacity: 0, filter: prefersReducedMotion ? 'none' : 'blur(10px)', y: 8 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(3.8rem,9.6vw,10.2rem)] leading-[0.86] tracking-[-0.05em] transition-colors"
               style={{
                 backgroundImage:

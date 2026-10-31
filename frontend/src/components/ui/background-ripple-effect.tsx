@@ -19,24 +19,59 @@ export const BackgroundRippleEffect = ({
   const [rippleKey, setRippleKey] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hasAutoTriggeredRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  // Responsive grid dimension calculation to seamlessly tile edge-to-edge across all viewports
+  // Responsive grid dimension calculation
   const [gridConfig, setGridConfig] = useState({
     rows,
     cols,
     cellSize,
+    interactive: true,
   });
 
   useEffect(() => {
     if (!containerRef.current) return;
+
+    // Visibility observer to pause/halt when scrolled out of view
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    visibilityObserver.observe(containerRef.current);
 
     const updateGrid = () => {
       if (!containerRef.current) return;
       const { clientWidth, clientHeight } = containerRef.current;
       if (clientWidth === 0 || clientHeight === 0) return;
 
-      // Adjust cellSize responsively: 42px on mobile, 48px on tablet, 52px on desktop
-      const effectiveCellSize = clientWidth < 640 ? 42 : clientWidth < 1024 ? 48 : 52;
+      const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const mobileView = clientWidth < 768;
+      setIsMobile(mobileView);
+
+      if (mobileView) {
+        // Mobile (<768px): Light static grid with larger cells to slash DOM nodes by ~75%
+        // ~6 cols x 10 rows = ~60 cells max (vs 250+ previously)
+        const mobileCellSize = 72;
+        const calculatedCols = Math.min(6, Math.ceil(clientWidth / mobileCellSize) + 1);
+        const calculatedRows = Math.min(10, Math.ceil(clientHeight / mobileCellSize) + 1);
+
+        setGridConfig({
+          rows: Math.max(6, calculatedRows),
+          cols: Math.max(5, calculatedCols),
+          cellSize: mobileCellSize,
+          interactive: false,
+        });
+        return;
+      }
+
+      // Desktop & Tablet (>=768px): Full dynamic ripple grid
+      const effectiveCellSize = clientWidth < 1024 ? 48 : 52;
       const calculatedCols = Math.ceil(clientWidth / effectiveCellSize) + 2;
       const calculatedRows = Math.ceil(clientHeight / effectiveCellSize) + 2;
 
@@ -47,20 +82,12 @@ export const BackgroundRippleEffect = ({
         rows: rowsCount,
         cols: colsCount,
         cellSize: effectiveCellSize,
+        interactive: true,
       });
 
-      // Automatically trigger the single central rectangle illumination on initial mount once dimensions settle
-      if (!hasAutoTriggeredRef.current) {
+      // Desktop auto-trigger: single central illumination on initial mount once settled
+      if (!hasAutoTriggeredRef.current && !prefersReducedMotion) {
         hasAutoTriggeredRef.current = true;
-
-        // Respect prefers-reduced-motion
-        if (
-          typeof window !== "undefined" &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
-          return;
-        }
-
         setTimeout(() => {
           const exactCenterRow = Math.floor(rowsCount / 2);
           const exactCenterCol = Math.floor(colsCount / 2);
@@ -77,7 +104,10 @@ export const BackgroundRippleEffect = ({
     });
 
     resizeObserver.observe(containerRef.current);
-    return () => resizeObserver.disconnect();
+    return () => {
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
+    };
   }, []);
 
   return (
@@ -96,17 +126,21 @@ export const BackgroundRippleEffect = ({
       }}
     >
       <DivGrid
-        key={`base-${rippleKey}`}
+        key={isMobile ? "mobile-grid" : `base-${rippleKey}`}
         className="w-full h-full"
         rows={gridConfig.rows}
         cols={gridConfig.cols}
         cellSize={gridConfig.cellSize}
-        clickedCell={clickedCell}
-        onCellClick={(row, col) => {
-          setClickedCell({ row, col });
-          setRippleKey((k) => k + 1);
-        }}
-        interactive
+        clickedCell={isMobile || !isVisible ? null : clickedCell}
+        onCellClick={
+          gridConfig.interactive && isVisible
+            ? (row, col) => {
+                setClickedCell({ row, col });
+                setRippleKey((k) => k + 1);
+              }
+            : undefined
+        }
+        interactive={gridConfig.interactive && !isMobile}
       />
     </div>
   );
@@ -116,7 +150,7 @@ type DivGridProps = {
   className?: string;
   rows: number;
   cols: number;
-  cellSize: number; // in pixels
+  cellSize: number;
   clickedCell: { row: number; col: number } | null;
   onCellClick?: (row: number, col: number) => void;
   interactive?: boolean;
@@ -135,7 +169,7 @@ const DivGrid = ({
   cols,
   cellSize,
   clickedCell = null,
-  onCellClick = () => {},
+  onCellClick,
   interactive = true,
 }: DivGridProps) => {
   const cells = useMemo(
@@ -163,24 +197,21 @@ const DivGrid = ({
           ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
           : 0;
 
-        const delay = clickedCell ? Math.max(0, distance * 50) : 0; // ms
-        const duration = 240 + distance * 70; // ms
+        const delay = clickedCell ? Math.max(0, distance * 50) : 0;
+        const duration = 240 + distance * 70;
 
-        // Calculate deterministic depth tier for subtle variations across rectangles
+        // Deterministic depth tier for subtle variations across rectangles
         const depthSeed = (rowIdx * 13 + colIdx * 7 + (rowIdx % 3) * 5) % 17;
-        let cellBg = "rgba(255, 255, 255, 0.04)"; // Default translucent fill on bright blue
-        let cellBorder = "rgba(255, 255, 255, 0.16)"; // Default crisp border
+        let cellBg = "rgba(255, 255, 255, 0.04)";
+        let cellBorder = "rgba(255, 255, 255, 0.16)";
 
         if (depthSeed === 0 || depthSeed === 7) {
-          // Tier 1: Slightly highlighted accent tiles (approx ~12% of tiles)
           cellBg = "rgba(255, 255, 255, 0.10)";
           cellBorder = "rgba(255, 255, 255, 0.28)";
         } else if (depthSeed === 3 || depthSeed === 11) {
-          // Tier 2: Medium subtle blue depth tiles (approx ~12% of tiles)
           cellBg = "rgba(255, 255, 255, 0.07)";
           cellBorder = "rgba(255, 255, 255, 0.22)";
         } else if (depthSeed === 5 || depthSeed === 14) {
-          // Tier 3: Soft ambient blue tiles
           cellBg = "rgba(255, 255, 255, 0.05)";
           cellBorder = "rgba(255, 255, 255, 0.19)";
         }
@@ -201,8 +232,8 @@ const DivGrid = ({
           <div
             key={idx}
             className={cn(
-              "cell relative border-[0.75px] transition-all duration-200 will-change-transform cursor-pointer",
-              "hover:bg-[rgba(255,255,255,0.22)] hover:border-[rgba(255,255,255,0.65)] hover:shadow-[0_0_14px_rgba(255,255,255,0.35)]",
+              "cell relative border-[0.75px] transition-all duration-200",
+              interactive && "cursor-pointer hover:bg-[rgba(255,255,255,0.22)] hover:border-[rgba(255,255,255,0.65)] hover:shadow-[0_0_14px_rgba(255,255,255,0.35)] will-change-transform",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
               !interactive && "pointer-events-none",
             )}
@@ -213,7 +244,9 @@ const DivGrid = ({
               ...animStyle,
             }}
             onClick={
-              interactive ? () => onCellClick?.(rowIdx, colIdx) : undefined
+              interactive && onCellClick
+                ? () => onCellClick(rowIdx, colIdx)
+                : undefined
             }
           />
         );
