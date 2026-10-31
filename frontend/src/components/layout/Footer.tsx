@@ -74,60 +74,88 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <button
-                  onClick={() => navigateTo('home', 'home')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('home', 'home');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   Home
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('home', 'about')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/about"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('about');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   Who We Are
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('services')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/services"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('services');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   What Do We Do
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('gallery')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/gallery"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('gallery');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   Gallery
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('foundation')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/foundation"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('foundation');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   DKP Foundation
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('careers')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/careers"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('careers');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   Careers
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => navigateTo('contact')}
-                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left"
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('contact');
+                  }}
+                  className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left inline-block"
                 >
                   Contact Us
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -140,14 +168,18 @@ export const Footer = () => {
             <ul className="space-y-2.5 text-sm">
               {serviceCategories.map((cat) => (
                 <li key={cat.id}>
-                  <button
-                    onClick={() => navigateTo('services', cat.slug)}
+                  <a
+                    href={`/services#${cat.slug}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo('services', cat.slug);
+                    }}
                     className="text-neutral-400 hover:text-[#FFD60A] transition-colors cursor-pointer text-left leading-snug flex items-center group"
                   >
                     <span className="group-hover:translate-x-0.5 transition-transform">
                       {cat.title}
                     </span>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -207,13 +239,17 @@ export const Footer = () => {
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => navigateTo('contact', 'branch-map')}
+                <a
+                  href="/contact#branch-map"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo('contact', 'branch-map');
+                  }}
                   className="mt-3 inline-flex items-center space-x-1 text-xs text-[#FFD60A] hover:text-[#FFE047] font-semibold cursor-pointer group"
                 >
                   <span>View Interactive Branch Map</span>
                   <IconArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </button>
+                </a>
               </div>
             </div>
           </div>

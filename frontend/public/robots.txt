@@ -1,0 +1,8 @@
+# Robots.txt for DKP Innovations
+# Verification and Crawler Directives
+
+User-agent: *
+Allow: /
+
+# Sitemap Reference
+Sitemap: https://dkp-innovation-preview.vercel.app/sitemap.xml

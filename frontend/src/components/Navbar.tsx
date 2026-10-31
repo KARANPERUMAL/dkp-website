@@ -14,37 +14,37 @@ import {
 export const navItems: NavItem[] = [
   {
     name: 'Home',
-    link: '#home',
+    link: '/',
     icon: <IconHome className="h-4 w-4" />,
   },
   {
     name: 'Who We Are',
-    link: '#about',
+    link: '/about',
     icon: <IconUsers className="h-4 w-4" />,
   },
   {
     name: 'What We Do',
-    link: '#services',
+    link: '/services',
     icon: <IconBriefcase className="h-4 w-4" />,
   },
   {
     name: 'Gallery',
-    link: '#gallery',
+    link: '/gallery',
     icon: <IconPhoto className="h-4 w-4" />,
   },
   {
     name: 'DKP Foundation',
-    link: '#foundation',
+    link: '/foundation',
     icon: <IconHeartHandshake className="h-4 w-4" />,
   },
   {
     name: 'Careers',
-    link: '#careers',
+    link: '/careers',
     icon: <IconUserCheck className="h-4 w-4" />,
   },
   {
     name: 'Contact Us',
-    link: '#contact',
+    link: '/contact',
     icon: <IconMessage className="h-4 w-4" />,
   },
 ];
@@ -54,13 +54,13 @@ export const Navbar = () => {
 
   // Compute active tab based on currentPage
   const getTabForPage = (page: string) => {
-    if (page === 'about') return '#about';
-    if (page === 'services') return '#services';
-    if (page === 'gallery') return '#gallery';
-    if (page === 'foundation') return '#foundation';
-    if (page === 'careers') return '#careers';
-    if (page === 'contact') return '#contact';
-    return '#home';
+    if (page === 'about') return '/about';
+    if (page === 'services') return '/services';
+    if (page === 'gallery') return '/gallery';
+    if (page === 'foundation') return '/foundation';
+    if (page === 'careers') return '/careers';
+    if (page === 'contact') return '/contact';
+    return '/';
   };
 
   const [activeTab, setActiveTab] = useState<string>(getTabForPage(currentPage));
@@ -71,19 +71,19 @@ export const Navbar = () => {
 
   const handleNavClick = (link: string) => {
     setActiveTab(link);
-    if (link === '#home') {
+    if (link === '/' || link === '#home') {
       navigateTo('home');
-    } else if (link === '#about') {
+    } else if (link === '/about' || link === '#about') {
       navigateTo('about');
-    } else if (link === '#services') {
+    } else if (link === '/services' || link === '#services') {
       navigateTo('services');
-    } else if (link === '#gallery') {
+    } else if (link === '/gallery' || link === '#gallery') {
       navigateTo('gallery');
-    } else if (link === '#foundation') {
+    } else if (link === '/foundation' || link === '#foundation') {
       navigateTo('foundation');
-    } else if (link === '#careers') {
+    } else if (link === '/careers' || link === '#careers') {
       navigateTo('careers');
-    } else if (link === '#contact') {
+    } else if (link === '/contact' || link === '#contact') {
       navigateTo('contact');
     }
   };

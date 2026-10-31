@@ -16,7 +16,7 @@ export interface NavItem {
 export const FloatingNav = ({
   navItems,
   className,
-  activeTab = "#home",
+  activeTab = "/",
   onItemClick,
   alwaysVisible = false,
 }: {
