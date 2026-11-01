@@ -5,6 +5,7 @@ export type PageRoute =
   | 'about'
   | 'services'
   | 'gallery'
+  | 'academy'
   | 'foundation'
   | 'careers'
   | 'contact'
@@ -12,7 +13,7 @@ export type PageRoute =
 
 export interface NavigationContextType {
   currentPage: PageRoute;
-  navigateTo: (page: PageRoute, targetId?: string) => void;
+  navigateTo: (page: PageRoute, targetId?: string, queryParams?: Record<string, string>) => void;
   selectedServiceForInquiry?: string;
   setSelectedServiceForInquiry: (serviceName: string) => void;
   selectedPositionForApplication?: string;

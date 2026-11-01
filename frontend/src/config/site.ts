@@ -26,7 +26,7 @@ export const getSiteUrl = (): string => {
 export const SITE_CONFIG = {
   name: 'DKP Innovations',
   legalName: 'DKP Innovations',
-  defaultTitle: 'DKP Innovation — Digital Strategy, Brand Architecture & Creative Production',
+  defaultTitle: 'DKP Innovations — Digital Strategy, Brand Architecture & Creative Production',
   defaultDescription:
     'DKP Innovations is a full-service digital strategy, creative production, IT solutions, and brand architecture company based in Bengaluru, India.',
   siteUrl: getSiteUrl(),

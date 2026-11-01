@@ -17,6 +17,7 @@ const routes = [
   { path: '/about', changefreq: 'monthly', priority: '0.8' },
   { path: '/services', changefreq: 'weekly', priority: '0.9' },
   { path: '/gallery', changefreq: 'monthly', priority: '0.7' },
+  { path: '/academy', changefreq: 'weekly', priority: '0.8' },
   { path: '/foundation', changefreq: 'monthly', priority: '0.7' },
   { path: '/careers', changefreq: 'weekly', priority: '0.8' },
   { path: '/contact', changefreq: 'monthly', priority: '0.8' },
@@ -44,7 +45,7 @@ ${routes
 `;
 
 fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemapXml.trim() + '\n', 'utf8');
-console.log(`✓ sitemap.xml successfully generated for ${baseUrl} (7 canonical routes)`);
+console.log(`✓ sitemap.xml successfully generated for ${baseUrl} (8 canonical routes)`);
 
 // 2. Generate robots.txt referencing the sitemap
 const robotsTxt = allowIndexing

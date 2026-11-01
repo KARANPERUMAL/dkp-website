@@ -263,4 +263,76 @@ class CareerApplicationControllerTest {
                 .andExpect(jsonPath("$.status").value(503))
                 .andExpect(jsonPath("$.message", containsString("temporarily unavailable")));
     }
+
+    @Test
+    @DisplayName("POST /api/careers/applications with valid internship payload should succeed")
+    void testValidInternshipApplication() throws Exception {
+        MockMultipartFile resumeFile = new MockMultipartFile("resume", "intern_cv.pdf", "application/pdf", validPdfBytes);
+
+        mockMvc.perform(multipart("/api/careers/applications")
+                        .file(resumeFile)
+                        .param("fullName", "Student Candidate")
+                        .param("email", "student@example.com")
+                        .param("phone", "+91 98765 43210")
+                        .param("position", "Internship — Web & Frontend Development")
+                        .param("applicationType", "internship")
+                        .param("department", "IT & Digital Solutions")
+                        .param("experienceLevel", "Internship")
+                        .param("workArrangement", "Hybrid")
+                        .param("keySkills", "HTML, CSS, React, TypeScript")
+                        .param("coverLetter", "I am a college student applying for the web development internship opportunity.")
+                        .param("privacyConsent", "true")
+                        .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.success").value(true))
+                .andExpect(jsonPath("$.referenceId", containsString("DKP-APP-")));
+    }
+
+    @Test
+    @DisplayName("POST /api/careers/applications with internship type but non-internship experience level should be rejected with 400")
+    void testInvalidInternshipExperienceLevelRejected() throws Exception {
+        MockMultipartFile resumeFile = new MockMultipartFile("resume", "intern_cv.pdf", "application/pdf", validPdfBytes);
+
+        mockMvc.perform(multipart("/api/careers/applications")
+                        .file(resumeFile)
+                        .param("fullName", "Bypass Candidate")
+                        .param("email", "bypass@example.com")
+                        .param("phone", "+91 98765 43210")
+                        .param("position", "Internship — Web & Frontend Development")
+                        .param("applicationType", "internship")
+                        .param("department", "IT & Digital Solutions")
+                        .param("experienceLevel", "3–5 Years")
+                        .param("workArrangement", "Hybrid")
+                        .param("keySkills", "HTML, CSS, React, TypeScript")
+                        .param("coverLetter", "Attempting to bypass experience level lock via direct API call.")
+                        .param("privacyConsent", "true")
+                        .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message", containsString("Experience level must be 'Internship'")));
+    }
+
+    @Test
+    @DisplayName("POST /api/careers/applications with general type but internship position should be rejected with 400")
+    void testMismatchedGeneralTypeWithInternshipPositionRejected() throws Exception {
+        MockMultipartFile resumeFile = new MockMultipartFile("resume", "mismatch_cv.pdf", "application/pdf", validPdfBytes);
+
+        mockMvc.perform(multipart("/api/careers/applications")
+                        .file(resumeFile)
+                        .param("fullName", "Mismatch Candidate")
+                        .param("email", "mismatch@example.com")
+                        .param("phone", "+91 98765 43210")
+                        .param("position", "Internship — Web & Frontend Development")
+                        .param("applicationType", "general")
+                        .param("department", "IT & Digital Solutions")
+                        .param("experienceLevel", "Entry Level")
+                        .param("workArrangement", "Hybrid")
+                        .param("keySkills", "HTML, CSS, React, TypeScript")
+                        .param("coverLetter", "Mismatched application type and position.")
+                        .param("privacyConsent", "true")
+                        .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message", containsString("cannot be submitted with application type")));
+    }
 }

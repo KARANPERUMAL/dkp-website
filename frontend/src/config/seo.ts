@@ -95,6 +95,25 @@ export const getSeoForRoute = (route: SupportedPage | string): RouteSeoMetadata 
         twitterImage: studioImage,
       };
 
+    case 'academy':
+      return {
+        path: '/academy',
+        title: 'DKP Academy | Practical Internships & Skill Development | DKP Innovations',
+        description:
+          'Explore college internship opportunities at DKP Academy by DKP Innovations. Gain hands-on project exposure in web development, design, and digital marketing in Bengaluru.',
+        canonical: getCanonicalUrl('/academy'),
+        ogType: 'website',
+        ogTitle: 'DKP Academy | Practical Internships & Skill Development | DKP Innovations',
+        ogDescription:
+          'Explore college internship opportunities at DKP Academy by DKP Innovations. Gain hands-on project exposure in web development, design, and digital marketing in Bengaluru.',
+        ogImage: defaultImage,
+        twitterCard: 'summary_large_image',
+        twitterTitle: 'DKP Academy | Practical Internships & Skill Development | DKP Innovations',
+        twitterDescription:
+          'Explore college internship opportunities at DKP Academy by DKP Innovations. Gain hands-on project exposure in web development, design, and digital marketing in Bengaluru.',
+        twitterImage: defaultImage,
+      };
+
     case 'foundation':
       return {
         path: '/foundation',

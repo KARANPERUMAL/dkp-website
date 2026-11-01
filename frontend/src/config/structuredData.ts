@@ -299,6 +299,29 @@ export const getStructuredDataForRoute = (
         ],
       };
 
+    case 'academy':
+      return {
+        '@context': 'https://schema.org',
+        '@graph': [
+          orgSchema,
+          websiteSchema,
+          {
+            '@type': 'WebPage',
+            '@id': `${siteUrl}/academy/#webpage`,
+            url: `${siteUrl}/academy`,
+            name: 'DKP Academy | Practical Internships & Skill Development | DKP Innovations',
+            description:
+              'DKP Academy is a practical learning and internship initiative by DKP Innovations offering hands-on project experience in web development, design, and digital marketing.',
+            isPartOf: {
+              '@id': `${siteUrl}/#website`,
+            },
+          },
+          getBreadcrumbSchema(siteUrl, [
+            { name: 'DKP Academy', path: '/academy' },
+          ]),
+        ],
+      };
+
     case 'foundation':
       return {
         '@context': 'https://schema.org',

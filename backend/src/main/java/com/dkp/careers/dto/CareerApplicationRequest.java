@@ -25,6 +25,9 @@ public class CareerApplicationRequest {
     @Size(max = 100, message = "Position must not exceed 100 characters.")
     private String position;
 
+    @Pattern(regexp = "^(?i)(internship|general|job)?$", message = "Application type must be internship, general, or job.")
+    private String applicationType;
+
     @NotBlank(message = "Department of interest is required.")
     @Size(max = 100, message = "Department must not exceed 100 characters.")
     private String department;
@@ -89,6 +92,14 @@ public class CareerApplicationRequest {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getApplicationType() {
+        return applicationType;
+    }
+
+    public void setApplicationType(String applicationType) {
+        this.applicationType = applicationType;
     }
 
     public String getDepartment() {

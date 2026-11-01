@@ -26,11 +26,11 @@ export const Footer = () => {
                 navigateTo('home', 'home');
               }}
               className="inline-block cursor-pointer transition-opacity hover:opacity-90 w-fit"
-              aria-label="DKP Innovation Home"
+              aria-label="DKP Innovations Home"
             >
               <img
                 src="/images/logo/logo.webp"
-                alt="DKP Innovation"
+                alt="DKP Innovations"
                 width={96}
                 height={48}
                 loading="lazy"
@@ -265,7 +265,7 @@ export const Footer = () => {
         {/* Bottom Row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/70 gap-3">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1">
-            <span className="font-bold text-white tracking-tight">DKP INNOVATION</span>
+            <span className="font-bold text-white tracking-tight">DKP INNOVATIONS</span>
             <span>•</span>
             <span>Digital Agency, Creative Production & Brand Architecture</span>
             <span>•</span>
@@ -273,7 +273,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <span>© {CURRENT_YEAR} DKP Innovation. All rights reserved.</span>
+            <span>© {CURRENT_YEAR} DKP Innovations. All rights reserved.</span>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
-# DKP Innovation — Official Platform
+# DKP Innovations — Official Platform
 
-Official website and digital presence platform for DKP Innovation, built with a modern React 19 frontend and a production-ready Spring Boot 3.4 Java backend.
+Official website and digital presence platform for DKP Innovations, built with a modern React 19 frontend and a production-ready Spring Boot 3.4 Java backend.
 
 ## Project Structure
 

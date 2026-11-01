@@ -1,4 +1,4 @@
-import { useState, useRef, type FormEvent, type ChangeEvent } from 'react';
+import { useState, useMemo, useRef, useEffect, type FormEvent, type ChangeEvent } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { useNavigation } from '../hooks/useNavigation';
@@ -9,12 +9,19 @@ import {
   workArrangementOptions,
   type JobPosition,
 } from '../data/careersData';
+import {
+  internshipDomains,
+  findInternshipDomainById,
+  findInternshipDomainByPosition,
+  isInternshipPosition,
+  type ApplicationClassification,
+} from '../data/academyData';
 import { submitCareerApplication } from '../services/careersService';
 import {
   TextAnimationBlurFadeIn,
   BlurFadeIn,
 } from '@/components/ui/text-animation-blur-fade-in';
-import { CustomSelect } from './ui/custom-select';
+import { CustomSelect, type CustomSelectOption } from './ui/custom-select';
 import {
   Briefcase,
   CheckCircle2,
@@ -26,6 +33,7 @@ import {
   Clock,
   Building2,
   ArrowRight,
+  Lock,
 } from 'lucide-react';
 import { IconArrowRight } from '@tabler/icons-react';
 
@@ -63,25 +71,107 @@ interface FormErrors {
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 const ALLOWED_EXTENSIONS = ['.pdf', '.doc', '.docx'];
 
+// Helper to compute initial state from URL query parameters or context
+function getInitialApplicationState(selectedPosition?: string): {
+  type: ApplicationClassification;
+  position: string;
+  department: string;
+  experienceLevel: string;
+} {
+  if (typeof window !== 'undefined') {
+    const searchParams = new URLSearchParams(window.location.search);
+    const typeParam = searchParams.get('type')?.toLowerCase();
+    const domainParam = searchParams.get('domain');
+
+    if (typeParam === 'internship') {
+      const matchedDomain = domainParam ? findInternshipDomainById(domainParam) : undefined;
+      if (matchedDomain) {
+        return {
+          type: 'internship',
+          position: matchedDomain.careerPositionTitle,
+          department: matchedDomain.department,
+          experienceLevel: 'Internship',
+        };
+      }
+      return {
+        type: 'internship',
+        position: 'Internship — General Application',
+        department: 'IT & Digital Solutions',
+        experienceLevel: 'Internship',
+      };
+    }
+
+    const posParam = searchParams.get('position');
+    if (posParam) {
+      const matchedJob = openPositions.find((p) => p.title.toLowerCase() === posParam.toLowerCase());
+      if (matchedJob) {
+        return {
+          type: 'job',
+          position: matchedJob.title,
+          department: matchedJob.department,
+          experienceLevel: 'Entry Level',
+        };
+      }
+    }
+  }
+
+  if (selectedPosition) {
+    const matchedDomain = findInternshipDomainByPosition(selectedPosition);
+    if (matchedDomain) {
+      return {
+        type: 'internship',
+        position: matchedDomain.careerPositionTitle,
+        department: matchedDomain.department,
+        experienceLevel: 'Internship',
+      };
+    }
+    if (isInternshipPosition(selectedPosition)) {
+      return {
+        type: 'internship',
+        position: selectedPosition,
+        department: 'IT & Digital Solutions',
+        experienceLevel: 'Internship',
+      };
+    }
+  }
+
+  return {
+    type: 'general',
+    position: 'General Application',
+    department: 'IT & Digital Solutions',
+    experienceLevel: 'Entry Level',
+  };
+}
+
 export const CareersPage = () => {
   const { selectedPositionForApplication, setSelectedPositionForApplication } =
     useNavigation();
 
+  // Initial parsed context
+  const initialContext = useMemo(
+    () => getInitialApplicationState(selectedPositionForApplication),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  // Application classification: 'internship' | 'general' | 'job'
+  const [applicationType, setApplicationType] = useState<ApplicationClassification>(initialContext.type);
+
   // Form State
-  const [formData, setFormData] = useState<FormState>({
+  const [formData, setFormData] = useState<FormState>(() => ({
     fullName: '',
     email: '',
     phone: '',
-    position: selectedPositionForApplication || 'General Application',
-    department: 'IT & Digital Solutions',
-    experienceLevel: 'Entry Level',
+    position: initialContext.position,
+    department: initialContext.department,
+    experienceLevel: initialContext.experienceLevel,
     workArrangement: 'Hybrid',
     keySkills: '',
     coverLetter: '',
     linkedInUrl: '',
     portfolioUrl: '',
     privacyConsent: false,
-  });
+  }));
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -94,6 +184,60 @@ export const CareersPage = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Sync state if URL search params or navigation context updates (e.g. back/forward navigation or route transition)
+  useEffect(() => {
+    const syncFromUrl = () => {
+      const state = getInitialApplicationState(selectedPositionForApplication);
+      setApplicationType(state.type);
+      setFormData((prev) => ({
+        ...prev,
+        position: state.position,
+        department: state.department,
+        experienceLevel: state.experienceLevel,
+      }));
+
+      // If URL has #apply or #application-form, scroll to form
+      if (window.location.hash.includes('apply') || window.location.hash.includes('application-form')) {
+        setTimeout(() => {
+          const el = document.getElementById('application-form');
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }, 80);
+      }
+    };
+
+    syncFromUrl();
+
+    window.addEventListener('popstate', syncFromUrl);
+    return () => {
+      window.removeEventListener('popstate', syncFromUrl);
+    };
+  }, [selectedPositionForApplication]);
+
+  // Dynamic position options list
+  const positionOptions: CustomSelectOption[] = useMemo(() => {
+    const list: CustomSelectOption[] = [
+      { value: 'General Application', label: 'General Application (All Disciplines)', category: 'General' },
+      ...openPositions.map((pos) => ({
+        value: pos.title,
+        label: `${pos.title} (${pos.department})`,
+        category: 'Job Openings',
+      })),
+      ...internshipDomains.map((dom) => ({
+        value: dom.careerPositionTitle,
+        label: `${dom.careerPositionTitle} (${dom.category})`,
+        category: 'DKP Academy Internships',
+      })),
+    ];
+    if (formData.position && !list.some((opt) => opt.value === formData.position)) {
+      list.unshift({
+        value: formData.position,
+        label: formData.position,
+        category: isInternshipPosition(formData.position) ? 'DKP Academy Internships' : 'Openings',
+      });
+    }
+    return list;
+  }, [formData.position]);
+
   // Smooth scroll helper
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -102,9 +246,43 @@ export const CareersPage = () => {
     }
   };
 
+  // Position change handler: updates application type and locks/unlocks experience level
+  const handlePositionChange = (newPosition: string) => {
+    if (isInternshipPosition(newPosition)) {
+      setApplicationType('internship');
+      const matchedDomain = findInternshipDomainByPosition(newPosition);
+      setFormData((prev) => ({
+        ...prev,
+        position: newPosition,
+        department: matchedDomain ? matchedDomain.department : prev.department,
+        experienceLevel: 'Internship', // Enforced & locked
+      }));
+    } else {
+      const matchedJob = openPositions.find((p) => p.title === newPosition);
+      if (matchedJob) {
+        setApplicationType('job');
+        setFormData((prev) => ({
+          ...prev,
+          position: newPosition,
+          department: matchedJob.department,
+          experienceLevel: prev.experienceLevel === 'Internship' ? 'Entry Level' : prev.experienceLevel,
+        }));
+      } else {
+        setApplicationType('general');
+        setFormData((prev) => ({
+          ...prev,
+          position: newPosition,
+          experienceLevel: prev.experienceLevel === 'Internship' ? 'Entry Level' : prev.experienceLevel,
+        }));
+      }
+    }
+    if (errors.position) setErrors((prev) => ({ ...prev, position: undefined }));
+    if (errors.experienceLevel) setErrors((prev) => ({ ...prev, experienceLevel: undefined }));
+  };
+
   // Select a role from Open Positions and scroll to form
   const handleSelectRole = (roleTitle: string) => {
-    setFormData((prev) => ({ ...prev, position: roleTitle }));
+    handlePositionChange(roleTitle);
     if (setSelectedPositionForApplication) {
       setSelectedPositionForApplication(roleTitle);
     }
@@ -184,6 +362,8 @@ export const CareersPage = () => {
     // 6. Experience Level
     if (!formData.experienceLevel.trim()) {
       errs.experienceLevel = 'Please select your experience level.';
+    } else if (applicationType === 'internship' && formData.experienceLevel !== 'Internship') {
+      errs.experienceLevel = "Experience level must be 'Internship' for all internship applications.";
     }
 
     // 7. Preferred Work Arrangement
@@ -258,6 +438,7 @@ export const CareersPage = () => {
         position: formData.position,
         department: formData.department,
         experienceLevel: formData.experienceLevel,
+        applicationType,
         workArrangement: formData.workArrangement,
         keySkills: formData.keySkills,
         coverLetter: formData.coverLetter,
@@ -291,6 +472,7 @@ export const CareersPage = () => {
   };
 
   const handleReset = () => {
+    setApplicationType('general');
     setFormData({
       fullName: '',
       email: '',
@@ -360,7 +542,7 @@ export const CareersPage = () => {
             duration={0.5}
             className="max-w-3xl mx-auto text-base sm:text-lg text-neutral-100 leading-relaxed font-normal mb-10"
           >
-            Join a team that brings together technology, creativity, and digital strategy to help businesses grow. Explore opportunities to develop your skills, work on meaningful projects, and build your future with DKP Innovation.
+            Join a team that brings together technology, creativity, and digital strategy to help businesses grow. Explore opportunities to develop your skills, work on meaningful projects, and build your future with DKP Innovations.
           </TextAnimationBlurFadeIn>
 
           {/* Action CTAs */}
@@ -701,17 +883,9 @@ export const CareersPage = () => {
                         name="position"
                         value={formData.position}
                         onChange={(e) => {
-                          setFormData({ ...formData, position: e.target.value });
-                          if (errors.position) setErrors((prev) => ({ ...prev, position: undefined }));
+                          handlePositionChange(e.target.value);
                         }}
-                        options={[
-                          { value: 'General Application', label: 'General Application (All Disciplines)' },
-                          ...openPositions.map((pos) => ({
-                            value: pos.title,
-                            label: `${pos.title} (${pos.department})`,
-                            category: pos.department,
-                          })),
-                        ]}
+                        options={positionOptions}
                         error={Boolean(errors.position)}
                         placeholder="Select a position..."
                       />
@@ -754,17 +928,27 @@ export const CareersPage = () => {
 
                     {/* Experience Level */}
                     <div>
-                      <label
-                        htmlFor="experienceLevel"
-                        className="block text-xs sm:text-sm font-bold text-neutral-800 mb-2"
-                      >
-                        Experience Level <span className="text-[#854D0E]">*</span>
-                      </label>
+                      <div className="flex items-center justify-between mb-2">
+                        <label
+                          htmlFor="experienceLevel"
+                          className="block text-xs sm:text-sm font-bold text-neutral-800"
+                        >
+                          Experience Level <span className="text-[#854D0E]">*</span>
+                        </label>
+                        {applicationType === 'internship' && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#004D86] bg-[#004D86]/10 px-2 py-0.5 rounded-full border border-[#004D86]/20">
+                            <Lock className="w-3 h-3 text-[#004D86]" />
+                            <span>Locked for Internship</span>
+                          </span>
+                        )}
+                      </div>
                       <CustomSelect
                         id="experienceLevel"
                         name="experienceLevel"
                         value={formData.experienceLevel}
+                        disabled={applicationType === 'internship'}
                         onChange={(e) => {
+                          if (applicationType === 'internship') return;
                           setFormData({ ...formData, experienceLevel: e.target.value });
                           if (errors.experienceLevel) setErrors((prev) => ({ ...prev, experienceLevel: undefined }));
                         }}
@@ -772,11 +956,15 @@ export const CareersPage = () => {
                         error={Boolean(errors.experienceLevel)}
                         placeholder="Select experience level..."
                       />
-                      {errors.experienceLevel && (
+                      {applicationType === 'internship' ? (
+                        <p className="text-xs text-neutral-500 mt-1.5 flex items-center gap-1">
+                          <span>Internship applications require <strong>Internship</strong> experience level. To change it, apply through a general or job application.</span>
+                        </p>
+                      ) : errors.experienceLevel ? (
                         <p className="text-xs text-red-600 mt-1.5 font-medium">
                           {errors.experienceLevel}
                         </p>
-                      )}
+                      ) : null}
                     </div>
                   </div>
 
@@ -926,7 +1114,7 @@ export const CareersPage = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, coverLetter: e.target.value })
                       }
-                      placeholder="Share a brief overview of your background, career aspirations, and how you can contribute to DKP Innovation..."
+                      placeholder="Share a brief overview of your background, career aspirations, and how you can contribute to DKP Innovations..."
                       className={`w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD60A] focus:border-[#FFD60A] transition-all ${
                         errors.coverLetter
                           ? 'border-red-400 ring-1 ring-red-400'
@@ -1016,7 +1204,7 @@ export const CareersPage = () => {
                         className="mt-1 h-4 w-4 rounded text-[#FFD60A] accent-[#FFD60A] focus:ring-[#FFD60A] focus:border-[#FFD60A] border-neutral-300"
                       />
                       <span className="text-xs sm:text-sm text-neutral-600 leading-relaxed select-none">
-                        I consent to DKP Innovation processing the information I provide for recruitment purposes, in accordance with its Privacy Policy.
+                        I consent to DKP Innovations processing the information I provide for recruitment purposes, in accordance with its Privacy Policy.
                       </span>
                     </label>
                     {errors.privacyConsent && (

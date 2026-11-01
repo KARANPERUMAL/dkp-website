@@ -7,6 +7,7 @@ export interface JobApplicationPayload {
   position: string;
   department: string;
   experienceLevel: string;
+  applicationType?: 'internship' | 'general' | 'job';
   workArrangement: string;
   keySkills: string;
   coverLetter: string;
@@ -43,6 +44,9 @@ export async function submitCareerApplication(
   formData.append('position', payload.position.trim());
   formData.append('department', payload.department.trim());
   formData.append('experienceLevel', payload.experienceLevel.trim());
+  if (payload.applicationType) {
+    formData.append('applicationType', payload.applicationType);
+  }
   formData.append('workArrangement', payload.workArrangement.trim());
   formData.append('keySkills', payload.keySkills.trim());
   formData.append('coverLetter', payload.coverLetter.trim());

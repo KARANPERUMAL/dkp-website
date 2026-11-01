@@ -101,7 +101,7 @@ export const AboutPage = () => {
             duration={0.5}
             className="max-w-3xl mx-auto text-base sm:text-lg text-neutral-300 leading-relaxed font-normal mb-6"
           >
-            DKP Innovation is a full-service digital and creative innovations company dedicated to building powerful brands across every platform. From digital marketing and web development to ad production, events, and talent management, we bring your vision to life.
+            DKP Innovations is a full-service digital and creative innovations company dedicated to building powerful brands across every platform. From digital marketing and web development to ad production, events, and talent management, we bring your vision to life.
           </TextAnimationBlurFadeIn>
 
           <TextAnimationBlurFadeIn
@@ -110,7 +110,7 @@ export const AboutPage = () => {
             duration={0.5}
             className="max-w-2xl mx-auto text-sm sm:text-base text-neutral-400 leading-relaxed font-normal mb-8"
           >
-            With a team of passionate strategists, designers, and creators, we deliver results that go beyond expectations. Whatever your goal, DKP Innovation is your one-stop growth partner.
+            With a team of passionate strategists, designers, and creators, we deliver results that go beyond expectations. Whatever your goal, DKP Innovations is your one-stop growth partner.
           </TextAnimationBlurFadeIn>
 
           {/* Primary & Secondary CTAs with Blur-and-Fade Reveal */}

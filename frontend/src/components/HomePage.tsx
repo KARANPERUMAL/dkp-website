@@ -52,7 +52,7 @@ export const HomePage = () => {
               <TeamStack
                 eyebrow="Integrated Digital Solutions"
                 title="Creativity Meets Strategy"
-                description="At DKP Innovation, we believe lasting market impact requires both analytical rigor and distinctive creative execution. By uniting five foundational capabilities under one roof, we eliminate fragmented communication and ensure cohesive brand growth."
+                description="At DKP Innovations, we believe lasting market impact requires both analytical rigor and distinctive creative execution. By uniting five foundational capabilities under one roof, we eliminate fragmented communication and ensure cohesive brand growth."
                 items={defaultDkpServices}
                 defaultActiveIndex={0}
                 onCardClick={(card) => {

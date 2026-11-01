@@ -9,7 +9,7 @@ const ctaLabels: Record<string, string> = {
   'business-registration-and-corporate-compliance': 'Explore Compliance',
 };
 
-// Authoritative DKP Innovation service data representing the five core capabilities in exact order
+// Authoritative DKP Innovations service data representing the five core capabilities in exact order
 export const defaultDkpServices: TeamCardItem[] = serviceCategories.map((cat, idx) => ({
   name: cat.title,
   role: cat.subtitle,

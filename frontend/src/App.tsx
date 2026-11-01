@@ -22,6 +22,9 @@ const CareersPage = lazy(() =>
 const GalleryPage = lazy(() =>
   import('./components/GalleryPage').then((m) => ({ default: m.GalleryPage }))
 );
+const AcademyPage = lazy(() =>
+  import('./components/AcademyPage').then((m) => ({ default: m.AcademyPage }))
+);
 const FoundationPage = lazy(() =>
   import('./components/FoundationPage').then((m) => ({ default: m.FoundationPage }))
 );
@@ -59,6 +62,8 @@ function PageContent() {
             return <ServicesPage />;
           case 'gallery':
             return <GalleryPage />;
+          case 'academy':
+            return <AcademyPage />;
           case 'foundation':
             return <FoundationPage />;
           case 'careers':

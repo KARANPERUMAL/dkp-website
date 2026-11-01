@@ -29,7 +29,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       'We architect high-performance websites, scalable e-commerce infrastructure, and search dominance systems designed to transform casual visitors into long-term brand advocates.',
     titleCardImage: '/images/services/technology-solutions/title-card.webp',
-    titleCardAlt: 'IT & Digital Solutions overview and engineering capabilities at DKP Innovation',
+    titleCardAlt: 'IT & Digital Solutions overview and engineering capabilities at DKP Innovations',
     services: [
       {
         id: 'seo-expert-advanced-strategy',
@@ -192,7 +192,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       'We craft iconic visual identities, orchestrate national public relations features, and manage prestige talent branding that positions our partners as undisputed market leaders.',
     titleCardImage: '/images/services/branding-pr-and-influencer-marketing/title-card.webp',
-    titleCardAlt: 'Branding, PR & Influencer Marketing showcase at DKP Innovation',
+    titleCardAlt: 'Branding, PR & Influencer Marketing showcase at DKP Innovations',
     services: [
       {
         id: 'celebrity-artist-branding-pr-strategy',
@@ -266,7 +266,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       'We bring brand narratives to life through high-definition cinematography, commercial photography, and interactive 360-degree virtual experiences that captivate attention.',
     titleCardImage: '/images/services/creative-production-and-advertising/title-card.webp',
-    titleCardAlt: 'Creative Production & Advertising showcase at DKP Innovation',
+    titleCardAlt: 'Creative Production & Advertising showcase at DKP Innovations',
     services: [
       {
         id: 'corporate-photography-videography',
@@ -325,7 +325,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       'We provide end-to-end corporate legal structuring, company incorporation, GST compliance, and trademark protection to establish a rock-solid operational and regulatory foundation for your enterprise.',
     titleCardImage: '/images/services/business-registration-and-corporate-compliance/title-card.webp',
-    titleCardAlt: 'Business Registration & Corporate Compliance overview and advisory services at DKP Innovation',
+    titleCardAlt: 'Business Registration & Corporate Compliance overview and advisory services at DKP Innovations',
     services: [
       {
         id: 'company-incorporation',

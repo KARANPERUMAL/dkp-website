@@ -5,6 +5,7 @@ import {
   IconUsers,
   IconBriefcase,
   IconPhoto,
+  IconSchool,
   IconHeartHandshake,
   IconUserCheck,
   IconMessage,
@@ -32,6 +33,11 @@ const navItems: NavItem[] = [
     icon: <IconPhoto className="h-4 w-4" />,
   },
   {
+    name: 'Academy',
+    link: '/academy',
+    icon: <IconSchool className="h-4 w-4" />,
+  },
+  {
     name: 'DKP Foundation',
     link: '/foundation',
     icon: <IconHeartHandshake className="h-4 w-4" />,
@@ -56,6 +62,7 @@ export const Navbar = () => {
     if (page === 'about') return '/about';
     if (page === 'services') return '/services';
     if (page === 'gallery') return '/gallery';
+    if (page === 'academy') return '/academy';
     if (page === 'foundation') return '/foundation';
     if (page === 'careers') return '/careers';
     if (page === 'contact') return '/contact';
@@ -73,6 +80,8 @@ export const Navbar = () => {
       navigateTo('services');
     } else if (link === '/gallery' || link === '#gallery') {
       navigateTo('gallery');
+    } else if (link === '/academy' || link === '#academy') {
+      navigateTo('academy');
     } else if (link === '/foundation' || link === '#foundation') {
       navigateTo('foundation');
     } else if (link === '/careers' || link === '#careers') {
@@ -93,12 +102,12 @@ export const Navbar = () => {
               e.preventDefault();
               navigateTo('home');
             }}
-            aria-label="DKP Innovation Home"
+            aria-label="DKP Innovations Home"
             className="group flex items-center select-none z-10 transition-transform duration-200 hover:scale-105 cursor-pointer"
           >
             <img
               src="/images/logo/logo.webp"
-              alt="DKP Innovation"
+              alt="DKP Innovations"
               width={96}
               height={48}
               fetchPriority="high"

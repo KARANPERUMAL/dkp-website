@@ -15,6 +15,9 @@ function getInitialPage(): PageRoute {
   if (rawPath === '/gallery' || hash.includes('#gallery') || hash.includes('#/gallery')) {
     return 'gallery';
   }
+  if (rawPath === '/academy' || hash.includes('#academy') || hash.includes('#/academy')) {
+    return 'academy';
+  }
   if (rawPath === '/foundation' || hash.includes('#foundation') || hash.includes('#/foundation')) {
     return 'foundation';
   }
@@ -57,12 +60,15 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const navigateTo = (page: PageRoute, targetId?: string) => {
+  const navigateTo = (page: PageRoute, targetId?: string, queryParams?: Record<string, string>) => {
     const isAlreadyOnPage = currentPage === page;
     setCurrentPage(page);
 
     const basePath = page === 'home' ? '/' : page === 'not-found' ? '/404' : `/${page}`;
-    const url = targetId && targetId !== 'home' ? `${basePath}#${targetId}` : basePath;
+    const searchStr = queryParams && Object.keys(queryParams).length > 0
+      ? '?' + new URLSearchParams(queryParams).toString()
+      : '';
+    const url = targetId && targetId !== 'home' ? `${basePath}${searchStr}#${targetId}` : `${basePath}${searchStr}`;
     window.history.pushState(null, '', url);
 
     if (page === 'home' && (!targetId || targetId === 'home')) {
@@ -103,5 +109,3 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
     </NavigationContext.Provider>
   );
 };
-
-

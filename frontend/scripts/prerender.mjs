@@ -13,6 +13,7 @@ const routes = [
   { key: 'about', path: '/about' },
   { key: 'services', path: '/services' },
   { key: 'gallery', path: '/gallery' },
+  { key: 'academy', path: '/academy' },
   { key: 'foundation', path: '/foundation' },
   { key: 'careers', path: '/careers' },
   { key: 'contact', path: '/contact' },
@@ -189,7 +190,7 @@ async function prerender() {
     }
   }
 
-  console.log('✓ All 7 canonical routes + 404 successfully prerendered into dist/\n');
+  console.log('✓ All 8 canonical routes + 404 successfully prerendered into dist/\n');
 }
 
 prerender().catch((err) => {

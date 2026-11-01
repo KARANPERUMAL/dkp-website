@@ -59,12 +59,34 @@ public class CareerApplicationService {
         this.appProperties = appProperties;
     }
 
+    private static final List<String> SUPPORTED_INTERNSHIP_POSITIONS = List.of(
+            "Internship — Frontend",
+            "Internship — Web & Frontend Development",
+            "Internship — Java Backend",
+            "Internship — Java Full Stack",
+            "Internship — Backend & Java Full Stack Engineering",
+            "Internship — E-Commerce Solutions",
+            "Internship — UI/UX & Digital Product Design",
+            "Internship — Brand Identity & Business Growth",
+            "Internship — Brand Identity & Graphic Design",
+            "Internship — Commercial Video & Creative Production",
+            "Internship — Digital Marketing",
+            "Internship — Digital Lead Generation",
+            "Internship — Search Engine Optimization (SEO)",
+            "Internship — Social Media & Performance Marketing",
+            "Internship — General Application",
+            "General Internship Application"
+    );
+
     @Transactional
     public ApiResponse processApplication(CareerApplicationRequest request, MultipartFile resumeFile) {
         // 1. Anti-bot honeypot check
         spamProtectionService.validateHoneypot(request.getHoneypot());
 
-        // 2. Validate uploaded resume document (magic bytes, MIME type, configurable size limit)
+        // 2. Validate application type, position and experience level integrity
+        validateApplicationTypeAndExperienceLevel(request);
+
+        // 3. Validate uploaded resume document (magic bytes, MIME type, configurable size limit)
         fileValidator.validateResumeFile(resumeFile);
 
         byte[] resumeBytes;
@@ -172,5 +194,31 @@ public class CareerApplicationService {
         log.info("Career application processed successfully with attachment delivery [ref={}, providerId={}]", referenceId, providerMessageId);
 
         return ApiResponse.ok(referenceId, "Your application has been received successfully. Our recruitment team will review your qualifications against active requirements.");
+    }
+
+    private void validateApplicationTypeAndExperienceLevel(CareerApplicationRequest request) {
+        String appType = request.getApplicationType() != null ? request.getApplicationType().trim().toLowerCase() : null;
+        String position = request.getPosition() != null ? request.getPosition().trim() : "";
+        String experienceLevel = request.getExperienceLevel() != null ? request.getExperienceLevel().trim() : "";
+
+        // Check if applicationType explicitly conflicts with position
+        if ("general".equals(appType) || "job".equals(appType)) {
+            if (position.toLowerCase().startsWith("internship")) {
+                throw new IllegalArgumentException("Position '" + position + "' is an internship opportunity and cannot be submitted with application type '" + request.getApplicationType() + "'.");
+            }
+        }
+
+        boolean isInternship = "internship".equals(appType) || position.toLowerCase().startsWith("internship");
+
+        if (isInternship) {
+            if (!"internship".equalsIgnoreCase(experienceLevel)) {
+                throw new IllegalArgumentException("Experience level must be 'Internship' for all internship applications.");
+            }
+            boolean matchesSupported = SUPPORTED_INTERNSHIP_POSITIONS.stream()
+                    .anyMatch(p -> p.equalsIgnoreCase(position));
+            if (!matchesSupported && !position.toLowerCase().contains("internship")) {
+                throw new IllegalArgumentException("Position '" + position + "' is not a supported internship opportunity.");
+            }
+        }
     }
 }

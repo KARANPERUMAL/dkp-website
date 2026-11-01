@@ -45,7 +45,7 @@ export const BranchMap = () => {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors | DKP Innovation Locations',
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors | DKP Innovations Locations',
     }).addTo(map);
 
     // Create custom DKP yellow marker icon with animated pulse ring
@@ -261,7 +261,7 @@ export const BranchMap = () => {
             ref={mapContainerRef}
             className="w-full h-full absolute inset-0 z-0"
             style={{ minHeight: '100%' }}
-            aria-label="Interactive map displaying all three DKP Innovation branches in Bengaluru"
+            aria-label="Interactive map displaying all three DKP Innovations branches in Bengaluru"
           />
 
           {/* Floating Map Legend Indicator */}

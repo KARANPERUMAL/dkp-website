@@ -572,7 +572,7 @@ export const ContactPage = () => {
                 Our Bengaluru Branch Locations
               </h2>
               <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-                DKP Innovation operates three strategically positioned branches across Bengaluru to coordinate client consulting, creative production, and engineering operations. Select a branch below or explore the interactive map.
+                DKP Innovations operates three strategically positioned branches across Bengaluru to coordinate client consulting, creative production, and engineering operations. Select a branch below or explore the interactive map.
               </p>
             </div>
 
