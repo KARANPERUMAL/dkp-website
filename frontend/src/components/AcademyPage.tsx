@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { Navbar } from './Navbar';
 import { Footer } from './layout/Footer';
 import { useNavigation } from '../hooks/useNavigation';
@@ -19,13 +20,17 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { IconArrowRight } from '@tabler/icons-react';
+import { TextAnimationBlurFadeIn, BlurFadeIn } from '@/components/ui/text-animation-blur-fade-in';
+import { TiltCard } from '@/components/ui/tilt-card';
+import { Tilt } from '@/components/ui/tilt';
+import { ClippedCircle } from '@/components/ui/clipped-circle';
 
 export const AcademyPage = () => {
   const { navigateTo, setSelectedPositionForApplication } = useNavigation();
 
-  // Domain filtering state
+  // Domain filtering state — exactly three options: All, Technical, Digital Marketing
   const [selectedCategory, setSelectedCategory] = useState<
-    'All' | 'Technology' | 'Design & Creative' | 'Digital Marketing'
+    'All' | 'Technical' | 'Digital Marketing'
   >('All');
 
   // Filtered domain list
@@ -45,10 +50,9 @@ export const AcademyPage = () => {
     navigateTo('careers', 'application-form', { type: 'internship', domain: 'general' });
   };
 
-  const categories: Array<'All' | 'Technology' | 'Design & Creative' | 'Digital Marketing'> = [
+  const categories: Array<'All' | 'Technical' | 'Digital Marketing'> = [
     'All',
-    'Technology',
-    'Design & Creative',
+    'Technical',
     'Digital Marketing',
   ];
 
@@ -89,24 +93,39 @@ export const AcademyPage = () => {
         </div>
 
         <div className="max-w-[1240px] mx-auto text-center relative z-10">
-          {/* Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#FFFFFF] tracking-tight leading-[1.08] mb-4 sm:mb-6 max-w-4xl mx-auto">
+          {/* Heading with Blur-Fade Reveal */}
+          <TextAnimationBlurFadeIn
+            as="h1"
+            delay={0.1}
+            duration={0.6}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#FFFFFF] tracking-tight leading-[1.08] mb-4 sm:mb-6 max-w-4xl mx-auto"
+          >
             DKP Academy
-          </h1>
+          </TextAnimationBlurFadeIn>
 
-          {/* Main Headline */}
-          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-[#FFD60A] tracking-tight max-w-3xl mx-auto mb-4 sm:mb-6 leading-snug">
+          {/* Main Headline with Blur-Fade Reveal */}
+          <TextAnimationBlurFadeIn
+            as="p"
+            delay={0.2}
+            duration={0.5}
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-[#FFD60A] tracking-tight max-w-3xl mx-auto mb-4 sm:mb-6 leading-snug"
+          >
             Learn Skills. Build Real Projects. Shape Your Future.
-          </p>
+          </TextAnimationBlurFadeIn>
 
-          {/* Supporting Copy */}
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-200 leading-relaxed font-normal mb-8 sm:mb-10">
+          {/* Supporting Copy with Blur-Fade Reveal */}
+          <TextAnimationBlurFadeIn
+            as="p"
+            delay={0.3}
+            duration={0.5}
+            className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-200 leading-relaxed font-normal mb-8 sm:mb-10"
+          >
             Explore internship opportunities at DKP Innovations and gain practical exposure across
             technology, design, digital marketing and creative disciplines.
-          </p>
+          </TextAnimationBlurFadeIn>
 
-          {/* Primary & Secondary CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+          {/* Primary & Secondary CTAs with Blur-Fade Reveal */}
+          <BlurFadeIn delay={0.4} duration={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
             <a
               href="#domains"
               onClick={(e) => {
@@ -127,7 +146,7 @@ export const AcademyPage = () => {
             >
               <span>Apply for Internship</span>
             </button>
-          </div>
+          </BlurFadeIn>
         </div>
       </header>
 
@@ -140,113 +159,206 @@ export const AcademyPage = () => {
         <section className="w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 bg-white text-neutral-900 select-none border-b border-neutral-200/80">
           <div className="max-w-[1240px] mx-auto">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-              <span className="text-xs font-bold text-[#004D86] uppercase tracking-widest mb-3 block">
+              <TextAnimationBlurFadeIn
+                as="span"
+                delay={0.08}
+                duration={0.5}
+                className="text-xs font-bold text-[#004D86] uppercase tracking-widest mb-3 block"
+              >
                 About The Initiative
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4 sm:mb-6">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="h2"
+                delay={0.15}
+                duration={0.6}
+                className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4 sm:mb-6"
+              >
                 Practical Skill Development for Tomorrow’s Creators
-              </h2>
-              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="p"
+                delay={0.22}
+                duration={0.5}
+                className="text-base sm:text-lg text-neutral-600 leading-relaxed"
+              >
                 DKP Academy is a dedicated learning and internship initiative by{' '}
                 <strong className="text-neutral-900 font-bold">DKP Innovations</strong>. Designed
                 specifically for college students and recent graduates, our mission is to bridge the
                 gap between academic coursework and real-world commercial delivery through guided,
                 project-oriented engagement.
-              </p>
+              </TextAnimationBlurFadeIn>
             </div>
 
             {/* 5 Pillars of Learning Approach + Philosophy Note */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {/* Pillar 1 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col shadow-sm hover:shadow-md">
-                <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
-                  <Briefcase className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
-                  Practical Agency Exposure
-                </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  Work alongside active engineers, designers, and digital strategists. See how real
-                  client briefs, technical specifications, and commercial deadlines unfold in a live
-                  agency setting.
-                </p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.5, delay: 0, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex"
+              >
+                <Tilt
+                  rotationFactor={11}
+                  className="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl w-full select-none"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
+                      <Briefcase className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
+                      Practical Agency Exposure
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      Work alongside active engineers, designers, and digital strategists. See how real
+                      client briefs, technical specifications, and commercial deadlines unfold in a live
+                      agency setting.
+                    </p>
+                  </div>
+                </Tilt>
+              </motion.div>
 
               {/* Pillar 2 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col shadow-sm hover:shadow-md">
-                <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
-                  <Compass className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
-                  Guided Mentorship
-                </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  Receive direct guidance and feedback from experienced practitioners. Ask questions,
-                  participate in design and code critiques, and learn industry-standard best practices.
-                </p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex"
+              >
+                <Tilt
+                  rotationFactor={11}
+                  className="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl w-full select-none"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
+                      <Compass className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
+                      Guided Mentorship
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      Receive direct guidance and feedback from experienced practitioners. Ask questions,
+                      participate in design and code critiques, and learn industry-standard best practices.
+                    </p>
+                  </div>
+                </Tilt>
+              </motion.div>
 
               {/* Pillar 3 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col shadow-sm hover:shadow-md">
-                <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
-                  <Layers className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
-                  Project-Oriented Experience
-                </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  Move beyond passive lectures. Build concrete project components, contribute to
-                  authentic workflows, and leave with verifiable outcomes you can showcase in your
-                  portfolio.
-                </p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex"
+              >
+                <Tilt
+                  rotationFactor={11}
+                  className="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl w-full select-none"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
+                      <Layers className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
+                      Project-Oriented Experience
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      Move beyond passive lectures. Build concrete project components, contribute to
+                      authentic workflows, and leave with verifiable outcomes you can showcase in your
+                      portfolio.
+                    </p>
+                  </div>
+                </Tilt>
+              </motion.div>
 
               {/* Pillar 4 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col shadow-sm hover:shadow-md">
-                <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
-                  <Code2 className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
-                  Domain-Specific Skills
-                </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  Develop competencies that align directly with industry expectations—from modern web
-                  frameworks and Spring Boot to UI design systems and search engine optimization.
-                </p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.5, delay: 0, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex"
+              >
+                <Tilt
+                  rotationFactor={11}
+                  className="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl w-full select-none"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
+                      <Code2 className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
+                      Domain-Specific Skills
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      Develop competencies that align directly with industry expectations—from modern web
+                      frameworks and Spring Boot to UI design systems and search engine optimization.
+                    </p>
+                  </div>
+                </Tilt>
+              </motion.div>
 
               {/* Pillar 5 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col shadow-sm hover:shadow-md">
-                <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
-                  <Users2 className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
-                  Professional Collaboration
-                </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  Experience the dynamics of multidisciplinary teamwork. Learn how developers,
-                  visual designers, and marketers synchronize their work to build unified brand
-                  solutions.
-                </p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex"
+              >
+                <Tilt
+                  rotationFactor={11}
+                  className="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl w-full select-none"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
+                      <Users2 className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2.5">
+                      Professional Collaboration
+                    </h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">
+                      Experience the dynamics of multidisciplinary teamwork. Learn how developers,
+                      visual designers, and marketers synchronize their work to build unified brand
+                      solutions.
+                    </p>
+                  </div>
+                </Tilt>
+              </motion.div>
 
               {/* Program Philosophy Card on White */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col justify-center shadow-sm hover:shadow-md">
-                <div className="flex items-center space-x-2 text-[#004D86] mb-3">
-                  <BookOpen className="w-5 h-5 text-[#004D86]" />
-                  <span className="text-xs font-bold uppercase tracking-wider">
-                    Program Philosophy
-                  </span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2">
-                  Company-Led Learning
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                  DKP Academy is an industry learning and internship initiative by DKP Innovations. We
-                  focus purely on authentic project experience, professional skill enhancement, and
-                  hands-on agency exposure.
-                </p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex"
+              >
+                <Tilt
+                  rotationFactor={11}
+                  className="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] transition-all duration-300 flex flex-col justify-center shadow-sm hover:shadow-xl w-full select-none"
+                >
+                  <div>
+                    <div className="flex items-center space-x-2 text-[#004D86] mb-3">
+                      <BookOpen className="w-5 h-5 text-[#004D86]" />
+                      <span className="text-xs font-bold uppercase tracking-wider">
+                        Program Philosophy
+                      </span>
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2">
+                      Company-Led Learning
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                      DKP Academy is an industry learning and internship initiative by DKP Innovations. We
+                      focus purely on authentic project experience, professional skill enhancement, and
+                      hands-on agency exposure.
+                    </p>
+                  </div>
+                </Tilt>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -263,19 +375,34 @@ export const AcademyPage = () => {
           <div className="max-w-[1240px] mx-auto">
             {/* Section Header */}
             <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
-              <span className="text-xs font-bold text-[#004D86] uppercase tracking-widest mb-3 block">
+              <TextAnimationBlurFadeIn
+                as="span"
+                delay={0.08}
+                duration={0.5}
+                className="text-xs font-bold text-[#004D86] uppercase tracking-widest mb-3 block"
+              >
                 Available Opportunities
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="h2"
+                delay={0.15}
+                duration={0.6}
+                className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4"
+              >
                 Explore Internship Domains
-              </h2>
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-3xl mx-auto">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="p"
+                delay={0.22}
+                duration={0.5}
+                className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-3xl mx-auto"
+              >
                 Every internship track reflects active commercial services delivered by DKP Innovations.
                 Choose the domain that matches your career passion.
-              </p>
+              </TextAnimationBlurFadeIn>
 
               {/* Category Filter Pills on White */}
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
+              <BlurFadeIn delay={0.28} duration={0.5} className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
                 {categories.map((cat) => {
                   const isActive = selectedCategory === cat;
                   return (
@@ -292,74 +419,111 @@ export const AcademyPage = () => {
                     </button>
                   );
                 })}
-              </div>
+              </BlurFadeIn>
             </div>
 
             {/* Domain Cards Grid on White */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-              {filteredDomains.map((domain: InternshipDomain) => (
-                <div
+              {filteredDomains.map((domain: InternshipDomain, index: number) => (
+                <motion.div
                   key={domain.id}
-                  className="group rounded-2xl bg-white border border-neutral-200 hover:border-[#004D86]/40 transition-all duration-300 flex flex-col overflow-hidden shadow-sm hover:shadow-xl"
+                  initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                  whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                  viewport={{ once: true, margin: '-20px' }}
+                  transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full flex"
                 >
-                  {/* Thumbnail Image */}
-                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100">
-                    <img
-                      src={domain.image}
-                      alt={domain.alt}
-                      width={600}
-                      height={375}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute top-3 left-3">
-                      <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#004D86] text-[#FFD60A] border border-white/20 backdrop-blur-sm shadow-sm">
-                        {domain.category}
-                      </span>
+                  <TiltCard
+                    title={domain.name}
+                    description={domain.shortDescription}
+                    circleSize={280}
+                    circleClassName="bg-[#004D86]"
+                    className="h-full flex flex-col justify-between select-none bg-white border border-neutral-200/90 hover:border-[#FFD60A] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                  >
+                    {/* REGION 1: Isolated Domain Image Container — outside hover reveal layer, category badge removed */}
+                    <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100 select-none">
+                      <img
+                        src={domain.image}
+                        alt={domain.alt}
+                        width={600}
+                        height={375}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                      />
                     </div>
-                  </div>
 
-                  {/* Card Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-[#004D86] transition-colors">
-                        {domain.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-5">
-                        {domain.shortDescription}
-                      </p>
+                    {/* REGION 2: Text/Content Container — isolated from image, contains the localized circular hover reveal */}
+                    <div className="relative flex-1 flex flex-col justify-between overflow-hidden bg-white">
+                      {/* CLIPPED OVERLAY: attached directly to text/content container so circle coordinates and clipping are strictly bounded */}
+                      <ClippedCircle
+                        circleSize={280}
+                        circleClassName="bg-[#004D86]"
+                        className="z-20"
+                      >
+                        {/* Synchronized duplicate containing ONLY the text/content area (marked aria-hidden to eliminate heading duplication) */}
+                        <div
+                          aria-hidden="true"
+                          className="p-6 flex-1 flex flex-col justify-between h-full bg-[#004D86] select-none pointer-events-none"
+                        >
+                          <div>
+                            {/* Domain Visual Heading: DKP yellow accent counterpart */}
+                            <div className="text-xl font-bold text-[#FFD60A] leading-snug mb-2.5">
+                              {domain.name}
+                            </div>
 
-                      {/* Skills Covered Chips */}
-                      <div className="mb-6">
-                        <span className="block text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-2">
-                          Skills You'll Explore:
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {domain.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="inline-block px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-neutral-100 text-neutral-700 border border-neutral-200"
+                            {/* Description: High-contrast light gray */}
+                            <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed">
+                              {domain.shortDescription}
+                            </p>
+                          </div>
+
+                          {/* Action Button: Dark theme visual counterpart */}
+                          <div className="pt-6">
+                            <div
+                              tabIndex={-1}
+                              aria-hidden="true"
+                              className="w-full inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-white/10 text-white font-semibold text-xs sm:text-sm border border-white/20 select-none pointer-events-none"
                             >
-                              {skill}
-                            </span>
-                          ))}
+                              <span>Apply for this Domain</span>
+                              <IconArrowRight className="w-4 h-4 text-[#FFD60A]" />
+                            </div>
+                          </div>
+                        </div>
+                      </ClippedCircle>
+
+                      {/* BASE CONTENT: original light theme with dark headings and text */}
+                      <div className="p-6 flex-1 flex flex-col justify-between relative z-10 bg-white">
+                        <div>
+                          {/* Domain Heading: Clean dark neutral */}
+                          <h3 className="text-xl font-bold text-neutral-900 group-hover:text-neutral-950 transition-colors leading-snug mb-2.5">
+                            {domain.name}
+                          </h3>
+
+                          {/* Description: Readable dark-gray copy */}
+                          <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                            {domain.shortDescription}
+                          </p>
+                        </div>
+
+                        {/* Primary Action Button: Light theme styling, interactive & focusable */}
+                        <div className="pt-6 relative z-10">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleApplyForDomain(domain.id, domain.careerPositionTitle);
+                            }}
+                            className="w-full inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shadow-sm hover:shadow-[0_2px_14px_rgba(255,214,10,0.3)] relative z-10 pointer-events-auto"
+                          >
+                            <span>Apply for this Domain</span>
+                            <IconArrowRight className="w-4 h-4" />
+                          </button>
                         </div>
                       </div>
                     </div>
-
-                    {/* Apply Action Button with Integration */}
-                    <button
-                      type="button"
-                      onClick={() => handleApplyForDomain(domain.id, domain.careerPositionTitle)}
-                      className="w-full inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shadow-sm hover:shadow-[0_2px_14px_rgba(255,214,10,0.3)]"
-                    >
-                      <span>Apply for this Domain</span>
-                      <IconArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
+                  </TiltCard>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -373,20 +537,35 @@ export const AcademyPage = () => {
           <div className="max-w-[1240px] mx-auto">
             {/* Section Header */}
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-              <span className="text-xs font-bold text-[#004D86] uppercase tracking-widest mb-3 block">
+              <TextAnimationBlurFadeIn
+                as="span"
+                delay={0.08}
+                duration={0.5}
+                className="text-xs font-bold text-[#004D86] uppercase tracking-widest mb-3 block"
+              >
                 Eligibility & Profiles
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="h2"
+                delay={0.15}
+                duration={0.6}
+                className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight mb-4"
+              >
                 Who Can Apply?
-              </h2>
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-3xl mx-auto">
+              </TextAnimationBlurFadeIn>
+              <TextAnimationBlurFadeIn
+                as="p"
+                delay={0.22}
+                duration={0.5}
+                className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-3xl mx-auto"
+              >
                 DKP Academy is open to motivated students seeking practical industry exposure to
                 complement their academic foundation.
-              </p>
+              </TextAnimationBlurFadeIn>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {targetAudienceList.map((aud) => {
+              {targetAudienceList.map((aud, idx) => {
                 const IconComponent =
                   aud.iconName === 'GraduationCap'
                     ? GraduationCap
@@ -397,18 +576,29 @@ export const AcademyPage = () => {
                     : TrendingUp;
 
                 return (
-                  <div
+                  <motion.div
                     key={aud.id}
-                    className="p-6 rounded-2xl bg-white border border-neutral-200/90 hover:border-[#004D86]/40 hover:shadow-md transition-all duration-300 flex flex-col"
+                    initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+                    whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                    viewport={{ once: true, margin: '-20px' }}
+                    transition={{ duration: 0.5, delay: (idx % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full flex"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
-                      <IconComponent className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-neutral-900 mb-2">{aud.title}</h3>
-                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                      {aud.description}
-                    </p>
-                  </div>
+                    <Tilt
+                      rotationFactor={11}
+                      className="p-6 rounded-xl bg-white border border-neutral-200/90 hover:border-[#FFD60A] hover:shadow-xl transition-all duration-300 flex flex-col justify-between w-full shadow-sm select-none"
+                    >
+                      <div>
+                        <div className="w-12 h-12 rounded-xl bg-[#004D86] text-[#FFD60A] flex items-center justify-center mb-5 shadow-sm">
+                          <IconComponent className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-lg font-bold text-neutral-900 mb-2">{aud.title}</h3>
+                        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                          {aud.description}
+                        </p>
+                      </div>
+                    </Tilt>
+                  </motion.div>
                 );
               })}
             </div>

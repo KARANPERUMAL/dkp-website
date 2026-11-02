@@ -5,10 +5,9 @@ export type ApplicationClassification = 'internship' | 'general' | 'job';
 export interface InternshipDomain {
   id: string;
   name: string;
-  category: 'Technology' | 'Design & Creative' | 'Digital Marketing';
+  category: 'Technical' | 'Digital Marketing';
   department: DepartmentOption;
   shortDescription: string;
-  skills: string[];
   image: string;
   alt: string;
   careerPositionTitle: string;
@@ -27,17 +26,16 @@ export interface TargetAudience {
  */
 export const internshipDomains: InternshipDomain[] = [
   // =========================================================================
-  // Technology Category
-  // Includes: Frontend, Java Backend, Java Full Stack + Remaining: E-Commerce
+  // Technical Category
+  // Includes: Frontend, Java Backend, Java Full Stack
   // =========================================================================
   {
     id: 'frontend',
     name: 'Frontend',
-    category: 'Technology',
+    category: 'Technical',
     department: 'IT & Digital Solutions',
     shortDescription:
       'Build responsive, accessible, and high-performance user interfaces using modern web standards and component-driven architecture.',
-    skills: ['HTML5 & Modern CSS', 'React 19 & TypeScript', 'Tailwind CSS', 'Responsive Layouts', 'Git Workflow'],
     image: '/images/services/technology-solutions/website-design-and-development.webp',
     alt: 'Frontend development internship at DKP Academy',
     careerPositionTitle: 'Internship — Frontend',
@@ -45,11 +43,10 @@ export const internshipDomains: InternshipDomain[] = [
   {
     id: 'java-backend',
     name: 'Java Backend',
-    category: 'Technology',
+    category: 'Technical',
     department: 'IT & Digital Solutions',
     shortDescription:
       'Learn backend engineering concepts including REST API design, relational databases, data validation, and server-side business logic.',
-    skills: ['Java 21 & Spring Boot', 'RESTful API Architecture', 'PostgreSQL & JPA', 'Authentication & Security', 'API Testing'],
     image: '/images/services/technology-solutions/title-card.webp',
     alt: 'Java backend engineering internship at DKP Academy',
     careerPositionTitle: 'Internship — Java Backend',
@@ -57,29 +54,26 @@ export const internshipDomains: InternshipDomain[] = [
   {
     id: 'java-full-stack',
     name: 'Java Full Stack',
-    category: 'Technology',
+    category: 'Technical',
     department: 'IT & Digital Solutions',
     shortDescription:
       'Master end-to-end web engineering combining modern responsive React user interfaces with production-grade Java Spring Boot services.',
-    skills: ['Java 21 & Spring Boot', 'React 19 & TypeScript', 'PostgreSQL & JPA', 'Full Stack Integration', 'REST APIs & Testing'],
     image: '/images/services/technology-solutions/social-media-optimization-and-strategy.webp',
     alt: 'Java full stack development internship at DKP Academy',
     careerPositionTitle: 'Internship — Java Full Stack',
   },
 
   // =========================================================================
-  // Design & Creative Category
-  // Includes: Digital Marketing, Brand Identity & Business Growth + UI/UX & Video
-  // (Images swapped between Digital Marketing and Brand Identity & Business Growth)
+  // Digital Marketing Category
+  // Includes: Digital Marketing, Brand Identity & Business Growth, UI/UX, Video, SEO, Social Media
   // =========================================================================
   {
     id: 'digital-marketing',
     name: 'Digital Marketing',
-    category: 'Design & Creative',
+    category: 'Digital Marketing',
     department: 'Digital Marketing & Lead Generation',
     shortDescription:
       'Understand how businesses generate qualified customer inquiries through Google services, landing page optimization, and digital outreach.',
-    skills: ['Funnel Architecture', 'Landing Page Conversion', 'Google Presence Management', 'CRM Data Synchronization', 'Analytics Reporting'],
     // Swapped: now displays former Brand Identity image
     image: '/images/services/branding-pr-and-influencer-marketing/title-card.webp',
     alt: 'Digital marketing internship at DKP Academy',
@@ -88,11 +82,10 @@ export const internshipDomains: InternshipDomain[] = [
   {
     id: 'brand-identity-business-growth',
     name: 'Brand Identity & Business Growth',
-    category: 'Design & Creative',
+    category: 'Digital Marketing',
     department: 'Branding, PR & Influencer Marketing',
     shortDescription:
       'Design cohesive visual assets including logo systems, marketing collateral, social graphics, and corporate typography palettes.',
-    skills: ['Visual Identity Design', 'Typography & Color Systems', 'Marketing Collateral', 'Vector Illustration', 'Brand Guidelines'],
     // Swapped: now displays former Digital Marketing image
     image: '/images/services/digital-marketing-and-lead-generation/lead-generation-for-business.webp',
     alt: 'Brand identity and business growth internship at DKP Academy',
@@ -101,11 +94,10 @@ export const internshipDomains: InternshipDomain[] = [
   {
     id: 'ui-ux-design',
     name: 'UI/UX & Digital Product Design',
-    category: 'Design & Creative',
+    category: 'Digital Marketing',
     department: 'Branding, PR & Influencer Marketing',
     shortDescription:
       'Transform requirements into intuitive user journeys, wireframes, interactive prototypes, and scalable digital design systems.',
-    skills: ['User Flow Mapping', 'Wireframing & Prototyping', 'Design Systems', 'Usability Principles', 'Figma Collaboration'],
     image: '/images/services/branding-pr-and-influencer-marketing/brand-identity-and-logo-design.webp',
     alt: 'UI/UX digital product design internship at DKP Academy',
     careerPositionTitle: 'Internship — UI/UX & Digital Product Design',
@@ -113,11 +105,10 @@ export const internshipDomains: InternshipDomain[] = [
   {
     id: 'creative-production',
     name: 'Commercial Video & Creative Production',
-    category: 'Design & Creative',
+    category: 'Digital Marketing',
     department: 'Creative Production & Advertising',
     shortDescription:
       'Gain exposure to professional studio environments, camera workflows, lighting setups, audio capture, and video post-production.',
-    skills: ['Studio Production Workflows', 'Lighting & Framing', 'Audio Engineering', 'Video Editing', 'Motion Content Delivery'],
     image: '/images/services/creative-production-and-advertising/corporate-photography-and-videography.webp',
     alt: 'Commercial video and creative production internship at DKP Academy',
     careerPositionTitle: 'Internship — Commercial Video & Creative Production',
@@ -134,7 +125,6 @@ export const internshipDomains: InternshipDomain[] = [
     department: 'Digital Marketing & Lead Generation',
     shortDescription:
       'Learn data-driven organic search strategies, technical SEO fundamentals, keyword research, on-page optimization, and SERP analytics.',
-    skills: ['Technical SEO Audits', 'Keyword Research', 'On-Page Optimization', 'Search Analytics', 'Site Speed Diagnostics'],
     image: '/images/services/technology-solutions/seo-expert-advanced-strategy.webp',
     alt: 'Search engine optimization internship at DKP Academy',
     careerPositionTitle: 'Internship — Search Engine Optimization (SEO)',
@@ -146,7 +136,6 @@ export const internshipDomains: InternshipDomain[] = [
     department: 'Digital Marketing & Lead Generation',
     shortDescription:
       'Explore multi-channel social media strategy, organic community building, ad campaign architecture, and audience engagement metrics.',
-    skills: ['Campaign Planning', 'Audience Segmentation', 'Ad Creative Strategy', 'Social Channel Management', 'Conversion Tracking'],
     image: '/images/services/digital-marketing-and-lead-generation/meta-ads-expert-strategy.webp',
     alt: 'Social media and performance marketing internship at DKP Academy',
     careerPositionTitle: 'Internship — Social Media & Performance Marketing',

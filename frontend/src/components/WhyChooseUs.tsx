@@ -206,24 +206,30 @@ export const WhyChooseUs = () => {
           whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 sm:mt-12 bg-gradient-to-br from-[#004D86] via-[#003E6D] to-[#004D86] text-white rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="relative mt-8 sm:mt-12 bg-gradient-to-b from-neutral-50 via-white to-amber-50/30 text-neutral-900 rounded-2xl p-6 sm:p-8 border border-neutral-200 shadow-xl overflow-hidden max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6"
         >
-          <div className="flex-1 text-center sm:text-left">
-            <span className="text-[11px] font-bold text-[#FFD60A] uppercase tracking-wider mb-2 block">
+          {/* Subtle ambient light matching Foundation "Be the Catalyst" */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,214,10,0.08),transparent_70%)] pointer-events-none"
+          />
+
+          <div className="relative z-10 flex-1 text-center sm:text-left">
+            <span className="text-[11px] font-bold text-[#854D0E] uppercase tracking-wider mb-2 block">
               Start Your Partnership
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 leading-snug">
+            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2 leading-snug">
               Ready to Build Your Brand?
             </h3>
-            <p className="text-xs sm:text-sm text-neutral-100 leading-relaxed max-w-xl">
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed max-w-xl">
               Connect with our team to discuss customized strategies tailored to your timeline and objectives.
             </p>
           </div>
-          <div className="flex-shrink-0 w-full sm:w-auto">
+          <div className="relative z-10 flex-shrink-0 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => navigateTo('contact', 'enquiry-form')}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 py-3 px-6 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-xs sm:text-sm shadow-md shadow-[0_4px_20px_rgba(255,214,10,0.35)] transition-all cursor-pointer group/cta"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 py-3 px-6 rounded-xl bg-[#FFD60A] hover:bg-[#FFE047] text-[#002244] font-bold text-xs sm:text-sm shadow-md shadow-amber-300/30 transition-all cursor-pointer group/cta"
             >
               <span>Discuss Your Project</span>
               <IconArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
