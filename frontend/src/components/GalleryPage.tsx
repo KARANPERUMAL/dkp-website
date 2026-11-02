@@ -12,36 +12,36 @@ import {
 } from '@/components/ui/text-animation-blur-fade-in';
 
 // Ordered gallery archive to precisely fulfill the editorial collage composition:
-// Top row (2): 3.jpeg (large wide left) + 4.jpeg (tall landscape right)
-// Middle row (3): 5.jpeg (square crop left) + 14.jpeg (landscape center) + 9.jpeg (portrait right)
-// Third row (3): 13.jpeg (portrait left) + 6.jpeg (portrait center) + 12.png (portrait right)
-// Fourth row (4): 7.jpeg (landscape left) + 1.jpeg (portrait) + 2.jpeg (portrait) + 15.jpeg (portrait)
-// Fifth row (3): 8.jpeg (portrait left) + 11.png (landscape center) + 10.jpeg (portrait right)
+// Top row (2): 3.webp (large wide left) + 4.webp (tall landscape right)
+// Middle row (3): 5.webp (square crop left) + 14.webp (landscape center) + 9.webp (portrait right)
+// Third row (3): 13.webp (portrait left) + 6.webp (portrait center) + 12.webp (portrait right)
+// Fourth row (4): 7.webp (landscape left) + 1.webp (portrait) + 2.webp (portrait) + 15.webp (portrait)
+// Fifth row (3): 8.webp (portrait left) + 11.webp (landscape center) + 10.webp (portrait right)
 const CURATED_COLLAGE_IDS = [
   // Top Row (2 images) — Preserved exact original positions
-  'studio-panorama', // Slot 0: 3.jpeg (Landscape, large wide left)
-  'inspirational-cultural-mural', // Slot 1: 4.jpeg (Landscape, tall landscape right)
+  'studio-panorama', // Slot 0: 3.webp (Landscape, large wide left)
+  'inspirational-cultural-mural', // Slot 1: 4.webp (Landscape, tall landscape right)
 
   // Middle Row (3 images) — Balanced production, collaborative workbench, leadership suite
-  'chroma-production-studio', // Slot 2: 5.jpeg (Chroma green studio cropped to square 1:1, left)
-  'advertising-and-creative-bench', // Slot 3: 14.jpeg (Landscape, advertising & web bench center)
-  'executive-director-cabin', // Slot 4: 9.jpeg (Portrait, pine wood executive cabin right)
+  'chroma-production-studio', // Slot 2: 5.webp (Chroma green studio cropped to square 1:1, left)
+  'advertising-and-creative-bench', // Slot 3: 14.webp (Landscape, advertising & web bench center)
+  'executive-director-cabin', // Slot 4: 9.webp (Portrait, pine wood executive cabin right)
 
   // Third Row (3 images) — Tech workspace, golden lounge, glass tower elevation
-  'digital-marketing-growth-lab', // Slot 5: 13.jpeg (Portrait, digital marketing team desk left)
-  'consultation-lounge', // Slot 6: 6.jpeg (Portrait, gold sofa consultation lounge center)
-  'corporate-tower-elevation', // Slot 7: 12.png (Portrait, blue glass tower elevation right)
+  'digital-marketing-growth-lab', // Slot 5: 13.webp (Portrait, digital marketing team desk left)
+  'consultation-lounge', // Slot 6: 6.webp (Portrait, gold sofa consultation lounge center)
+  'corporate-tower-elevation', // Slot 7: 12.webp (Portrait, blue glass tower elevation right)
 
   // Fourth Row (4 images) — Meeting desk & greenery, dual-screen marketing, corridor, IT coding
-  'strategy-meeting-desk', // Slot 8: 7.jpeg (Landscape, strategy desk & plant left)
-  'digital-marketing-hub', // Slot 9: 1.jpeg (Portrait, dual-screen marketing workstation)
-  'corridor-and-suites', // Slot 10: 2.jpeg (Portrait, polished wood floor corridor)
-  'it-solutions-engineering-desk', // Slot 11: 15.jpeg (Portrait, IT solutions coding desk)
+  'strategy-meeting-desk', // Slot 8: 7.webp (Landscape, strategy desk & plant left)
+  'digital-marketing-hub', // Slot 9: 1.webp (Portrait, dual-screen marketing workstation)
+  'corridor-and-suites', // Slot 10: 2.webp (Portrait, polished wood floor corridor)
+  'it-solutions-engineering-desk', // Slot 11: 15.webp (Portrait, IT solutions coding desk)
 
   // Fifth Row — Architectural ceiling, corporate building facade, tech hardware (3 images)
-  'workspace-vertical-depth', // Slot 12: 8.jpeg (Portrait, studio elevation & wood ceiling left)
-  'nagadevanahalli-corporate-facade', // Slot 13: 11.png (Landscape, corporate facade center)
-  'hardware-and-marketing-desk', // Slot 14: 10.jpeg (Portrait, keyboard & tech hardware right)
+  'workspace-vertical-depth', // Slot 12: 8.webp (Portrait, studio elevation & wood ceiling left)
+  'nagadevanahalli-corporate-facade', // Slot 13: 11.webp (Landscape, corporate facade center)
+  'hardware-and-marketing-desk', // Slot 14: 10.webp (Portrait, keyboard & tech hardware right)
 ];
 
 interface GalleryCardProps {
@@ -205,7 +205,7 @@ export const GalleryPage = () => {
               Large wide image on the left, tall landscape-oriented image on the right
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Large wide image (Slot 0, 3.jpeg) */}
+            {/* Left: Large wide image (Slot 0, 3.webp) */}
             {curatedGalleryItems[0] && (
               <div className="col-span-12 md:col-span-7 flex flex-col">
                 <GalleryCard
@@ -220,7 +220,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Tall landscape-oriented image (Slot 1, 4.jpeg) */}
+            {/* Right: Tall landscape-oriented image (Slot 1, 4.webp) */}
             {curatedGalleryItems[1] && (
               <div className="col-span-12 md:col-span-5 flex flex-col">
                 <GalleryCard
@@ -241,7 +241,7 @@ export const GalleryPage = () => {
               and narrow vertical image on the right
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Small square image (Slot 2, 5.jpeg) */}
+            {/* Left: Small square image (Slot 2, 5.webp) */}
             {curatedGalleryItems[2] && (
               <div className="col-span-12 sm:col-span-3 flex flex-col">
                 <GalleryCard
@@ -254,7 +254,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Center: Larger rectangular image (Slot 3, 14.jpeg) */}
+            {/* Center: Larger rectangular image (Slot 3, 14.webp) */}
             {curatedGalleryItems[3] && (
               <div className="col-span-12 sm:col-span-6 flex flex-col">
                 <GalleryCard
@@ -267,7 +267,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Narrow vertical image (Slot 4, 9.jpeg) */}
+            {/* Right: Narrow vertical image (Slot 4, 9.webp) */}
             {curatedGalleryItems[4] && (
               <div className="col-span-12 sm:col-span-3 flex flex-col">
                 <GalleryCard
@@ -287,7 +287,7 @@ export const GalleryPage = () => {
               arranged side by side
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Portrait 1 (Slot 5, 13.jpeg) */}
+            {/* Left: Portrait 1 (Slot 5, 13.webp) */}
             {curatedGalleryItems[5] && (
               <div className="col-span-1 flex flex-col">
                 <GalleryCard
@@ -300,7 +300,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Center: Portrait 2 (Slot 6, 6.jpeg) */}
+            {/* Center: Portrait 2 (Slot 6, 6.webp) */}
             {curatedGalleryItems[6] && (
               <div className="col-span-1 flex flex-col">
                 <GalleryCard
@@ -313,7 +313,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Portrait 3 (Slot 7, 12.png) */}
+            {/* Right: Portrait 3 (Slot 7, 12.webp) */}
             {curatedGalleryItems[7] && (
               <div className="col-span-1 flex flex-col">
                 <GalleryCard
@@ -332,7 +332,7 @@ export const GalleryPage = () => {
               Strategy desk on the left, paired with a vertical triptych on the right
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Large wide strategy & meeting collaboration desk (Slot 8, 7.jpeg) */}
+            {/* Left: Large wide strategy & meeting collaboration desk (Slot 8, 7.webp) */}
             {curatedGalleryItems[8] && (
               <div className="col-span-12 md:col-span-6 flex flex-col">
                 <GalleryCard
@@ -348,7 +348,7 @@ export const GalleryPage = () => {
 
             {/* Right: Three vertical studio portraits side by side (Slots 9, 10, 11) */}
             <div className="col-span-12 md:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-stretch">
-              {/* 1.jpeg: Digital Marketing & Strategy Workstation */}
+              {/* 1.webp: Digital Marketing & Strategy Workstation */}
               {curatedGalleryItems[9] && (
                 <div className="flex flex-col">
                   <GalleryCard
@@ -362,7 +362,7 @@ export const GalleryPage = () => {
                 </div>
               )}
 
-              {/* 2.jpeg: Central Corridor & Architectural Layout */}
+              {/* 2.webp: Central Corridor & Architectural Layout */}
               {curatedGalleryItems[10] && (
                 <div className="flex flex-col">
                   <GalleryCard
@@ -376,7 +376,7 @@ export const GalleryPage = () => {
                 </div>
               )}
 
-              {/* 15.jpeg: IT & Digital Solutions Engineering Station */}
+              {/* 15.webp: IT & Digital Solutions Engineering Station */}
               {curatedGalleryItems[11] && (
                 <div className="flex flex-col">
                   <GalleryCard
@@ -395,12 +395,12 @@ export const GalleryPage = () => {
           {/* ---------------------------------------------------------------------
               TIER 5 — ARCHITECTURAL CEILING, CORPORATE FACADE & TECH DESK (3 IMAGES)
               Editorial triptych presenting images 8, 11, and 10:
-              Left: Studio Elevation & Workspace Architecture (Slot 12, 8.jpeg, portrait)
-              Center: DKP Innovations Corporate Facade & Branch (Slot 13, 11.png, landscape)
-              Right: Creative Technology & Development Setup (Slot 14, 10.jpeg, portrait)
+              Left: Studio Elevation & Workspace Architecture (Slot 12, 8.webp, portrait)
+              Center: DKP Innovations Corporate Facade & Branch (Slot 13, 11.webp, landscape)
+              Right: Creative Technology & Development Setup (Slot 14, 10.webp, portrait)
               --------------------------------------------------------------------- */}
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-stretch">
-            {/* Left: Studio Elevation & Workspace Architecture (Slot 12, 8.jpeg) */}
+            {/* Left: Studio Elevation & Workspace Architecture (Slot 12, 8.webp) */}
             {curatedGalleryItems[12] && (
               <div className="col-span-12 sm:col-span-3 flex flex-col">
                 <GalleryCard
@@ -414,7 +414,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Center: DKP Innovations Corporate Facade & Branch (Slot 13, 11.png) */}
+            {/* Center: DKP Innovations Corporate Facade & Branch (Slot 13, 11.webp) */}
             {curatedGalleryItems[13] && (
               <div className="col-span-12 sm:col-span-6 flex flex-col">
                 <GalleryCard
@@ -428,7 +428,7 @@ export const GalleryPage = () => {
               </div>
             )}
 
-            {/* Right: Creative Technology & Development Setup (Slot 14, 10.jpeg) */}
+            {/* Right: Creative Technology & Development Setup (Slot 14, 10.webp) */}
             {curatedGalleryItems[14] && (
               <div className="col-span-12 sm:col-span-3 flex flex-col">
                 <GalleryCard

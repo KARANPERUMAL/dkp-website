@@ -16,18 +16,37 @@ export const BackgroundRippleEffect = ({
     row: number;
     col: number;
   } | null>(null);
-  const [rippleKey, setRippleKey] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hasAutoTriggeredRef = useRef(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
   const [isVisible, setIsVisible] = useState(true);
 
   // Responsive grid dimension calculation
-  const [gridConfig, setGridConfig] = useState({
-    rows,
-    cols,
-    cellSize,
-    interactive: true,
+  const [gridConfig, setGridConfig] = useState(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      const mobileCellSize = 72;
+      const width = window.innerWidth;
+      const height = window.innerHeight || 800;
+      const calculatedCols = Math.min(6, Math.ceil(width / mobileCellSize) + 1);
+      const calculatedRows = Math.min(10, Math.ceil(height / mobileCellSize) + 1);
+      return {
+        rows: Math.max(6, calculatedRows),
+        cols: Math.max(5, calculatedCols),
+        cellSize: mobileCellSize,
+        interactive: false,
+      };
+    }
+    return {
+      rows,
+      cols,
+      cellSize,
+      interactive: true,
+    };
   });
 
   useEffect(() => {
@@ -70,37 +89,53 @@ export const BackgroundRippleEffect = ({
         return;
       }
 
-      // Desktop & Tablet (>=768px): Full dynamic ripple grid
-      const effectiveCellSize = clientWidth < 1024 ? 48 : 52;
-      const calculatedCols = Math.ceil(clientWidth / effectiveCellSize) + 2;
-      const calculatedRows = Math.ceil(clientHeight / effectiveCellSize) + 2;
-
-      const rowsCount = Math.max(10, calculatedRows);
-      const colsCount = Math.max(12, calculatedCols);
-
-      setGridConfig({
-        rows: rowsCount,
-        cols: colsCount,
-        cellSize: effectiveCellSize,
-        interactive: true,
+      // Desktop & Tablet (>=768px): Stable configured grid to preserve visual layout with zero CLS
+      setGridConfig((prev) => {
+        if (prev.rows === rows && prev.cols === cols && prev.cellSize === cellSize && prev.interactive) {
+          return prev;
+        }
+        return {
+          rows,
+          cols,
+          cellSize,
+          interactive: true,
+        };
       });
 
-      // Desktop auto-trigger: single central illumination on initial mount once settled
+      // Desktop auto-trigger: deferred until main thread is completely idle (post-FCP / TTI window)
       if (!hasAutoTriggeredRef.current && !prefersReducedMotion) {
         hasAutoTriggeredRef.current = true;
-        setTimeout(() => {
-          const exactCenterRow = Math.floor(rowsCount / 2);
-          const exactCenterCol = Math.floor(colsCount / 2);
+        const triggerCenterRipple = () => {
+          const exactCenterRow = Math.floor(rows / 2);
+          const exactCenterCol = Math.floor(cols / 2);
           setClickedCell({ row: exactCenterRow, col: exactCenterCol });
-          setRippleKey((k) => k + 1);
-        }, 320);
+        };
+
+        if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+          (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(
+            triggerCenterRipple,
+            { timeout: 2000 }
+          );
+        } else {
+          setTimeout(triggerCenterRipple, 1200);
+        }
       }
     };
 
     updateGrid();
 
-    const resizeObserver = new ResizeObserver(() => {
-      updateGrid();
+    let lastWidth = 0;
+    let lastHeight = 0;
+    const resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) {
+        const { width, height } = entry.contentRect;
+        if (Math.abs(width - lastWidth) > 30 || Math.abs(height - lastHeight) > 30) {
+          lastWidth = width;
+          lastHeight = height;
+          updateGrid();
+        }
+      }
     });
 
     resizeObserver.observe(containerRef.current);
@@ -108,7 +143,7 @@ export const BackgroundRippleEffect = ({
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
     };
-  }, []);
+  }, [cols, cellSize, rows]);
 
   return (
     <div
@@ -119,6 +154,7 @@ export const BackgroundRippleEffect = ({
         className,
       )}
       style={{
+        contain: "strict",
         maskImage:
           "radial-gradient(ellipse 94% 88% at 50% 45%, black 45%, rgba(0,0,0,0.85) 75%, transparent 100%)",
         WebkitMaskImage:
@@ -126,7 +162,6 @@ export const BackgroundRippleEffect = ({
       }}
     >
       <DivGrid
-        key={isMobile ? "mobile-grid" : `base-${rippleKey}`}
         className="w-full h-full"
         rows={gridConfig.rows}
         cols={gridConfig.cols}
@@ -136,7 +171,6 @@ export const BackgroundRippleEffect = ({
           gridConfig.interactive && isVisible
             ? (row, col) => {
                 setClickedCell({ row, col });
-                setRippleKey((k) => k + 1);
               }
             : undefined
         }
@@ -181,9 +215,10 @@ const DivGrid = ({
     display: "grid",
     gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
     gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-    width: cols * cellSize,
-    height: rows * cellSize,
-    marginInline: "auto",
+    justifyContent: "center",
+    alignContent: "center",
+    width: "100%",
+    height: "100%",
     touchAction: "pan-y",
   };
 

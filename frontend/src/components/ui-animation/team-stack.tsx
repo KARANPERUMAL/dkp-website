@@ -76,8 +76,8 @@ function TeamMemberCard({
   const ctaLabel = card.ctaLabel || `View ${card.name}`;
   const isDark = isActive || (Boolean(card.isFeatured) && !isActive);
 
-  // Measure CTA label width for spring expand pill
-  React.useLayoutEffect(() => {
+  // Measure CTA label width for spring expand pill (deferred to useEffect to prevent blocking initial paint)
+  React.useEffect(() => {
     if (ctaLabelRef.current) {
       setCtaWidth(Math.ceil(ctaLabelRef.current.scrollWidth + 50));
     }
