@@ -74,16 +74,16 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
         <div className="relative pt-1 pb-4 sm:pb-6 md:pb-8 w-full max-w-[1180px] mx-auto">
           
           <motion.h1
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 1, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center text-center font-black tracking-[-0.04em] select-none w-full gap-4 sm:gap-6 md:gap-8 lg:gap-9"
           >
             {/* Line 1: We Don't Just (slightly narrower, centered at top of ladder) */}
             <motion.div
-              initial={{ opacity: 0, filter: prefersReducedMotion ? 'none' : 'blur(10px)', y: 8 }}
+              initial={{ opacity: 1, filter: prefersReducedMotion ? 'none' : 'blur(6px)', y: 6 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(2.3rem,5.4vw,5.6rem)] leading-[0.90] transition-colors"
               style={{
                 backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%)',
@@ -96,9 +96,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
             {/* Line 2: Market Your Brand — (wider middle tier of ladder with increased vertical gap) */}
             <motion.div
-              initial={{ opacity: 0, filter: prefersReducedMotion ? 'none' : 'blur(10px)', y: 8 }}
+              initial={{ opacity: 1, filter: prefersReducedMotion ? 'none' : 'blur(6px)', y: 6 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{ duration: 0.6, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.02, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(3.1rem,7.8vw,8.2rem)] leading-[0.88] tracking-[-0.045em] transition-colors"
               style={{
                 backgroundImage:
@@ -112,9 +112,9 @@ export const HeroSection = ({ onCtaClick }: HeroSectionProps) => {
 
             {/* Line 3: We Build It. (balanced base beneath them, sitting naturally lower) */}
             <motion.div
-              initial={{ opacity: 0, filter: prefersReducedMotion ? 'none' : 'blur(10px)', y: 8 }}
+              initial={{ opacity: 1, filter: prefersReducedMotion ? 'none' : 'blur(6px)', y: 6 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
               className="text-[clamp(3.8rem,9.6vw,10.2rem)] leading-[0.86] tracking-[-0.05em] transition-colors"
               style={{
                 backgroundImage:

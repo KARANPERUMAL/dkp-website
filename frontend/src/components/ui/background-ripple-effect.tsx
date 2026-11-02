@@ -52,6 +52,9 @@ export const BackgroundRippleEffect = ({
   useEffect(() => {
     if (!containerRef.current) return;
 
+    let idleCallbackId: number | null = null;
+    let fallbackTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
     // Visibility observer to pause/halt when scrolled out of view
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
@@ -112,12 +115,12 @@ export const BackgroundRippleEffect = ({
         };
 
         if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-          (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(
+          idleCallbackId = (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
             triggerCenterRipple,
             { timeout: 2000 }
           );
         } else {
-          setTimeout(triggerCenterRipple, 1200);
+          fallbackTimeoutId = setTimeout(triggerCenterRipple, 1200);
         }
       }
     };
@@ -140,6 +143,12 @@ export const BackgroundRippleEffect = ({
 
     resizeObserver.observe(containerRef.current);
     return () => {
+      if (idleCallbackId !== null && typeof window !== "undefined" && "cancelIdleCallback" in window) {
+        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleCallbackId);
+      }
+      if (fallbackTimeoutId !== null) {
+        clearTimeout(fallbackTimeoutId);
+      }
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
     };
